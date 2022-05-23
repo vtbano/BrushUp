@@ -12,9 +12,14 @@ router.get("/", (request, response, next) => {
 router.get("/:id", (request, response, next) => {
   const { id } = request.params;
 
-  pool.query("SELECT * FROM monsters WHERE id=$1", [id], (err, res) => {
+  pool.query("SELECT * FROM creators WHERE id=$1", [id], (err, res) => {
     if (err) return next(err);
-    response.json(res.rows);
+    if (res.rows.length === 0)
+      return response.json({
+        error: true,
+        message: "The creator does not exist",
+      });
+    response.json(res.rows[0]);
   });
 });
 

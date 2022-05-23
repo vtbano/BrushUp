@@ -48,5 +48,7 @@ CREATE TABLE responses (
   respondent_id INT,
   answer_options_id INT,
   PRIMARY KEY (id),
-  FOREIGN KEY (respondent_id) REFERENCES respondents (id)
+  FOREIGN KEY (respondent_id) REFERENCES respondents (id),
+  FOREIGN KEY (answer_options_id) REFERENCES answer_options (id)
 );
+

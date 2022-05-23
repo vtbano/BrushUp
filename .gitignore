@@ -1,2 +1,2 @@
-secrets/
-node_modules
+backend/secrets/
+backend/node_modules
