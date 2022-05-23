@@ -9,6 +9,20 @@ router.get("/", (request, response, next) => {
   });
 });
 
+router.get("/:id", (request, response, next) => {
+  const { id } = request.params;
+
+  pool.query("SELECT * FROM answer_options WHERE id=$1", [id], (err, res) => {
+    if (err) return next(err);
+    if (res.rows.length === 0)
+      return response.json({
+        error: true,
+        message: "This answer option does not exist",
+      });
+    response.json(res.rows[0]);
+  });
+});
+
 router.post("/", (request, response, next) => {
   const { correct, answer_text } = request.body;
 

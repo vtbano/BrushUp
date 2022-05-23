@@ -14,19 +14,14 @@ router.get("/:id", (request, response, next) => {
 
   pool.query("SELECT * FROM quizzes WHERE id=$1", [id], (err, res) => {
     if (err) return next(err);
-    response.json(res.rows);
+    if (res.rows.length === 0)
+      return response.json({
+        error: true,
+        message: "This quiz does not exist",
+      });
+    response.json(res.rows[0]);
   });
 });
-
-// router.get("/questions", (request, response, next) => {
-//   pool.query(
-//     "SELECT * FROM quizzes JOIN questions ON questions.quizzes_id = quizzes.id",
-//     (err, res) => {
-//       if (err) return next(err);
-//       response.json(res.rows);
-//     }
-//   );
-// });
 
 router.post("/", (request, response, next) => {
   const { title } = request.body;
