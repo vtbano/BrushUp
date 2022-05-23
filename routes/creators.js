@@ -1,0 +1,65 @@
+const { Router } = require("express");
+const pool = require("../db");
+const router = Router();
+
+router.get("/", (request, response, next) => {
+  pool.query("SELECT * FROM creators ORDER BY id ASC", (err, res) => {
+    if (err) return next(err);
+    response.json(res.rows);
+  });
+});
+
+router.get("/:id", (request, response, next) => {
+  const { id } = request.params;
+
+  pool.query("SELECT * FROM monsters WHERE id=$1", [id], (err, res) => {
+    if (err) return next(err);
+    response.json(res.rows);
+  });
+});
+
+router.post("/", (request, response, next) => {
+  const { username, email, first_name, last_name, password } = request.body;
+
+  pool.query(
+    "INSERT INTO creators (username, email, first_name, last_name, password) VALUES ($1,$2,$3,$4,$5)",
+    [username, email, first_name, last_name, password],
+    (err, res) => {
+      if (err) return next(err);
+      response.redirect("/creators");
+    }
+  );
+});
+
+router.put("/:id", (request, response, next) => {
+  const { id } = request.params;
+  const keys = ["username", "email", "first_name", "last_name", "password"];
+
+  const fields = [];
+
+  keys.forEach((key) => {
+    if (request.body[key]) fields.push(key);
+  });
+
+  fields.forEach((field, index) => {
+    pool.query(
+      `UPDATE creators SET ${field}=($1) WHERE id=($2)`,
+      [request.body[field], id],
+      (err, res) => {
+        if (err) return next(err);
+        if (index === fields.length - 1) response.redirect("/creators");
+      }
+    );
+  });
+});
+
+router.delete("/:id", (request, response, next) => {
+  const { id } = request.params;
+  pool.query("DELETE FROM creators WHERE id=($1)", [id], (err, res) => {
+    if (err) return next(err);
+
+    response.redirect("/creators");
+  });
+});
+
+module.exports = router;
