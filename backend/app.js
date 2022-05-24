@@ -10,7 +10,7 @@ const app = express();
 app.use(bodyParser.json());
 app.use("/creators", creators);
 app.use("/quizzes", quizzes);
-app.use("/quizzes/:quizzes_id/questions", questions);
+// app.use("/questions", questions);
 app.use("/questions/:id/answer_options", answer_options);
 
 app.use((err, req, res, next) => {

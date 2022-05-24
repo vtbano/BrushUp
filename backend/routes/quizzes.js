@@ -23,6 +23,23 @@ router.get("/:id", (request, response, next) => {
   });
 });
 
+router.get("/:id/questions", (request, response, next) => {
+  const { id } = request.params;
+  pool.query(
+    "SELECT * FROM questions WHERE quizzes_id=$1",
+    [id],
+    (err, res) => {
+      if (err) return next(err);
+      if (res.rows.length === 0)
+        return response.json({
+          error: true,
+          message: "Questions do not exist",
+        });
+      response.json(res.rows[0]);
+    }
+  );
+});
+
 router.post("/", (request, response, next) => {
   const { title } = request.body;
 
