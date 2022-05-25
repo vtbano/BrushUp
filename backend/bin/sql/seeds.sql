@@ -25,5 +25,20 @@ VALUES
 (2, 'false', 'Cat');
 
 
--- INSERT INTO respondents(respondent_id,answer_options_id) 
--- VALUES
+INSERT INTO respondents(quizzes_id,email,secret) 
+VALUES
+
+(1, 'stella&chewy@gmail.com', '123qwe'),
+(1, 'acana@hotmail.com', '456qwe'),
+(2, 'dogchew@tibetan.org', '1099pkp'),
+(3, 'cheerio@generamills.ca', 'thie989');
+
+INSERT INTO responses (respondent_id,answer_options_id) 
+VALUES
+(1,1),
+(2,1),
+(3,1),
+(4,1),
+(1,2),
+(2,2),
+(3,2);

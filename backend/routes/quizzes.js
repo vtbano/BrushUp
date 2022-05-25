@@ -65,11 +65,11 @@ router.delete("/:id", (request, response, next) => {
 });
 
 //QUESTION ROUTES
-router.get("/:id/questions", (request, response, next) => {
-  const { id } = request.params;
+router.get("/:quizzes_id/questions", (request, response, next) => {
+  const { quizzes_id } = request.params;
   pool.query(
     "SELECT * FROM questions WHERE quizzes_id=$1",
-    [id],
+    [quizzes_id],
     (err, res) => {
       if (err) return next(err);
       if (res.rows.length === 0)
@@ -103,16 +103,15 @@ router.get(
   }
 );
 
-router.post("/:id/questions", (request, response, next) => {
+router.post("/:quizzes_id/questions", (request, response, next) => {
   const { quizzes_id, question_text, image } = request.body;
-  const { id } = request.params;
 
   pool.query(
     "INSERT INTO questions (quizzes_id,question_text,image) VALUES ($1,$2,$3)",
     [quizzes_id, question_text, image],
     (err, res) => {
       if (err) return next(err);
-      response.redirect(`/quizzes/${id}/questions`);
+      response.redirect(`/quizzes/${quizzes_id}/questions`);
     }
   );
 });
@@ -131,7 +130,7 @@ router.put(
 
     fields.forEach((field, index) => {
       pool.query(
-        `UPDATE questions SET ${field}=($1) WHERE quizzes_id=($2) AND id=$(3)`,
+        `UPDATE questions SET ${field}=($1) WHERE quizzes_id=($2) AND id=($3)`,
         [request.body[field], quizzes_id, questions_id],
         (err, res) => {
           if (err) return next(err);
@@ -252,6 +251,101 @@ router.delete(
         response.redirect(
           `/quizzes/${quizzes_id}/questions/${questions_id}/answer_options`
         );
+      }
+    );
+  }
+);
+
+//RESPONDENTS
+
+router.get("/:quizzes_id/respondents", (request, response, next) => {
+  const { quizzes_id } = request.params;
+  pool.query(
+    "SELECT * FROM respondents WHERE quizzes_id=$1",
+    [quizzes_id],
+    (err, res) => {
+      if (err) return next(err);
+      if (res.rows.length === 0)
+        return response.json({
+          error: true,
+          message: "There are no respondents",
+        });
+      response.json(res.rows);
+    }
+  );
+});
+
+router.get(
+  "/:quizzes_id/respondents/:respondent_id",
+  (request, response, next) => {
+    const { quizzes_id, respondent_id } = request.params;
+
+    pool.query(
+      "SELECT * FROM respondents WHERE quizzes_id=($1) AND id=($2)",
+      [quizzes_id, respondent_id],
+      (err, res) => {
+        if (err) return next(err);
+        if (res.rows.length === 0)
+          return response.json({
+            error: true,
+            message: "This respondent does not exist",
+          });
+        response.json(res.rows[0]);
+      }
+    );
+  }
+);
+
+router.post("/:quizzes_id/respondents", (request, response, next) => {
+  const { quizzes_id, email, secret } = request.body;
+
+  pool.query(
+    "INSERT INTO respondents (quizzes_id,email, secret) VALUES ($1,$2,$3)",
+    [quizzes_id, email, secret],
+    (err, res) => {
+      if (err) return next(err);
+      response.redirect(`/quizzes/${quizzes_id}/respondents`);
+    }
+  );
+});
+
+router.put(
+  "/:quizzes_id/respondents/:respondent_id",
+  (request, response, next) => {
+    const { quizzes_id, respondent_id } = request.params;
+    const keys = ["email", "secret"];
+
+    const fields = [];
+
+    keys.forEach((key) => {
+      if (request.body[key]) fields.push(key);
+    });
+
+    fields.forEach((field, index) => {
+      pool.query(
+        `UPDATE respondents SET ${field}=($1) WHERE quizzes_id=($2) AND id=($3)`,
+        [request.body[field], quizzes_id, respondent_id],
+        (err, res) => {
+          if (err) return next(err);
+          if (index === fields.length - 1)
+            response.redirect(`/quizzes/${quizzes_id}/respondents`);
+        }
+      );
+    });
+  }
+);
+
+router.delete(
+  "/:quizzes_id/respondents/:respondent_id",
+  (request, response, next) => {
+    const { quizzes_id, respondent_id } = request.params;
+    pool.query(
+      "DELETE FROM respondents WHERE quizzes_id=$1 AND id=$2",
+      [quizzes_id, respondent_id],
+      (err, res) => {
+        if (err) return next(err);
+
+        response.redirect(`/quizzes/${quizzes_id}/respondents`);
       }
     );
   }
