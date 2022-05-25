@@ -131,7 +131,7 @@ router.put(
 
     fields.forEach((field, index) => {
       pool.query(
-        `UPDATE questions SET ${field}=($1) WHERE quizzes_id=$2 AND id=$3`,
+        `UPDATE questions SET ${field}=($1) WHERE quizzes_id=($2) AND id=$(3)`,
         [request.body[field], quizzes_id, questions_id],
         (err, res) => {
           if (err) return next(err);
@@ -154,6 +154,104 @@ router.delete(
         if (err) return next(err);
 
         response.redirect(`/quizzes/${quizzes_id}/questions`);
+      }
+    );
+  }
+);
+
+//ANSWER_OPTIONS
+
+router.get(
+  "/:quizzes_id/questions/:questions_id/answer_options",
+  (request, response, next) => {
+    pool.query("SELECT * FROM answer_options ORDER BY id ASC", (err, res) => {
+      if (err) return next(err);
+      response.json(res.rows);
+    });
+  }
+);
+
+router.get(
+  "/:quizzes_id/questions/:questions_id/answer_options/:id",
+  (request, response, next) => {
+    const { questions_id, id } = request.params;
+
+    pool.query(
+      "SELECT * FROM answer_options WHERE questions_id=$1 AND id=$2",
+      [questions_id, id],
+      (err, res) => {
+        if (err) return next(err);
+        if (res.rows.length === 0)
+          return response.json({
+            error: true,
+            message: "This answer option does not exist",
+          });
+        response.json(res.rows[0]);
+      }
+    );
+  }
+);
+
+router.post(
+  "/:quizzes_id/questions/:questions_id/answer_options",
+  (request, response, next) => {
+    const { questions_id, correct, answer_text } = request.body;
+    const { quizzes_id } = request.params;
+
+    pool.query(
+      "INSERT INTO answer_options(questions_id,correct, answer_text) VALUES ($1,$2,$3)",
+      [questions_id, correct, answer_text],
+      (err, res) => {
+        if (err) return next(err);
+        response.redirect(
+          `/quizzes/${quizzes_id}/questions/${questions_id}/answer_options`
+        );
+      }
+    );
+  }
+);
+
+router.put(
+  "/:quizzes_id/questions/:questions_id/answer_options/:id",
+  (request, response, next) => {
+    const { quizzes_id, questions_id, id } = request.params;
+    const keys = ["correct", "answer_text"];
+
+    const fields = [];
+
+    keys.forEach((key) => {
+      if (request.body[key]) fields.push(key);
+    });
+
+    fields.forEach((field, index) => {
+      pool.query(
+        `UPDATE answer_options SET ${field}=($1) WHERE questions_id=($2) AND id=($3)`,
+        [request.body[field], questions_id, id],
+        (err, res) => {
+          if (err) return next(err);
+          if (index === fields.length - 1)
+            response.redirect(
+              `/quizzes/${quizzes_id}/questions/${questions_id}/answer_options`
+            );
+        }
+      );
+    });
+  }
+);
+
+router.delete(
+  "/:quizzes_id/questions/:questions_id/answer_options/:id",
+  (request, response, next) => {
+    const { quizzes_id, questions_id, id } = request.params;
+    pool.query(
+      "DELETE FROM answer_options WHERE questions_id=($1) AND id=($2)",
+      [questions_id, id],
+      (err, res) => {
+        if (err) return next(err);
+
+        response.redirect(
+          `/quizzes/${quizzes_id}/questions/${questions_id}/answer_options`
+        );
       }
     );
   }
