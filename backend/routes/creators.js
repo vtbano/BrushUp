@@ -24,6 +24,22 @@ router.get("/:id", (request, response, next) => {
   });
 });
 
+//CREATE ROUTE FOR CREATORS/QUIZ
+
+router.get("/:id/quizzes", (request, response, next) => {
+  const { id } = request.params;
+
+  pool.query("SELECT * FROM quizzes WHERE creators_id=$1", [id], (err, res) => {
+    if (err) return next(err);
+    if (res.rows.length === 0)
+      return response.json({
+        error: true,
+        message: "There are no quizzes under this user",
+      });
+    response.json(res.rows);
+  });
+});
+
 router.post("/", (request, response, next) => {
   const { username, email, first_name, last_name, password } = request.body;
 

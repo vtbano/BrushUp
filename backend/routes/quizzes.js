@@ -28,35 +28,27 @@ router.post("/", (request, response, next) => {
   const { creators_id, title } = request.body;
 
   pool.query(
-    "INSERT INTO quizzes (creators_id,title) VALUES ($1,$2)",
+    "INSERT INTO quizzes (creators_id,title) VALUES ($1,$2) RETURNING *",
     [creators_id, title],
     (err, res) => {
       if (err) return next(err);
-      response.redirect("/quizzes");
+      response.json(res.rows[0]);
     }
   );
 });
 
 router.put("/:id", (request, response, next) => {
   const { id } = request.params;
-  const keys = ["title"];
+  const { title } = request.body;
 
-  const fields = [];
-
-  keys.forEach((key) => {
-    if (request.body[key]) fields.push(key);
-  });
-
-  fields.forEach((field, index) => {
-    pool.query(
-      `UPDATE quizzes SET ${field}=($1) WHERE id=($2)`,
-      [request.body[field], id],
-      (err, res) => {
-        if (err) return next(err);
-        if (index === fields.length - 1) response.redirect("/quizzes");
-      }
-    );
-  });
+  pool.query(
+    `UPDATE quizzes SET title=($1) WHERE id=($2)`,
+    [title, id],
+    (err, res) => {
+      if (err) return next(err);
+      response.json(res.rows[0]);
+    }
+  );
 });
 
 router.delete("/:id", (request, response, next) => {
@@ -64,7 +56,7 @@ router.delete("/:id", (request, response, next) => {
   pool.query("DELETE FROM quizzes WHERE id=($1)", [id], (err, res) => {
     if (err) return next(err);
 
-    response.redirect("/quizzes");
+    response.status(204).end();
   });
 });
 
@@ -108,14 +100,15 @@ router.get(
 );
 
 router.post("/:quizzes_id/questions", (request, response, next) => {
-  const { quizzes_id, question_text, image } = request.body;
+  const { question_text, image } = request.body;
+  const { quizzes_id } = request.params;
 
   pool.query(
-    "INSERT INTO questions (quizzes_id,question_text,image) VALUES ($1,$2,$3)",
+    "INSERT INTO questions (quizzes_id,question_text,image) VALUES ($1,$2,$3) RETURNING *",
     [quizzes_id, question_text, image],
     (err, res) => {
       if (err) return next(err);
-      response.redirect(`/quizzes/${quizzes_id}/questions`);
+      response.json(res.rows[0]);
     }
   );
 });
@@ -124,25 +117,16 @@ router.put(
   "/:quizzes_id/questions/:questions_id",
   (request, response, next) => {
     const { quizzes_id, questions_id } = request.params;
-    const keys = ["question_text", "image"];
+    const { question_text, image } = request.body;
 
-    const fields = [];
-
-    keys.forEach((key) => {
-      if (request.body[key]) fields.push(key);
-    });
-
-    fields.forEach((field, index) => {
-      pool.query(
-        `UPDATE questions SET ${field}=($1) WHERE quizzes_id=($2) AND id=($3)`,
-        [request.body[field], quizzes_id, questions_id],
-        (err, res) => {
-          if (err) return next(err);
-          if (index === fields.length - 1)
-            response.redirect(`/quizzes/${quizzes_id}/questions`);
-        }
-      );
-    });
+    pool.query(
+      `UPDATE questions SET question_text=($1), image=($2) WHERE quizzes_id=($3) AND questions_id=($4)`,
+      [question_text, image, quizzes_id, questions_id],
+      (err, res) => {
+        if (err) return next(err);
+        response.json(res.rows[0]);
+      }
+    );
   }
 );
 
@@ -156,7 +140,7 @@ router.delete(
       (err, res) => {
         if (err) return next(err);
 
-        response.redirect(`/quizzes/${quizzes_id}/questions`);
+        response.status(204).end(); // Status response
       }
     );
   }
@@ -167,10 +151,15 @@ router.delete(
 router.get(
   "/:quizzes_id/questions/:questions_id/answer_options",
   (request, response, next) => {
-    pool.query("SELECT * FROM answer_options ORDER BY id ASC", (err, res) => {
-      if (err) return next(err);
-      response.json(res.rows);
-    });
+    const { questions_id } = request.params;
+    pool.query(
+      "SELECT * FROM answer_options WHERE questions_id=($1) ORDER BY id ASC",
+      [questions_id],
+      (err, res) => {
+        if (err) return next(err);
+        response.json(res.rows);
+      }
+    );
   }
 );
 
@@ -198,17 +187,15 @@ router.get(
 router.post(
   "/:quizzes_id/questions/:questions_id/answer_options",
   (request, response, next) => {
-    const { questions_id, correct, answer_text } = request.body;
-    const { quizzes_id } = request.params;
+    const { correct, answer_text } = request.body;
+    const { questions_id } = request.params;
 
     pool.query(
-      "INSERT INTO answer_options(questions_id,correct, answer_text) VALUES ($1,$2,$3)",
+      "INSERT INTO answer_options(questions_id,correct, answer_text) VALUES ($1,$2,$3) RETURNING *",
       [questions_id, correct, answer_text],
       (err, res) => {
         if (err) return next(err);
-        response.redirect(
-          `/quizzes/${quizzes_id}/questions/${questions_id}/answer_options`
-        );
+        response.json(res.rows[0]);
       }
     );
   }
@@ -218,27 +205,16 @@ router.put(
   "/:quizzes_id/questions/:questions_id/answer_options/:id",
   (request, response, next) => {
     const { quizzes_id, questions_id, id } = request.params;
-    const keys = ["correct", "answer_text"];
+    const { correct, answer_text } = request.body;
 
-    const fields = [];
-
-    keys.forEach((key) => {
-      if (request.body[key]) fields.push(key);
-    });
-
-    fields.forEach((field, index) => {
-      pool.query(
-        `UPDATE answer_options SET ${field}=($1) WHERE questions_id=($2) AND id=($3)`,
-        [request.body[field], questions_id, id],
-        (err, res) => {
-          if (err) return next(err);
-          if (index === fields.length - 1)
-            response.redirect(
-              `/quizzes/${quizzes_id}/questions/${questions_id}/answer_options`
-            );
-        }
-      );
-    });
+    pool.query(
+      `UPDATE answer_options SET correct=($1), answer_text=($2) WHERE questions_id=($3) AND id=($4)`,
+      [correct, answer_text, questions_id, id],
+      (err, res) => {
+        if (err) return next(err);
+        response.json(res.rows[0]);
+      }
+    );
   }
 );
 
@@ -251,10 +227,7 @@ router.delete(
       [questions_id, id],
       (err, res) => {
         if (err) return next(err);
-
-        response.redirect(
-          `/quizzes/${quizzes_id}/questions/${questions_id}/answer_options`
-        );
+        response.status(204).end();
       }
     );
   }
