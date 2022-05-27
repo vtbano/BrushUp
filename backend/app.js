@@ -2,11 +2,10 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const creators = require("./routes/creators");
 const quizzes = require("./routes/quizzes");
-const questions = require("./routes/questions");
-const answer_options = require("./routes/answer_options");
-
+const cors = require("cors");
 const app = express();
 
+app.use(cors());
 app.use(bodyParser.json());
 app.use("/creators", creators);
 app.use("/quizzes", quizzes);

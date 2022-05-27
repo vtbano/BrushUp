@@ -351,4 +351,91 @@ router.delete(
   }
 );
 
+//RESPONSES
+
+// GET http://www.brushup.com/quizzes/ID/respondents/ID/answer_options/ID
+
+router.get(
+  "/:quizzes_id/respondents/:respondent_id/answer_options/:answer_options_id",
+  (request, response, next) => {
+    const { quizzes_id, respondent_id, answer_options_id } = request.params;
+
+    pool.query(
+      "SELECT * FROM responses WHERE respondent_id=($1) AND answer_options_id=($2)",
+      [respondent_id, answer_options_id],
+      (err, res) => {
+        if (err) return next(err);
+        if (res.rows.length === 0)
+          return response.json({
+            error: true,
+            message: "There is no response found",
+          });
+        response.json(res.rows[0]);
+      }
+    );
+  }
+);
+
+// POST http://www.brushup.com/quizzes/ID/respondents/ID/responses
+
+router.post(
+  "/:quizzes_id/respondents/:respondent_id/responses",
+  (request, response, next) => {
+    const { quizzes_id, email, secret } = request.body;
+
+    pool.query(
+      "INSERT INTO responses (quizzes_id,email, secret) VALUES ($1,$2,$3)",
+      [quizzes_id, email, secret],
+      (err, res) => {
+        if (err) return next(err);
+        response.redirect(`/quizzes/${quizzes_id}/respondents`);
+      }
+    );
+  }
+);
+// PUT http://www.brushup.com/quizzes/ID/respondents/ID/responses/ID
+
+router.put(
+  "/:quizzes_id/respondents/:respondent_id",
+  (request, response, next) => {
+    const { quizzes_id, respondent_id } = request.params;
+    const keys = ["email", "secret"];
+
+    const fields = [];
+
+    keys.forEach((key) => {
+      if (request.body[key]) fields.push(key);
+    });
+
+    fields.forEach((field, index) => {
+      pool.query(
+        `UPDATE respondents SET ${field}=($1) WHERE quizzes_id=($2) AND id=($3)`,
+        [request.body[field], quizzes_id, respondent_id],
+        (err, res) => {
+          if (err) return next(err);
+          if (index === fields.length - 1)
+            response.redirect(`/quizzes/${quizzes_id}/respondents`);
+        }
+      );
+    });
+  }
+);
+// DELETE http://www.brushup.com/quizzes/ID/respondents/ID/responses/ID
+
+router.delete(
+  "/:quizzes_id/respondents/:respondent_id",
+  (request, response, next) => {
+    const { quizzes_id, respondent_id } = request.params;
+    pool.query(
+      "DELETE FROM respondents WHERE quizzes_id=$1 AND id=$2",
+      [quizzes_id, respondent_id],
+      (err, res) => {
+        if (err) return next(err);
+
+        response.redirect(`/quizzes/${quizzes_id}/respondents`);
+      }
+    );
+  }
+);
+
 module.exports = router;
