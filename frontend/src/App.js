@@ -1,13 +1,29 @@
 import React from "react";
 import "./App.css";
 import Creators from "./Creators";
+import NavigationButtons from "./NavigationButtons";
+import Footer from "./Footer";
 
 const App = () => {
   return (
     <React.Fragment>
-      <section>
-        <Creators />
-      </section>
+      <div className="page-body">
+        <header>
+          <div className="title">
+            <span className="bold-title">BRUSH</span>
+            <span>UP</span>
+          </div>
+          <div className="navigation-options">
+            <NavigationButtons />
+          </div>
+        </header>
+        <section className="main-display-section">
+          <Creators />
+        </section>
+        <footer>
+          <Footer />
+        </footer>
+      </div>
     </React.Fragment>
   );
 };
