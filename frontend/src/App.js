@@ -1,6 +1,7 @@
 import React from "react";
 import "./App.css";
 import Creators from "./Creators";
+import Quizzes from "./Quizzes";
 import NavigationButtons from "./NavigationButtons";
 import Footer from "./Footer";
 
@@ -19,6 +20,7 @@ const App = () => {
         </header>
         <section className="main-display-section">
           <Creators />
+          <Quizzes />
         </section>
         <footer>
           <Footer />

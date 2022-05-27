@@ -25,12 +25,16 @@ router.get("/:id", (request, response, next) => {
 });
 
 router.post("/", (request, response, next) => {
-  const { title } = request.body;
+  const { creators_id, title } = request.body;
 
-  pool.query("INSERT INTO quizzes (title) VALUES ($1)", [title], (err, res) => {
-    if (err) return next(err);
-    response.redirect("/quizzes");
-  });
+  pool.query(
+    "INSERT INTO quizzes (creators_id,title) VALUES ($1,$2)",
+    [creators_id, title],
+    (err, res) => {
+      if (err) return next(err);
+      response.redirect("/quizzes");
+    }
+  );
 });
 
 router.put("/:id", (request, response, next) => {
