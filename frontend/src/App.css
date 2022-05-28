@@ -1,0 +1,35 @@
+body {
+  background-color: #ffedda;
+}
+
+/* Pancake Stack Layout */
+.page-body {
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+}
+
+header {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  background-color: #3db2ff;
+}
+
+.title {
+  font-family: "Roboto", sans-serif;
+  font-size: 3em;
+  color: #ffffff;
+  font-weight: 100;
+  padding: 20px;
+  text-align: center;
+  flex: 0 1 150px;
+}
+
+.title-bold {
+  font-weight: 900;
+}
+
+.nav-button {
+  width: 1em;
+  height: 1em;
+}

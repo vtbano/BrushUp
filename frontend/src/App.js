@@ -9,20 +9,20 @@ const App = () => {
   return (
     <React.Fragment>
       <div className="page-body">
-        <header>
+        <header className="page-body-header">
           <div className="title">
-            <span className="bold-title">BRUSH</span>
-            <span>UP</span>
-          </div>
-          <div className="navigation-options">
-            <NavigationButtons />
+            <span>BRUSH</span>
+            <span className="title-bold">UP</span>
+            <div className="navigation-options">
+              <NavigationButtons />
+            </div>
           </div>
         </header>
-        <section className="main-display-section">
+        <section className="page-body-main">
           <Creators />
           <Quizzes />
         </section>
-        <footer>
+        <footer className="page-body-footer">
           <Footer />
         </footer>
       </div>
