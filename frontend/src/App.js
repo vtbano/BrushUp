@@ -19,7 +19,7 @@ const App = () => {
           </div>
         </header>
         <section className="page-body-main">
-          <Creators />
+          {/* <Creators /> */}
           <Quizzes />
         </section>
         <footer className="page-body-footer">
