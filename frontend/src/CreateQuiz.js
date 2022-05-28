@@ -1,10 +1,8 @@
 import React, { useState, useEffect } from "react";
-const url = `creators/1/quizzes`;
+const url = "/quizzes"; //MAKE POST METHOD
 
-const Quizzes = () => {
-  const [quizzes, setQuizzes] = useState([]);
-
-  const getQuizzes = async () => {
+const CreateQuiz = (setQuizzes) => {
+  const postQuizzes = async () => {
     const response = await fetch(url);
     const quizzes = await response.json();
     setQuizzes(quizzes);
@@ -12,7 +10,7 @@ const Quizzes = () => {
   };
 
   useEffect(() => {
-    getQuizzes();
+    postQuizzes();
   }, []);
 
   return (
@@ -22,4 +20,4 @@ const Quizzes = () => {
   );
 };
 
-export default Quizzes;
+export default CreateQuiz;
