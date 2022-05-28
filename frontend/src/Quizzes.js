@@ -18,7 +18,7 @@ const Quizzes = () => {
   return (
     <React.Fragment>
       <section className="quiz-shelf-sect">
-        <h3>Ready to Brush Up **USERNAME**</h3>
+        <div className="creator-welcome">Ready to Brush Up **USERNAME**</div>
         <div className="quiz-shelf-title">QUIZ SHELF</div>
         <div className="quiz-shelf-display">
           <div className="quizzes-container-name">
