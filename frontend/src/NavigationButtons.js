@@ -2,7 +2,7 @@ import React from "react";
 
 const NavigationButtons = ({}) => {
   return (
-    <section className="navigation-buttons">
+    <span className="navigation-buttons">
       <img
         src="./img/icons8-book-shelf-96.png"
         alt="Quiz Shelf Button"
@@ -27,7 +27,7 @@ const NavigationButtons = ({}) => {
           //
         }}
       />
-    </section>
+    </span>
   );
 };
 export default NavigationButtons;

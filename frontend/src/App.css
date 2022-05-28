@@ -1,5 +1,6 @@
 body {
   background-color: #ffedda;
+  font-family: "Roboto", sans-serif;
 }
 
 /* Pancake Stack Layout */
@@ -9,7 +10,7 @@ body {
 }
 
 header {
-  display: flex;
+  display: inline-flex;
   flex-wrap: wrap;
   justify-content: center;
   background-color: #3db2ff;
@@ -32,4 +33,37 @@ header {
 .nav-button {
   width: 1em;
   height: 1em;
+}
+
+.quiz-shelf-title {
+  background-color: #ffb830;
+  color: #ffffff;
+  font-size: 2em;
+  padding: 0.5em;
+  width: 80%;
+}
+
+.quiz-shelf-display {
+  display: inline-flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  border: 1px solid black;
+  width: 80%;
+}
+.quizzes-container {
+  border: 1px solid #3db2ff;
+  flex: 0 1 400px;
+}
+
+.quizzes-container-name {
+  color: #3db2ff;
+  font-weight: 500;
+  margin: 1em;
+}
+
+.btn-create-quiz {
+  background-color: #ffb830;
+  color: #ffffff;
+  border-radius: 15px;
+  border: none;
 }
