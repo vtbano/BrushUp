@@ -1,36 +1,40 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import QuizQuestions from "./QuizQuestions";
 const url = "/quizzes"; //MAKE POST METHOD
 
 const CreateQuiz = ({ setQuizzes, setActiveContainer }) => {
-  const postQuizzes = async () => {
-    const response = await fetch(url);
-    const quizzes = await response.json();
-    setQuizzes(quizzes);
-    console.log(quizzes);
+  const [title, setTitle] = useState("");
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const quizTitle = { title };
+    fetch("/quizzes", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(quizTitle),
+    }).then(() => {
+      console.log("New Quiz Added");
+    });
   };
-
-  useEffect(() => {
-    postQuizzes();
-  }, []);
 
   return (
     <React.Fragment>
       <section className="create-quiz-sect">
         <div className="create-quiz-title">CREATE QUIZ</div>
         <div className="create-quiz-container">
+          <form onSubmit={handleSubmit}>
+            <input type="text" required value={title} />
+          </form>
           <button
-            type="button"
+            type="submit"
             className="btn-save-quiz"
-            onClick={() =>
-              setActiveContainer("QuizQuestions")(<QuizQuestions />)
+            onClick={
+              (() => setActiveContainer("QuizQuestions"), (<QuizQuestions />))
             }
           >
-            +Create Quiz
+            Save
           </button>
         </div>
       </section>
-      <h3>getQuizzes</h3>
     </React.Fragment>
   );
 };

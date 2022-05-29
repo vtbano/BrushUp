@@ -107,6 +107,13 @@ footer {
   border: none;
 }
 
+.btn-save-quiz {
+  background-color: #4caf50;
+  color: #ffffff;
+  border-radius: 15px;
+  border: none;
+}
+
 .question-shelf-quiz-title {
   background-color: #f5841b;
   color: #ffffff;

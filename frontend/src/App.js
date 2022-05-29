@@ -3,6 +3,7 @@ import "./App.css";
 import Creators from "./Creators";
 import Quizzes from "./Quizzes";
 import CreateQuiz from "./CreateQuiz";
+import QuizQuestions from "./QuizQuestions";
 import NavigationButtons from "./NavigationButtons";
 import Footer from "./Footer";
 
@@ -27,7 +28,12 @@ const App = () => {
           {activeContainer === "Quizzes" && (
             <Quizzes setActiveContainer={setActiveContainer} />
           )}
-          {activeContainer === "CreateQuiz" && <CreateQuiz />}
+          {activeContainer === "CreateQuiz" && (
+            <CreateQuiz setActiveContainer={setActiveContainer} />
+          )}
+          {activeContainer === "QuizQuestions" && (
+            <QuizQuestions setActiveContainer={setActiveContainer} />
+          )}
         </section>
         <footer className="page-body-footer">
           <Footer />
