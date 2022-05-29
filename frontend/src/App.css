@@ -15,12 +15,15 @@ body {
 }
 
 header {
-  display: inline-flex;
-  flex-wrap: wrap;
-  justify-content: center;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
   background-color: #3db2ff;
 }
 
+.navigation-buttons {
+  display: flex;
+  justify-content: right;
+}
 footer {
   margin-top: 3em;
   padding-top: 2em;
@@ -54,8 +57,10 @@ footer {
 }
 
 .nav-button {
-  width: 1em;
-  height: 1em;
+  width: 3em;
+  height: 3em;
+  padding: 1em;
+  padding-top: 25px;
 }
 
 .creator-welcome {

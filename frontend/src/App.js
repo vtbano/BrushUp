@@ -10,12 +10,13 @@ const App = () => {
     <React.Fragment>
       <div className="page-body">
         <header className="page-body-header">
+          <div></div>
           <div className="title">
             <span>BRUSH</span>
             <span className="title-bold">UP</span>
-            <div className="navigation-options">
-              <NavigationButtons />
-            </div>
+          </div>
+          <div className="navigation-options">
+            <NavigationButtons />
           </div>
         </header>
         <section className="page-body-main">
