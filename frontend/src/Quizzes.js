@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react";
+import CreateQuiz from "./CreateQuiz";
 const url = `creators/1/quizzes`;
 
-const Quizzes = () => {
+const Quizzes = ({ setActiveContainer }) => {
   const [quizzes, setQuizzes] = useState([]);
+  const [createQuizzes, setCreateQuizzes] = useState(false);
 
   const getQuizzes = async () => {
     const response = await fetch(url);
@@ -24,7 +26,13 @@ const Quizzes = () => {
           <div className="quizzes-container-name">
             My Quizzes
             <div className="quizzes-container">
-              <button className="btn-create-quiz">+Create Quiz</button>
+              <button
+                type="button"
+                className="btn-create-quiz"
+                onClick={() => setActiveContainer("CreateQuiz")}
+              >
+                +Create Quiz
+              </button>
             </div>
           </div>
           <div className="quizzes-container-name">

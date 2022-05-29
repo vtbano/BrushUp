@@ -1,11 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 import "./App.css";
 import Creators from "./Creators";
 import Quizzes from "./Quizzes";
+import CreateQuiz from "./CreateQuiz";
 import NavigationButtons from "./NavigationButtons";
 import Footer from "./Footer";
 
 const App = () => {
+  const [activeContainer, setActiveContainer] = useState("Quizzes");
   return (
     <React.Fragment>
       <div className="page-body">
@@ -20,8 +22,12 @@ const App = () => {
           </div>
         </header>
         <section className="page-body-main">
-          {/* <Creators /> */}
-          <Quizzes />
+          {/* if the text is true then it will return the second value. */}
+          {activeContainer === "Creators" && <Creators />}
+          {activeContainer === "Quizzes" && (
+            <Quizzes setActiveContainer={setActiveContainer} />
+          )}
+          {activeContainer === "CreateQuiz" && <CreateQuiz />}
         </section>
         <footer className="page-body-footer">
           <Footer />
