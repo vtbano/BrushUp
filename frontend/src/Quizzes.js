@@ -29,7 +29,15 @@ const Quizzes = ({ setActiveContainer }) => {
               <button
                 type="button"
                 className="btn-create-quiz"
-                onClick={() => setActiveContainer("CreateQuiz")}
+                onClick={() => (
+                  setActiveContainer("CreateQuiz"),
+                  (
+                    <CreateQuiz
+                      setQuizzes={setQuizzes}
+                      setActiveContainer={setActiveContainer}
+                    />
+                  )
+                )}
               >
                 +Create Quiz
               </button>

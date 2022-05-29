@@ -75,13 +75,15 @@ footer {
   padding-bottom: 0.5em;
 }
 
-.quiz-shelf-display {
+.quiz-shelf-display,
+.question-shelf-display {
   display: inline-flex;
   flex-wrap: wrap;
   justify-content: center;
   /* border: 1px solid black; */
 }
-.quizzes-container {
+.quizzes-container,
+.questions-container {
   border: 1px solid #3db2ff;
   flex: 0 1 400px;
   width: 35em;
@@ -97,9 +99,19 @@ footer {
   margin: 1em;
 }
 
-.btn-create-quiz {
+.btn-create-quiz,
+.btn-add-question {
   background-color: #ffb830;
   color: #ffffff;
   border-radius: 15px;
   border: none;
+}
+
+.question-shelf-quiz-title {
+  background-color: #f5841b;
+  color: #ffffff;
+  text-align: center;
+  font-size: 2em;
+  padding-top: 0.5em;
+  padding-bottom: 0.5em;
 }
