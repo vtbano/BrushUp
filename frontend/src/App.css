@@ -90,7 +90,7 @@ footer {
   height: 20em;
 }
 
-.quizzes-container,
+.share-container,
 .questions-container {
   border: 1px solid #3db2ff;
   flex: 0 1 400px;
@@ -98,6 +98,19 @@ footer {
   height: 20em;
   display: grid;
   place-items: center;
+}
+
+.quizzes-container {
+  display: grid;
+  border: 1px solid #3db2ff;
+  flex: 0 1 400px;
+  width: 35em;
+  height: 20em;
+}
+
+.single-quiz-title {
+  font-size: 0.75em;
+  padding: 0.5em;
 }
 
 .quizzes-container-name,
@@ -120,6 +133,10 @@ footer {
   padding: 0.5em 1.5em;
   border-radius: 20px;
   border: none;
+}
+
+.btn-create-quiz {
+  place-self: center;
 }
 
 .btn-save-quiz {

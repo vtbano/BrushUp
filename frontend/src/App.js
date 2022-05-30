@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./App.css";
-import Creators from "./Creators";
+import CreatorsLogin from "./CreatorsLogin";
 import Quizzes from "./Quizzes";
 import CreateQuiz from "./CreateQuiz";
 import QuizQuestions from "./QuizQuestions";
@@ -9,6 +9,11 @@ import Footer from "./Footer";
 
 const App = () => {
   const [activeContainer, setActiveContainer] = useState("Quizzes");
+  const [creator, setCreator] = useState({
+    id: 1,
+    username: "**Fetch Creator from CreatorsLogin Component**",
+  });
+  const [quizzes, setQuizzes] = useState([]);
   return (
     <React.Fragment>
       <div className="page-body">
@@ -24,12 +29,22 @@ const App = () => {
         </header>
         <section className="page-body-main">
           {/* if the text is true then it will return the second value. */}
-          {activeContainer === "Creators" && <Creators />}
+          {activeContainer === "Creators" && (
+            <CreatorsLogin setCreator={setCreator} />
+          )}
           {activeContainer === "Quizzes" && (
-            <Quizzes setActiveContainer={setActiveContainer} />
+            <Quizzes
+              setActiveContainer={setActiveContainer}
+              setQuizzes={setQuizzes}
+              creator={creator}
+            />
           )}
           {activeContainer === "CreateQuiz" && (
-            <CreateQuiz setActiveContainer={setActiveContainer} />
+            <CreateQuiz
+              setActiveContainer={setActiveContainer}
+              setQuizzes={setQuizzes}
+              creator={creator}
+            />
           )}
           {activeContainer === "QuizQuestions" && (
             <QuizQuestions setActiveContainer={setActiveContainer} />

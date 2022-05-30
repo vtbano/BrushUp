@@ -1,13 +1,11 @@
 import React, { useState, useEffect } from "react";
-const url = "http://localhost:3000/creators";
+const url = "/creators";
 
-const Creators = () => {
-  const [creators, setCreators] = useState([]);
-
+const CreatorsLogin = ({ setCreator }) => {
   const getCreators = async () => {
     const response = await fetch(url);
     const creators = await response.json();
-    setCreators(creators);
+    setCreator(creators[0]);
     console.log(creators);
   };
 
@@ -22,4 +20,4 @@ const Creators = () => {
   );
 };
 
-export default Creators;
+export default CreatorsLogin;

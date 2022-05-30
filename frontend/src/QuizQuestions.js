@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-const url = `/1/questions`;
+const url = `quizzes/25/questions`;
 
 const QuizQuestions = ({ setActiveContainer }) => {
   const [questions, setQuestions] = useState([]);

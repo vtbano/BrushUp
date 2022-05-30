@@ -2,18 +2,25 @@ import React, { useEffect, useState } from "react";
 import QuizQuestions from "./QuizQuestions";
 const url = "/quizzes"; //MAKE POST METHOD
 
-const CreateQuiz = ({ setQuizzes, setActiveContainer }) => {
+const CreateQuiz = ({ setQuizzes, setActiveContainer, creator }) => {
+  console.log("CreateQuiz Creator", creator);
   const [title, setTitle] = useState("");
   const handleSubmit = (e) => {
     e.preventDefault();
-    const quizTitle = { title }; //MUST ADD creaters_id
+    const { id, username } = creator;
+
+    const quizTitle = { title };
+    const creator_id = id; //MUST ADD creaters_id properly
     fetch("/quizzes", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(quizTitle),
+      body: JSON.stringify(quizTitle, creator_id),
     }).then(() => {
       console.log("New Quiz Added");
     });
+
+    setActiveContainer("QuizQuestions");
+    <QuizQuestions quizTitle={quizTitle} creator={creator} />;
   };
 
   return (
@@ -22,7 +29,7 @@ const CreateQuiz = ({ setQuizzes, setActiveContainer }) => {
         <div className="create-quiz-title">CREATE QUIZ</div>
         <div className="create-quiz-display">
           <span className="create-quiz-label">Quiz Title</span>
-          <form onClick={handleSubmit}>
+          <form>
             <input
               type="text"
               className="create-quiz-title-input"
@@ -34,9 +41,7 @@ const CreateQuiz = ({ setQuizzes, setActiveContainer }) => {
           <button
             type="submit"
             className="btn-save-quiz"
-            onClick={
-              (() => setActiveContainer("QuizQuestions"), (<QuizQuestions />))
-            }
+            onClick={handleSubmit}
           >
             Save
           </button>
