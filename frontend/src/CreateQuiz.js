@@ -2,20 +2,21 @@ import React, { useEffect, useState } from "react";
 import QuizQuestions from "./QuizQuestions";
 const url = "/quizzes"; //MAKE POST METHOD
 
-const CreateQuiz = ({ setQuizzes, setActiveContainer, creator }) => {
+const CreateQuiz = ({ setActiveContainer, creator, setActiveQuiz }) => {
   console.log("CreateQuiz Creator", creator);
-  const [title, setTitle] = useState("");
-  const handleSubmit = (e) => {
+  const [title, setTitle] = useState(""); //this causes to re-render and that's why console.log is coming up multiple times
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const { id, username } = creator;
-    fetch("/quizzes", {
+    const submitQuiz = await fetch("/quizzes", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ creators_id: id, title: title }),
-    }).then(() => {
-      console.log("New Quiz Added");
     });
-
+    const getQuizSubmitted = await submitQuiz.json();
+    console.log(getQuizSubmitted);
+    setActiveQuiz(getQuizSubmitted);
+    console.log("New Quiz Added");
     setActiveContainer("QuizQuestions");
   };
 

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-const url = `quizzes/1`;
+const url = `quizzes/1/quetions`; //but how do you know it's the latest quiz created
 
 // const url = `creators/1/quizzes`; //use this URL for testing
 

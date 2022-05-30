@@ -1,20 +1,17 @@
 import React, { useState, useEffect } from "react";
 import SingleQuiz from "./SingleQuiz";
-const url = `creators/1/quizzes`;
 
-const Quizzes = ({ setActiveContainer, quizzes, setQuizzes, creator }) => {
+const Quizzes = ({ setActiveContainer, creator }) => {
   console.log("Quizzes Creator", creator);
-  const { username } = creator;
-  const [createQuizzes, setCreateQuizzes] = useState(false);
-  const [getQuizResult, setGetQuizResult] = useState([]);
-  setQuizzes(getQuizResult);
+  const { id, username } = creator;
+  const url = `creators/${id}/quizzes`;
+  const [quizzes, setQuizzes] = useState([]);
 
   const getQuizzes = async () => {
     const response = await fetch(url);
-    const quizzes = await response.json();
-    setGetQuizResult(quizzes);
-    console.log(quizzes);
-    console.log(creator);
+    const responseQuizzes = await response.json();
+    setQuizzes(responseQuizzes);
+    console.log(responseQuizzes);
   };
 
   useEffect(() => {
@@ -31,7 +28,7 @@ const Quizzes = ({ setActiveContainer, quizzes, setQuizzes, creator }) => {
             My Quizzes
             <div className="quizzes-container">
               <div className="quizzes-single-quiz-container">
-                {getQuizResult.map((quiz) => {
+                {quizzes.map((quiz) => {
                   return <SingleQuiz key={quiz.id} {...quiz} />;
                 })}
               </div>
