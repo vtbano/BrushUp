@@ -29,7 +29,13 @@ const Quizzes = ({ setActiveContainer, creator }) => {
             <div className="quizzes-container">
               <div className="quizzes-single-quiz-container">
                 {quizzes.map((quiz) => {
-                  return <SingleQuiz key={quiz.id} {...quiz} />;
+                  return (
+                    <SingleQuiz
+                      key={quiz.id}
+                      {...quiz}
+                      setQuizzes={setQuizzes}
+                    />
+                  );
                 })}
               </div>
               <button
