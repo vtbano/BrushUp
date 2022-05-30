@@ -82,6 +82,14 @@ footer {
   justify-content: center;
   /* border: 1px solid black; */
 }
+
+.create-quiz-display {
+  display: grid;
+  place-items: center;
+  width: 70em;
+  height: 20em;
+}
+
 .quizzes-container,
 .questions-container {
   border: 1px solid #3db2ff;
@@ -93,27 +101,37 @@ footer {
 }
 
 .quizzes-container-name,
-.creator-welcome {
+.creator-welcome,
+.create-quiz-label {
   color: #3db2ff;
   font-weight: 500;
   margin: 1em;
+}
+
+.create-quiz-label {
+  margin-bottom: 0;
 }
 
 .btn-create-quiz,
 .btn-add-question {
   background-color: #ffb830;
   color: #ffffff;
-  border-radius: 15px;
+  font-size: 1em;
+  padding: 0.5em 1.5em;
+  border-radius: 20px;
   border: none;
 }
 
 .btn-save-quiz {
   background-color: #4caf50;
   color: #ffffff;
-  border-radius: 15px;
+  font-size: 1.5em;
+  padding: 0.5rem 2.5rem;
+  border-radius: 25px;
   border: none;
 }
 
+.create-quiz-title,
 .question-shelf-quiz-title {
   background-color: #f5841b;
   color: #ffffff;
@@ -121,4 +139,15 @@ footer {
   font-size: 2em;
   padding-top: 0.5em;
   padding-bottom: 0.5em;
+}
+
+.create-quiz-title {
+  margin-top: 2em;
+  margin-bottom: 1em;
+}
+
+.create-quiz-title-input {
+  width: 35em;
+  height: 2em;
+  font-size: 1em;
 }

@@ -6,7 +6,7 @@ const CreateQuiz = ({ setQuizzes, setActiveContainer }) => {
   const [title, setTitle] = useState("");
   const handleSubmit = (e) => {
     e.preventDefault();
-    const quizTitle = { title };
+    const quizTitle = { title }; //MUST ADD creaters_id
     fetch("/quizzes", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -20,9 +20,16 @@ const CreateQuiz = ({ setQuizzes, setActiveContainer }) => {
     <React.Fragment>
       <section className="create-quiz-sect">
         <div className="create-quiz-title">CREATE QUIZ</div>
-        <div className="create-quiz-container">
-          <form onSubmit={handleSubmit}>
-            <input type="text" required value={title} />
+        <div className="create-quiz-display">
+          <span className="create-quiz-label">Quiz Title</span>
+          <form onClick={handleSubmit}>
+            <input
+              type="text"
+              className="create-quiz-title-input"
+              placeholder=" Enter Quiz Title"
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+            />
           </form>
           <button
             type="submit"
