@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
-const url = `quizzes/25/questions`;
+const url = `quizzes/1`;
 
-const QuizQuestions = ({ setActiveContainer }) => {
+// const url = `creators/1/quizzes`; //use this URL for testing
+
+const QuizQuestions = ({ setActiveContainer, quizzes, creator }) => {
   const [questions, setQuestions] = useState([]);
-
   const getQuestions = async () => {
     const response = await fetch(url);
     const questions = await response.json();

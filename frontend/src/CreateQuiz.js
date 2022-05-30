@@ -8,19 +8,15 @@ const CreateQuiz = ({ setQuizzes, setActiveContainer, creator }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     const { id, username } = creator;
-
-    const quizTitle = { title };
-    const creator_id = id; //MUST ADD creaters_id properly
     fetch("/quizzes", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(quizTitle, creator_id),
+      body: JSON.stringify({ creators_id: id, title: title }),
     }).then(() => {
       console.log("New Quiz Added");
     });
 
     setActiveContainer("QuizQuestions");
-    <QuizQuestions quizTitle={quizTitle} creator={creator} />;
   };
 
   return (

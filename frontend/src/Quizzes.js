@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import SingleQuiz from "./SingleQuiz";
 const url = `creators/1/quizzes`;
 
-const Quizzes = ({ setActiveContainer, setQuizzes, creator }) => {
+const Quizzes = ({ setActiveContainer, quizzes, setQuizzes, creator }) => {
   console.log("Quizzes Creator", creator);
   const { username } = creator;
   const [createQuizzes, setCreateQuizzes] = useState(false);

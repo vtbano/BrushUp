@@ -47,7 +47,11 @@ const App = () => {
             />
           )}
           {activeContainer === "QuizQuestions" && (
-            <QuizQuestions setActiveContainer={setActiveContainer} />
+            <QuizQuestions
+              setActiveContainer={setActiveContainer}
+              quizzes={quizzes}
+              creator={creator}
+            />
           )}
         </section>
         <footer className="page-body-footer">
