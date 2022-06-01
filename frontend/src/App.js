@@ -49,7 +49,8 @@ const App = () => {
             <QuizQuestions
               setActiveContainer={setActiveContainer}
               creator={creator}
-              activeQuiz={activeQuiz}
+              key={activeQuiz.id}
+              {...activeQuiz}
             />
           )}
         </section>

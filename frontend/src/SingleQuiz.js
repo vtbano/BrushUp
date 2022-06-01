@@ -4,9 +4,7 @@ import EditQuiz from "./EditQuiz";
 
 const SingleQuiz = ({ id, creators_id, title, setQuizzes, quizzes }) => {
   console.log("TITLE:", title, "QUIZ:", id);
-  // const removeQuiz = (key) => {
-  //   setQuizzes(quizzes.filter((quiz) => quiz.id !== key));
-  // };
+
   return (
     <React.Fragment>
       <div className="single-quiz-row-container">

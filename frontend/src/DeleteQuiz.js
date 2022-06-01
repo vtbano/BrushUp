@@ -9,15 +9,7 @@ const DeleteQuiz = ({ setQuizzes, quizzes, DeleteId }) => {
     const getUpdateQuizzes = await submitQuizDelete;
     console.log(getUpdateQuizzes);
   };
-  // const handleSubmit = async (e) => {
-  //   e.preventDefault();
-  //   const { id, username } = creator;
-  //   const submitQuiz = await fetch("/quizzes", {
-  //     method: "POST",
-  //     headers: { "Content-Type": "application/json" },
-  //     body: JSON.stringify({ creators_id: id, title: title }),
-  //   });
-  // };
+  //the route does not redirect, must refresh to view new list
   return (
     <React.Fragment>
       <button className="btn-delete-quiz" onClick={handleDelete}>
