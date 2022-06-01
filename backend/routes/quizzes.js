@@ -68,11 +68,6 @@ router.get("/:quizzes_id/questions", (request, response, next) => {
     [quizzes_id],
     (err, res) => {
       if (err) return next(err);
-      if (res.rows.length === 0)
-        return response.json({
-          error: true,
-          message: "Questions do not exist",
-        });
       response.json(res.rows);
     }
   );
@@ -221,7 +216,7 @@ router.put(
 router.delete(
   "/:quizzes_id/questions/:questions_id/answer_options/:id",
   (request, response, next) => {
-    const { quizzes_id, questions_id, id } = request.params;
+    const { questions_id, id } = request.params;
     pool.query(
       "DELETE FROM answer_options WHERE questions_id=($1) AND id=($2)",
       [questions_id, id],
@@ -242,11 +237,6 @@ router.get("/:quizzes_id/respondents", (request, response, next) => {
     [quizzes_id],
     (err, res) => {
       if (err) return next(err);
-      if (res.rows.length === 0)
-        return response.json({
-          error: true,
-          message: "There are no respondents",
-        });
       response.json(res.rows);
     }
   );
@@ -274,14 +264,15 @@ router.get(
 );
 
 router.post("/:quizzes_id/respondents", (request, response, next) => {
-  const { quizzes_id, email, secret } = request.body;
+  const { email, secret } = request.body;
+  const { quizzes_id } = request.params;
 
   pool.query(
-    "INSERT INTO respondents (quizzes_id,email, secret) VALUES ($1,$2,$3)",
+    "INSERT INTO respondents (quizzes_id,email, secret) VALUES ($1,$2,$3) RETURNING *",
     [quizzes_id, email, secret],
     (err, res) => {
       if (err) return next(err);
-      response.redirect(`/quizzes/${quizzes_id}/respondents`);
+      response.json(res.rows[0]);
     }
   );
 });
@@ -290,25 +281,16 @@ router.put(
   "/:quizzes_id/respondents/:respondent_id",
   (request, response, next) => {
     const { quizzes_id, respondent_id } = request.params;
-    const keys = ["email", "secret"];
+    const { email, secret } = request.body;
 
-    const fields = [];
-
-    keys.forEach((key) => {
-      if (request.body[key]) fields.push(key);
-    });
-
-    fields.forEach((field, index) => {
-      pool.query(
-        `UPDATE respondents SET ${field}=($1) WHERE quizzes_id=($2) AND id=($3)`,
-        [request.body[field], quizzes_id, respondent_id],
-        (err, res) => {
-          if (err) return next(err);
-          if (index === fields.length - 1)
-            response.redirect(`/quizzes/${quizzes_id}/respondents`);
-        }
-      );
-    });
+    pool.query(
+      `UPDATE respondents SET email=($1), secret=($2) WHERE quizzes_id=($3) AND id=($4)`,
+      [email, secret, quizzes_id, respondent_id],
+      (err, res) => {
+        if (err) return next(err);
+        response.json(res.rows[0]);
+      }
+    );
   }
 );
 
@@ -321,8 +303,7 @@ router.delete(
       [quizzes_id, respondent_id],
       (err, res) => {
         if (err) return next(err);
-
-        response.redirect(`/quizzes/${quizzes_id}/respondents`);
+        response.status(204).end();
       }
     );
   }
@@ -358,14 +339,15 @@ router.get(
 router.post(
   "/:quizzes_id/respondents/:respondent_id/responses",
   (request, response, next) => {
-    const { quizzes_id, email, secret } = request.body;
+    const { email, secret } = request.body;
+    const { quizzes_id } = request.params;
 
     pool.query(
       "INSERT INTO responses (quizzes_id,email, secret) VALUES ($1,$2,$3)",
       [quizzes_id, email, secret],
       (err, res) => {
         if (err) return next(err);
-        response.redirect(`/quizzes/${quizzes_id}/respondents`);
+        response.json(res.rows[0]);
       }
     );
   }
@@ -376,25 +358,16 @@ router.put(
   "/:quizzes_id/respondents/:respondent_id",
   (request, response, next) => {
     const { quizzes_id, respondent_id } = request.params;
-    const keys = ["email", "secret"];
+    const { email, secret } = request.body;
 
-    const fields = [];
-
-    keys.forEach((key) => {
-      if (request.body[key]) fields.push(key);
-    });
-
-    fields.forEach((field, index) => {
-      pool.query(
-        `UPDATE respondents SET ${field}=($1) WHERE quizzes_id=($2) AND id=($3)`,
-        [request.body[field], quizzes_id, respondent_id],
-        (err, res) => {
-          if (err) return next(err);
-          if (index === fields.length - 1)
-            response.redirect(`/quizzes/${quizzes_id}/respondents`);
-        }
-      );
-    });
+    pool.query(
+      `UPDATE respondents SET email=($1), secret=($2) WHERE quizzes_id=($3) AND id=($4)`,
+      [email, secret, quizzes_id, respondent_id],
+      (err, res) => {
+        if (err) return next(err);
+        response.json(res.rows[0]);
+      }
+    );
   }
 );
 // DELETE http://www.brushup.com/quizzes/ID/respondents/ID/responses/ID
@@ -409,7 +382,7 @@ router.delete(
       (err, res) => {
         if (err) return next(err);
 
-        response.redirect(`/quizzes/${quizzes_id}/respondents`);
+        response.status(204).end();
       }
     );
   }
