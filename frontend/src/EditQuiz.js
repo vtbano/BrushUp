@@ -1,9 +1,9 @@
 import React from "react";
 
-const EditQuiz = ({ title, setQuizzes }) => {
+const EditQuiz = ({ tetQuizzes, quizzes, RemoveId }) => {
   return (
     <React.Fragment>
-      <button className="Edit">Edit</button>
+      <button className="btn-edit-quiz">Edit</button>
     </React.Fragment>
   );
 };

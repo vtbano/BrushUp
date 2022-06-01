@@ -121,6 +121,10 @@ footer {
   margin: 1em;
 }
 
+.single-quiz-row-container {
+  margin-top: 1rem;
+}
+
 .create-quiz-label {
   margin-bottom: 0;
 }
@@ -144,6 +148,27 @@ footer {
   color: #ffffff;
   font-size: 1.5em;
   padding: 0.5rem 2.5rem;
+  border-radius: 25px;
+  border: none;
+}
+
+.btn-delete-quiz {
+  background-color: #ff2442;
+  color: #ffffff;
+  font-size: 0.75em;
+  padding: 0.25rem 1rem;
+  margin-left: 1rem;
+  margin-right: 1rem;
+  border-radius: 25px;
+  border: none;
+}
+
+.btn-edit-quiz {
+  background-color: #f5841b;
+  color: #ffffff;
+  font-size: 0.75em;
+  padding: 0.25rem 1rem;
+  margin-right: 1rem;
   border-radius: 25px;
   border: none;
 }
