@@ -30,17 +30,32 @@ const QuizQuestions = ({
           <div className="question-count">{questions.length}</div>
         </div>
         <div className="question-shelf-display">
-          <div className="questions-container">
-            <button
-              type="button"
-              className="btn-add-question"
-              onClick={() => setActiveContainer("")}
-            >
-              +Add Question
-            </button>
+          <div className="questions-container-name">
+            My Questions
+            <div className="questions-container">
+              <div className="questions-single-question-container">
+                {/* {quizzes.map((quiz) => {
+                return (
+                  <SingleQuestion
+                    key={quiz.id}
+                    {...quiz}
+                    setQuizzes={setQuizzes}
+                    quizzes={quizzes}
+                  />
+                );
+              })} */}
+              </div>
+              <button
+                type="button"
+                className="btn-add-question"
+                // onClick={() => setActiveContainer("")}
+              >
+                +Add Question
+              </button>
+            </div>
           </div>
 
-          <div className="share-link-container">
+          <div className="share-quiz-container">
             {/* when empty it display's a greyed out share img */}
             <img
               src="./img/icons8-ToShare-96 (1).png"

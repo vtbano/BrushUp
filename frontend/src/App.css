@@ -91,13 +91,17 @@ footer {
 }
 
 .share-container,
-.questions-container {
+.share-quiz-container {
   border: 1px solid #3db2ff;
   flex: 0 1 400px;
   width: 35em;
   height: 20em;
   display: grid;
   place-items: center;
+}
+
+.share-quiz-container {
+  border: none;
 }
 
 .quizzes-container {
@@ -108,12 +112,20 @@ footer {
   height: 20em;
 }
 
+/* must revise  */
+.questions-container {
+  display: grid;
+  border: none;
+  width: 35em;
+  height: 20em;
+}
 .single-quiz-title {
   font-size: 0.75em;
   padding: 0.5em;
 }
 
 .quizzes-container-name,
+.questions-container-name,
 .creator-welcome,
 .create-quiz-label {
   color: #3db2ff;
@@ -129,7 +141,15 @@ footer {
   margin-bottom: 0;
 }
 
-.btn-create-quiz,
+.btn-create-quiz {
+  background-color: #ffb830;
+  color: #ffffff;
+  font-size: 1em;
+  padding: 0.5em 1.5em;
+  border-radius: 20px;
+  border: none;
+}
+
 .btn-add-question {
   background-color: #ffb830;
   color: #ffffff;
