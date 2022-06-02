@@ -90,6 +90,12 @@ footer {
   height: 20em;
 }
 
+.add-question-display {
+  display: grid;
+  width: 70em;
+  height: 20em;
+}
+
 .share-container,
 .share-quiz-container {
   border: 1px solid #3db2ff;
@@ -128,7 +134,9 @@ footer {
 .quizzes-container-name,
 .questions-container-name,
 .creator-welcome,
-.create-quiz-label {
+.create-quiz-label,
+.add-question-label,
+.add-url-label {
   color: #3db2ff;
   font-weight: 500;
   margin: 1em;
@@ -214,8 +222,28 @@ footer {
   margin-bottom: 1em;
 }
 
+.add-question-title {
+  background-color: #3db2ff;
+  color: #ffffff;
+  text-align: center;
+  font-size: 2em;
+  padding-top: 0.5em;
+  padding-bottom: 0.5em;
+  margin-top: 2em;
+  margin-bottom: 1em;
+}
+
 .create-quiz-title-input {
   width: 35em;
   height: 2em;
   font-size: 1em;
+}
+
+.add-question-input {
+  width: 35em;
+  height: 2em;
+  font-size: 1em;
+  border: 1px solid #3db2ff;
+  background-color: #aed7f3;
+  color: #3db2ff;
 }
