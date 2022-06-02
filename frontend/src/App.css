@@ -119,7 +119,8 @@ footer {
   width: 35em;
   height: 20em;
 }
-.single-quiz-title {
+.single-quiz-title,
+.single-question-title {
   font-size: 0.75em;
   padding: 0.5em;
 }
@@ -133,7 +134,8 @@ footer {
   margin: 1em;
 }
 
-.single-quiz-row-container {
+.single-quiz-row-container,
+.single-question-row-container {
   margin-top: 1rem;
 }
 
@@ -201,6 +203,10 @@ footer {
   font-size: 2em;
   padding-top: 0.5em;
   padding-bottom: 0.5em;
+}
+
+.questions-count {
+  font-size: 0.5em;
 }
 
 .create-quiz-title {

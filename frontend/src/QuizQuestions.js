@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
-const url = `quizzes/1/quetions`; //but how do you know it's the latest quiz created
+import SingleQuestion from "./SingleQuestion";
+const url = `quizzes/1/questions`; //but how do you know it's the latest quiz created
 
 // const url = `creators/1/quizzes`; //use this URL for testing
 
@@ -27,23 +28,24 @@ const QuizQuestions = ({
       <section className="quiz-shelf-sect">
         <div className="question-shelf-quiz-title">
           {title}
-          <div className="question-count">{questions.length}</div>
+          <div className="questions-count">{questions.length} questions</div>
         </div>
         <div className="question-shelf-display">
           <div className="questions-container-name">
             My Questions
             <div className="questions-container">
               <div className="questions-single-question-container">
-                {/* {quizzes.map((quiz) => {
-                return (
-                  <SingleQuestion
-                    key={quiz.id}
-                    {...quiz}
-                    setQuizzes={setQuizzes}
-                    quizzes={quizzes}
-                  />
-                );
-              })} */}
+                {questions.map((question) => {
+                  return (
+                    <SingleQuestion
+                      quizId={id}
+                      key={question.id}
+                      {...question}
+                      setQuestions={setQuestions}
+                      questions={questions}
+                    />
+                  );
+                })}
               </div>
               <button
                 type="button"
