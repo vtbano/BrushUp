@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from "react";
-const url = "/quizzes/:quizzes_id/questions"; //MAKE POST METHOD
+import React, { useState } from "react";
 
 const AddQuestion = ({ id, setActiveContainer, setActiveQuiz }) => {
   console.log("Quiz ID from Add Question", id);
@@ -8,15 +7,19 @@ const AddQuestion = ({ id, setActiveContainer, setActiveQuiz }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // const submitQuiz = await fetch("/quizzes", {
-    //   method: "POST",
-    //   headers: { "Content-Type": "application/json" },
-    //   body: JSON.stringify({ creators_id: id, title: title }),
-    // });
-    // const getQuizSubmitted = await submitQuiz.json();
-    // console.log(getQuizSubmitted);
-    // setActiveQuiz(getQuizSubmitted);
-    // console.log("New Quiz Added");
+    const submitQuestion = await fetch(`/quizzes/${id}/questions`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        quizzes_id: id,
+        question_text: questionText,
+        image: imageUrl,
+      }),
+    });
+    const getQuestionSubmitted = await submitQuestion.json();
+    console.log(getQuestionSubmitted);
+    setActiveQuiz(getQuestionSubmitted);
+    console.log("New Question Added");
     // setActiveContainer("QuizQuestions");
   };
 
@@ -46,16 +49,16 @@ const AddQuestion = ({ id, setActiveContainer, setActiveQuiz }) => {
               onChange={(e) => setImageUrl(e.target.value)}
             />
           </form>
-          {/* <button
-            type="submit"
-            className="btn-save-quiz"
-            onClick={handleSubmit}
-          >
-            Save
-          </button> */}
         </div>
-        <button type="submit" className="btn-save-quiz" onClick={handleSubmit}>
+        <button
+          type="submit"
+          className="btn-save-question"
+          onClick={handleSubmit}
+        >
           Save
+        </button>
+        <button type="submit" className="btn-savePlusAdd-question" onClick={""}>
+          Save + Start Another
         </button>
       </section>
     </React.Fragment>

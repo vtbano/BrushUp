@@ -173,13 +173,19 @@ footer {
   place-self: center;
 }
 
-.btn-save-quiz {
+.btn-save-quiz,
+.btn-save-question,
+.btn-savePlusAdd-question {
   background-color: #4caf50;
   color: #ffffff;
   font-size: 1.5em;
   padding: 0.5rem 2.5rem;
   border-radius: 25px;
   border: none;
+}
+
+.btn-savePlusAdd-question {
+  background-color: #3db2ff;
 }
 
 .btn-delete-quiz {
