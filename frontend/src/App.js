@@ -4,6 +4,7 @@ import CreatorsLogin from "./CreatorsLogin";
 import Quizzes from "./Quizzes";
 import CreateQuiz from "./CreateQuiz";
 import QuizQuestions from "./QuizQuestions";
+import AddQuestion from "./AddQuestion";
 import NavigationButtons from "./NavigationButtons";
 import Footer from "./Footer";
 
@@ -51,6 +52,12 @@ const App = () => {
               creator={creator}
               key={activeQuiz.id}
               {...activeQuiz}
+            />
+          )}
+          {activeContainer === "AddQuestion" && (
+            <AddQuestion
+              key={activeQuiz.id}
+              setActiveContainer={setActiveContainer}
             />
           )}
         </section>

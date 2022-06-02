@@ -50,7 +50,7 @@ const QuizQuestions = ({
               <button
                 type="button"
                 className="btn-add-question"
-                // onClick={() => setActiveContainer("")}
+                onClick={() => setActiveContainer("AddQuestion")}
               >
                 +Add Question
               </button>

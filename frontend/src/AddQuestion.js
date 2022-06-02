@@ -1,20 +1,19 @@
 import React, { useEffect, useState } from "react";
-import QuizQuestions from "./QuizQuestions";
-const url = "/quizzes"; //MAKE POST METHOD
+const url = "/quizzes/:quizzes_id/questions"; //MAKE POST METHOD
 
-const CreateQuiz = ({ setActiveContainer, creator, setActiveQuiz }) => {
-  console.log("CreateQuiz Creator", creator);
+const AddQuestion = ({ id, setActiveContainer, setActiveQuiz }) => {
+  console.log("Quiz ID from Add Question", id);
   const [title, setTitle] = useState(""); //this causes to re-render and that's why console.log is coming up multiple times
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const { id, username } = creator;
+
     const submitQuiz = await fetch("/quizzes", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ creators_id: id, title: title }),
     });
     const getQuizSubmitted = await submitQuiz.json();
-    console.log("Set Active Quiz:", getQuizSubmitted);
+    console.log(getQuizSubmitted);
     setActiveQuiz(getQuizSubmitted);
     console.log("New Quiz Added");
     setActiveContainer("QuizQuestions");
@@ -23,7 +22,7 @@ const CreateQuiz = ({ setActiveContainer, creator, setActiveQuiz }) => {
   return (
     <React.Fragment>
       <section className="create-quiz-sect">
-        <div className="create-quiz-title">CREATE QUIZ</div>
+        <div className="create-quiz-title">ADD QUESTION</div>
         <div className="create-quiz-display">
           <span className="create-quiz-label">Quiz Title</span>
           <form>
@@ -48,4 +47,4 @@ const CreateQuiz = ({ setActiveContainer, creator, setActiveQuiz }) => {
   );
 };
 
-export default CreateQuiz;
+export default AddQuestion;
