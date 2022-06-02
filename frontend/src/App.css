@@ -240,10 +240,12 @@ footer {
 }
 
 .add-question-input {
-  width: 35em;
-  height: 2em;
+  width: 60em;
+  height: 4em;
   font-size: 1em;
   border: 1px solid #3db2ff;
-  background-color: #aed7f3;
+  background-color: #cae3f3;
   color: #3db2ff;
+  padding-left: 1em;
+  padding-right: 1em;
 }

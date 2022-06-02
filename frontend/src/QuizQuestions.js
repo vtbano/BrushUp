@@ -47,14 +47,14 @@ const QuizQuestions = ({
                   );
                 })}
               </div>
-              <button
-                type="button"
-                className="btn-add-question"
-                onClick={() => setActiveContainer("AddQuestion")}
-              >
-                +Add Question
-              </button>
             </div>
+            <button
+              type="button"
+              className="btn-add-question"
+              onClick={() => setActiveContainer("AddQuestion")}
+            >
+              +Add Question
+            </button>
           </div>
 
           <div className="share-quiz-container">

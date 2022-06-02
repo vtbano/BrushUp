@@ -24,9 +24,9 @@ const AddQuestion = ({ id, setActiveContainer, setActiveQuiz }) => {
     <React.Fragment>
       <section className="add-question-sect">
         <div className="add-question-title ">ADD QUESTION</div>
-        <div className="add-quiz-display">
+        <div className="add-question-display">
           <form>
-            <span className="add-question-label">Question</span>
+            <div className="add-question-label">Question</div>
             <input
               type="text"
               className="add-question-input"
@@ -35,9 +35,9 @@ const AddQuestion = ({ id, setActiveContainer, setActiveQuiz }) => {
               onChange={(e) => setQuestionText(e.target.value)}
             />
 
-            <span className="add-url-label">
+            <div className="add-url-label">
               Optional - Add Question Image URL
-            </span>
+            </div>
             <input
               type="text"
               className="add-question-input"
@@ -46,14 +46,17 @@ const AddQuestion = ({ id, setActiveContainer, setActiveQuiz }) => {
               onChange={(e) => setImageUrl(e.target.value)}
             />
           </form>
-          <button
+          {/* <button
             type="submit"
             className="btn-save-quiz"
             onClick={handleSubmit}
           >
             Save
-          </button>
+          </button> */}
         </div>
+        <button type="submit" className="btn-save-quiz" onClick={handleSubmit}>
+          Save
+        </button>
       </section>
     </React.Fragment>
   );
