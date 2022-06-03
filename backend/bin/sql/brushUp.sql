@@ -22,7 +22,7 @@ CREATE TABLE questions (
   question_text TEXT,
   image TEXT,
   PRIMARY KEY (id),
-  FOREIGN KEY (quizzes_id) REFERENCES quizzes(id)
+  FOREIGN KEY (quizzes_id) REFERENCES quizzes(id) ON DELETE CASCADE
 );
 
 CREATE TABLE answer_options (
@@ -31,7 +31,7 @@ CREATE TABLE answer_options (
   correct BOOLEAN,
   answer_text TEXT,
   PRIMARY KEY (id),
-  FOREIGN KEY (questions_id) REFERENCES questions(id)
+  FOREIGN KEY (questions_id) REFERENCES questions(id) ON DELETE CASCADE
 );
 
 CREATE TABLE respondents (
