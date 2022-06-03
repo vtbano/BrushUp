@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import SingleQuestion from "./SingleQuestion";
+import ButtonAddQuestion from "./ButtonAddQuestion";
 
-const url = `quizzes/1/questions`; //use this URL for testing
+// const url = `quizzes/1/questions`; //use this URL for testing
 
 const QuizQuestions = ({
   setActiveContainer,
@@ -10,6 +11,8 @@ const QuizQuestions = ({
   creators_id,
   title,
   setActiveQuestion,
+  questionText,
+  imageUrl,
 }) => {
   const [questions, setQuestions] = useState([]);
   const getQuestions = async () => {
@@ -22,24 +25,6 @@ const QuizQuestions = ({
   useEffect(() => {
     getQuestions();
   }, []);
-
-  const handleQuestionSubmit = async (e) => {
-    e.preventDefault();
-    const submitQuestion = await fetch(`/quizzes/${id}/questions`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        quizzes_id: id,
-        question_text: questionText,
-        image: imageUrl,
-      }),
-    });
-    const getQuestionSubmitted = await submitQuestion.json();
-    console.log("Set Active Question", getQuestionSubmitted);
-    setActiveQuestion(getQuestionSubmitted);
-    console.log("New Question Added");
-    setActiveContainer("AddQuestion");
-  };
 
   return (
     <React.Fragment>
@@ -66,13 +51,13 @@ const QuizQuestions = ({
                 })}
               </div>
             </div>
-            <button
-              type="button"
-              className="btn-add-question"
-              onClick={handleQuestionSubmit}
-            >
-              +Add Question
-            </button>
+            <ButtonAddQuestion
+              setActiveContainer={setActiveContainer}
+              id={id}
+              setActiveQuestion={setActiveQuestion}
+              questionText={questionText}
+              imageUrl={imageUrl}
+            />
           </div>
 
           <div className="share-quiz-container">

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 const CreateQuiz = ({ setActiveContainer, creator, setActiveQuiz }) => {
-  console.log("CreateQuiz Creator", creator);
+  // console.log("CreateQuiz Creator", creator);
   const [title, setTitle] = useState(""); //this causes to re-render and that's why console.log is coming up multiple times
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -12,7 +12,7 @@ const CreateQuiz = ({ setActiveContainer, creator, setActiveQuiz }) => {
       body: JSON.stringify({ creators_id: id, title: title }),
     });
     const getQuizSubmitted = await submitQuiz.json();
-    console.log("Set Active Quiz:", getQuizSubmitted);
+    // console.log("Set Active Quiz:", getQuizSubmitted);
     setActiveQuiz(getQuizSubmitted);
     console.log("New Quiz Added");
     setActiveContainer("QuizQuestions");

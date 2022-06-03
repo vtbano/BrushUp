@@ -7,7 +7,7 @@ const DeleteQuiz = ({ setQuizzes, quizzes, DeleteId }) => {
       method: "DELETE",
     });
     const getUpdateQuizzes = await submitQuizDelete;
-    console.log(getUpdateQuizzes);
+    console.log("List of Quizzes after delete request", getUpdateQuizzes);
   };
   //the route does not redirect, must refresh to view new list
   return (

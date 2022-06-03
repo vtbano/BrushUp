@@ -7,8 +7,7 @@ const AddQuestion = ({
   activeQuestion,
 }) => {
   console.log("Quiz ID from Add Question", id);
-  const [questionText, setQuestionText] = useState("");
-  const [imageUrl, setImageUrl] = useState("");
+
   // const handleSubmit = async (e) => {
   //   e.preventDefault();
 
@@ -38,8 +37,8 @@ const AddQuestion = ({
               type="text"
               className="add-question-input"
               placeholder=" Example: Can dogs eat chocolate?"
-              value={questionText}
-              onChange={(e) => setQuestionText(e.target.value)}
+              // value={questionText}
+              // onChange={(e) => setQuestionText(e.target.value)}
             />
 
             <div className="add-url-label">
@@ -49,15 +48,15 @@ const AddQuestion = ({
               type="text"
               className="add-question-input"
               placeholder=" Example: https://image.shutterstock.com/image-photo/siberian-huskies-on-beach-600w-213996883.jpg"
-              value={imageUrl}
-              onChange={(e) => setImageUrl(e.target.value)}
+              // value={imageUrl}
+              // onChange={(e) => setImageUrl(e.target.value)}
             />
           </form>
         </div>
         <button
           type="submit"
           className="btn-Add-question-image"
-          onClick={handleSubmit}
+          // onClick={handleSubmit}
         >
           ADD
         </button>

@@ -16,6 +16,8 @@ const App = () => {
   });
   const [activeQuiz, setActiveQuiz] = useState(null); //if intended to be an object you can start of with null state
   const [activeQuestion, setActiveQuestion] = useState(null);
+  const [questionText, setQuestionText] = useState("");
+  const [imageUrl, setImageUrl] = useState("");
   return (
     <React.Fragment>
       <div className="page-body">
@@ -54,6 +56,8 @@ const App = () => {
               key={activeQuiz.id}
               {...activeQuiz}
               setActiveQuestion={setActiveQuestion}
+              questionText={questionText}
+              imageUrl={imageUrl}
             />
           )}
           {activeContainer === "AddQuestion" && (
