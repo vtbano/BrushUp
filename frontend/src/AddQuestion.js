@@ -3,32 +3,36 @@ import AddCorectAnswers from "./AddCorrectAnswers";
 import AddWrongAnswers from "./AddWrongAnswers";
 
 const AddQuestion = ({
-  id,
   setActiveContainer,
-  setActiveQuiz,
   activeQuestion,
   setQuestionText,
   setImageUrl,
+  questionText,
+  imageUrl,
 }) => {
-  console.log("Quiz ID from Add Question", id);
+  const { id, quizzes_id, questionText, image } = activeQuestion;
+  console.log("Quiz ID from Add Question", quizzes_id);
 
-  // const handleSubmit = async (e) => {
-  //   e.preventDefault();
+  const handleQuestionSave = async (e) => {
+    e.preventDefault();
 
-  //   const submitQuestion = await fetch(`/quizzes/${id}/questions`, {
-  //     method: "PUT",
-  //     headers: { "Content-Type": "application/json" },
-  //     body: JSON.stringify({
-  //       quizzes_id: id,
-  //       question_text: questionText,
-  //       image: imageUrl,
-  //     }),
-  //   });
-  //   const getQuestionSubmitted = await submitQuestion.json();
-  //   console.log(getQuestionSubmitted);
-  //   console.log("New Question Added");
-  //   // setActiveContainer("");
-  // };
+    const submitQuestion = await fetch(
+      `/quizzes/${quizzes_id}/questions/${id}`,
+      {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          quizzes_id: id,
+          question_text: questionText,
+          image: imageUrl,
+        }),
+      }
+    );
+    const getQuestionSubmitted = await submitQuestion.json();
+    console.log(getQuestionSubmitted);
+    console.log("New Question Saved");
+    // setActiveContainer("");
+  };
 
   return (
     <React.Fragment>
@@ -41,8 +45,8 @@ const AddQuestion = ({
               type="text"
               className="add-question-input"
               placeholder=" Example: Can dogs eat chocolate?"
-              // value={questionText}
-              // onChange={(e) => setQuestionText(e.target.value)}
+              value={questionText}
+              onChange={(e) => setQuestionText(e.target.value)}
             />
 
             <div className="add-url-label">
@@ -52,8 +56,8 @@ const AddQuestion = ({
               type="text"
               className="add-question-input"
               placeholder=" Example: https://image.shutterstock.com/image-photo/siberian-huskies-on-beach-600w-213996883.jpg"
-              // value={imageUrl}
-              // onChange={(e) => setImageUrl(e.target.value)}
+              value={imageUrl}
+              onChange={(e) => setImageUrl(e.target.value)}
             />
           </form>
           <div className="answer-options-display">
@@ -71,7 +75,7 @@ const AddQuestion = ({
           <button
             type="submit"
             className="btn-save-question"
-            // onClick={handleSubmit}
+            onClick={handleQuestionSave}
           >
             Save
           </button>

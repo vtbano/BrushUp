@@ -62,8 +62,6 @@ const App = () => {
           )}
           {activeContainer === "AddQuestion" && (
             <AddQuestion
-              key={activeQuiz.id}
-              {...activeQuiz}
               setActiveContainer={setActiveContainer}
               activeQuestion={activeQuestion}
               setQuestionText={setQuestionText}
