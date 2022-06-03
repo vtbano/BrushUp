@@ -175,7 +175,7 @@ footer {
 
 .btn-save-quiz,
 .btn-save-question,
-.btn-savePlusAdd-question {
+.btn-Add-question-image {
   background-color: #4caf50;
   color: #ffffff;
   font-size: 1.5em;
@@ -184,7 +184,7 @@ footer {
   border: none;
 }
 
-.btn-savePlusAdd-question {
+.btn-Add-question-image {
   background-color: #3db2ff;
 }
 

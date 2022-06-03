@@ -15,6 +15,7 @@ const App = () => {
     username: "**Fetch Creator from CreatorsLogin Component**",
   });
   const [activeQuiz, setActiveQuiz] = useState(null); //if intended to be an object you can start of with null state
+  const [activeQuestion, setActiveQuestion] = useState(null);
   return (
     <React.Fragment>
       <div className="page-body">
@@ -52,12 +53,15 @@ const App = () => {
               creator={creator}
               key={activeQuiz.id}
               {...activeQuiz}
+              setActiveQuestion={setActiveQuestion}
             />
           )}
           {activeContainer === "AddQuestion" && (
             <AddQuestion
               key={activeQuiz.id}
+              {...activeQuiz}
               setActiveContainer={setActiveContainer}
+              activeQuestion={activeQuestion}
             />
           )}
         </section>

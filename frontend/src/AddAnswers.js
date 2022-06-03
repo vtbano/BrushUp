@@ -1,31 +1,26 @@
 import React, { useState } from "react";
 
-const AddQuestion = ({
-  id,
-  setActiveContainer,
-  setActiveQuiz,
-  activeQuestion,
-}) => {
+const AddQuestion = ({ id, setActiveContainer, setActiveQuiz }) => {
   console.log("Quiz ID from Add Question", id);
   const [questionText, setQuestionText] = useState("");
   const [imageUrl, setImageUrl] = useState("");
-  // const handleSubmit = async (e) => {
-  //   e.preventDefault();
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
-  //   const submitQuestion = await fetch(`/quizzes/${id}/questions`, {
-  //     method: "PUT",
-  //     headers: { "Content-Type": "application/json" },
-  //     body: JSON.stringify({
-  //       quizzes_id: id,
-  //       question_text: questionText,
-  //       image: imageUrl,
-  //     }),
-  //   });
-  //   const getQuestionSubmitted = await submitQuestion.json();
-  //   console.log(getQuestionSubmitted);
-  //   console.log("New Question Added");
-  //   // setActiveContainer("");
-  // };
+    const submitQuestion = await fetch(`/quizzes/${id}/questions`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        quizzes_id: id,
+        question_text: questionText,
+        image: imageUrl,
+      }),
+    });
+    const getQuestionSubmitted = await submitQuestion.json();
+    console.log(getQuestionSubmitted);
+    console.log("New Question Added");
+    // setActiveContainer("");
+  };
 
   return (
     <React.Fragment>

@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from "react";
 import SingleQuestion from "./SingleQuestion";
-const url = `quizzes/1/questions`; //but how do you know it's the latest quiz created
 
-// const url = `creators/1/quizzes`; //use this URL for testing
+const url = `quizzes/1/questions`; //use this URL for testing
 
 const QuizQuestions = ({
   setActiveContainer,
@@ -10,18 +9,37 @@ const QuizQuestions = ({
   id,
   creators_id,
   title,
+  setActiveQuestion,
 }) => {
   const [questions, setQuestions] = useState([]);
   const getQuestions = async () => {
-    const response = await fetch(url);
-    const activeQuestions = await response.json();
-    setQuestions(activeQuestions);
-    console.log(activeQuestions);
+    const response = await fetch(`quizzes/1/questions`);
+    const activeQuizQuestions = await response.json();
+    setQuestions(activeQuizQuestions);
+    console.log(activeQuizQuestions);
   };
 
   useEffect(() => {
     getQuestions();
   }, []);
+
+  const handleQuestionSubmit = async (e) => {
+    e.preventDefault();
+    const submitQuestion = await fetch(`/quizzes/${id}/questions`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        quizzes_id: id,
+        question_text: questionText,
+        image: imageUrl,
+      }),
+    });
+    const getQuestionSubmitted = await submitQuestion.json();
+    console.log("Set Active Question", getQuestionSubmitted);
+    setActiveQuestion(getQuestionSubmitted);
+    console.log("New Question Added");
+    setActiveContainer("AddQuestion");
+  };
 
   return (
     <React.Fragment>
@@ -51,7 +69,7 @@ const QuizQuestions = ({
             <button
               type="button"
               className="btn-add-question"
-              onClick={() => setActiveContainer("AddQuestion")}
+              onClick={handleQuestionSubmit}
             >
               +Add Question
             </button>

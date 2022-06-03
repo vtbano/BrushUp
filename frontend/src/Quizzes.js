@@ -2,9 +2,9 @@ import React, { useState, useEffect } from "react";
 import SingleQuiz from "./SingleQuiz";
 
 const Quizzes = ({ setActiveContainer, creator }) => {
-  // console.log("Quizzes Creator", creator);
+  console.log("Quizzes Creator", creator);
   const { id, username } = creator;
-  const url = `creators/${id}/quizzes`;
+  const url = `creators/1/quizzes`; //set for testing- DONT Change until Create Login is setup
   const [quizzes, setQuizzes] = useState([]);
 
   const getQuizzes = async () => {
