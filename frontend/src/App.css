@@ -76,7 +76,8 @@ footer {
 }
 
 .quiz-shelf-display,
-.question-shelf-display {
+.question-shelf-display,
+.answer-options-display {
   display: inline-flex;
   flex-wrap: wrap;
   justify-content: center;
@@ -93,7 +94,7 @@ footer {
 .add-question-display {
   display: grid;
   width: 70em;
-  height: 20em;
+  height: auto;
 }
 
 .share-container,
@@ -110,12 +111,20 @@ footer {
   border: none;
 }
 
-.quizzes-container {
+.quizzes-container,
+.correct-answers-container,
+.wrong-answers-container {
   display: grid;
   border: 1px solid #3db2ff;
   flex: 0 1 400px;
   width: 35em;
   height: 20em;
+}
+
+.correct-answers-container,
+.wrong-answers-container {
+  margin-top: 1em;
+  margin-bottom: 1em;
 }
 
 /* must revise  */
@@ -257,7 +266,7 @@ footer {
   padding-right: 1em;
 }
 
-.answer-options-display {
+/* .answer-options-display {
   display: grid;
   grid-template-columns: 1fr 1fr;
-}
+} */

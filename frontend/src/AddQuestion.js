@@ -57,20 +57,28 @@ const AddQuestion = ({
             />
           </form>
           <div className="answer-options-display">
-            <AddCorectAnswers />
-            <AddWrongAnswers />
+            <div className="correct-answers-container">
+              Correct Answers
+              <AddCorectAnswers />
+            </div>
+            <div className="wrong-answers-container">
+              Wrong Answers
+              <AddWrongAnswers />
+            </div>
           </div>
         </div>
-        <button
-          type="submit"
-          className="btn-save-question"
-          // onClick={handleSubmit}
-        >
-          Save
-        </button>
-        <button type="submit" className="btn-savePlusAdd-question">
-          Save + Start Another
-        </button>
+        <div>
+          <button
+            type="submit"
+            className="btn-save-question"
+            // onClick={handleSubmit}
+          >
+            Save
+          </button>
+          <button type="submit" className="btn-savePlusAdd-question">
+            Save + Start Another
+          </button>
+        </div>
       </section>
     </React.Fragment>
   );
