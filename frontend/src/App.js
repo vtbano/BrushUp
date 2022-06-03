@@ -66,6 +66,8 @@ const App = () => {
               {...activeQuiz}
               setActiveContainer={setActiveContainer}
               activeQuestion={activeQuestion}
+              setQuestionText={setQuestionText}
+              setImageUrl={setImageUrl}
             />
           )}
         </section>

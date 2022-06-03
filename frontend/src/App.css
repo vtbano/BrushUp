@@ -175,7 +175,8 @@ footer {
 
 .btn-save-quiz,
 .btn-save-question,
-.btn-Add-question-image {
+.btn-save-question,
+.btn-savePlusAdd-question {
   background-color: #4caf50;
   color: #ffffff;
   font-size: 1.5em;
@@ -184,7 +185,7 @@ footer {
   border: none;
 }
 
-.btn-Add-question-image {
+.btn-savePlusAdd-question {
   background-color: #3db2ff;
 }
 
@@ -254,4 +255,9 @@ footer {
   color: #3db2ff;
   padding-left: 1em;
   padding-right: 1em;
+}
+
+.answer-options-display {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
 }

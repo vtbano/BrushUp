@@ -1,10 +1,14 @@
 import React, { useState } from "react";
+import AddCorectAnswers from "./AddCorrectAnswers";
+import AddWrongAnswers from "./AddWrongAnswers";
 
 const AddQuestion = ({
   id,
   setActiveContainer,
   setActiveQuiz,
   activeQuestion,
+  setQuestionText,
+  setImageUrl,
 }) => {
   console.log("Quiz ID from Add Question", id);
 
@@ -52,17 +56,21 @@ const AddQuestion = ({
               // onChange={(e) => setImageUrl(e.target.value)}
             />
           </form>
+          <div className="answer-options-display">
+            <AddCorectAnswers />
+            <AddWrongAnswers />
+          </div>
         </div>
         <button
           type="submit"
-          className="btn-Add-question-image"
+          className="btn-save-question"
           // onClick={handleSubmit}
         >
-          ADD
+          Save
         </button>
-        {/* <button type="submit" className="btn-savePlusAdd-question">
+        <button type="submit" className="btn-savePlusAdd-question">
           Save + Start Another
-        </button> */}
+        </button>
       </section>
     </React.Fragment>
   );
