@@ -111,9 +111,7 @@ footer {
   border: none;
 }
 
-.quizzes-container,
-.correct-answers-container,
-.wrong-answers-container {
+.quizzes-container {
   display: grid;
   border: 1px solid #3db2ff;
   flex: 0 1 400px;
@@ -121,10 +119,13 @@ footer {
   height: 20em;
 }
 
-.correct-answers-container,
-.wrong-answers-container {
-  margin-top: 1em;
-  margin-bottom: 1em;
+.correct-answer-options,
+.wrong-answer-options {
+  display: grid;
+  border: 1px solid #3db2ff;
+  flex: 0 1 400px;
+  width: 32em;
+  min-height: 20em;
 }
 
 /* must revise  */
@@ -145,10 +146,19 @@ footer {
 .creator-welcome,
 .create-quiz-label,
 .add-question-label,
-.add-url-label {
+.add-url-label,
+.correct-answers-container,
+.wrong-answers-container {
   color: #3db2ff;
   font-weight: 500;
   margin: 1em;
+}
+
+.correct-answers-container {
+  color: #4caf50;
+}
+.wrong-answers-container {
+  color: red;
 }
 
 .single-quiz-row-container,
@@ -256,7 +266,7 @@ footer {
 }
 
 .add-question-input {
-  width: 60em;
+  width: 66em;
   height: 4em;
   font-size: 1em;
   border: 1px solid #3db2ff;
@@ -265,8 +275,3 @@ footer {
   padding-left: 1em;
   padding-right: 1em;
 }
-
-/* .answer-options-display {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-} */

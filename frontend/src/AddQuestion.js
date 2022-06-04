@@ -2,16 +2,12 @@ import React, { useState } from "react";
 import AddCorectAnswers from "./AddCorrectAnswers";
 import AddWrongAnswers from "./AddWrongAnswers";
 
-const AddQuestion = ({
-  setActiveContainer,
-  activeQuestion,
-  setQuestionText,
-  setImageUrl,
-  questionText,
-  imageUrl,
-}) => {
-  const { id, quizzes_id, questionText, image } = activeQuestion;
+const AddQuestion = ({ setActiveContainer, id, quizzes_id }) => {
+  console.log("Question ID from Add Question", id);
   console.log("Quiz ID from Add Question", quizzes_id);
+
+  const [questionText, setQuestionText] = useState("");
+  const [imageUrl, setImageUrl] = useState("");
 
   const handleQuestionSave = async (e) => {
     e.preventDefault();
@@ -63,11 +59,11 @@ const AddQuestion = ({
           <div className="answer-options-display">
             <div className="correct-answers-container">
               Correct Answers
-              <AddCorectAnswers />
+              <AddCorectAnswers questionId={id} />
             </div>
             <div className="wrong-answers-container">
               Wrong Answers
-              <AddWrongAnswers />
+              <AddWrongAnswers questionId={id} />
             </div>
           </div>
         </div>
