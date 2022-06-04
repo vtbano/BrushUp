@@ -179,6 +179,15 @@ footer {
   border: none;
 }
 
+.btn-add-correct-answer {
+  background-color: #4caf50;
+  color: #ffffff;
+  font-size: 1em;
+  padding: 0.5em 1.5em;
+  border-radius: 20px;
+  border: none;
+}
+
 .btn-add-question {
   background-color: #ffb830;
   color: #ffffff;

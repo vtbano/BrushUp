@@ -3,8 +3,8 @@ import CorrectAnswers from "./CorrectAnswers";
 import WrongAnswers from "./WrongAnswers";
 
 const AddQuestion = ({ setActiveContainer, id, quizzes_id }) => {
-  console.log("Question ID from Add Question", id);
-  console.log("Quiz ID from Add Question", quizzes_id);
+  // console.log("Question ID from Add Question", id);
+  // console.log("Quiz ID from Add Question", quizzes_id);
 
   const [questionText, setQuestionText] = useState("");
   const [imageUrl, setImageUrl] = useState("");
@@ -59,7 +59,7 @@ const AddQuestion = ({ setActiveContainer, id, quizzes_id }) => {
           <div className="answer-options-display">
             <div className="correct-answers-container">
               Correct Answers
-              <CorrectAnswers id={id} quizzes_id={quizzes_id} />
+              <CorrectAnswers questionId={id} quizzes_id={quizzes_id} />
               {/* need to see if this needs to be passed through activeQuestion from App.js level  */}
             </div>
             <div className="wrong-answers-container">
