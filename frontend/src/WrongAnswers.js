@@ -1,6 +1,6 @@
 import React from "react";
-
-const AddWrongAnswers = () => {
+// url route/:quizzes_id/questions/:questions_id/answer_options
+const WrongAnswers = (quizzes_id, questionId) => {
   return (
     <React.Fragment>
       <div className="wrong-answer-options">
@@ -14,4 +14,4 @@ const AddWrongAnswers = () => {
   );
 };
 
-export default AddWrongAnswers;
+export default WrongAnswers;

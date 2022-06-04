@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import AddCorectAnswers from "./AddCorrectAnswers";
-import AddWrongAnswers from "./AddWrongAnswers";
+import CorrectAnswers from "./CorrectAnswers";
+import WrongAnswers from "./WrongAnswers";
 
 const AddQuestion = ({ setActiveContainer, id, quizzes_id }) => {
   console.log("Question ID from Add Question", id);
@@ -59,11 +59,13 @@ const AddQuestion = ({ setActiveContainer, id, quizzes_id }) => {
           <div className="answer-options-display">
             <div className="correct-answers-container">
               Correct Answers
-              <AddCorectAnswers questionId={id} />
+              <CorrectAnswers id={id} quizzes_id={quizzes_id} />
+              {/* need to see if this needs to be passed through activeQuestion from App.js level  */}
             </div>
             <div className="wrong-answers-container">
               Wrong Answers
-              <AddWrongAnswers questionId={id} />
+              <WrongAnswers id={id} quizzes_id={quizzes_id} />
+              {/* need to see if this needs to be passed through activeQuestion from App.js level  */}
             </div>
           </div>
         </div>
