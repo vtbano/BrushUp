@@ -42,7 +42,7 @@ router.put("/:id", (request, response, next) => {
   const { title } = request.body;
 
   pool.query(
-    `UPDATE quizzes SET title=($1) WHERE id=($2)`,
+    `UPDATE quizzes SET title=($1) WHERE id=($2) RETURNING *`,
     [title, id],
     (err, res) => {
       if (err) return next(err);
@@ -115,10 +115,11 @@ router.put(
     const { question_text, image } = request.body;
 
     pool.query(
-      `UPDATE questions SET question_text=($1), image=($2) WHERE quizzes_id=($3) AND questions_id=($4)`,
+      `UPDATE questions SET question_text=($1), image=($2) WHERE quizzes_id=($3) AND id=($4) RETURNING *`,
       [question_text, image, quizzes_id, questions_id],
       (err, res) => {
         if (err) return next(err);
+
         response.json(res.rows[0]);
       }
     );
@@ -203,7 +204,7 @@ router.put(
     const { correct, answer_text } = request.body;
 
     pool.query(
-      `UPDATE answer_options SET correct=($1), answer_text=($2) WHERE questions_id=($3) AND id=($4)`,
+      `UPDATE answer_options SET correct=($1), answer_text=($2) WHERE questions_id=($3) AND id=($4) RETURNING *`,
       [correct, answer_text, questions_id, id],
       (err, res) => {
         if (err) return next(err);
@@ -284,7 +285,7 @@ router.put(
     const { email, secret } = request.body;
 
     pool.query(
-      `UPDATE respondents SET email=($1), secret=($2) WHERE quizzes_id=($3) AND id=($4)`,
+      `UPDATE respondents SET email=($1), secret=($2) WHERE quizzes_id=($3) AND id=($4) RETURNING *`,
       [email, secret, quizzes_id, respondent_id],
       (err, res) => {
         if (err) return next(err);
@@ -343,7 +344,7 @@ router.post(
     const { quizzes_id } = request.params;
 
     pool.query(
-      "INSERT INTO responses (quizzes_id,email, secret) VALUES ($1,$2,$3)",
+      "INSERT INTO responses (quizzes_id,email, secret) VALUES ($1,$2,$3) RETURNING *",
       [quizzes_id, email, secret],
       (err, res) => {
         if (err) return next(err);
@@ -361,7 +362,7 @@ router.put(
     const { email, secret } = request.body;
 
     pool.query(
-      `UPDATE respondents SET email=($1), secret=($2) WHERE quizzes_id=($3) AND id=($4)`,
+      `UPDATE respondents SET email=($1), secret=($2) WHERE quizzes_id=($3) AND id=($4) RETURNING *`,
       [email, secret, quizzes_id, respondent_id],
       (err, res) => {
         if (err) return next(err);
