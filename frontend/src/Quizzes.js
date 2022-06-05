@@ -6,17 +6,19 @@ const Quizzes = ({ setActiveContainer, creator }) => {
   const { id, username } = creator;
   const url = `creators/1/quizzes`; //set for testing- DONT Change until Create Login is setup
   const [quizzes, setQuizzes] = useState([]);
+  const [showQuizzes, setShowQuizzes] = useState("");
 
   const getQuizzes = async () => {
     const response = await fetch(url);
     const responseQuizzes = await response.json();
     setQuizzes(responseQuizzes);
+    setShowQuizzes("Quizzes");
     // console.log("All quizzes from specific Creator:",responseQuizzes);
   };
 
   useEffect(() => {
     getQuizzes();
-  }, []);
+  }, [showQuizzes]);
 
   return (
     <React.Fragment>
@@ -35,6 +37,8 @@ const Quizzes = ({ setActiveContainer, creator }) => {
                       {...quiz}
                       setQuizzes={setQuizzes}
                       quizzes={quizzes}
+                      setShowQuizzes={setShowQuizzes}
+                      setActiveContainer={setActiveContainer}
                     />
                   );
                 })}
