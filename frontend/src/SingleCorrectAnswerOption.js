@@ -5,7 +5,7 @@ const SingleCorrectAnswerOption = ({
   questions_id,
   correct,
   answer_text,
-  setanswerOptionsList,
+  setAnswerOptionsList,
   answerOptionsList,
 }) => {
   console.log(
@@ -24,7 +24,7 @@ const SingleCorrectAnswerOption = ({
       <div className="single-question-row-container">
         <span className="single-question-title">{answer_text}</span>
         <span>
-          {/* <RemoveAnswer setanswerOptionsList={setanswerOptionsList}
+          {/* <RemoveAnswer setAnswerOptionsList={setAnswerOptionsList}
                 answerOptionsList={answerOptionsList} DeleteId={id} /> */}
         </span>
       </div>

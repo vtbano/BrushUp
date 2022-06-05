@@ -59,7 +59,11 @@ const AddQuestion = ({ setActiveContainer, id, quizzes_id }) => {
           <div className="answer-options-display">
             <div className="correct-answers-container">
               Correct Answers
-              <CorrectAnswers questionId={id} quizzes_id={quizzes_id} />
+              <CorrectAnswers
+                questionId={id}
+                quizzes_id={quizzes_id}
+                setActiveContainer={setActiveContainer}
+              />
               {/* need to see if this needs to be passed through activeQuestion from App.js level  */}
             </div>
             <div className="wrong-answers-container">
