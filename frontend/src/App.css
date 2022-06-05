@@ -240,6 +240,17 @@ footer {
   border: none;
 }
 
+.btn-enter-correct-answer {
+  background-color: #4caf50;
+  color: #ffffff;
+  font-size: 0.75em;
+  padding: 0.5em 1.5em;
+  border-radius: 20px;
+  border: none;
+  margin-left: 1em;
+  margin-right: 1em;
+}
+
 .create-quiz-title,
 .question-shelf-quiz-title {
   background-color: #f5841b;

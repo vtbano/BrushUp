@@ -51,10 +51,10 @@ const CorrectAnswers = ({ questionId, quizzes_id }) => {
               />
               <button
                 type="button"
-                className="btn-add-correct-answer"
+                className="btn-enter-correct-answer"
                 onClick={""}
               >
-                +Add
+                Enter
               </button>
             </div>
           ) : (
