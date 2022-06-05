@@ -11,26 +11,29 @@ const QuizQuestions = ({
   creators_id,
   title,
   setActiveQuestion,
+  showQuizQuestions,
+  setShowQuizQuestions,
 }) => {
   const [questions, setQuestions] = useState([]);
   const getQuestions = async () => {
-    const response = await fetch(`quizzes/1/questions`);
+    const response = await fetch(`quizzes/${id}/questions`);
     const activeQuizQuestions = await response.json();
     setQuestions(activeQuizQuestions);
+    setShowQuizQuestions("QuizQuestions");
     console.log(activeQuizQuestions);
   };
 
   useEffect(() => {
     getQuestions();
-  }, []);
+  }, [showQuizQuestions]);
 
   const handleQuestionSubmit = async (e) => {
     e.preventDefault();
-    const submitQuestion = await fetch(`/quizzes/1/questions`, {
+    const submitQuestion = await fetch(`/quizzes/${id}/questions`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        quizzes_id: 1,
+        quizzes_id: id,
         question_text: null,
         image: null,
       }),
@@ -62,6 +65,8 @@ const QuizQuestions = ({
                       {...question}
                       setQuestions={setQuestions}
                       questions={questions}
+                      setShowQuizQuestions={setShowQuizQuestions}
+                      setActiveContainer={setActiveContainer}
                     />
                   );
                 })}

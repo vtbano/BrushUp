@@ -8,6 +8,8 @@ const SingleQuestion = ({
   image,
   setQuestions,
   questions,
+  setShowQuizQuestions,
+  setActiveContainer,
 }) => {
   console.log(
     "Question ID:",
@@ -28,6 +30,8 @@ const SingleQuestion = ({
             questions={questions}
             quizId={quizId}
             DeleteId={id}
+            setShowQuizQuestions={setShowQuizQuestions}
+            setActiveContainer={setActiveContainer}
           />
           {/* <EditQuiz setQuizzes={setQuizzes} quizzes={quizzes} RemoveId={id} /> */}
         </span>

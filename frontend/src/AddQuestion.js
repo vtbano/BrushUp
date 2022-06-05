@@ -2,7 +2,12 @@ import React, { useState } from "react";
 import CorrectAnswers from "./CorrectAnswers";
 import WrongAnswers from "./WrongAnswers";
 
-const AddQuestion = ({ setActiveContainer, id, quizzes_id }) => {
+const AddQuestion = ({
+  setActiveContainer,
+  id,
+  quizzes_id,
+  setShowQuizQuestions,
+}) => {
   // console.log("Question ID from Add Question", id);
   // console.log("Quiz ID from Add Question", quizzes_id);
 
@@ -27,7 +32,8 @@ const AddQuestion = ({ setActiveContainer, id, quizzes_id }) => {
     const getQuestionSubmitted = await submitQuestion.json();
     console.log(getQuestionSubmitted);
     console.log("New Question Saved");
-    // setActiveContainer("");
+    setActiveContainer("QuizQuestions");
+    setShowQuizQuestions("AddQuestion");
   };
 
   return (

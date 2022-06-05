@@ -22,7 +22,7 @@ const CorrectAnswers = ({ questionId, quizzes_id, setActiveContainer }) => {
 
   useEffect(() => {
     getAnswerOptions();
-  }, []);
+  }, [answerOptionsList]);
 
   //HANDLE SUBMIT & POST METHOD
 
