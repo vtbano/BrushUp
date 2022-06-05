@@ -1,4 +1,5 @@
 import React from "react";
+import DeleteQuestion from "./DeleteQuestion";
 
 const SingleQuestion = ({
   quizId,
@@ -22,8 +23,13 @@ const SingleQuestion = ({
       <div className="single-question-row-container">
         <span className="single-question-title">{question_text}</span>
         <span>
-          {/* <DeleteQuiz setQuizzes={setQuizzes} quizzes={quizzes} DeleteId={id} />
-          <EditQuiz setQuizzes={setQuizzes} quizzes={quizzes} RemoveId={id} /> */}
+          <DeleteQuestion
+            setQuestions={setQuestions}
+            questions={questions}
+            quizId={quizId}
+            DeleteId={id}
+          />
+          {/* <EditQuiz setQuizzes={setQuizzes} quizzes={quizzes} RemoveId={id} /> */}
         </span>
       </div>
     </React.Fragment>

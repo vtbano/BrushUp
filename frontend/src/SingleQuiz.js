@@ -3,7 +3,7 @@ import DeleteQuiz from "./DeleteQuiz";
 import EditQuiz from "./EditQuiz";
 
 const SingleQuiz = ({ id, creators_id, title, setQuizzes, quizzes }) => {
-  console.log("TITLE:", title, "QUIZ:", id);
+  // console.log("TITLE:", title, "QUIZ:", id);
 
   return (
     <React.Fragment>

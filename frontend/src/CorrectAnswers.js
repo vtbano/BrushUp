@@ -2,11 +2,29 @@ import React, { useState, useEffect } from "react";
 import SingleCorrectAnswerOption from "./SingleCorrectAnswerOption";
 
 const CorrectAnswers = ({ questionId, quizzes_id, setActiveContainer }) => {
-  // console.log("questionID from CorrectAnswers", questionId);
-  // console.log("quizzes_id from CorrectAnswers", quizzes_id);
   const [answerOptionsList, setAnswerOptionsList] = useState([]);
   const [showInput, setShowInput] = useState(false);
   const [correctAnswer, setCorrectAnswer] = useState("");
+
+  //GET CALL
+  const getAnswerOptions = async () => {
+    const response = await fetch(
+      // `quizzes/${quizzes_id}/questions/${questionId}/answer_options`
+      `quizzes/1/questions/1/answer_options` //testing URL
+    );
+    const responseAnswerOptions = await response.json();
+    setAnswerOptionsList(responseAnswerOptions);
+    // console.log(
+    //   `All answers options from Quiz:${quizzes_id} & Question:${questionId}`,
+    //   answerOptionsList
+    // );
+  };
+
+  useEffect(() => {
+    getAnswerOptions();
+  }, []);
+
+  //HANDLE SUBMIT & POST METHOD
 
   const handleCorrectAnswerSubmit = async (e) => {
     e.preventDefault();
@@ -29,23 +47,6 @@ const CorrectAnswers = ({ questionId, quizzes_id, setActiveContainer }) => {
     // setActiveContainer("AddQuestion");
     console.log("New Correct Answer Added");
   };
-  const getAnswerOptions = async () => {
-    const response = await fetch(
-      // `quizzes/${quizzes_id}/questions/${questionId}/answer_options`
-      `quizzes/1/questions/1/answer_options` //testing URL
-    );
-    const responseAnswerOptions = await response.json();
-    setAnswerOptionsList(responseAnswerOptions);
-    // console.log(
-    //   `All answers options from Quiz:${quizzes_id} & Question:${questionId}`,
-    //   answerOptionsList
-    // );
-  };
-
-  useEffect(() => {
-    getAnswerOptions();
-  }, []);
-
   return (
     <React.Fragment>
       <div className="correct-answer-options">

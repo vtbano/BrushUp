@@ -1,7 +1,7 @@
 import React from "react";
 
 const DeleteQuiz = ({ setQuizzes, quizzes, DeleteId }) => {
-  console.log("Delete ID", DeleteId);
+  // console.log("Delete ID", DeleteId);
   const handleDelete = async () => {
     const submitQuizDelete = await fetch(`/quizzes/${DeleteId}`, {
       method: "DELETE",

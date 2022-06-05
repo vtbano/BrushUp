@@ -8,16 +8,16 @@ const SingleCorrectAnswerOption = ({
   setAnswerOptionsList,
   answerOptionsList,
 }) => {
-  console.log(
-    "Answer ID:",
-    id,
-    "Question ID:",
-    questions_id,
-    "correct:",
-    correct,
-    "AnswerText:",
-    answer_text
-  );
+  // console.log(
+  //   "Answer ID:",
+  //   id,
+  //   "Question ID:",
+  //   questions_id,
+  //   "correct:",
+  //   correct,
+  //   "AnswerText:",
+  //   answer_text
+  // );
 
   return (
     <React.Fragment>
