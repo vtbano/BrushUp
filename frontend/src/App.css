@@ -116,7 +116,7 @@ footer {
   border: 1px solid #3db2ff;
   flex: 0 1 400px;
   width: 35em;
-  height: 20em;
+  min-height: 20em;
 }
 
 .correct-answer-options,
@@ -199,6 +199,8 @@ footer {
 
 .btn-create-quiz {
   place-self: center;
+  margin-top: 2em;
+  margin-bottom: 1em;
 }
 
 .btn-save-quiz,

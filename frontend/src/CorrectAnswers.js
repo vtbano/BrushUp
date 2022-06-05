@@ -49,6 +49,13 @@ const CorrectAnswers = ({ questionId, quizzes_id }) => {
                 // value={imageUrl}
                 // onChange={(e) => setImageUrl(e.target.value)}
               />
+              <button
+                type="button"
+                className="btn-add-correct-answer"
+                onClick={""}
+              >
+                +Add
+              </button>
             </div>
           ) : (
             <div></div>

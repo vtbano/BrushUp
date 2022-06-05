@@ -22,7 +22,7 @@ const SingleCorrectAnswerOption = ({
   return (
     <React.Fragment>
       <div className="single-question-row-container">
-        <span className="single-question-title">{""}</span>
+        <span className="single-question-title">{answer_text}</span>
         <span>
           {/* <RemoveAnswer setanswerOptionsList={setanswerOptionsList}
                 answerOptionsList={answerOptionsList} DeleteId={id} /> */}
