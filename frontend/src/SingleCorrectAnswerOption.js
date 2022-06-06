@@ -1,11 +1,13 @@
 import React from "react";
+import DeleteCorrectAnswer from "./DeleteCorrectAnswer";
 
 const SingleCorrectAnswerOption = ({
   id,
   questions_id,
+  quizzes_id,
   correct,
   answer_text,
-  setAnswerOptionsList,
+  setShowCorrectAnswers,
 }) => {
   // console.log(
   //   "Answer ID:",
@@ -23,8 +25,12 @@ const SingleCorrectAnswerOption = ({
       <div className="single-question-row-container">
         <span className="single-question-title">{answer_text}</span>
         <span>
-          {/* <RemoveAnswer setAnswerOptionsList={setAnswerOptionsList}
-                answerOptionsList={answerOptionsList} DeleteId={id} /> */}
+          <DeleteCorrectAnswer
+            questions_id={questions_id}
+            deleteId={id}
+            quizzes_id={quizzes_id}
+            setShowCorrectAnswers={setShowCorrectAnswers}
+          />
         </span>
       </div>
     </React.Fragment>

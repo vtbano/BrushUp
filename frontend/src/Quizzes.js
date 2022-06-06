@@ -1,18 +1,22 @@
 import React, { useState, useEffect } from "react";
 import SingleQuiz from "./SingleQuiz";
 
-const Quizzes = ({ setActiveContainer, creator }) => {
+const Quizzes = ({
+  setActiveContainer,
+  creator,
+  showQuizzes,
+  setShowQuizzes,
+}) => {
   // console.log("Quizzes Creator", creator);
   const { id, username } = creator;
   const url = `creators/1/quizzes`; //set for testing- DONT Change until Create Login is setup
   const [quizzes, setQuizzes] = useState([]);
-  const [showQuizzes, setShowQuizzes] = useState("");
 
   const getQuizzes = async () => {
     const response = await fetch(url);
     const responseQuizzes = await response.json();
     setQuizzes(responseQuizzes);
-    setShowQuizzes("Quizzes");
+    setShowQuizzes("Quizzes.js");
     // console.log("All quizzes from specific Creator:",responseQuizzes);
   };
 

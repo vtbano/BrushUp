@@ -17,6 +17,7 @@ const App = () => {
   const [activeQuiz, setActiveQuiz] = useState(null); //if intended to be an object you can start of with null state
   const [activeQuestion, setActiveQuestion] = useState(null);
   const [showQuizQuestions, setShowQuizQuestions] = useState("");
+  const [showQuizzes, setShowQuizzes] = useState("");
 
   return (
     <React.Fragment>
@@ -30,6 +31,7 @@ const App = () => {
           <div className="navigation-options">
             <NavigationButtons
               setActiveContainer={setActiveContainer}
+              setShowQuizzes={setShowQuizzes}
               creator={creator}
             />
           </div>
@@ -43,6 +45,8 @@ const App = () => {
             <Quizzes
               setActiveContainer={setActiveContainer}
               creator={creator}
+              showQuizzes={showQuizzes}
+              setShowQuizzes={setShowQuizzes}
             />
           )}
           {activeContainer === "CreateQuiz" && (
