@@ -2,19 +2,14 @@ import React, { useState } from "react";
 import CorrectAnswers from "./CorrectAnswers";
 import WrongAnswers from "./WrongAnswers";
 
-const AddQuestion = ({
-  setActiveContainer,
-  id,
-  quizzes_id,
-  setShowQuizQuestions,
-}) => {
+const AddQuestion = ({ setActiveContainer, id, quizzes_id }) => {
   // console.log("Question ID from Add Question", id);
   // console.log("Quiz ID from Add Question", quizzes_id);
 
   const [questionText, setQuestionText] = useState("");
   const [imageUrl, setImageUrl] = useState("");
-  const [showCorrectAnswers, setShowCorrectAnswers] = useState("");
-  const [showWrongAnswers, setShowWrongAnswers] = useState("");
+  // const [showCorrectAnswers, setShowCorrectAnswers] = useState("");
+  // const [showWrongAnswers, setShowWrongAnswers] = useState("");
 
   const handleQuestionSave = async (e) => {
     e.preventDefault();
@@ -35,7 +30,6 @@ const AddQuestion = ({
     console.log(getQuestionSubmitted);
     console.log("New Question Saved");
     setActiveContainer("QuizQuestions");
-    setShowQuizQuestions("AddQuestion");
   };
 
   return (
@@ -71,8 +65,6 @@ const AddQuestion = ({
                 questionId={id}
                 quizzes_id={quizzes_id}
                 setActiveContainer={setActiveContainer}
-                showCorrectAnswers={showCorrectAnswers}
-                setShowCorrectAnswers={setShowCorrectAnswers}
               />
             </div>
             <div className="wrong-answers-container">
@@ -81,8 +73,6 @@ const AddQuestion = ({
                 questionId={id}
                 quizzes_id={quizzes_id}
                 setActiveContainer={setActiveContainer}
-                showWrongAnswers={showWrongAnswers}
-                setShowWrongAnswers={setShowWrongAnswers}
               />
             </div>
           </div>

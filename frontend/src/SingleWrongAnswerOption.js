@@ -6,7 +6,7 @@ const SingleWrongAnswerOption = ({
   questions_id,
   quizzes_id,
   answer_text,
-  setShowWrongAnswers,
+  handleWrongAnswerDelete,
 }) => {
   // console.log(
   //   "Answer ID:",
@@ -25,10 +25,7 @@ const SingleWrongAnswerOption = ({
         <span className="single-question-title">{answer_text}</span>
         <span>
           <DeleteWrongAnswer
-            questions_id={questions_id}
-            deleteId={id}
-            quizzes_id={quizzes_id}
-            setShowWrongAnswers={setShowWrongAnswers}
+            handleWrongAnswerDelete={handleWrongAnswerDelete}
           />
         </span>
       </div>

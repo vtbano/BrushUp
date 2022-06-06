@@ -1,23 +1,16 @@
 import React, { useState, useEffect } from "react";
 import SingleWrongAnswerOption from "./SingleWrongAnswerOption";
 
-const WrongAnswers = ({
-  questionId,
-  quizzes_id,
-  setActiveContainer,
-  showWrongAnswers,
-  setShowWrongAnswers,
-}) => {
+const WrongAnswers = ({ questionId, quizzes_id, setActiveContainer }) => {
   const [wrongOptionsList, setWrongOptionsList] = useState([]);
   const [showInput, setShowInput] = useState(false);
   const [wrongAnswers, setWrongAnswer] = useState("");
-  const [wrongAnswerCount, setWrongAnswerCount] = useState(false);
 
   //GET CALL
   const getWrongOptions = async () => {
     const response = await fetch(
-      // `quizzes/${quizzes_id}/questions/${questionId}/answer_options`
-      `quizzes/1/questions/1/answer_options` //testing URL
+      `quizzes/${quizzes_id}/questions/${questionId}/answer_options`
+      // `quizzes/1/questions/1/answer_options` //testing URL
     );
     const responseAnswerOptions = await response.json();
     const onlyWrongAnswers = responseAnswerOptions.filter(
@@ -25,23 +18,19 @@ const WrongAnswers = ({
     );
     // console.log("WRONG ANSWERS ONLY:", onlyWrongAnswers);
     setWrongOptionsList(onlyWrongAnswers);
-    setShowWrongAnswers("call getAnswerOptions Function");
-    if (onlyWrongAnswers.length > 1) {
-      setWrongAnswerCount(true);
-    }
   };
 
   useEffect(() => {
     getWrongOptions();
-  }, [showWrongAnswers]);
+  }, []);
 
   //HANDLE SUBMIT & POST METHOD
 
   const handleWrongAnswerSubmit = async (e) => {
     e.preventDefault();
     const submitWrongAnswer = await fetch(
-      // `quizzes/${quizzes_id}/questions/${questionId}/answer_options`
-      `quizzes/1/questions/1/answer_options`, //testing URL
+      `quizzes/${quizzes_id}/questions/${questionId}/answer_options`,
+      // `quizzes/1/questions/1/answer_options`, //testing URL
       {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -55,38 +44,40 @@ const WrongAnswers = ({
     const getWrongAnswerSubmitted = await submitWrongAnswer.json();
     console.log("Set Active Wrong Answers:", getWrongAnswerSubmitted);
     setWrongAnswer("");
-    setShowWrongAnswers("Add new correct answer option");
     setShowInput(!showInput);
+    getWrongOptions();
     console.log("New Correct Answer Added");
+  };
+
+  //HANDLE DELETE
+
+  const handleWrongAnswerDelete = async (id) => {
+    const submitWrongAnswerDelete = await fetch(
+      `quizzes/${quizzes_id}/questions/${questionId}/answer_options/${id}`,
+      {
+        method: "DELETE",
+      }
+    );
+    console.log(submitWrongAnswerDelete);
+    await getWrongOptions();
   };
 
   return (
     <React.Fragment>
       <div className="wrong-answer-options">
         <span className="single-answer-option">
-          {wrongAnswerCount ? (
-            <div>
-              {wrongOptionsList.map((answer) => {
-                return (
-                  <SingleWrongAnswerOption
-                    key={answer.id}
-                    {...answer}
-                    setShowWrongAnswers={setShowWrongAnswers}
-                    quizzes_id={quizzes_id}
-                  />
-                );
-              })}
-            </div>
-          ) : (
-            <div>
+          {wrongOptionsList.map((answer) => {
+            return (
               <SingleWrongAnswerOption
-                key={wrongOptionsList.id}
-                {...wrongOptionsList}
-                setShowWrongAnswers={setShowWrongAnswers}
+                key={answer.id}
+                {...answer}
                 quizzes_id={quizzes_id}
+                handleWrongAnswerDelete={() =>
+                  handleWrongAnswerDelete(answer.id)
+                }
               />
-            </div>
-          )}
+            );
+          })}
         </span>
 
         <div>

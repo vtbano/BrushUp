@@ -6,7 +6,6 @@ const SingleQuestion = ({
   id,
   question_text,
   image,
-  setActiveContainer,
   handleQuestionDelete,
 }) => {
   console.log(

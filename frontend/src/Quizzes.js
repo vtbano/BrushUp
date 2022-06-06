@@ -7,13 +7,6 @@ const Quizzes = ({ setActiveContainer, creator }) => {
   const url = `creators/1/quizzes`; //set for testing- DONT Change until Create Login is setup
   const [quizzes, setQuizzes] = useState([]);
 
-  const handleDelete = async (id) => {
-    const submitQuizDelete = await fetch(`/quizzes/${id}`, {
-      method: "DELETE",
-    });
-    await getQuizzes();
-  };
-
   const getQuizzes = async () => {
     const response = await fetch(url);
     const responseQuizzes = await response.json();
@@ -25,6 +18,14 @@ const Quizzes = ({ setActiveContainer, creator }) => {
   useEffect(() => {
     getQuizzes();
   }, []);
+
+  const handleDelete = async (id) => {
+    const submitQuizDelete = await fetch(`/quizzes/${id}`, {
+      method: "DELETE",
+    });
+    console.log(submitQuizDelete);
+    await getQuizzes();
+  };
 
   return (
     <React.Fragment>

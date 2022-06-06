@@ -64,7 +64,6 @@ const App = () => {
               setActiveContainer={setActiveContainer}
               key={activeQuestion.id}
               {...activeQuestion}
-              // setShowQuizQuestions={setShowQuizQuestions}
             />
           )}
         </section>

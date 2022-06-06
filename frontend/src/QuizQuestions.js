@@ -12,16 +12,8 @@ const QuizQuestions = ({
   setActiveQuestion,
 }) => {
   const [questions, setQuestions] = useState([]);
-  const handleQuestionDelete = async (questionId) => {
-    const submitQuestionDelete = await fetch(
-      `/quizzes/${id}/questions/${questionId}`,
-      {
-        method: "DELETE",
-      }
-    );
-    await getQuestions();
-  };
 
+  //GET
   const getQuestions = async () => {
     const response = await fetch(`quizzes/${id}/questions`);
     const activeQuizQuestions = await response.json();
@@ -33,6 +25,19 @@ const QuizQuestions = ({
     getQuestions();
   }, []);
 
+  //HANDLE DELETE
+  const handleQuestionDelete = async (questionId) => {
+    const submitQuestionDelete = await fetch(
+      `/quizzes/${id}/questions/${questionId}`,
+      {
+        method: "DELETE",
+      }
+    );
+    console.log(submitQuestionDelete);
+    await getQuestions();
+  };
+
+  //HANDLE SUBMIT
   const handleQuestionSubmit = async (e) => {
     e.preventDefault();
     const submitQuestion = await fetch(`/quizzes/${id}/questions`, {
@@ -68,7 +73,6 @@ const QuizQuestions = ({
                       quizId={id}
                       key={question.id}
                       {...question}
-                      setActiveContainer={setActiveContainer}
                       handleQuestionDelete={() =>
                         handleQuestionDelete(question.id)
                       }
