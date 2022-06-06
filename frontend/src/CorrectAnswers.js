@@ -20,7 +20,7 @@ const CorrectAnswers = ({
     );
     const responseAnswerOptions = await response.json();
     setAnswerOptionsList(responseAnswerOptions);
-    // setShowCorrectAnswers("call getAnswerOptions Function");
+    setShowCorrectAnswers("call getAnswerOptions Function");
 
     // console.log(
     //   `All answers options from Quiz:${quizzes_id} & Question:${questionId}`,
@@ -51,6 +51,7 @@ const CorrectAnswers = ({
     );
     const getCorrectAnswerSubmitted = await submitCorrectAnswer.json();
     console.log("Set Active Correct Answers:", getCorrectAnswerSubmitted);
+    setCorrectAnswer("");
     setShowCorrectAnswers("Add new correct answer option");
     setShowInput(!showInput);
     console.log("New Correct Answer Added");
