@@ -28,7 +28,10 @@ const App = () => {
             <span className="title-bold">UP</span>
           </div>
           <div className="navigation-options">
-            <NavigationButtons />
+            <NavigationButtons
+              setActiveContainer={setActiveContainer}
+              creator={creator}
+            />
           </div>
         </header>
         <section className="page-body-main">

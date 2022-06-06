@@ -6,7 +6,6 @@ const SingleCorrectAnswerOption = ({
   correct,
   answer_text,
   setAnswerOptionsList,
-  answerOptionsList,
 }) => {
   // console.log(
   //   "Answer ID:",

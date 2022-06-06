@@ -1,7 +1,13 @@
 import React, { useState, useEffect } from "react";
 import SingleCorrectAnswerOption from "./SingleCorrectAnswerOption";
 
-const CorrectAnswers = ({ questionId, quizzes_id, setActiveContainer }) => {
+const CorrectAnswers = ({
+  questionId,
+  quizzes_id,
+  setActiveContainer,
+  showCorrectAnswers,
+  setShowCorrectAnswers,
+}) => {
   const [answerOptionsList, setAnswerOptionsList] = useState([]);
   const [showInput, setShowInput] = useState(false);
   const [correctAnswer, setCorrectAnswer] = useState("");
@@ -14,6 +20,8 @@ const CorrectAnswers = ({ questionId, quizzes_id, setActiveContainer }) => {
     );
     const responseAnswerOptions = await response.json();
     setAnswerOptionsList(responseAnswerOptions);
+    setShowCorrectAnswers("call getAnswerOptions Function");
+
     // console.log(
     //   `All answers options from Quiz:${quizzes_id} & Question:${questionId}`,
     //   answerOptionsList
@@ -22,7 +30,7 @@ const CorrectAnswers = ({ questionId, quizzes_id, setActiveContainer }) => {
 
   useEffect(() => {
     getAnswerOptions();
-  }, [answerOptionsList]);
+  }, [showCorrectAnswers]);
 
   //HANDLE SUBMIT & POST METHOD
 
@@ -35,7 +43,7 @@ const CorrectAnswers = ({ questionId, quizzes_id, setActiveContainer }) => {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          questions_id: questionId,
+          questions_id: 1,
           correct: true,
           answer_text: correctAnswer,
         }),
@@ -44,6 +52,7 @@ const CorrectAnswers = ({ questionId, quizzes_id, setActiveContainer }) => {
     const getCorrectAnswerSubmitted = await submitCorrectAnswer.json();
     console.log("Set Active Correct Answers:", getCorrectAnswerSubmitted);
     setAnswerOptionsList(getCorrectAnswerSubmitted);
+    setShowCorrectAnswers("Add new correct answer option");
     // setActiveContainer("AddQuestion");
     console.log("New Correct Answer Added");
   };
@@ -57,7 +66,6 @@ const CorrectAnswers = ({ questionId, quizzes_id, setActiveContainer }) => {
                 key={answer.id}
                 {...answer}
                 setAnswerOptionsList={setAnswerOptionsList}
-                answerOptionsList={answerOptionsList}
               />
             );
           })}

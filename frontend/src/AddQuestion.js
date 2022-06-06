@@ -13,6 +13,7 @@ const AddQuestion = ({
 
   const [questionText, setQuestionText] = useState("");
   const [imageUrl, setImageUrl] = useState("");
+  const [showCorrectAnswers, setShowCorrectAnswers] = useState("");
 
   const handleQuestionSave = async (e) => {
     e.preventDefault();
@@ -69,6 +70,8 @@ const AddQuestion = ({
                 questionId={id}
                 quizzes_id={quizzes_id}
                 setActiveContainer={setActiveContainer}
+                showCorrectAnswers={showCorrectAnswers}
+                setShowCorrectAnswers={setShowCorrectAnswers}
               />
               {/* need to see if this needs to be passed through activeQuestion from App.js level  */}
             </div>
