@@ -1,28 +1,30 @@
 import React, { useState, useEffect } from "react";
 import SingleQuiz from "./SingleQuiz";
 
-const Quizzes = ({
-  setActiveContainer,
-  creator,
-  showQuizzes,
-  setShowQuizzes,
-}) => {
+const Quizzes = ({ setActiveContainer, creator }) => {
   // console.log("Quizzes Creator", creator);
   const { id, username } = creator;
   const url = `creators/1/quizzes`; //set for testing- DONT Change until Create Login is setup
   const [quizzes, setQuizzes] = useState([]);
 
+  const handleDelete = async (id) => {
+    const submitQuizDelete = await fetch(`/quizzes/${id}`, {
+      method: "DELETE",
+    });
+    await getQuizzes();
+  };
+
   const getQuizzes = async () => {
     const response = await fetch(url);
     const responseQuizzes = await response.json();
     setQuizzes(responseQuizzes);
-    setShowQuizzes("Quizzes.js");
+
     // console.log("All quizzes from specific Creator:",responseQuizzes);
   };
 
   useEffect(() => {
     getQuizzes();
-  }, [showQuizzes]);
+  }, []);
 
   return (
     <React.Fragment>
@@ -40,8 +42,7 @@ const Quizzes = ({
                       key={quiz.id}
                       {...quiz}
                       setQuizzes={setQuizzes}
-                      quizzes={quizzes}
-                      setShowQuizzes={setShowQuizzes}
+                      handleDelete={() => handleDelete(quiz.id)}
                       setActiveContainer={setActiveContainer}
                     />
                   );

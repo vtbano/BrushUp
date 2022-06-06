@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-const NavigationButtons = ({ setActiveContainer, setShowQuizzes, creator }) => {
+const NavigationButtons = ({ setActiveContainer, creator }) => {
   return (
     <span className="navigation-buttons">
       <img
@@ -8,7 +8,7 @@ const NavigationButtons = ({ setActiveContainer, setShowQuizzes, creator }) => {
         alt="Quiz Shelf Button"
         className="nav-button"
         onClick={() => {
-          setActiveContainer("Quizzes"), setShowQuizzes("Return to Quizzes.js");
+          setActiveContainer("Quizzes");
         }}
       />
       <img

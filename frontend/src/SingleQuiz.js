@@ -2,15 +2,7 @@ import React from "react";
 import DeleteQuiz from "./DeleteQuiz";
 import EditQuiz from "./EditQuiz";
 
-const SingleQuiz = ({
-  id,
-  creators_id,
-  title,
-  setQuizzes,
-  quizzes,
-  setShowQuizzes,
-  setActiveContainer,
-}) => {
+const SingleQuiz = ({ id, title, handleDelete, setQuizzes }) => {
   // console.log("TITLE:", title, "QUIZ:", id);
 
   return (
@@ -18,14 +10,8 @@ const SingleQuiz = ({
       <div className="single-quiz-row-container">
         <span className="single-quiz-title">{title}</span>
         <span>
-          <DeleteQuiz
-            setQuizzes={setQuizzes}
-            quizzes={quizzes}
-            DeleteId={id}
-            setShowQuizzes={setShowQuizzes}
-            setActiveContainer={setActiveContainer}
-          />
-          <EditQuiz setQuizzes={setQuizzes} quizzes={quizzes} RemoveId={id} />
+          <DeleteQuiz handleDelete={handleDelete} />
+          <EditQuiz setQuizzes={setQuizzes} RemoveId={id} />
         </span>
       </div>
     </React.Fragment>
