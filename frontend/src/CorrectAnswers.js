@@ -18,6 +18,7 @@ const CorrectAnswers = ({
       // `quizzes/${quizzes_id}/questions/${questionId}/answer_options`
       `quizzes/1/questions/1/answer_options` //testing URL
     );
+    console.log("*****");
     const responseAnswerOptions = await response.json();
     setAnswerOptionsList(responseAnswerOptions);
     setShowCorrectAnswers("call getAnswerOptions Function");
@@ -51,11 +52,13 @@ const CorrectAnswers = ({
     );
     const getCorrectAnswerSubmitted = await submitCorrectAnswer.json();
     console.log("Set Active Correct Answers:", getCorrectAnswerSubmitted);
-    setAnswerOptionsList(getCorrectAnswerSubmitted);
+    // setAnswerOptionsList(getCorrectAnswerSubmitted);
     setShowCorrectAnswers("Add new correct answer option");
     // setActiveContainer("AddQuestion");
     console.log("New Correct Answer Added");
   };
+
+  console.log("AnswerOptionsList", answerOptionsList);
   return (
     <React.Fragment>
       <div className="correct-answer-options">
