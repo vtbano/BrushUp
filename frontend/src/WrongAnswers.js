@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import SingleCorrectAnswerOption from "./SingleCorrectAnswerOption";
+import SingleWrongAnswerOption from "./SingleWrongAnswerOption";
 
 const WrongAnswers = ({
   questionId,
@@ -19,6 +19,7 @@ const WrongAnswers = ({
       `quizzes/1/questions/1/answer_options` //testing URL
     );
     const responseAnswerOptions = await response.json();
+    //ADD FILTER SO IT WILL ONLY SHOW WRONG ANSWERS
     setWrongOptionsList(responseAnswerOptions);
     setShowWrongAnswers("call getAnswerOptions Function");
 
@@ -63,10 +64,9 @@ const WrongAnswers = ({
         <span className="single-answer-option">
           {wrongOptionsList.map((answer) => {
             return (
-              <SingleCorrectAnswerOption
+              <SingleWrongAnswerOption
                 key={answer.id}
                 {...answer}
-                setWrongOptionsList={setWrongOptionsList}
                 setShowWrongAnswers={setShowWrongAnswers}
                 quizzes_id={quizzes_id}
               />

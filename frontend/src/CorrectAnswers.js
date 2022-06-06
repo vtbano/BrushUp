@@ -19,6 +19,7 @@ const CorrectAnswers = ({
       `quizzes/1/questions/1/answer_options` //testing URL
     );
     const responseAnswerOptions = await response.json();
+    //ADD FILTER SO IT WILL ONLY SHOW CORRECT ANSWERS
     setAnswerOptionsList(responseAnswerOptions);
     setShowCorrectAnswers("call getAnswerOptions Function");
 
