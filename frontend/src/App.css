@@ -179,13 +179,18 @@ footer {
   border: none;
 }
 
-.btn-add-correct-answer {
+.btn-add-correct-answer,
+.btn-add-wrong-answer {
   background-color: #4caf50;
   color: #ffffff;
   font-size: 1em;
   padding: 0.5em 1.5em;
   border-radius: 20px;
   border: none;
+}
+
+.btn-add-wrong-answer {
+  background-color: #ff2442;
 }
 
 .btn-add-question {
@@ -240,7 +245,8 @@ footer {
   border: none;
 }
 
-.btn-enter-correct-answer {
+.btn-enter-correct-answer,
+.btn-enter-wrong-answer {
   background-color: #4caf50;
   color: #ffffff;
   font-size: 0.75em;
@@ -249,6 +255,10 @@ footer {
   border: none;
   margin-left: 1em;
   margin-right: 1em;
+}
+
+.btn-enter-wrong-answer {
+  background-color: #ff2442;
 }
 
 .create-quiz-title,
@@ -298,7 +308,8 @@ footer {
   padding-right: 1em;
 }
 
-.correct-answer-option-input {
+.correct-answer-option-input,
+.wrong-answer-option-input {
   width: 18em;
   height: 1em;
   font-size: 1em;
