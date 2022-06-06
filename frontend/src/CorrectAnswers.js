@@ -11,6 +11,7 @@ const CorrectAnswers = ({
   const [answerOptionsList, setAnswerOptionsList] = useState([]);
   const [showInput, setShowInput] = useState(false);
   const [correctAnswer, setCorrectAnswer] = useState("");
+  const [correctAnswerCount, setCorrectAnswerCount] = useState(false);
 
   //GET CALL
   const getAnswerOptions = async () => {
@@ -19,14 +20,14 @@ const CorrectAnswers = ({
       `quizzes/1/questions/1/answer_options` //testing URL
     );
     const responseAnswerOptions = await response.json();
-    //ADD FILTER SO IT WILL ONLY SHOW CORRECT ANSWERS
-    setAnswerOptionsList(responseAnswerOptions);
+    const onlyCorrectAnswers = responseAnswerOptions.filter(
+      (answer) => answer.correct === true
+    );
+    setAnswerOptionsList(onlyCorrectAnswers);
     setShowCorrectAnswers("call getAnswerOptions Function");
-
-    // console.log(
-    //   `All answers options from Quiz:${quizzes_id} & Question:${questionId}`,
-    //   answerOptionsList
-    // );
+    if (onlyCorrectAnswers.length > 1) {
+      setCorrectAnswerCount(true);
+    }
   };
 
   useEffect(() => {
@@ -62,17 +63,31 @@ const CorrectAnswers = ({
     <React.Fragment>
       <div className="correct-answer-options">
         <span className="single-answer-option">
-          {answerOptionsList.map((answer) => {
-            return (
+          {correctAnswerCount ? (
+            <div>
+              {answerOptionsList.map((answer) => {
+                return (
+                  <SingleCorrectAnswerOption
+                    key={answer.id}
+                    {...answer}
+                    setAnswerOptionsList={setAnswerOptionsList}
+                    setShowCorrectAnswers={setShowCorrectAnswers}
+                    quizzes_id={quizzes_id}
+                  />
+                );
+              })}
+            </div>
+          ) : (
+            <div>
               <SingleCorrectAnswerOption
-                key={answer.id}
-                {...answer}
+                key={answerOptionsList.id}
+                {...answerOptionsList}
                 setAnswerOptionsList={setAnswerOptionsList}
                 setShowCorrectAnswers={setShowCorrectAnswers}
                 quizzes_id={quizzes_id}
               />
-            );
-          })}
+            </div>
+          )}
         </span>
 
         <div>

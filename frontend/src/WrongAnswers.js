@@ -64,7 +64,7 @@ const WrongAnswers = ({
     <React.Fragment>
       <div className="wrong-answer-options">
         <span className="single-answer-option">
-          {setWrongAnswerCount ? (
+          {wrongAnswerCount ? (
             <div>
               {wrongOptionsList.map((answer) => {
                 return (
