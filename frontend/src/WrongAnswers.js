@@ -11,6 +11,7 @@ const WrongAnswers = ({
   const [wrongOptionsList, setWrongOptionsList] = useState([]);
   const [showInput, setShowInput] = useState(false);
   const [wrongAnswers, setWrongAnswer] = useState("");
+  const [wrongAnswerCount, setWrongAnswerCount] = useState(false);
 
   //GET CALL
   const getWrongOptions = async () => {
@@ -19,14 +20,15 @@ const WrongAnswers = ({
       `quizzes/1/questions/1/answer_options` //testing URL
     );
     const responseAnswerOptions = await response.json();
-    //ADD FILTER SO IT WILL ONLY SHOW WRONG ANSWERS
-    setWrongOptionsList(responseAnswerOptions);
+    const onlyWrongAnswers = responseAnswerOptions.filter(
+      (answer) => answer.correct === false
+    );
+    // console.log("WRONG ANSWERS ONLY:", onlyWrongAnswers);
+    setWrongOptionsList(onlyWrongAnswers);
     setShowWrongAnswers("call getAnswerOptions Function");
-
-    // console.log(
-    //   `All answers options from Quiz:${quizzes_id} & Question:${questionId}`,
-    //   wrongOptionsList
-    // );
+    if (onlyWrongAnswers.length > 1) {
+      setWrongAnswerCount(true);
+    }
   };
 
   useEffect(() => {
@@ -62,16 +64,29 @@ const WrongAnswers = ({
     <React.Fragment>
       <div className="wrong-answer-options">
         <span className="single-answer-option">
-          {wrongOptionsList.map((answer) => {
-            return (
+          {setWrongAnswerCount ? (
+            <div>
+              {wrongOptionsList.map((answer) => {
+                return (
+                  <SingleWrongAnswerOption
+                    key={answer.id}
+                    {...answer}
+                    setShowWrongAnswers={setShowWrongAnswers}
+                    quizzes_id={quizzes_id}
+                  />
+                );
+              })}
+            </div>
+          ) : (
+            <div>
               <SingleWrongAnswerOption
-                key={answer.id}
-                {...answer}
+                key={wrongOptionsList.id}
+                {...wrongOptionsList}
                 setShowWrongAnswers={setShowWrongAnswers}
                 quizzes_id={quizzes_id}
               />
-            );
-          })}
+            </div>
+          )}
         </span>
 
         <div>
