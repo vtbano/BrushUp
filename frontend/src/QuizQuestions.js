@@ -6,26 +6,32 @@ import SingleQuestion from "./SingleQuestion";
 
 const QuizQuestions = ({
   setActiveContainer,
-  creator,
   id,
   creators_id,
   title,
   setActiveQuestion,
-  showQuizQuestions,
-  setShowQuizQuestions,
 }) => {
   const [questions, setQuestions] = useState([]);
+  const handleQuestionDelete = async (questionId) => {
+    const submitQuestionDelete = await fetch(
+      `/quizzes/${id}/questions/${questionId}`,
+      {
+        method: "DELETE",
+      }
+    );
+    await getQuestions();
+  };
+
   const getQuestions = async () => {
     const response = await fetch(`quizzes/${id}/questions`);
     const activeQuizQuestions = await response.json();
     setQuestions(activeQuizQuestions);
-    setShowQuizQuestions("QuizQuestions");
     console.log(activeQuizQuestions);
   };
 
   useEffect(() => {
     getQuestions();
-  }, [showQuizQuestions]);
+  }, []);
 
   const handleQuestionSubmit = async (e) => {
     e.preventDefault();
@@ -39,9 +45,8 @@ const QuizQuestions = ({
       }),
     });
     const getQuestionSubmitted = await submitQuestion.json();
-    console.log("Set Active Question", getQuestionSubmitted);
     setActiveQuestion(getQuestionSubmitted);
-    console.log("New Question Added");
+    console.log("Set Active Question", getQuestionSubmitted);
     setActiveContainer("AddQuestion");
   };
 
@@ -63,10 +68,10 @@ const QuizQuestions = ({
                       quizId={id}
                       key={question.id}
                       {...question}
-                      setQuestions={setQuestions}
-                      questions={questions}
-                      setShowQuizQuestions={setShowQuizQuestions}
                       setActiveContainer={setActiveContainer}
+                      handleQuestionDelete={() =>
+                        handleQuestionDelete(question.id)
+                      }
                     />
                   );
                 })}
@@ -79,11 +84,6 @@ const QuizQuestions = ({
             >
               +Add Question
             </button>
-            {/* <ButtonAddQuestion
-              setActiveContainer={setActiveContainer}
-              id={id}
-              setActiveQuestion={setActiveQuestion}
-            /> */}
           </div>
 
           <div className="share-quiz-container">

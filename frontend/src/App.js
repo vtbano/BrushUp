@@ -16,7 +16,6 @@ const App = () => {
   });
   const [activeQuiz, setActiveQuiz] = useState(null); //if intended to be an object you can start of with null state
   const [activeQuestion, setActiveQuestion] = useState(null);
-  const [showQuizQuestions, setShowQuizQuestions] = useState("");
 
   return (
     <React.Fragment>
@@ -55,12 +54,9 @@ const App = () => {
           {activeContainer === "QuizQuestions" && (
             <QuizQuestions
               setActiveContainer={setActiveContainer}
-              creator={creator}
               key={activeQuiz.id}
               {...activeQuiz}
               setActiveQuestion={setActiveQuestion}
-              showQuizQuestions={showQuizQuestions}
-              setShowQuizQuestions={setShowQuizQuestions}
             />
           )}
           {activeContainer === "AddQuestion" && (
@@ -68,7 +64,7 @@ const App = () => {
               setActiveContainer={setActiveContainer}
               key={activeQuestion.id}
               {...activeQuestion}
-              setShowQuizQuestions={setShowQuizQuestions}
+              // setShowQuizQuestions={setShowQuizQuestions}
             />
           )}
         </section>
