@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import SingleQuiz from "./SingleQuiz";
+import QuizQuestions from "./QuizQuestions";
 
 const Quizzes = ({ setActiveContainer, creator }) => {
   // console.log("Quizzes Creator", creator);
@@ -27,6 +28,16 @@ const Quizzes = ({ setActiveContainer, creator }) => {
     await getQuizzes();
   };
 
+  const handleRedirectQuizQuestions = (quizId, creator_id, title) => {
+    <QuizQuestions quizId={quizId} creator_id={creator_id} title={title} />;
+
+    // const response = await fetch(`quizzes/${id}/questions`);
+    // const activeQuizQuestions = await response.json();
+    // setQuestions(activeQuizQuestions);
+    // console.log(activeQuizQuestions);
+    setActiveContainer("QuizQuestions");
+  };
+
   return (
     <React.Fragment>
       <section className="quiz-shelf-sect">
@@ -44,6 +55,9 @@ const Quizzes = ({ setActiveContainer, creator }) => {
                       {...quiz}
                       setQuizzes={setQuizzes}
                       handleDelete={() => handleDelete(quiz.id)}
+                      handleRedirectQuizQuestions={() =>
+                        handleRedirectQuizQuestions(quiz.id, id, quiz.title)
+                      }
                       setActiveContainer={setActiveContainer}
                     />
                   );

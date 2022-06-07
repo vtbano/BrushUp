@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import SingleQuestion from "./SingleQuestion";
-// import ButtonAddQuestion from "./ButtonAddQuestion";
 
 // const url = `quizzes/1/questions`; //use this URL for testing
 
