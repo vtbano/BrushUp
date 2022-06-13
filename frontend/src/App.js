@@ -42,6 +42,7 @@ const App = () => {
             <Quizzes
               setActiveContainer={setActiveContainer}
               creator={creator}
+              setActiveQuiz={setActiveQuiz}
             />
           )}
           {activeContainer === "CreateQuiz" && (

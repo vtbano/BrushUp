@@ -2,10 +2,10 @@ import React, { useState, useEffect } from "react";
 import SingleQuiz from "./SingleQuiz";
 import QuizQuestions from "./QuizQuestions";
 
-const Quizzes = ({ setActiveContainer, creator }) => {
+const Quizzes = ({ setActiveContainer, creator, setActiveQuiz }) => {
   // console.log("Quizzes Creator", creator);
   const { id, username } = creator;
-  const url = `creators/1/quizzes`; //set for testing- DONT Change until Create Login is setup
+  const url = `/creators/1/quizzes`; //set for testing- DONT Change until Create Login is setup
   const [quizzes, setQuizzes] = useState([]);
 
   const getQuizzes = async () => {
@@ -13,7 +13,7 @@ const Quizzes = ({ setActiveContainer, creator }) => {
     const responseQuizzes = await response.json();
     setQuizzes(responseQuizzes);
 
-    // console.log("All quizzes from specific Creator:",responseQuizzes);
+    console.log("All quizzes from specific Creator:", responseQuizzes);
   };
 
   useEffect(() => {
@@ -28,13 +28,8 @@ const Quizzes = ({ setActiveContainer, creator }) => {
     await getQuizzes();
   };
 
-  const handleRedirectQuizQuestions = (quizId, creator_id, title) => {
-    <QuizQuestions quizId={quizId} creator_id={creator_id} title={title} />;
-
-    // const response = await fetch(`quizzes/${id}/questions`);
-    // const activeQuizQuestions = await response.json();
-    // setQuestions(activeQuizQuestions);
-    // console.log(activeQuizQuestions);
+  const handleRedirectQuizQuestions = (quiz) => {
+    setActiveQuiz(quiz);
     setActiveContainer("QuizQuestions");
   };
 
@@ -56,7 +51,7 @@ const Quizzes = ({ setActiveContainer, creator }) => {
                       setQuizzes={setQuizzes}
                       handleDelete={() => handleDelete(quiz.id)}
                       handleRedirectQuizQuestions={() =>
-                        handleRedirectQuizQuestions(quiz.id, id, quiz.title)
+                        handleRedirectQuizQuestions(quiz)
                       }
                       setActiveContainer={setActiveContainer}
                     />
