@@ -54,6 +54,13 @@ const QuizQuestions = ({
     setActiveContainer("AddQuestion");
   };
 
+  //HANDLE EDIT TO EACH QUESTION
+
+  const handleQuestionEdit = (question) => {
+    setActiveQuestion(question);
+    setActiveContainer("AddQuestion");
+  };
+
   return (
     <React.Fragment>
       <section className="quiz-shelf-sect">
@@ -75,6 +82,7 @@ const QuizQuestions = ({
                       handleQuestionDelete={() =>
                         handleQuestionDelete(question.id)
                       }
+                      handleQuestionEdit={() => handleQuestionEdit(question)}
                     />
                   );
                 })}

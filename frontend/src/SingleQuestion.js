@@ -1,5 +1,6 @@
 import React from "react";
 import DeleteQuestion from "./DeleteQuestion";
+import EditQuestion from "./EditQuestion";
 
 const SingleQuestion = ({
   quizId,
@@ -7,6 +8,7 @@ const SingleQuestion = ({
   question_text,
   image,
   handleQuestionDelete,
+  handleQuestionEdit,
 }) => {
   console.log(
     "Question ID:",
@@ -23,7 +25,7 @@ const SingleQuestion = ({
         <span className="single-question-title">{question_text}</span>
         <span>
           <DeleteQuestion handleQuestionDelete={handleQuestionDelete} />
-          {/* <EditQuiz setQuizzes={setQuizzes} quizzes={quizzes} RemoveId={id} /> */}
+          <EditQuestion handleQuestionEdit={handleQuestionEdit} />
         </span>
       </div>
     </React.Fragment>

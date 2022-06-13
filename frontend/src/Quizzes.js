@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import SingleQuiz from "./SingleQuiz";
-import QuizQuestions from "./QuizQuestions";
 
 const Quizzes = ({ setActiveContainer, creator, setActiveQuiz }) => {
   // console.log("Quizzes Creator", creator);
@@ -28,6 +27,7 @@ const Quizzes = ({ setActiveContainer, creator, setActiveQuiz }) => {
     await getQuizzes();
   };
 
+  //HANDLE REDIRECT TO QUIZ QUESTIONS WHEN YOU CLICK QUIZ TITLE
   const handleRedirectQuizQuestions = (quiz) => {
     setActiveQuiz(quiz);
     setActiveContainer("QuizQuestions");
