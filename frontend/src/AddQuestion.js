@@ -2,14 +2,18 @@ import React, { useState } from "react";
 import CorrectAnswers from "./CorrectAnswers";
 import WrongAnswers from "./WrongAnswers";
 
-const AddQuestion = ({ setActiveContainer, id, quizzes_id }) => {
+const AddQuestion = ({
+  setActiveContainer,
+  id,
+  quizzes_id,
+  questionPlaceholder,
+  imagePlaceholder,
+}) => {
   // console.log("Question ID from Add Question", id);
   // console.log("Quiz ID from Add Question", quizzes_id);
 
   const [questionText, setQuestionText] = useState("");
   const [imageUrl, setImageUrl] = useState("");
-  // const [showCorrectAnswers, setShowCorrectAnswers] = useState("");
-  // const [showWrongAnswers, setShowWrongAnswers] = useState("");
 
   const handleQuestionSave = async (e) => {
     e.preventDefault();
@@ -42,7 +46,7 @@ const AddQuestion = ({ setActiveContainer, id, quizzes_id }) => {
             <input
               type="text"
               className="add-question-input"
-              placeholder=" Example: Can dogs eat chocolate?"
+              placeholder={questionPlaceholder}
               value={questionText}
               onChange={(e) => setQuestionText(e.target.value)}
             />

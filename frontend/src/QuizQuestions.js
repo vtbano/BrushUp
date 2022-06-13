@@ -9,6 +9,8 @@ const QuizQuestions = ({
   creators_id,
   title,
   setActiveQuestion,
+  setQuestionPlaceholder,
+  setImagePlaceholder,
 }) => {
   const [questions, setQuestions] = useState([]);
 
@@ -56,8 +58,18 @@ const QuizQuestions = ({
 
   //HANDLE EDIT TO EACH QUESTION
 
-  const handleQuestionEdit = (question) => {
-    setActiveQuestion(question);
+  // const handleQuestionEdit = (question) => {
+  //   setActiveQuestion(question);
+  //   setActiveContainer("AddQuestion");
+  // };
+
+  const handleQuestionEdit = async (questionId) => {
+    const response = await fetch(`/quizzes/${id}/questions/${questionId}`);
+    const responseGetQuestion = await response.json();
+    setActiveQuestion(responseGetQuestion);
+    setQuestionPlaceholder(responseGetQuestion.question_text);
+    setImagePlaceholder(responseGetQuestion.image);
+    console.log("Set Active Question", responseGetQuestion);
     setActiveContainer("AddQuestion");
   };
 
@@ -82,7 +94,7 @@ const QuizQuestions = ({
                       handleQuestionDelete={() =>
                         handleQuestionDelete(question.id)
                       }
-                      handleQuestionEdit={() => handleQuestionEdit(question)}
+                      handleQuestionEdit={() => handleQuestionEdit(question.id)}
                     />
                   );
                 })}
