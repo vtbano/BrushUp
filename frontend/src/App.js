@@ -22,6 +22,8 @@ const App = () => {
   const [imagePlaceholder, setImagePlaceholder] = useState(
     " Example: https://image.shutterstock.com/image-photo/siberian-huskies-on-beach-600w-213996883.jpg"
   );
+  const [questionText, setQuestionText] = useState("");
+  const [imageUrl, setImageUrl] = useState("");
 
   return (
     <React.Fragment>
@@ -66,6 +68,8 @@ const App = () => {
               setActiveQuestion={setActiveQuestion}
               setQuestionPlaceholder={setQuestionPlaceholder}
               setImagePlaceholder={setImagePlaceholder}
+              setQuestionText={setQuestionText}
+              setImageUrl={setImageUrl}
             />
           )}
           {activeContainer === "AddQuestion" && (
@@ -75,6 +79,10 @@ const App = () => {
               {...activeQuestion}
               questionPlaceholder={questionPlaceholder}
               imagePlaceholder={imagePlaceholder}
+              questionText={questionText}
+              setQuestionText={setQuestionText}
+              imageUrl={imageUrl}
+              setImageUrl={setImageUrl}
             />
           )}
         </section>

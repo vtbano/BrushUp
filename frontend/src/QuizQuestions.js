@@ -11,6 +11,8 @@ const QuizQuestions = ({
   setActiveQuestion,
   setQuestionPlaceholder,
   setImagePlaceholder,
+  setQuestionText,
+  setImageUrl,
 }) => {
   const [questions, setQuestions] = useState([]);
 
@@ -69,6 +71,8 @@ const QuizQuestions = ({
     setActiveQuestion(responseGetQuestion);
     setQuestionPlaceholder(responseGetQuestion.question_text);
     setImagePlaceholder(responseGetQuestion.image);
+    setQuestionText(responseGetQuestion.question_text);
+    setImageUrl(responseGetQuestion.image);
     console.log("Set Active Question", responseGetQuestion);
     setActiveContainer("AddQuestion");
   };

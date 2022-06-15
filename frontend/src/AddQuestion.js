@@ -8,12 +8,13 @@ const AddQuestion = ({
   quizzes_id,
   questionPlaceholder,
   imagePlaceholder,
+  questionText,
+  setQuestionText,
+  imageUrl,
+  setImageUrl,
 }) => {
   // console.log("Question ID from Add Question", id);
   // console.log("Quiz ID from Add Question", quizzes_id);
-
-  const [questionText, setQuestionText] = useState("");
-  const [imageUrl, setImageUrl] = useState("");
 
   const handleQuestionSave = async (e) => {
     e.preventDefault();
@@ -48,7 +49,9 @@ const AddQuestion = ({
               className="add-question-input"
               placeholder={questionPlaceholder}
               value={questionText}
-              onChange={(e) => setQuestionText(e.target.value)}
+              onChange={(e) => {
+                setQuestionText(e.target.value);
+              }}
             />
 
             <div className="add-url-label">
