@@ -1,6 +1,7 @@
 import React from "react";
+import EditQuizTitle from "./EditQuizTitle";
 
-const EditQuiz = ({ tetQuizzes, quizzes, RemoveId }) => {
+const EditQuiz = ({}) => {
   return (
     <React.Fragment>
       <button className="btn-edit-quiz">Edit</button>
