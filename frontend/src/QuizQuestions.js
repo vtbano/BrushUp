@@ -60,11 +60,6 @@ const QuizQuestions = ({
 
   //HANDLE EDIT TO EACH QUESTION
 
-  // const handleQuestionEdit = (question) => {
-  //   setActiveQuestion(question);
-  //   setActiveContainer("AddQuestion");
-  // };
-
   const handleQuestionEdit = async (questionId) => {
     const response = await fetch(`/quizzes/${id}/questions/${questionId}`);
     const responseGetQuestion = await response.json();

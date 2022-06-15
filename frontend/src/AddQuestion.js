@@ -8,7 +8,9 @@ const AddQuestion = ({
   quizzes_id,
   questionPlaceholder,
   imagePlaceholder,
+  setImagePlaceholder,
   questionText,
+  setQuestionPlaceholder,
   setQuestionText,
   imageUrl,
   setImageUrl,
@@ -34,6 +36,13 @@ const AddQuestion = ({
     const getQuestionSubmitted = await submitQuestion.json();
     console.log(getQuestionSubmitted);
     console.log("New Question Saved");
+    console.log(
+      "setQuestionPlaceholder in ADDQUESTION",
+      setQuestionPlaceholder(" Example: Can dogs eat chocolate?")
+    );
+    setQuestionText("");
+    setImagePlaceholder(" Copy image address here!");
+    setImageUrl("");
     setActiveContainer("QuizQuestions");
   };
 
@@ -60,7 +69,7 @@ const AddQuestion = ({
             <input
               type="text"
               className="add-question-input"
-              placeholder=" Example: https://image.shutterstock.com/image-photo/siberian-huskies-on-beach-600w-213996883.jpg"
+              placeholder={imagePlaceholder}
               value={imageUrl}
               onChange={(e) => setImageUrl(e.target.value)}
             />

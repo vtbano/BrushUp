@@ -17,10 +17,10 @@ const App = () => {
   const [activeQuiz, setActiveQuiz] = useState(null); //if intended to be an object you can start of with null state
   const [activeQuestion, setActiveQuestion] = useState(null);
   const [questionPlaceholder, setQuestionPlaceholder] = useState(
-    " Example: Can dogs eat chocolate?"
+    "Example: Can dogs eat chocolate?"
   );
   const [imagePlaceholder, setImagePlaceholder] = useState(
-    " Example: https://image.shutterstock.com/image-photo/siberian-huskies-on-beach-600w-213996883.jpg"
+    "Copy image address here!"
   );
   const [questionText, setQuestionText] = useState("");
   const [imageUrl, setImageUrl] = useState("");
@@ -79,7 +79,9 @@ const App = () => {
               {...activeQuestion}
               questionPlaceholder={questionPlaceholder}
               imagePlaceholder={imagePlaceholder}
+              setImagePlaceholder={setImagePlaceholder}
               questionText={questionText}
+              setQuestionPlaceholder={setQuestionPlaceholder}
               setQuestionText={setQuestionText}
               imageUrl={imageUrl}
               setImageUrl={setImageUrl}
