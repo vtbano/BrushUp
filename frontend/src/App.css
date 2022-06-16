@@ -84,7 +84,8 @@ footer {
   /* border: 1px solid black; */
 }
 
-.create-quiz-display {
+.create-quiz-display,
+.edit-quiz-display {
   display: grid;
   place-items: center;
   width: 70em;
@@ -145,6 +146,7 @@ footer {
 .questions-container-name,
 .creator-welcome,
 .create-quiz-label,
+.edit-quiz-label,
 .add-question-label,
 .add-url-label,
 .correct-answers-container,
@@ -220,6 +222,15 @@ footer {
   border: none;
 }
 
+.btn-update-quiz {
+  background-color: #f5841b;
+  color: #ffffff;
+  font-size: 1.5em;
+  padding: 0.5rem 2.5rem;
+  border-radius: 25px;
+  border: none;
+}
+
 .btn-savePlusAdd-question {
   background-color: #3db2ff;
 }
@@ -262,6 +273,7 @@ footer {
 }
 
 .create-quiz-title,
+.edit-quiz-title,
 .question-shelf-quiz-title {
   background-color: #f5841b;
   color: #ffffff;
@@ -291,7 +303,8 @@ footer {
   margin-bottom: 1em;
 }
 
-.create-quiz-title-input {
+.create-quiz-title-input,
+.edit-quiz-title-input {
   width: 35em;
   height: 2em;
   font-size: 1em;

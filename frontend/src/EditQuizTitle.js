@@ -20,19 +20,23 @@ const EditQuizTitle = ({ setActiveContainer, activeQuiz, setActiveQuiz }) => {
   return (
     <React.Fragment>
       <section className="create-quiz-sect">
-        <div className="create-quiz-title">EDIT QUIZ TITLE</div>
-        <div className="create-quiz-display">
-          <span className="create-quiz-label">Current title is: {title}</span>
+        <div className="edit-quiz-title">EDIT QUIZ TITLE</div>
+        <div className="edit-quiz-display">
+          <span className="edit-quiz-label">Current title is: {title}</span>
           <form>
             <input
               type="text"
-              className="create-quiz-title-input"
+              className="edit-quiz-title-input"
               placeholder=" Enter Quiz Title"
               value={updateTitle}
               onChange={(e) => setUpdateTitle(e.target.value)}
             />
           </form>
-          <button type="submit" className="btn-save-quiz" onClick={handleEdit}>
+          <button
+            type="submit"
+            className="btn-update-quiz"
+            onClick={handleEdit}
+          >
             Update
           </button>
         </div>
