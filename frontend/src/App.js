@@ -3,6 +3,7 @@ import "./App.css";
 import CreatorsLogin from "./CreatorsLogin";
 import Quizzes from "./Quizzes";
 import CreateQuiz from "./CreateQuiz";
+import EditQuizTitle from "./EditQuizTitle";
 import QuizQuestions from "./QuizQuestions";
 import AddQuestion from "./AddQuestion";
 import NavigationButtons from "./NavigationButtons";
@@ -57,6 +58,14 @@ const App = () => {
             <CreateQuiz
               setActiveContainer={setActiveContainer}
               creator={creator}
+              setActiveQuiz={setActiveQuiz}
+            />
+          )}
+
+          {activeContainer === "EditQuizTitle" && (
+            <EditQuizTitle
+              setActiveContainer={setActiveContainer}
+              activeQuiz={activeQuiz}
               setActiveQuiz={setActiveQuiz}
             />
           )}

@@ -1,18 +1,19 @@
 import React, { useState } from "react";
 
-const EditQuizTitle = ({ setActiveContainer, creator, setActiveQuiz }) => {
-  const [title, setTitle] = useState(""); //this causes to re-render and that's why console.log is coming up multiple times
-  const handleSubmit = async (e) => {
+const EditQuizTitle = ({ setActiveContainer, activeQuiz, setActiveQuiz }) => {
+  const { id, title } = activeQuiz;
+  const [updateTitle, setUpdateTitle] = useState(""); //this causes to re-render and that's why console.log is coming up multiple times
+  const handleEdit = async (e) => {
     e.preventDefault();
-    const { id } = creator;
-    const submitQuiz = await fetch("/quizzes", {
+
+    const submitQuizTitleEdit = await fetch(`/quizzes/${id}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ creators_id: id, title: title }),
+      body: JSON.stringify({ title: updateTitle }),
     });
-    const getQuizSubmitted = await submitQuiz.json();
-    setActiveQuiz(getQuizSubmitted);
-    console.log("Quiz Title Updated");
+    const getQuizTitleSubmitted = await submitQuizTitleEdit.json();
+    setActiveQuiz("");
+    console.log(`Quiz Title Updated to ${getQuizTitleSubmitted}`);
     setActiveContainer("Quizzes");
   };
 
@@ -21,21 +22,17 @@ const EditQuizTitle = ({ setActiveContainer, creator, setActiveQuiz }) => {
       <section className="create-quiz-sect">
         <div className="create-quiz-title">EDIT QUIZ TITLE</div>
         <div className="create-quiz-display">
-          <span className="create-quiz-label">Quiz Title</span>
+          <span className="create-quiz-label">Current title is: {title}</span>
           <form>
             <input
               type="text"
               className="create-quiz-title-input"
               placeholder=" Enter Quiz Title"
-              value={title}
-              onChange={(e) => setTitle(e.target.value)}
+              value={updateTitle}
+              onChange={(e) => setUpdateTitle(e.target.value)}
             />
           </form>
-          <button
-            type="submit"
-            className="btn-save-quiz"
-            onClick={handleSubmit}
-          >
+          <button type="submit" className="btn-save-quiz" onClick={handleEdit}>
             Update
           </button>
         </div>

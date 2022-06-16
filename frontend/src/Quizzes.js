@@ -32,6 +32,12 @@ const Quizzes = ({ setActiveContainer, creator, setActiveQuiz }) => {
     setActiveQuiz(quiz);
     setActiveContainer("QuizQuestions");
   };
+  //HANDLE EDIT QUIZ TITLE
+
+  const handleEditQuizTitle = (quiz) => {
+    setActiveQuiz(quiz);
+    setActiveContainer("EditQuizTitle");
+  };
 
   return (
     <React.Fragment>
@@ -53,7 +59,7 @@ const Quizzes = ({ setActiveContainer, creator, setActiveQuiz }) => {
                       handleRedirectQuizQuestions={() =>
                         handleRedirectQuizQuestions(quiz)
                       }
-                      setActiveContainer={setActiveContainer}
+                      handleEditQuizTitle={() => handleEditQuizTitle(quiz)}
                     />
                   );
                 })}

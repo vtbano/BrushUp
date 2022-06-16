@@ -8,6 +8,7 @@ const SingleQuiz = ({
   handleDelete,
   setQuizzes,
   handleRedirectQuizQuestions,
+  handleEditQuizTitle,
 }) => {
   // console.log("TITLE:", title, "QUIZ:", id);
 
@@ -22,7 +23,7 @@ const SingleQuiz = ({
         </span>
         <span>
           <DeleteQuiz handleDelete={handleDelete} />
-          <EditQuiz setQuizzes={setQuizzes} RemoveId={id} />
+          <EditQuiz handleEditQuizTitle={handleEditQuizTitle} />
         </span>
       </div>
     </React.Fragment>
