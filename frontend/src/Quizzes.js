@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import SingleQuiz from "./SingleQuiz";
+import { Link } from "react-router-dom";
 
-const Quizzes = ({ setActiveContainer, creator, setActiveQuiz }) => {
+const Quizzes = ({ creator }) => {
   // console.log("Quizzes Creator", creator);
   const { id, username } = creator;
   const url = `/creators/1/quizzes`; //set for testing- DONT Change until Create Login is setup
@@ -27,20 +28,8 @@ const Quizzes = ({ setActiveContainer, creator, setActiveQuiz }) => {
     await getQuizzes();
   };
 
-  //HANDLE REDIRECT TO QUIZ QUESTIONS WHEN YOU CLICK QUIZ TITLE
-  const handleRedirectQuizQuestions = (quiz) => {
-    setActiveQuiz(quiz);
-    setActiveContainer("QuizQuestions");
-  };
-  //HANDLE EDIT QUIZ TITLE
-
-  const handleEditQuizTitle = (quiz) => {
-    setActiveQuiz(quiz);
-    setActiveContainer("EditQuizTitle");
-  };
-
   return (
-    <React.Fragment>
+    <>
       <section className="quiz-shelf-sect">
         <div className="creator-welcome">Ready to Brush Up {username}</div>
         <div className="quiz-shelf-title">QUIZ SHELF</div>
@@ -56,21 +45,15 @@ const Quizzes = ({ setActiveContainer, creator, setActiveQuiz }) => {
                       {...quiz}
                       setQuizzes={setQuizzes}
                       handleDelete={() => handleDelete(quiz.id)}
-                      handleRedirectQuizQuestions={() =>
-                        handleRedirectQuizQuestions(quiz)
-                      }
-                      handleEditQuizTitle={() => handleEditQuizTitle(quiz)}
                     />
                   );
                 })}
               </div>
-              <button
-                type="button"
-                className="btn-create-quiz"
-                onClick={() => setActiveContainer("CreateQuiz")}
-              >
-                +Create Quiz
-              </button>
+              <Link to={`/quizzes/create`}>
+                <button type="button" className="btn-create-quiz">
+                  +Create Quiz
+                </button>
+              </Link>
             </div>
           </div>
           <div className="quizzes-container-name">
@@ -86,7 +69,7 @@ const Quizzes = ({ setActiveContainer, creator, setActiveQuiz }) => {
           </div>
         </div>
       </section>
-    </React.Fragment>
+    </>
   );
 };
 

@@ -63,7 +63,7 @@ const WrongAnswers = ({ questionId, quizzes_id, setActiveContainer }) => {
   };
 
   return (
-    <React.Fragment>
+    <>
       <div className="wrong-answer-options">
         <span className="single-answer-option">
           {wrongOptionsList.map((answer) => {
@@ -112,7 +112,7 @@ const WrongAnswers = ({ questionId, quizzes_id, setActiveContainer }) => {
           </button>
         </div>
       </div>
-    </React.Fragment>
+    </>
   );
 };
 

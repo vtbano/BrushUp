@@ -1,6 +1,7 @@
 import React from "react";
 import DeleteQuiz from "./DeleteQuiz";
 import EditQuiz from "./EditQuiz";
+import { Link } from "react-router-dom";
 
 const SingleQuiz = ({
   id,
@@ -13,20 +14,17 @@ const SingleQuiz = ({
   // console.log("TITLE:", title, "QUIZ:", id);
 
   return (
-    <React.Fragment>
+    <>
       <div className="single-quiz-row-container">
-        <span
-          className="single-quiz-title"
-          onClick={handleRedirectQuizQuestions}
-        >
-          {title}
+        <span className="single-quiz-title">
+          <Link to={`/quizzes/${id}/questions`}> {title}</Link>
         </span>
         <span>
           <DeleteQuiz handleDelete={handleDelete} />
-          <EditQuiz handleEditQuizTitle={handleEditQuizTitle} />
+          <EditQuiz id={id} />
         </span>
       </div>
-    </React.Fragment>
+    </>
   );
 };
 

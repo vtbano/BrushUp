@@ -14,9 +14,9 @@ const CreatorsLogin = ({ setCreator }) => {
   }, []);
 
   return (
-    <React.Fragment>
+    <>
       <h3>Creators</h3>
-    </React.Fragment>
+    </>
   );
 };
 

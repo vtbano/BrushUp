@@ -19,7 +19,7 @@ const CreateQuiz = ({ setActiveContainer, creator, setActiveQuiz }) => {
   };
 
   return (
-    <React.Fragment>
+    <>
       <section className="create-quiz-sect">
         <div className="create-quiz-title">CREATE QUIZ</div>
         <div className="create-quiz-display">
@@ -42,7 +42,7 @@ const CreateQuiz = ({ setActiveContainer, creator, setActiveQuiz }) => {
           </button>
         </div>
       </section>
-    </React.Fragment>
+    </>
   );
 };
 

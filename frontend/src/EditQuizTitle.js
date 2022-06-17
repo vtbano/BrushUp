@@ -18,7 +18,7 @@ const EditQuizTitle = ({ setActiveContainer, activeQuiz, setActiveQuiz }) => {
   };
 
   return (
-    <React.Fragment>
+    <>
       <section className="create-quiz-sect">
         <div className="edit-quiz-title">EDIT QUIZ TITLE</div>
         <div className="edit-quiz-display">
@@ -41,7 +41,7 @@ const EditQuizTitle = ({ setActiveContainer, activeQuiz, setActiveQuiz }) => {
           </button>
         </div>
       </section>
-    </React.Fragment>
+    </>
   );
 };
 

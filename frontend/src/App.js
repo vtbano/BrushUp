@@ -28,94 +28,96 @@ const App = () => {
   const [imageUrl, setImageUrl] = useState("");
 
   return (
+    // <BrowserRouter>
+    //   <Routes>
+    //     <Route path="/" element={<App />}>
+    //       <Route path="register" element={<CreatorsLogin />} />
+    //       <Route path="quizzes" element={<Quizzes />} />
+    //       <Route path="quizzes/create" element={<CreateQuiz />} />
+    //       <Route path="quizzes/:id/edit" element={<EditQuizTitle />} />
+    //       <Route path="quizzes/:id/questions" element={<QuizQuestions />} />
+    //       <Route path="quizzes/:id/questions/add" element={<AddQuestion />} />
+    //     </Route>
+    //   </Routes>
+    // </BrowserRouter>
+
     <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<App />}>
-          <Route path="register" element={<CreatorsLogin />} />
-          <Route path="quizzes" element={<Quizzes />} />
-          <Route path="quizzes/create" element={<CreateQuiz />} />
-          <Route path="quizzes/:id/edit" element={<EditQuizTitle />} />
-          <Route path="quizzes/:id/questions" element={<QuizQuestions />} />
-          <Route path="quizzes/:id/questions/add" element={<AddQuestion />} />
-        </Route>
-      </Routes>
+      <div className="page-body">
+        <header className="page-body-header">
+          <div></div>
+          <div className="title">
+            <span>BRUSH</span>
+            <span className="title-bold">UP</span>
+          </div>
+          <div className="navigation-options">
+            <NavigationButtons creator={creator} />
+          </div>
+        </header>
+        <section className="page-body-main">
+          <Routes>
+            {/* {activeContainer === "Creators" && (
+            <CreatorsLogin setCreator={setCreator} />
+          )} */}
+            <Route path="quizzes" element={<Quizzes creator={creator} />} />
+
+            {/* <Route
+              path="quizzes/create"
+              element={
+                <CreateQuiz
+                  setActiveContainer={setActiveContainer}
+                  creator={creator}
+                  setActiveQuiz={setActiveQuiz}
+                />
+              }
+            /> */}
+            {/* {activeContainer === "CreateQuiz" && (
+            <CreateQuiz
+              setActiveContainer={setActiveContainer}
+              creator={creator}
+              setActiveQuiz={setActiveQuiz}
+            />
+          )}
+          {activeContainer === "EditQuizTitle" && (
+            <EditQuizTitle
+              setActiveContainer={setActiveContainer}
+              activeQuiz={activeQuiz}
+              setActiveQuiz={setActiveQuiz}
+            />
+          )}
+          {activeContainer === "QuizQuestions" && (
+            <QuizQuestions
+              setActiveContainer={setActiveContainer}
+              key={activeQuiz.id}
+              {...activeQuiz}
+              setActiveQuestion={setActiveQuestion}
+              setQuestionPlaceholder={setQuestionPlaceholder}
+              setImagePlaceholder={setImagePlaceholder}
+              setQuestionText={setQuestionText}
+              setImageUrl={setImageUrl}
+            />
+          )}
+          {activeContainer === "AddQuestion" && (
+            <AddQuestion
+              setActiveContainer={setActiveContainer}
+              key={activeQuestion.id}
+              {...activeQuestion}
+              questionPlaceholder={questionPlaceholder}
+              imagePlaceholder={imagePlaceholder}
+              setImagePlaceholder={setImagePlaceholder}
+              questionText={questionText}
+              setQuestionPlaceholder={setQuestionPlaceholder}
+              setQuestionText={setQuestionText}
+              imageUrl={imageUrl}
+              setImageUrl={setImageUrl}
+            />
+          )} */}
+          </Routes>
+        </section>
+        <footer className="page-body-footer">
+          <Footer />
+        </footer>
+      </div>
     </BrowserRouter>
-
-    // <React.Fragment>
-    //   <div className="page-body">
-    //     <header className="page-body-header">
-    //       <div></div>
-    //       <div className="title">
-    //         <span>BRUSH</span>
-    //         <span className="title-bold">UP</span>
-    //       </div>
-    //       <div className="navigation-options">
-    //         <NavigationButtons
-    //           setActiveContainer={setActiveContainer}
-    //           creator={creator}
-    //         />
-    //       </div>
-    //     </header>
-    //     <section className="page-body-main">
-    //       {/* if the text is true then it will return the second value. */}
-    //       {activeContainer === "Creators" && (
-    //         <CreatorsLogin setCreator={setCreator} />
-    //       )}
-    //       {activeContainer === "Quizzes" && (
-    //         <Quizzes
-    //           setActiveContainer={setActiveContainer}
-    //           creator={creator}
-    //           setActiveQuiz={setActiveQuiz}
-    //         />
-    //       )}
-    //       {activeContainer === "CreateQuiz" && (
-    //         <CreateQuiz
-    //           setActiveContainer={setActiveContainer}
-    //           creator={creator}
-    //           setActiveQuiz={setActiveQuiz}
-    //         />
-    //       )}
-
-    //       {activeContainer === "EditQuizTitle" && (
-    //         <EditQuizTitle
-    //           setActiveContainer={setActiveContainer}
-    //           activeQuiz={activeQuiz}
-    //           setActiveQuiz={setActiveQuiz}
-    //         />
-    //       )}
-    //       {activeContainer === "QuizQuestions" && (
-    //         <QuizQuestions
-    //           setActiveContainer={setActiveContainer}
-    //           key={activeQuiz.id}
-    //           {...activeQuiz}
-    //           setActiveQuestion={setActiveQuestion}
-    //           setQuestionPlaceholder={setQuestionPlaceholder}
-    //           setImagePlaceholder={setImagePlaceholder}
-    //           setQuestionText={setQuestionText}
-    //           setImageUrl={setImageUrl}
-    //         />
-    //       )}
-    //       {activeContainer === "AddQuestion" && (
-    //         <AddQuestion
-    //           setActiveContainer={setActiveContainer}
-    //           key={activeQuestion.id}
-    //           {...activeQuestion}
-    //           questionPlaceholder={questionPlaceholder}
-    //           imagePlaceholder={imagePlaceholder}
-    //           setImagePlaceholder={setImagePlaceholder}
-    //           questionText={questionText}
-    //           setQuestionPlaceholder={setQuestionPlaceholder}
-    //           setQuestionText={setQuestionText}
-    //           imageUrl={imageUrl}
-    //           setImageUrl={setImageUrl}
-    //         />
-    //       )}
-    //     </section>
-    //     <footer className="page-body-footer">
-    //       <Footer />
-    //     </footer>
-    //   </div>
-    // </React.Fragment>
   );
 };
 

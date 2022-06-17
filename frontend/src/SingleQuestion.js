@@ -20,7 +20,7 @@ const SingleQuestion = ({
   );
 
   return (
-    <React.Fragment>
+    <>
       <div className="single-question-row-container">
         <span className="single-question-title">{question_text}</span>
         <span>
@@ -28,7 +28,7 @@ const SingleQuestion = ({
           <EditQuestion handleQuestionEdit={handleQuestionEdit} />
         </span>
       </div>
-    </React.Fragment>
+    </>
   );
 };
 

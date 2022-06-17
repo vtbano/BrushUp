@@ -20,7 +20,7 @@ const SingleWrongAnswerOption = ({
   // );
 
   return (
-    <React.Fragment>
+    <>
       <div className="single-question-row-container">
         <span className="single-question-title">{answer_text}</span>
         <span>
@@ -29,7 +29,7 @@ const SingleWrongAnswerOption = ({
           />
         </span>
       </div>
-    </React.Fragment>
+    </>
   );
 };
 

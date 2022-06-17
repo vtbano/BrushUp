@@ -9,7 +9,7 @@ const SingleCorrectAnswerOption = ({
   handleCorrectAnswerDelete,
 }) => {
   return (
-    <React.Fragment>
+    <>
       <div className="single-question-row-container">
         <span className="single-question-title">{answer_text}</span>
         <span>
@@ -18,7 +18,7 @@ const SingleCorrectAnswerOption = ({
           />
         </span>
       </div>
-    </React.Fragment>
+    </>
   );
 };
 

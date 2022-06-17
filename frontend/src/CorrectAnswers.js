@@ -62,7 +62,7 @@ const CorrectAnswers = ({ questionId, quizzes_id, setActiveContainer }) => {
   };
 
   return (
-    <React.Fragment>
+    <>
       <div className="correct-answer-options">
         <span className="single-answer-option">
           {answerOptionsList.map((answer) => {
@@ -110,7 +110,7 @@ const CorrectAnswers = ({ questionId, quizzes_id, setActiveContainer }) => {
           </button>
         </div>
       </div>
-    </React.Fragment>
+    </>
   );
 };
 

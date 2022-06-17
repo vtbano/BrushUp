@@ -73,7 +73,7 @@ const QuizQuestions = ({
   };
 
   return (
-    <React.Fragment>
+    <>
       <section className="quiz-shelf-sect">
         <div className="question-shelf-quiz-title">
           {title}
@@ -118,7 +118,7 @@ const QuizQuestions = ({
           </div>
         </div>
       </section>
-    </React.Fragment>
+    </>
   );
 };
 

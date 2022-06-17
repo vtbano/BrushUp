@@ -4,11 +4,11 @@ import React from "react";
 
 const DeleteCorrectAnswer = ({ handleCorrectAnswerDelete }) => {
   return (
-    <React.Fragment>
+    <>
       <button className="btn-delete-quiz" onClick={handleCorrectAnswerDelete}>
         Delete
       </button>
-    </React.Fragment>
+    </>
   );
 };
 

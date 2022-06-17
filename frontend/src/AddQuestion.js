@@ -47,7 +47,7 @@ const AddQuestion = ({
   };
 
   return (
-    <React.Fragment>
+    <>
       <section className="add-question-sect">
         <div className="add-question-title ">ADD QUESTION</div>
         <div className="add-question-display">
@@ -106,7 +106,7 @@ const AddQuestion = ({
           </button> */}
         </div>
       </section>
-    </React.Fragment>
+    </>
   );
 };
 
