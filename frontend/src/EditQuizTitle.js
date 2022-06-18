@@ -1,6 +1,7 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 
-const EditQuizTitle = ({ setActiveContainer, activeQuiz, setActiveQuiz }) => {
+const EditQuizTitle = ({ activeQuiz, setActiveQuiz }) => {
   const { id, title } = activeQuiz;
   const [updateTitle, setUpdateTitle] = useState(""); //this causes to re-render and that's why console.log is coming up multiple times
   const handleEdit = async (e) => {
@@ -14,7 +15,6 @@ const EditQuizTitle = ({ setActiveContainer, activeQuiz, setActiveQuiz }) => {
     const getQuizTitleSubmitted = await submitQuizTitleEdit.json();
     setActiveQuiz("");
     console.log(`Quiz Title Updated to ${getQuizTitleSubmitted}`);
-    setActiveContainer("Quizzes");
   };
 
   return (
@@ -32,13 +32,15 @@ const EditQuizTitle = ({ setActiveContainer, activeQuiz, setActiveQuiz }) => {
               onChange={(e) => setUpdateTitle(e.target.value)}
             />
           </form>
-          <button
-            type="submit"
-            className="btn-update-quiz"
-            onClick={handleEdit}
-          >
-            Update
-          </button>
+          <Link to={`/quizzes`}>
+            <button
+              type="submit"
+              className="btn-update-quiz"
+              onClick={handleEdit}
+            >
+              Update
+            </button>
+          </Link>
         </div>
       </section>
     </>

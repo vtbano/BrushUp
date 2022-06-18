@@ -1,19 +1,16 @@
 import React, { useState, useEffect } from "react";
 import SingleQuestion from "./SingleQuestion";
 
-// const url = `quizzes/1/questions`; //use this URL for testing
-
 const QuizQuestions = ({
   setActiveContainer,
-  id,
-  creators_id,
-  title,
+  activeQuiz,
   setActiveQuestion,
   setQuestionPlaceholder,
   setImagePlaceholder,
   setQuestionText,
   setImageUrl,
 }) => {
+  const { id, creators_id, title } = activeQuiz;
   const [questions, setQuestions] = useState([]);
 
   //GET
@@ -111,7 +108,7 @@ const QuizQuestions = ({
           <div className="share-quiz-container">
             {/* when empty it display's a greyed out share img */}
             <img
-              src="./img/icons8-ToShare-96 (1).png"
+              src="../img/icons8-ToShare-96 (1).png"
               alt="Share button"
               className="share-button"
             />

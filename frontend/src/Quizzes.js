@@ -61,7 +61,7 @@ const Quizzes = ({ creator }) => {
             <div className="share-container">
               {/* when empty it display's a greyed out share img */}
               <img
-                src="./img/icons8-noShareFade-96 (1).png"
+                src="../img/icons8-noShareFade-96(1).png"
                 alt="Greyed-out share button"
                 className="greyed-share-button"
               />

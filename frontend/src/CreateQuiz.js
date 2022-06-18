@@ -1,21 +1,22 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 
-const CreateQuiz = ({ setActiveContainer, creator, setActiveQuiz }) => {
-  // console.log("CreateQuiz Creator", creator);
+const CreateQuiz = ({ creator, setActiveQuiz }) => {
+  const { id } = creator;
   const [title, setTitle] = useState(""); //this causes to re-render and that's why console.log is coming up multiple times
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const { id } = creator;
+
     const submitQuiz = await fetch("/quizzes", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ creators_id: id, title: title }),
     });
     const getQuizSubmitted = await submitQuiz.json();
-    // console.log("Set Active Quiz:", getQuizSubmitted);
+    console.log("Set Active Quiz:", getQuizSubmitted);
     setActiveQuiz(getQuizSubmitted);
     console.log("New Quiz Added");
-    setActiveContainer("QuizQuestions");
   };
 
   return (
@@ -33,13 +34,15 @@ const CreateQuiz = ({ setActiveContainer, creator, setActiveQuiz }) => {
               onChange={(e) => setTitle(e.target.value)}
             />
           </form>
-          <button
-            type="submit"
-            className="btn-save-quiz"
-            onClick={handleSubmit}
-          >
-            Save
-          </button>
+          <Link to="/quizzes/:id/questions">
+            <button
+              type="submit"
+              className="btn-save-quiz"
+              onClick={handleSubmit}
+            >
+              Save
+            </button>
+          </Link>
         </div>
       </section>
     </>

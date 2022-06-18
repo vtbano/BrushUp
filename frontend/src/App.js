@@ -60,31 +60,45 @@ const App = () => {
           )} */}
             <Route path="quizzes" element={<Quizzes creator={creator} />} />
 
-            {/* <Route
+            <Route
               path="quizzes/create"
               element={
-                <CreateQuiz
-                  setActiveContainer={setActiveContainer}
-                  creator={creator}
+                <CreateQuiz creator={creator} setActiveQuiz={setActiveQuiz} />
+              }
+            />
+
+            <Route
+              path="quizzes/:id/edit"
+              element={
+                <EditQuizTitle
+                  activeQuiz={activeQuiz}
                   setActiveQuiz={setActiveQuiz}
                 />
               }
-            /> */}
-            {/* {activeContainer === "CreateQuiz" && (
-            <CreateQuiz
-              setActiveContainer={setActiveContainer}
-              creator={creator}
-              setActiveQuiz={setActiveQuiz}
             />
-          )}
-          {activeContainer === "EditQuizTitle" && (
+
+            {/* {activeContainer === "EditQuizTitle" && (
             <EditQuizTitle
               setActiveContainer={setActiveContainer}
               activeQuiz={activeQuiz}
               setActiveQuiz={setActiveQuiz}
             />
-          )}
-          {activeContainer === "QuizQuestions" && (
+          )} */}
+
+            <Route
+              path={`quizzes/:id/questions`}
+              element={
+                <QuizQuestions
+                  activeQuiz={activeQuiz}
+                  setActiveQuestion={setActiveQuestion}
+                  setQuestionPlaceholder={setQuestionPlaceholder}
+                  setImagePlaceholder={setImagePlaceholder}
+                  setQuestionText={setQuestionText}
+                  setImageUrl={setImageUrl}
+                />
+              }
+            />
+            {/* {activeContainer === "QuizQuestions" && (
             <QuizQuestions
               setActiveContainer={setActiveContainer}
               key={activeQuiz.id}
@@ -95,8 +109,8 @@ const App = () => {
               setQuestionText={setQuestionText}
               setImageUrl={setImageUrl}
             />
-          )}
-          {activeContainer === "AddQuestion" && (
+          )} */}
+            {/* {activeContainer === "AddQuestion" && (
             <AddQuestion
               setActiveContainer={setActiveContainer}
               key={activeQuestion.id}
@@ -110,7 +124,7 @@ const App = () => {
               imageUrl={imageUrl}
               setImageUrl={setImageUrl}
             />
-          )} */}
+          )}  */}
           </Routes>
         </section>
         <footer className="page-body-footer">
