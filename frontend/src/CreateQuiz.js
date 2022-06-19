@@ -1,9 +1,10 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const CreateQuiz = ({ creator, setActiveQuiz }) => {
   const { id } = creator;
   const [title, setTitle] = useState(""); //this causes to re-render and that's why console.log is coming up multiple times
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -16,6 +17,7 @@ const CreateQuiz = ({ creator, setActiveQuiz }) => {
     const getQuizSubmitted = await submitQuiz.json();
     console.log("Set Active Quiz:", getQuizSubmitted);
     setActiveQuiz(getQuizSubmitted);
+    navigate(`/quizzes/${getQuizSubmitted.id}/questions`);
     console.log("New Quiz Added");
   };
 
@@ -34,15 +36,14 @@ const CreateQuiz = ({ creator, setActiveQuiz }) => {
               onChange={(e) => setTitle(e.target.value)}
             />
           </form>
-          <Link to="/quizzes/:id/questions">
-            <button
-              type="submit"
-              className="btn-save-quiz"
-              onClick={handleSubmit}
-            >
-              Save
-            </button>
-          </Link>
+
+          <button
+            type="submit"
+            className="btn-save-quiz"
+            onClick={handleSubmit}
+          >
+            Save
+          </button>
         </div>
       </section>
     </>
