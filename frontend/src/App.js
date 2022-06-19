@@ -9,6 +9,8 @@ import QuizQuestions from "./QuizQuestions";
 import AddQuestion from "./AddQuestion";
 import NavigationButtons from "./NavigationButtons";
 import Footer from "./Footer";
+import Error from "./Error";
+import CreatorsLogin from "./CreatorsLogin";
 
 const App = () => {
   const [activeContainer, setActiveContainer] = useState("Quizzes");
@@ -55,6 +57,10 @@ const App = () => {
         </header>
         <section className="page-body-main">
           <Routes>
+            <Route
+              path="creators"
+              element={<CreatorsLogin setCreator={setCreator} />}
+            />
             {/* {activeContainer === "Creators" && (
             <CreatorsLogin setCreator={setCreator} />
           )} */}
@@ -125,6 +131,7 @@ const App = () => {
               setImageUrl={setImageUrl}
             />
           )}  */}
+            <Route path="*" element={Error} />
           </Routes>
         </section>
         <footer className="page-body-footer">
