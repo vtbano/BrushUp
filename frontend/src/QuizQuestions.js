@@ -69,7 +69,7 @@ const QuizQuestions = ({
   const handleQuestionEdit = async (questionId) => {
     const response = await fetch(`/quizzes/${id}/questions/${questionId}`);
     const responseGetQuestion = await response.json();
-    setActiveQuestion(responseGetQuestion);
+    // setActiveQuestion(responseGetQuestion);
     setQuestionPlaceholder(responseGetQuestion.question_text);
     setImagePlaceholder(responseGetQuestion.image);
     setQuestionText(responseGetQuestion.question_text);

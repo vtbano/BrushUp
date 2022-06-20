@@ -94,9 +94,6 @@ const AddQuestion = ({
           >
             Save
           </button>
-          {/* <button type="submit" className="btn-savePlusAdd-question">
-            Save + Start Another
-          </button> */}
         </div>
       </section>
     </>

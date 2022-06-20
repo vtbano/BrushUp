@@ -92,7 +92,8 @@ footer {
   height: 20em;
 }
 
-.add-question-display {
+.add-question-display,
+.quiz-taker-view-question-display {
   display: grid;
   width: 70em;
   height: auto;
@@ -150,7 +151,9 @@ footer {
 .add-question-label,
 .add-url-label,
 .correct-answers-container,
-.wrong-answers-container {
+.wrong-answers-container,
+.quiz-taker-view-question,
+.quiz-taker-view-question-label {
   color: #3db2ff;
   font-weight: 500;
   margin: 1em;
@@ -292,7 +295,8 @@ footer {
   margin-bottom: 1em;
 }
 
-.add-question-title {
+.add-question-title,
+.quiz-taker-view-question-title {
   background-color: #3db2ff;
   color: #ffffff;
   text-align: center;

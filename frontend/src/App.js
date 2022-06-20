@@ -10,6 +10,7 @@ import AddQuestion from "./AddQuestion";
 import NavigationButtons from "./NavigationButtons";
 import Footer from "./Footer";
 import Error from "./Error";
+import QuizTakerView from "./QuizTakerView";
 
 const App = () => {
   const [creator, setCreator] = useState({
@@ -95,6 +96,9 @@ const App = () => {
                 />
               }
             />
+            <Route path="quizzes/:id" element={<QuizTakerView />}>
+              {" "}
+            </Route>
 
             <Route path="*" element={Error} />
           </Routes>
