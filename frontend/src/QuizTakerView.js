@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
+import SingleAnswerOptionQuizTakerView from "./SingleAnswerOptionQuizTakerView";
 
 const QuizTakerView = ({}) => {
   const { id } = useParams();
@@ -50,6 +51,17 @@ const QuizTakerView = ({}) => {
           <div className="quiz-taker-view-question-label">Question:</div>
           <div className="quiz-taker-view-question">
             {activeQuestion !== null && activeQuestion.question_text}
+          </div>
+          <div className="quiz-taker-view-answer-options">
+            {answerOptions.map((answer) => {
+              return (
+                <SingleAnswerOptionQuizTakerView
+                  answerId={id}
+                  key={answer.id}
+                  {...answer}
+                />
+              );
+            })}
           </div>
         </div>
 

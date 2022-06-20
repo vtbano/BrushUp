@@ -10,15 +10,6 @@ const SingleQuestion = ({
   handleQuestionDelete,
   handleQuestionEdit,
 }) => {
-  console.log(
-    "Question ID:",
-    id,
-    "Question Text:",
-    question_text,
-    "QUIZ:",
-    quizId
-  );
-
   return (
     <>
       <div className="single-question-row-container">
