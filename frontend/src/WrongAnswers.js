@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import SingleWrongAnswerOption from "./SingleWrongAnswerOption";
 
-const WrongAnswers = ({ questionId, quizzes_id, setActiveContainer }) => {
+const WrongAnswers = ({ questionId, quizzes_id }) => {
   const [wrongOptionsList, setWrongOptionsList] = useState([]);
   const [showInput, setShowInput] = useState(false);
   const [wrongAnswers, setWrongAnswer] = useState("");
@@ -9,7 +9,7 @@ const WrongAnswers = ({ questionId, quizzes_id, setActiveContainer }) => {
   //GET CALL
   const getWrongOptions = async () => {
     const response = await fetch(
-      `quizzes/${quizzes_id}/questions/${questionId}/answer_options`
+      `/quizzes/${quizzes_id}/questions/${questionId}/answer_options`
       // `quizzes/1/questions/1/answer_options` //testing URL
     );
     const responseAnswerOptions = await response.json();
@@ -29,7 +29,7 @@ const WrongAnswers = ({ questionId, quizzes_id, setActiveContainer }) => {
   const handleWrongAnswerSubmit = async (e) => {
     e.preventDefault();
     const submitWrongAnswer = await fetch(
-      `quizzes/${quizzes_id}/questions/${questionId}/answer_options`,
+      `/quizzes/${quizzes_id}/questions/${questionId}/answer_options`,
       // `quizzes/1/questions/1/answer_options`, //testing URL
       {
         method: "POST",
@@ -53,7 +53,7 @@ const WrongAnswers = ({ questionId, quizzes_id, setActiveContainer }) => {
 
   const handleWrongAnswerDelete = async (id) => {
     const submitWrongAnswerDelete = await fetch(
-      `quizzes/${quizzes_id}/questions/${questionId}/answer_options/${id}`,
+      `/quizzes/${quizzes_id}/questions/${questionId}/answer_options/${id}`,
       {
         method: "DELETE",
       }

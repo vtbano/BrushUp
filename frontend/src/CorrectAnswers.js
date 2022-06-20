@@ -9,7 +9,7 @@ const CorrectAnswers = ({ questionId, quizzes_id }) => {
   //GET CALL
   const getAnswerOptions = async () => {
     const response = await fetch(
-      `quizzes/${quizzes_id}/questions/${questionId}/answer_options`
+      `/quizzes/${quizzes_id}/questions/${questionId}/answer_options`
       // `quizzes/1/questions/1/answer_options` //testing URL
     );
     const responseAnswerOptions = await response.json();
@@ -28,7 +28,7 @@ const CorrectAnswers = ({ questionId, quizzes_id }) => {
   const handleCorrectAnswerSubmit = async (e) => {
     e.preventDefault();
     const submitCorrectAnswer = await fetch(
-      `quizzes/${quizzes_id}/questions/${questionId}/answer_options`,
+      `/quizzes/${quizzes_id}/questions/${questionId}/answer_options`,
       // `quizzes/1/questions/1/answer_options`, //testing URL
       {
         method: "POST",
@@ -52,7 +52,7 @@ const CorrectAnswers = ({ questionId, quizzes_id }) => {
 
   const handleCorrectAnswerDelete = async (id) => {
     const submitCorrectAnswerDelete = await fetch(
-      `quizzes/${quizzes_id}/questions/${questionId}/answer_options/${id}`,
+      `/quizzes/${quizzes_id}/questions/${questionId}/answer_options/${id}`,
       {
         method: "DELETE",
       }
