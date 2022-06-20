@@ -25,7 +25,11 @@ const SingleQuestion = ({
         <span className="single-question-title">{question_text}</span>
         <span>
           <DeleteQuestion handleQuestionDelete={handleQuestionDelete} />
-          <EditQuestion handleQuestionEdit={handleQuestionEdit} />
+          <EditQuestion
+            handleQuestionEdit={handleQuestionEdit}
+            quizId={quizId}
+            id={id}
+          />
         </span>
       </div>
     </>

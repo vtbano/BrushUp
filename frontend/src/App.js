@@ -12,13 +12,10 @@ import Footer from "./Footer";
 import Error from "./Error";
 
 const App = () => {
-  const [activeContainer, setActiveContainer] = useState("Quizzes");
   const [creator, setCreator] = useState({
     id: 1,
     username: "**Fetch Creator from CreatorsLogin Component**",
   });
-  // const [activeQuiz, setActiveQuiz] = useState(null); //if intended to be an object you can start of with null state
-  const [activeQuestion, setActiveQuestion] = useState(null);
   const [questionPlaceholder, setQuestionPlaceholder] = useState(
     "Example: Can dogs eat chocolate?"
   );
@@ -76,7 +73,6 @@ const App = () => {
               path={`quizzes/:id/questions`}
               element={
                 <QuizQuestions
-                  setActiveQuestion={setActiveQuestion}
                   setQuestionPlaceholder={setQuestionPlaceholder}
                   setImagePlaceholder={setImagePlaceholder}
                   setQuestionText={setQuestionText}
@@ -99,21 +95,7 @@ const App = () => {
                 />
               }
             />
-            {/* {activeContainer === "AddQuestion" && (
-            <AddQuestion
-              setActiveContainer={setActiveContainer}
-              key={activeQuestion.id}
-              {...activeQuestion}
-              questionPlaceholder={questionPlaceholder}
-              imagePlaceholder={imagePlaceholder}
-              setImagePlaceholder={setImagePlaceholder}
-              questionText={questionText}
-              setQuestionPlaceholder={setQuestionPlaceholder}
-              setQuestionText={setQuestionText}
-              imageUrl={imageUrl}
-              setImageUrl={setImageUrl}
-            />
-          )}  */}
+
             <Route path="*" element={Error} />
           </Routes>
         </section>

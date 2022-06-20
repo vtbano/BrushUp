@@ -1,11 +1,14 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
-const EditQuestion = ({ handleQuestionEdit }) => {
+const EditQuestion = ({ handleQuestionEdit, quizId, id }) => {
   return (
     <>
-      <button className="btn-edit-quiz" onClick={handleQuestionEdit}>
-        Edit
-      </button>
+      <Link to={`/quizzes/${quizId}/questions/add/${id}`}>
+        <button className="btn-edit-quiz" onClick={handleQuestionEdit}>
+          Edit
+        </button>
+      </Link>
     </>
   );
 };

@@ -59,12 +59,9 @@ const QuizQuestions = ({
       }),
     });
     const getQuestionSubmitted = await submitQuestion.json();
-    console.log("Set Active Question", getQuestionSubmitted);
     navigate(
       `/quizzes/${getQuestionSubmitted.quizzes_id}/questions/add/${getQuestionSubmitted.id}`
     );
-    // setActiveContainer("AddQuestion");
-    // setActiveQuestion(getQuestionSubmitted);
   };
 
   //HANDLE EDIT TO EACH QUESTION
@@ -77,8 +74,6 @@ const QuizQuestions = ({
     setImagePlaceholder(responseGetQuestion.image);
     setQuestionText(responseGetQuestion.question_text);
     setImageUrl(responseGetQuestion.image);
-    console.log("Set Active Question", responseGetQuestion);
-    // setActiveContainer("AddQuestion");
   };
 
   return (
