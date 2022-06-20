@@ -3,14 +3,7 @@ import DeleteQuiz from "./DeleteQuiz";
 import EditQuiz from "./EditQuiz";
 import { Link } from "react-router-dom";
 
-const SingleQuiz = ({
-  id,
-  title,
-  handleDelete,
-  setQuizzes,
-  handleRedirectQuizQuestions,
-  handleEditQuizTitle,
-}) => {
+const SingleQuiz = ({ id, title, handleDelete }) => {
   // console.log("TITLE:", title, "QUIZ:", id);
 
   return (

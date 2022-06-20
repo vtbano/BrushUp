@@ -3,7 +3,6 @@ import SingleQuiz from "./SingleQuiz";
 import { Link } from "react-router-dom";
 
 const Quizzes = ({ creator }) => {
-  // console.log("Quizzes Creator", creator);
   const { id, username } = creator;
   const url = `/creators/1/quizzes`; //set for testing- DONT Change until Create Login is setup
   const [quizzes, setQuizzes] = useState([]);
@@ -43,7 +42,6 @@ const Quizzes = ({ creator }) => {
                     <SingleQuiz
                       key={quiz.id}
                       {...quiz}
-                      setQuizzes={setQuizzes}
                       handleDelete={() => handleDelete(quiz.id)}
                     />
                   );
