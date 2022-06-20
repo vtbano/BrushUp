@@ -23,8 +23,11 @@ const QuizQuestions = ({
   const getQuestions = async () => {
     const response = await fetch(`/quizzes/${id}/questions`);
     const activeQuizQuestions = await response.json();
-    setQuestions(activeQuizQuestions);
-    console.log(activeQuizQuestions);
+    const activeQuizQuestionsSorted = activeQuizQuestions.sort(function(a, b) {
+      return a.id - b.id;
+    });
+    setQuestions(activeQuizQuestionsSorted);
+    console.log(activeQuizQuestionsSorted);
   };
 
   useEffect(() => {

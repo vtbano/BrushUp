@@ -9,7 +9,7 @@ const SingleAnswerOptionQuizTakerView = ({
   return (
     <>
       <div className="quiz-taker-answer-options-container">
-        <span className="single-answer-option">{answer_text}</span>
+        <div className="quiz-taker-single-answer-option">{answer_text}</div>
       </div>
     </>
   );
