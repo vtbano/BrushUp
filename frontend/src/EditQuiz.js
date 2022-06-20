@@ -1,5 +1,5 @@
 import React from "react";
-import EditQuizTitle from "./EditQuizTitle";
+// import EditQuizTitle from "./EditQuizTitle";
 import { Link } from "react-router-dom";
 
 const EditQuiz = ({ id }) => {

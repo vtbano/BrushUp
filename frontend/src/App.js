@@ -10,7 +10,6 @@ import AddQuestion from "./AddQuestion";
 import NavigationButtons from "./NavigationButtons";
 import Footer from "./Footer";
 import Error from "./Error";
-import CreatorsLogin from "./CreatorsLogin";
 
 const App = () => {
   const [activeContainer, setActiveContainer] = useState("Quizzes");
@@ -75,12 +74,7 @@ const App = () => {
 
             <Route
               path="quizzes/:id/edit"
-              element={
-                <EditQuizTitle
-                  activeQuiz={activeQuiz}
-                  setActiveQuiz={setActiveQuiz}
-                />
-              }
+              element={<EditQuizTitle setActiveQuiz={setActiveQuiz} />}
             />
 
             {/* {activeContainer === "EditQuizTitle" && (

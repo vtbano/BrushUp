@@ -1,9 +1,23 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { Navigate, useNavigate, useParams } from "react-router-dom";
 
-const EditQuizTitle = ({ activeQuiz, setActiveQuiz }) => {
-  const { id, title } = activeQuiz;
+const EditQuizTitle = ({ setActiveQuiz }) => {
+  const navigate = useNavigate();
+  const { id } = useParams();
   const [updateTitle, setUpdateTitle] = useState(""); //this causes to re-render and that's why console.log is coming up multiple times
+  const [quizTitle, setQuizTitle] = useState(null);
+
+  const getCurrentQuizTitle = async () => {
+    const response = await fetch(`/quizzes/${id}`);
+    const responseGetCurrentQuizTitle = await response.json();
+    setQuizTitle(responseGetCurrentQuizTitle.title);
+    console.log(responseGetCurrentQuizTitle.title);
+  };
+
+  useEffect(() => {
+    getCurrentQuizTitle();
+  }, []);
+
   const handleEdit = async (e) => {
     e.preventDefault();
 
@@ -14,6 +28,7 @@ const EditQuizTitle = ({ activeQuiz, setActiveQuiz }) => {
     });
     const getQuizTitleSubmitted = await submitQuizTitleEdit.json();
     setActiveQuiz("");
+    navigate(`/quizzes`);
     console.log(`Quiz Title Updated to ${getQuizTitleSubmitted}`);
   };
 
@@ -22,7 +37,7 @@ const EditQuizTitle = ({ activeQuiz, setActiveQuiz }) => {
       <section className="create-quiz-sect">
         <div className="edit-quiz-title">EDIT QUIZ TITLE</div>
         <div className="edit-quiz-display">
-          <span className="edit-quiz-label">Current title is: {title}</span>
+          <span className="edit-quiz-label">Current title is: {quizTitle}</span>
           <form>
             <input
               type="text"
@@ -32,15 +47,14 @@ const EditQuizTitle = ({ activeQuiz, setActiveQuiz }) => {
               onChange={(e) => setUpdateTitle(e.target.value)}
             />
           </form>
-          <Link to={`/quizzes`}>
-            <button
-              type="submit"
-              className="btn-update-quiz"
-              onClick={handleEdit}
-            >
-              Update
-            </button>
-          </Link>
+
+          <button
+            type="submit"
+            className="btn-update-quiz"
+            onClick={handleEdit}
+          >
+            Update
+          </button>
         </div>
       </section>
     </>

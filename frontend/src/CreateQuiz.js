@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const CreateQuiz = ({ creator, setActiveQuiz }) => {
   const { id } = creator;

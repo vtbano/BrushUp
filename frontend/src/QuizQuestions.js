@@ -1,19 +1,20 @@
 import React, { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
 import SingleQuestion from "./SingleQuestion";
 
 const QuizQuestions = ({
   setActiveContainer,
-  activeQuiz,
   setActiveQuestion,
   setQuestionPlaceholder,
   setImagePlaceholder,
   setQuestionText,
   setImageUrl,
 }) => {
-  const { id, creators_id, title } = activeQuiz;
   const [questions, setQuestions] = useState([]);
+  const [quizTitle, setQuizTitle] = useState(null);
+  const { id } = useParams();
 
-  //GET
+  //GET QUIZ QUESTIONS
   const getQuestions = async () => {
     const response = await fetch(`quizzes/${id}/questions`);
     const activeQuizQuestions = await response.json();
@@ -23,6 +24,19 @@ const QuizQuestions = ({
 
   useEffect(() => {
     getQuestions();
+  }, []);
+
+  //GET QUIZ TITLE
+
+  const getCurrentQuizTitle = async () => {
+    const response = await fetch(`quizzes/${id}`);
+    const responseGetCurrentQuizTitle = await response.json();
+    setQuizTitle(responseGetCurrentQuizTitle.title);
+    console.log(responseGetCurrentQuizTitle.title);
+  };
+
+  useEffect(() => {
+    getCurrentQuizTitle();
   }, []);
 
   //HANDLE DELETE
@@ -73,7 +87,7 @@ const QuizQuestions = ({
     <>
       <section className="quiz-shelf-sect">
         <div className="question-shelf-quiz-title">
-          {title}
+          {quizTitle}
           <div className="questions-count">{questions.length} questions</div>
         </div>
         <div className="question-shelf-display">
@@ -108,7 +122,7 @@ const QuizQuestions = ({
           <div className="share-quiz-container">
             {/* when empty it display's a greyed out share img */}
             <img
-              src="../img/icons8-ToShare-96 (1).png"
+              src="../img/icons8-ToShare-96.png"
               alt="Share button"
               className="share-button"
             />
