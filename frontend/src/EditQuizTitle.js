@@ -27,7 +27,7 @@ const EditQuizTitle = ({ setActiveQuiz }) => {
       body: JSON.stringify({ title: updateTitle }),
     });
     const getQuizTitleSubmitted = await submitQuizTitleEdit.json();
-    setActiveQuiz("");
+
     navigate(`/quizzes`);
     console.log(`Quiz Title Updated to ${getQuizTitleSubmitted}`);
   };

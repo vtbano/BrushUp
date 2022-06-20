@@ -3,7 +3,6 @@ import { useParams } from "react-router-dom";
 import SingleQuestion from "./SingleQuestion";
 
 const QuizQuestions = ({
-  setActiveContainer,
   setActiveQuestion,
   setQuestionPlaceholder,
   setImagePlaceholder,
@@ -66,7 +65,7 @@ const QuizQuestions = ({
     const getQuestionSubmitted = await submitQuestion.json();
     setActiveQuestion(getQuestionSubmitted);
     console.log("Set Active Question", getQuestionSubmitted);
-    setActiveContainer("AddQuestion");
+    // setActiveContainer("AddQuestion");
   };
 
   //HANDLE EDIT TO EACH QUESTION
@@ -80,7 +79,7 @@ const QuizQuestions = ({
     setQuestionText(responseGetQuestion.question_text);
     setImageUrl(responseGetQuestion.image);
     console.log("Set Active Question", responseGetQuestion);
-    setActiveContainer("AddQuestion");
+    // setActiveContainer("AddQuestion");
   };
 
   return (

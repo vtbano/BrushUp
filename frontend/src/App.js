@@ -17,7 +17,7 @@ const App = () => {
     id: 1,
     username: "**Fetch Creator from CreatorsLogin Component**",
   });
-  const [activeQuiz, setActiveQuiz] = useState(null); //if intended to be an object you can start of with null state
+  // const [activeQuiz, setActiveQuiz] = useState(null); //if intended to be an object you can start of with null state
   const [activeQuestion, setActiveQuestion] = useState(null);
   const [questionPlaceholder, setQuestionPlaceholder] = useState(
     "Example: Can dogs eat chocolate?"
@@ -67,29 +67,15 @@ const App = () => {
 
             <Route
               path="quizzes/create"
-              element={
-                <CreateQuiz creator={creator} setActiveQuiz={setActiveQuiz} />
-              }
+              element={<CreateQuiz creator={creator} />}
             />
 
-            <Route
-              path="quizzes/:id/edit"
-              element={<EditQuizTitle setActiveQuiz={setActiveQuiz} />}
-            />
-
-            {/* {activeContainer === "EditQuizTitle" && (
-            <EditQuizTitle
-              setActiveContainer={setActiveContainer}
-              activeQuiz={activeQuiz}
-              setActiveQuiz={setActiveQuiz}
-            />
-          )} */}
+            <Route path="quizzes/:id/edit" element={<EditQuizTitle />} />
 
             <Route
               path={`quizzes/:id/questions`}
               element={
                 <QuizQuestions
-                  activeQuiz={activeQuiz}
                   setActiveQuestion={setActiveQuestion}
                   setQuestionPlaceholder={setQuestionPlaceholder}
                   setImagePlaceholder={setImagePlaceholder}
@@ -98,18 +84,7 @@ const App = () => {
                 />
               }
             />
-            {/* {activeContainer === "QuizQuestions" && (
-            <QuizQuestions
-              setActiveContainer={setActiveContainer}
-              key={activeQuiz.id}
-              {...activeQuiz}
-              setActiveQuestion={setActiveQuestion}
-              setQuestionPlaceholder={setQuestionPlaceholder}
-              setImagePlaceholder={setImagePlaceholder}
-              setQuestionText={setQuestionText}
-              setImageUrl={setImageUrl}
-            />
-          )} */}
+
             {/* {activeContainer === "AddQuestion" && (
             <AddQuestion
               setActiveContainer={setActiveContainer}

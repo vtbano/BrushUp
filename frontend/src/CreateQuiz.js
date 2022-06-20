@@ -16,7 +16,6 @@ const CreateQuiz = ({ creator, setActiveQuiz }) => {
     });
     const getQuizSubmitted = await submitQuiz.json();
     console.log("Set Active Quiz:", getQuizSubmitted);
-    setActiveQuiz(getQuizSubmitted);
     navigate(`/quizzes/${getQuizSubmitted.id}/questions`);
     console.log("New Quiz Added");
   };
