@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import SingleCorrectAnswerOption from "./SingleCorrectAnswerOption";
 
-const CorrectAnswers = ({ questionId, quizzes_id, setActiveContainer }) => {
+const CorrectAnswers = ({ questionId, quizzes_id }) => {
   const [answerOptionsList, setAnswerOptionsList] = useState([]);
   const [showInput, setShowInput] = useState(false);
   const [correctAnswer, setCorrectAnswer] = useState("");

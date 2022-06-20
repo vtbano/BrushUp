@@ -84,7 +84,21 @@ const App = () => {
                 />
               }
             />
-
+            <Route
+              path="quizzes/:id/questions/add/:questionId"
+              element={
+                <AddQuestion
+                  questionPlaceholder={questionPlaceholder}
+                  imagePlaceholder={imagePlaceholder}
+                  setImagePlaceholder={setImagePlaceholder}
+                  questionText={questionText}
+                  setQuestionPlaceholder={setQuestionPlaceholder}
+                  setQuestionText={setQuestionText}
+                  imageUrl={imageUrl}
+                  setImageUrl={setImageUrl}
+                />
+              }
+            />
             {/* {activeContainer === "AddQuestion" && (
             <AddQuestion
               setActiveContainer={setActiveContainer}

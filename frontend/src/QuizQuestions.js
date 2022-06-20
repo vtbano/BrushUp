@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import SingleQuestion from "./SingleQuestion";
 
 const QuizQuestions = ({
@@ -12,10 +12,16 @@ const QuizQuestions = ({
   const [questions, setQuestions] = useState([]);
   const [quizTitle, setQuizTitle] = useState(null);
   const { id } = useParams();
+  const navigate = useNavigate();
 
-  //GET QUIZ QUESTIONS
+  const getCurrentQuizTitle = async () => {
+    const response = await fetch(`/quizzes/${id}`);
+    const responseGetCurrentQuizTitle = await response.json();
+    setQuizTitle(responseGetCurrentQuizTitle.title);
+    console.log(responseGetCurrentQuizTitle.title);
+  };
   const getQuestions = async () => {
-    const response = await fetch(`quizzes/${id}/questions`);
+    const response = await fetch(`/quizzes/${id}/questions`);
     const activeQuizQuestions = await response.json();
     setQuestions(activeQuizQuestions);
     console.log(activeQuizQuestions);
@@ -23,18 +29,6 @@ const QuizQuestions = ({
 
   useEffect(() => {
     getQuestions();
-  }, []);
-
-  //GET QUIZ TITLE
-
-  const getCurrentQuizTitle = async () => {
-    const response = await fetch(`quizzes/${id}`);
-    const responseGetCurrentQuizTitle = await response.json();
-    setQuizTitle(responseGetCurrentQuizTitle.title);
-    console.log(responseGetCurrentQuizTitle.title);
-  };
-
-  useEffect(() => {
     getCurrentQuizTitle();
   }, []);
 
@@ -55,7 +49,9 @@ const QuizQuestions = ({
     e.preventDefault();
     const submitQuestion = await fetch(`/quizzes/${id}/questions`, {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: {
+        "Content-Type": "application/json",
+      },
       body: JSON.stringify({
         quizzes_id: id,
         question_text: null,
@@ -63,9 +59,12 @@ const QuizQuestions = ({
       }),
     });
     const getQuestionSubmitted = await submitQuestion.json();
-    setActiveQuestion(getQuestionSubmitted);
     console.log("Set Active Question", getQuestionSubmitted);
+    navigate(
+      `/quizzes/${getQuestionSubmitted.quizzes_id}/questions/add/${getQuestionSubmitted.id}`
+    );
     // setActiveContainer("AddQuestion");
+    // setActiveQuestion(getQuestionSubmitted);
   };
 
   //HANDLE EDIT TO EACH QUESTION

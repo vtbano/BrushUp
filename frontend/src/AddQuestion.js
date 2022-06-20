@@ -1,11 +1,12 @@
 import React, { useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import CorrectAnswers from "./CorrectAnswers";
 import WrongAnswers from "./WrongAnswers";
 
 const AddQuestion = ({
-  setActiveContainer,
-  id,
-  quizzes_id,
+  // setActiveContainer,
+  // id,
+  // quizzes_id,
   questionPlaceholder,
   imagePlaceholder,
   setImagePlaceholder,
@@ -15,14 +16,14 @@ const AddQuestion = ({
   imageUrl,
   setImageUrl,
 }) => {
-  // console.log("Question ID from Add Question", id);
-  // console.log("Quiz ID from Add Question", quizzes_id);
+  const { id, questionId } = useParams();
+  const navigate = useNavigate();
 
   const handleQuestionSave = async (e) => {
     e.preventDefault();
 
     const submitQuestion = await fetch(
-      `/quizzes/${quizzes_id}/questions/${id}`,
+      `/quizzes/${id}/questions/${questionId}`,
       {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
@@ -43,7 +44,7 @@ const AddQuestion = ({
     setQuestionText("");
     setImagePlaceholder(" Copy image address here!");
     setImageUrl("");
-    setActiveContainer("QuizQuestions");
+    navigate(`/quizzes/${id}/questions`);
   };
 
   return (
@@ -77,19 +78,11 @@ const AddQuestion = ({
           <div className="answer-options-display">
             <div className="correct-answers-container">
               Correct Answers
-              <CorrectAnswers
-                questionId={id}
-                quizzes_id={quizzes_id}
-                setActiveContainer={setActiveContainer}
-              />
+              <CorrectAnswers questionId={questionId} quizzes_id={id} />
             </div>
             <div className="wrong-answers-container">
               Wrong Answers
-              <WrongAnswers
-                questionId={id}
-                quizzes_id={quizzes_id}
-                setActiveContainer={setActiveContainer}
-              />
+              <WrongAnswers questionId={questionId} quizzes_id={id} />
             </div>
           </div>
         </div>
