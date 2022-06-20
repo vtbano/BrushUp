@@ -10,6 +10,7 @@ const QuizTakerView = ({}) => {
   const [activeQuestion, setActiveQuestion] = useState(null);
 
   //make function goNextQuestion --this function should set the next question to be the next activeQuestion
+  //make function for changing color on click and submitting as final
 
   const getCurrentQuizTitle = async () => {
     const response = await fetch(`/quizzes/${id}`);
@@ -21,8 +22,11 @@ const QuizTakerView = ({}) => {
   const getQuestions = async () => {
     const response = await fetch(`/quizzes/${id}/questions`);
     const activeQuizQuestions = await response.json();
-    setQuestions(activeQuizQuestions);
-    setActiveQuestion(activeQuizQuestions[0]);
+    const activeQuizQuestionsSorted = activeQuizQuestions.sort(function(a, b) {
+      return a.id - b.id;
+    });
+    setQuestions(activeQuizQuestionsSorted);
+    setActiveQuestion(activeQuizQuestionsSorted[0]);
     // console.log("Actuve quiz questions **", activeQuizQuestions);
   };
 
@@ -46,7 +50,10 @@ const QuizTakerView = ({}) => {
   return (
     <>
       <section className="quiz-taker-view-sect">
-        <div className="quiz-taker-view-question-title">{quizTitle}</div>
+        <div className="quiz-taker-view-question-title">
+          {quizTitle}
+          <div className="questions-count">{questions.length} questions</div>
+        </div>
         <div className="quiz-taker-view-question-display">
           <div className="quiz-taker-view-question-label">Question:</div>
           <div className="quiz-taker-view-question">
