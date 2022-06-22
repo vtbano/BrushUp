@@ -338,7 +338,9 @@ footer {
   margin-left: 1em;
 }
 
-.quiz-taker-single-answer-option {
+.quiz-taker-single-answer-option,
+.quiz-taker-single-answer-option-true,
+.quiz-taker-single-answer-option-false {
   max-width: 15em;
   height: 1em;
   font-size: 1em;
@@ -348,4 +350,20 @@ footer {
   padding: 1em;
   margin-left: 1em;
   margin-bottom: 1em;
+}
+
+.quiz-taker-single-answer-option:hover {
+  background-color: #f2f3ca;
+}
+
+.quiz-taker-single-answer-option-true {
+  color: #4caf50;
+  background-color: #b4e6b6;
+  border: 1px solid #4caf50;
+}
+
+.quiz-taker-single-answer-option-false {
+  color: #ff2442;
+  background-color: #fab3bd;
+  border: 1px solid #ff2442;
 }

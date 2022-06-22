@@ -10,7 +10,6 @@ const QuizTakerView = ({}) => {
   const [activeQuestion, setActiveQuestion] = useState(null);
 
   //make function goNextQuestion --this function should set the next question to be the next activeQuestion
-  //make function for changing color on click and submitting as final
 
   const getCurrentQuizTitle = async () => {
     const response = await fetch(`/quizzes/${id}`);

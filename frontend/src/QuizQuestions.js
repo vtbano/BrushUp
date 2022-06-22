@@ -3,7 +3,6 @@ import { useNavigate, useParams } from "react-router-dom";
 import SingleQuestion from "./SingleQuestion";
 
 const QuizQuestions = ({
-  setActiveQuestion,
   setQuestionPlaceholder,
   setImagePlaceholder,
   setQuestionText,
