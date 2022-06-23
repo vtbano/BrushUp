@@ -10,6 +10,9 @@ const QuizTakerView = ({}) => {
   const [activeQuestion, setActiveQuestion] = useState(null);
   const [correctOptionsCount, setCorrectOptionsCount] = useState(null);
   const [optionSelectedCount, setOptionSelectedCount] = useState({ count: 1 });
+  const [currentQuestionsIndex, setCurrentQuestionsIndex] = useState({
+    index: 0,
+  });
 
   //make function goNextQuestion --this function should set the next question to be the next activeQuestion
   //function must count how many correct answers there are in an active Question and there should be a counter
@@ -18,7 +21,6 @@ const QuizTakerView = ({}) => {
     const response = await fetch(`/quizzes/${id}`);
     const responseGetCurrentQuizTitle = await response.json();
     setQuizTitle(responseGetCurrentQuizTitle.title);
-    console.log(responseGetCurrentQuizTitle.title);
   };
 
   const getQuestions = async () => {
@@ -28,7 +30,8 @@ const QuizTakerView = ({}) => {
       return a.id - b.id;
     });
     setQuestions(activeQuizQuestionsSorted);
-    setActiveQuestion(activeQuizQuestionsSorted[0]);
+    setActiveQuestion(activeQuizQuestionsSorted[currentQuestionsIndex.index]);
+    console.log("CurrentQuestionIndex", currentQuestionsIndex.index);
     // console.log("Actuve quiz questions **", activeQuizQuestions);
   };
 
@@ -55,9 +58,17 @@ const QuizTakerView = ({}) => {
   }, [activeQuestion]);
 
   const goNextQuestion = (correctOptionsCount, optionSelectedCount) => {
-    if (correctOptionsCount === optionSelectedCount.count) {
+    if (
+      correctOptionsCount === optionSelectedCount.count ||
+      correctOptionsCount === 0
+    ) {
       setTimeout(() => {
-        setActiveQuestion(questions[1]);
+        setOptionSelectedCount({ count: 1 });
+        setActiveQuestion(questions[currentQuestionsIndex.index + 1]);
+        setCurrentQuestionsIndex({
+          ...currentQuestionsIndex,
+          index: currentQuestionsIndex.index + 1,
+        });
       }, 3000);
     }
   };
