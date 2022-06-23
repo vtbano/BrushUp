@@ -40,12 +40,23 @@ const QuizTakerView = ({}) => {
       `/quizzes/${id}/questions/${activeQuestion.id}/answer_options`
     );
     const activeAnswerOptions = await response.json();
-    const correctOptions = activeAnswerOptions.filter((option) => {
-      return option.correct === true;
-    });
-    setCorrectOptionsCount(correctOptions.length);
-    console.log("Correct Options", correctOptions.length);
-    setAnswerOptions(activeAnswerOptions);
+    if (activeAnswerOptions.length > 0) {
+      console.log("Active Answer Options:", activeAnswerOptions);
+      setAnswerOptions(activeAnswerOptions);
+      const correctOptions = activeAnswerOptions.filter((option) => {
+        return option.correct === true;
+      });
+      setCorrectOptionsCount(correctOptions.length);
+      console.log("Correct Options", correctOptions.length);
+    } else if (activeAnswerOptions.length === 0) {
+      setActiveQuestion(null);
+      setOptionSelectedCount({ count: 0 });
+      setActiveQuestion(questions[currentQuestionsIndex.index + 1]);
+      setCurrentQuestionsIndex({
+        ...currentQuestionsIndex,
+        index: currentQuestionsIndex.index + 1,
+      });
+    }
   };
 
   useEffect(() => {
@@ -58,10 +69,7 @@ const QuizTakerView = ({}) => {
   }, [activeQuestion]);
 
   const goNextQuestion = (correctOptionsCount, optionSelectedCount) => {
-    if (
-      correctOptionsCount === optionSelectedCount.count ||
-      correctOptionsCount === 0
-    ) {
+    if (correctOptionsCount === optionSelectedCount.count) {
       setTimeout(() => {
         setOptionSelectedCount({ count: 1 });
         setActiveQuestion(questions[currentQuestionsIndex.index + 1]);
