@@ -8,8 +8,11 @@ const QuizTakerView = ({}) => {
   const [quizTitle, setQuizTitle] = useState(null);
   const [answerOptions, setAnswerOptions] = useState([]);
   const [activeQuestion, setActiveQuestion] = useState(null);
+  const [correctOptionsCount, setCorrectOptionsCount] = useState(null);
+  const [optionSelectedCount, setOptionSelectedCount] = useState({ count: 1 });
 
   //make function goNextQuestion --this function should set the next question to be the next activeQuestion
+  //function must count how many correct answers there are in an active Question and there should be a counter
 
   const getCurrentQuizTitle = async () => {
     const response = await fetch(`/quizzes/${id}`);
@@ -34,6 +37,11 @@ const QuizTakerView = ({}) => {
       `/quizzes/${id}/questions/${activeQuestion.id}/answer_options`
     );
     const activeAnswerOptions = await response.json();
+    const correctOptions = activeAnswerOptions.filter((option) => {
+      return option.correct === true;
+    });
+    setCorrectOptionsCount(correctOptions.length);
+    console.log("Correct Options", correctOptions.length);
     setAnswerOptions(activeAnswerOptions);
   };
 
@@ -46,6 +54,11 @@ const QuizTakerView = ({}) => {
     if (activeQuestion !== null) getAnswerOptions();
   }, [activeQuestion]);
 
+  const goNextQuestion = (correctOptionsCount, optionSelectedCount) => {
+    if (correctOptionsCount === optionSelectedCount.count) {
+      setActiveQuestion(questions[1]);
+    }
+  };
   return (
     <>
       <section className="quiz-taker-view-sect">
@@ -65,6 +78,8 @@ const QuizTakerView = ({}) => {
                   answerId={id}
                   key={answer.id}
                   {...answer}
+                  optionSelectedCount={optionSelectedCount}
+                  setOptionSelectedCount={setOptionSelectedCount}
                 />
               );
             })}

@@ -5,6 +5,8 @@ const SingleAnswerOptionQuizTakerView = ({
   questions_id,
   correct,
   answer_text,
+  optionSelectedCount,
+  setOptionSelectedCount,
 }) => {
   const [cssAnswerOption, setCssAnswerOption] = useState(
     "quiz-taker-single-answer-option"
@@ -18,12 +20,18 @@ const SingleAnswerOptionQuizTakerView = ({
   };
 
   return (
-    //make function for changing color on click and submitting as final
     <>
       <div className="quiz-taker-answer-options-container">
         <div
           className={cssAnswerOption}
-          onClick={() => showAnswerSelectionResult(correct)}
+          onClick={() => {
+            showAnswerSelectionResult(correct);
+            setOptionSelectedCount({
+              ...optionSelectedCount,
+              count: optionSelectedCount.count + 1,
+            });
+            console.log(optionSelectedCount);
+          }}
         >
           {answer_text}
         </div>
