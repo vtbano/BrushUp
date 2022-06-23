@@ -7,6 +7,7 @@ const SingleAnswerOptionQuizTakerView = ({
   answer_text,
   optionSelectedCount,
   setOptionSelectedCount,
+  goNextQuestion,
 }) => {
   const [cssAnswerOption, setCssAnswerOption] = useState(
     "quiz-taker-single-answer-option"
@@ -31,6 +32,7 @@ const SingleAnswerOptionQuizTakerView = ({
               count: optionSelectedCount.count + 1,
             });
             console.log(optionSelectedCount);
+            goNextQuestion();
           }}
         >
           {answer_text}

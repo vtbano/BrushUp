@@ -56,7 +56,9 @@ const QuizTakerView = ({}) => {
 
   const goNextQuestion = (correctOptionsCount, optionSelectedCount) => {
     if (correctOptionsCount === optionSelectedCount.count) {
-      setActiveQuestion(questions[1]);
+      setTimeout(() => {
+        setActiveQuestion(questions[1]);
+      }, 3000);
     }
   };
   return (
@@ -80,6 +82,9 @@ const QuizTakerView = ({}) => {
                   {...answer}
                   optionSelectedCount={optionSelectedCount}
                   setOptionSelectedCount={setOptionSelectedCount}
+                  goNextQuestion={() =>
+                    goNextQuestion(correctOptionsCount, optionSelectedCount)
+                  }
                 />
               );
             })}
