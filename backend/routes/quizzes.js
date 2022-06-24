@@ -263,9 +263,10 @@ router.get(
     );
   }
 );
-
+//*******/
 router.post("/:quizzes_id/respondents", (request, response, next) => {
-  const { email, secret } = request.body;
+  const { email } = request.body;
+  //create secret function
   const { quizzes_id } = request.params;
 
   pool.query(
@@ -277,23 +278,6 @@ router.post("/:quizzes_id/respondents", (request, response, next) => {
     }
   );
 });
-
-router.put(
-  "/:quizzes_id/respondents/:respondent_id",
-  (request, response, next) => {
-    const { quizzes_id, respondent_id } = request.params;
-    const { email, secret } = request.body;
-
-    pool.query(
-      `UPDATE respondents SET email=($1), secret=($2) WHERE quizzes_id=($3) AND id=($4) RETURNING *`,
-      [email, secret, quizzes_id, respondent_id],
-      (err, res) => {
-        if (err) return next(err);
-        response.json(res.rows[0]);
-      }
-    );
-  }
-);
 
 router.delete(
   "/:quizzes_id/respondents/:respondent_id",
@@ -314,79 +298,41 @@ router.delete(
 
 // GET http://www.brushup.com/quizzes/ID/respondents/ID/answer_options/ID
 
-router.get(
-  "/:quizzes_id/respondents/:respondent_id/answer_options/:answer_options_id",
-  (request, response, next) => {
-    const { quizzes_id, respondent_id, answer_options_id } = request.params;
+//change to quizzes & quizzes_id
+router.get("/:quizzes_id/responses", (request, response, next) => {
+  const { quizzes_id, respondent_id, answer_options_id } = request.params;
 
-    pool.query(
-      "SELECT * FROM responses WHERE respondent_id=($1) AND answer_options_id=($2)",
-      [respondent_id, answer_options_id],
-      (err, res) => {
-        if (err) return next(err);
-        if (res.rows.length === 0)
-          return response.json({
-            error: true,
-            message: "There is no response found",
-          });
-        response.json(res.rows[0]);
-      }
-    );
-  }
-);
+  pool.query(
+    "SELECT * FROM responses WHERE respondent_id=($1) AND answer_options_id=($2)",
+    [respondent_id, answer_options_id],
+    (err, res) => {
+      if (err) return next(err);
+      if (res.rows.length === 0)
+        return response.json({
+          error: true,
+          message: "There is no response found",
+        });
+      response.json(res.rows[0]);
+    }
+  );
+});
 
 // POST http://www.brushup.com/quizzes/ID/respondents/ID/responses
 
-router.post(
-  "/:quizzes_id/respondents/:respondent_id/responses",
-  (request, response, next) => {
-    const { email, secret } = request.body;
-    const { quizzes_id } = request.params;
+router.post("/:quizzes_id/responses", (request, response, next) => {
+  const { email, secret } = request.body;
+  //validate response based on secret - check to make sure that quiz response has not already been done
+  const { quizzes_id } = request.params;
+  //who is the respondent when the request is made
 
-    pool.query(
-      "INSERT INTO responses (quizzes_id,email, secret) VALUES ($1,$2,$3) RETURNING *",
-      [quizzes_id, email, secret],
-      (err, res) => {
-        if (err) return next(err);
-        response.json(res.rows[0]);
-      }
-    );
-  }
-);
-// PUT http://www.brushup.com/quizzes/ID/respondents/ID/responses/ID
-
-router.put(
-  "/:quizzes_id/respondents/:respondent_id",
-  (request, response, next) => {
-    const { quizzes_id, respondent_id } = request.params;
-    const { email, secret } = request.body;
-
-    pool.query(
-      `UPDATE respondents SET email=($1), secret=($2) WHERE quizzes_id=($3) AND id=($4) RETURNING *`,
-      [email, secret, quizzes_id, respondent_id],
-      (err, res) => {
-        if (err) return next(err);
-        response.json(res.rows[0]);
-      }
-    );
-  }
-);
-// DELETE http://www.brushup.com/quizzes/ID/respondents/ID/responses/ID
-
-router.delete(
-  "/:quizzes_id/respondents/:respondent_id",
-  (request, response, next) => {
-    const { quizzes_id, respondent_id } = request.params;
-    pool.query(
-      "DELETE FROM respondents WHERE quizzes_id=$1 AND id=$2",
-      [quizzes_id, respondent_id],
-      (err, res) => {
-        if (err) return next(err);
-
-        response.status(204).end();
-      }
-    );
-  }
-);
+  pool.query(
+    "INSERT INTO responses (quizzes_id,email, secret) VALUES ($1,$2,$3) RETURNING *",
+    [quizzes_id, email, secret],
+    (err, res) => {
+      if (err) return next(err);
+      response.json(res.rows[0]);
+    }
+  );
+});
 
 module.exports = router;

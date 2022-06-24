@@ -46,9 +46,9 @@ CREATE TABLE respondents (
 CREATE TABLE responses (
   id SERIAL,
   respondent_id INT,
-  answer_options_id INT,
+  quizzes_id INT,
   PRIMARY KEY (id),
   FOREIGN KEY (respondent_id) REFERENCES respondents (id),
-  FOREIGN KEY (answer_options_id) REFERENCES answer_options (id)
+  FOREIGN KEY (quizzes_id) REFERENCES quizzes (id)
 );
 

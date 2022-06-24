@@ -21,8 +21,8 @@ INSERT INTO answer_options(questions_id,correct, answer_text)
 VALUES
 (1, 'true', 'Husky'),
 (1, 'false', 'Nothing'),
-(2, 'true', 'Shiba'),
-(2, 'false', 'Cat');
+(3, 'true', 'Shiba'),
+(3, 'false', 'Cat');
 
 
 INSERT INTO respondents(quizzes_id,email,secret) 
@@ -33,12 +33,12 @@ VALUES
 (2, 'dogchew@tibetan.org', '1099pkp'),
 (3, 'cheerio@generamills.ca', 'thie989');
 
-INSERT INTO responses (respondent_id,answer_options_id) 
+INSERT INTO responses (respondent_id,quizzes_id) 
 VALUES
 (1,1),
 (2,1),
 (3,1),
 (4,1),
 (1,2),
-(2,2),
-(3,2);
+(2,3),
+(3,3);
