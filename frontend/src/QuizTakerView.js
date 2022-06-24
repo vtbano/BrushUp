@@ -21,7 +21,7 @@ const QuizTakerView = ({}) => {
 
   const [answerOptionsSelected, setAnswerOptionsSelected] = useState([]);
   const [countCorrectAnswers, setCountCorrectAnswers] = useState({
-    correct_answers: 1,
+    correct_answers: 0,
   });
 
   const getCurrentQuizTitle = async () => {
@@ -80,7 +80,7 @@ const QuizTakerView = ({}) => {
   }, [activeQuestion]);
 
   const filterAnswerOptions = (answerOptionsSelected) => {
-    if (answerOptionsSelected.every((answer) => answer === true)) {
+    if (answerOptionsSelected.every((answer) => answer === true) === true) {
       setCountCorrectAnswers({
         ...countCorrectAnswers,
         correct_answers: countCorrectAnswers.correct_answers + 1,
@@ -134,7 +134,9 @@ const QuizTakerView = ({}) => {
         </div>
         {endGame ? (
           <div className="quiz-taker-view-end-game-display">
-            {countCorrectAnswers.correct_answers}/{questions.length}
+            <div className="quiz-takeer-view-final-score">
+              {countCorrectAnswers.correct_answers}/{questions.length} Correct
+            </div>
           </div>
         ) : (
           <div className="quiz-taker-view-question-display">

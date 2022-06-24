@@ -368,3 +368,9 @@ footer {
   background-color: #fab3bd;
   border: 1px solid #ff2442;
 }
+
+.quiz-takeer-view-final-score {
+  color: #3db2ff;
+  font-size: 4em;
+  font-weight: 500;
+}
