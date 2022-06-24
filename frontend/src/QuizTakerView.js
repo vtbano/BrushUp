@@ -9,20 +9,12 @@ const QuizTakerView = ({}) => {
   const [answerOptions, setAnswerOptions] = useState([]);
   const [activeQuestion, setActiveQuestion] = useState(null);
   const [correctOptionsCount, setCorrectOptionsCount] = useState(null);
-  const [optionSelectedCount, setOptionSelectedCount] = useState({ count: 1 });
-  const [currentQuestionsIndex, setCurrentQuestionsIndex] = useState({
-    index: 0,
-  });
-  const [currentQuestionNum, setCurrentQuestionNum] = useState({
-    question_number: 1,
-  });
-
+  const [optionSelectedCount, setOptionSelectedCount] = useState(1);
+  const [currentQuestionsIndex, setCurrentQuestionsIndex] = useState(0);
+  const [currentQuestionNum, setCurrentQuestionNum] = useState(1);
   const [endGame, setEndGame] = useState(false);
-
   const [answerOptionsSelected, setAnswerOptionsSelected] = useState([]);
-  const [countCorrectAnswers, setCountCorrectAnswers] = useState({
-    correct_answers: 0,
-  });
+  const [countCorrectAnswers, setCountCorrectAnswers] = useState(0);
 
   const getCurrentQuizTitle = async () => {
     const response = await fetch(`/quizzes/${id}`);
@@ -37,9 +29,7 @@ const QuizTakerView = ({}) => {
       return a.id - b.id;
     });
     setQuestions(activeQuizQuestionsSorted);
-    setActiveQuestion(activeQuizQuestionsSorted[currentQuestionsIndex.index]);
-    console.log("CurrentQuestionIndex", currentQuestionsIndex.index);
-    // console.log("Actuve quiz questions **", activeQuizQuestions);
+    setActiveQuestion(activeQuizQuestionsSorted[currentQuestionsIndex]);
   };
 
   const getAnswerOptions = async () => {
@@ -57,16 +47,10 @@ const QuizTakerView = ({}) => {
       console.log("Correct Options", correctOptions.length);
     } else if (activeAnswerOptions.length === 0) {
       setActiveQuestion(null);
-      setOptionSelectedCount({ count: 1 });
-      setActiveQuestion(questions[currentQuestionsIndex.index + 1]);
-      setCurrentQuestionsIndex({
-        ...currentQuestionsIndex,
-        index: currentQuestionsIndex.index + 1,
-      });
-      setCurrentQuestionNum({
-        ...currentQuestionNum,
-        question_number: currentQuestionNum.question_number + 1,
-      });
+      setOptionSelectedCount(1);
+      setActiveQuestion(questions[currentQuestionsIndex + 1]);
+      setCurrentQuestionsIndex(currentQuestionsIndex + 1);
+      setCurrentQuestionNum(currentQuestionNum + 1);
     }
   };
 
@@ -81,27 +65,18 @@ const QuizTakerView = ({}) => {
 
   const filterAnswerOptions = (answerOptionsSelected) => {
     if (answerOptionsSelected.every((answer) => answer === true) === true) {
-      setCountCorrectAnswers({
-        ...countCorrectAnswers,
-        correct_answers: countCorrectAnswers.correct_answers + 1,
-      });
+      setCountCorrectAnswers(countCorrectAnswers + 1);
       console.log("Count Correct Answers:", countCorrectAnswers);
     }
   };
 
   const goNextQuestion = (correctOptionsCount, optionSelectedCount) => {
-    if (correctOptionsCount === optionSelectedCount.count) {
+    if (correctOptionsCount === optionSelectedCount) {
       setTimeout(() => {
-        setOptionSelectedCount({ count: 1 });
-        setActiveQuestion(questions[currentQuestionsIndex.index + 1]);
-        setCurrentQuestionsIndex({
-          ...currentQuestionsIndex,
-          index: currentQuestionsIndex.index + 1,
-        });
-        setCurrentQuestionNum({
-          ...currentQuestionNum,
-          question_number: currentQuestionNum.question_number + 1,
-        });
+        setOptionSelectedCount(1);
+        setActiveQuestion(questions[currentQuestionsIndex + 1]);
+        setCurrentQuestionsIndex(currentQuestionsIndex + 1);
+        setCurrentQuestionNum(currentQuestionNum + 1);
         filterAnswerOptions(answerOptionsSelected);
         setAnswerOptionsSelected([]);
       }, 3000);
@@ -114,8 +89,9 @@ const QuizTakerView = ({}) => {
     correctOptionsCount,
     optionSelectedCount
   ) => {
-    if (currentQuestionNum.question_number === questions.length) {
+    if (currentQuestionNum === questions.length) {
       setTimeout(() => {
+        filterAnswerOptions(answerOptionsSelected);
         setEndGame(true);
       }, 3000);
     } else {
@@ -129,13 +105,13 @@ const QuizTakerView = ({}) => {
         <div className="quiz-taker-view-question-title">
           {quizTitle}
           <div className="questions-count">
-            {currentQuestionNum.question_number}/{questions.length} questions
+            {currentQuestionNum}/{questions.length} questions
           </div>
         </div>
         {endGame ? (
           <div className="quiz-taker-view-end-game-display">
             <div className="quiz-takeer-view-final-score">
-              {countCorrectAnswers.correct_answers}/{questions.length} Correct
+              {countCorrectAnswers}/{questions.length} Correct
             </div>
           </div>
         ) : (

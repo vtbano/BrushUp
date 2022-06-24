@@ -32,10 +32,7 @@ const SingleAnswerOptionQuizTakerView = ({
           className={cssAnswerOption}
           onClick={() => {
             showAnswerSelectionResult(correct);
-            setOptionSelectedCount({
-              ...optionSelectedCount,
-              count: optionSelectedCount.count + 1,
-            });
+            setOptionSelectedCount(optionSelectedCount + 1);
             console.log(optionSelectedCount);
             setAnswerOptionsSelected([...answerOptionsSelected, correct]);
             showEndGameDislay();
