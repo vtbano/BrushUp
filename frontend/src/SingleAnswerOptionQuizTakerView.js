@@ -7,8 +7,9 @@ const SingleAnswerOptionQuizTakerView = ({
   answer_text,
   optionSelectedCount,
   setOptionSelectedCount,
-  // goNextQuestion,
   showEndGameDislay,
+  answerOptionsSelected,
+  setAnswerOptionsSelected,
 }) => {
   const [cssAnswerOption, setCssAnswerOption] = useState(
     "quiz-taker-single-answer-option"
@@ -20,7 +21,10 @@ const SingleAnswerOptionQuizTakerView = ({
       return setCssAnswerOption("quiz-taker-single-answer-option-false");
     }
   };
-
+  // console.log(
+  //   "see timely update of answerOptionsSelected Array",
+  //   answerOptionsSelected
+  // );
   return (
     <>
       <div className="quiz-taker-answer-options-container">
@@ -33,7 +37,7 @@ const SingleAnswerOptionQuizTakerView = ({
               count: optionSelectedCount.count + 1,
             });
             console.log(optionSelectedCount);
-            // goNextQuestion();
+            setAnswerOptionsSelected([...answerOptionsSelected, correct]);
             showEndGameDislay();
           }}
         >

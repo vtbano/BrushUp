@@ -19,7 +19,10 @@ const QuizTakerView = ({}) => {
 
   const [endGame, setEndGame] = useState(false);
 
-  //figure out a way to determine when EndGame should be true
+  const [answerOptionsSelected, setAnswerOptionsSelected] = useState([]);
+  const [countCorrectAnswers, setCountCorrectAnswers] = useState({
+    correct_answers: 1,
+  });
 
   const getCurrentQuizTitle = async () => {
     const response = await fetch(`/quizzes/${id}`);
@@ -76,6 +79,16 @@ const QuizTakerView = ({}) => {
     if (activeQuestion !== null) getAnswerOptions();
   }, [activeQuestion]);
 
+  const filterAnswerOptions = (answerOptionsSelected) => {
+    if (answerOptionsSelected.every((answer) => answer === true)) {
+      setCountCorrectAnswers({
+        ...countCorrectAnswers,
+        correct_answers: countCorrectAnswers.correct_answers + 1,
+      });
+      console.log("Count Correct Answers:", countCorrectAnswers);
+    }
+  };
+
   const goNextQuestion = (correctOptionsCount, optionSelectedCount) => {
     if (correctOptionsCount === optionSelectedCount.count) {
       setTimeout(() => {
@@ -89,6 +102,8 @@ const QuizTakerView = ({}) => {
           ...currentQuestionNum,
           question_number: currentQuestionNum.question_number + 1,
         });
+        filterAnswerOptions(answerOptionsSelected);
+        setAnswerOptionsSelected([]);
       }, 3000);
     }
   };
@@ -119,7 +134,7 @@ const QuizTakerView = ({}) => {
         </div>
         {endGame ? (
           <div className="quiz-taker-view-end-game-display">
-            /{questions.length}
+            {countCorrectAnswers.correct_answers}/{questions.length}
           </div>
         ) : (
           <div className="quiz-taker-view-question-display">
@@ -136,10 +151,6 @@ const QuizTakerView = ({}) => {
                     {...answer}
                     optionSelectedCount={optionSelectedCount}
                     setOptionSelectedCount={setOptionSelectedCount}
-                    // goNextQuestion={() =>
-                    //   goNextQuestion(correctOptionsCount, optionSelectedCount)
-                    // }
-
                     showEndGameDislay={() =>
                       showEndGameDislay(
                         currentQuestionNum,
@@ -148,34 +159,14 @@ const QuizTakerView = ({}) => {
                         optionSelectedCount
                       )
                     }
+                    answerOptionsSelected={answerOptionsSelected}
+                    setAnswerOptionsSelected={setAnswerOptionsSelected}
                   />
                 );
               })}
             </div>
           </div>
         )}
-        {/* <div className="quiz-taker-view-question-display">
-          <div className="quiz-taker-view-question-label">Question:</div>
-          <div className="quiz-taker-view-question">
-            {activeQuestion !== null && activeQuestion.question_text}
-          </div>
-          <div className="quiz-taker-view-answer-options">
-            {answerOptions.map((answer) => {
-              return (
-                <SingleAnswerOptionQuizTakerView
-                  answerId={id}
-                  key={answer.id}
-                  {...answer}
-                  optionSelectedCount={optionSelectedCount}
-                  setOptionSelectedCount={setOptionSelectedCount}
-                  goNextQuestion={() =>
-                    goNextQuestion(correctOptionsCount, optionSelectedCount)
-                  }
-                />
-              );
-            })}
-          </div>
-        </div> */}
 
         <div>
           <button type="submit" className="btn-save-question">
