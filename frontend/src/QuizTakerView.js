@@ -13,6 +13,9 @@ const QuizTakerView = ({}) => {
   const [currentQuestionsIndex, setCurrentQuestionsIndex] = useState({
     index: 0,
   });
+  const [currentQuestionNum, setCurrentQuestionNum] = useState({
+    question_number: 1,
+  });
 
   //make function goNextQuestion --this function should set the next question to be the next activeQuestion
   //function must count how many correct answers there are in an active Question and there should be a counter
@@ -56,6 +59,10 @@ const QuizTakerView = ({}) => {
         ...currentQuestionsIndex,
         index: currentQuestionsIndex.index + 1,
       });
+      setCurrentQuestionNum({
+        ...currentQuestionNum,
+        question_number: currentQuestionNum.question_number + 1,
+      });
     }
   };
 
@@ -77,6 +84,10 @@ const QuizTakerView = ({}) => {
           ...currentQuestionsIndex,
           index: currentQuestionsIndex.index + 1,
         });
+        setCurrentQuestionNum({
+          ...currentQuestionNum,
+          question_number: currentQuestionNum.question_number + 1,
+        });
       }, 3000);
     }
   };
@@ -85,7 +96,9 @@ const QuizTakerView = ({}) => {
       <section className="quiz-taker-view-sect">
         <div className="quiz-taker-view-question-title">
           {quizTitle}
-          <div className="questions-count">{questions.length} questions</div>
+          <div className="questions-count">
+            {currentQuestionNum.question_number}/{questions.length} questions
+          </div>
         </div>
         <div className="quiz-taker-view-question-display">
           <div className="quiz-taker-view-question-label">Question:</div>
