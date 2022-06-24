@@ -17,8 +17,9 @@ const QuizTakerView = ({}) => {
     question_number: 1,
   });
 
-  //make function goNextQuestion --this function should set the next question to be the next activeQuestion
-  //function must count how many correct answers there are in an active Question and there should be a counter
+  const [endGame, setEndGame] = useState(false);
+
+  //figure out a way to determine when EndGame should be true
 
   const getCurrentQuizTitle = async () => {
     const response = await fetch(`/quizzes/${id}`);
@@ -100,7 +101,33 @@ const QuizTakerView = ({}) => {
             {currentQuestionNum.question_number}/{questions.length} questions
           </div>
         </div>
-        <div className="quiz-taker-view-question-display">
+        {endGame ? (
+          <div>TRUE</div>
+        ) : (
+          <div className="quiz-taker-view-question-display">
+            <div className="quiz-taker-view-question-label">Question:</div>
+            <div className="quiz-taker-view-question">
+              {activeQuestion !== null && activeQuestion.question_text}
+            </div>
+            <div className="quiz-taker-view-answer-options">
+              {answerOptions.map((answer) => {
+                return (
+                  <SingleAnswerOptionQuizTakerView
+                    answerId={id}
+                    key={answer.id}
+                    {...answer}
+                    optionSelectedCount={optionSelectedCount}
+                    setOptionSelectedCount={setOptionSelectedCount}
+                    goNextQuestion={() =>
+                      goNextQuestion(correctOptionsCount, optionSelectedCount)
+                    }
+                  />
+                );
+              })}
+            </div>
+          </div>
+        )}
+        {/* <div className="quiz-taker-view-question-display">
           <div className="quiz-taker-view-question-label">Question:</div>
           <div className="quiz-taker-view-question">
             {activeQuestion !== null && activeQuestion.question_text}
@@ -121,7 +148,7 @@ const QuizTakerView = ({}) => {
               );
             })}
           </div>
-        </div>
+        </div> */}
 
         <div>
           <button type="submit" className="btn-save-question">
