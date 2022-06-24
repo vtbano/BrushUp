@@ -54,7 +54,7 @@ const QuizTakerView = ({}) => {
       console.log("Correct Options", correctOptions.length);
     } else if (activeAnswerOptions.length === 0) {
       setActiveQuestion(null);
-      setOptionSelectedCount({ count: 0 });
+      setOptionSelectedCount({ count: 1 });
       setActiveQuestion(questions[currentQuestionsIndex.index + 1]);
       setCurrentQuestionsIndex({
         ...currentQuestionsIndex,
@@ -92,6 +92,22 @@ const QuizTakerView = ({}) => {
       }, 3000);
     }
   };
+
+  const showEndGameDislay = (
+    currentQuestionNum,
+    questions,
+    correctOptionsCount,
+    optionSelectedCount
+  ) => {
+    if (currentQuestionNum.question_number === questions.length) {
+      setTimeout(() => {
+        setEndGame(true);
+      }, 3000);
+    } else {
+      goNextQuestion(correctOptionsCount, optionSelectedCount);
+    }
+  };
+
   return (
     <>
       <section className="quiz-taker-view-sect">
@@ -102,7 +118,9 @@ const QuizTakerView = ({}) => {
           </div>
         </div>
         {endGame ? (
-          <div>TRUE</div>
+          <div className="quiz-taker-view-end-game-display">
+            /{questions.length}
+          </div>
         ) : (
           <div className="quiz-taker-view-question-display">
             <div className="quiz-taker-view-question-label">Question:</div>
@@ -118,8 +136,17 @@ const QuizTakerView = ({}) => {
                     {...answer}
                     optionSelectedCount={optionSelectedCount}
                     setOptionSelectedCount={setOptionSelectedCount}
-                    goNextQuestion={() =>
-                      goNextQuestion(correctOptionsCount, optionSelectedCount)
+                    // goNextQuestion={() =>
+                    //   goNextQuestion(correctOptionsCount, optionSelectedCount)
+                    // }
+
+                    showEndGameDislay={() =>
+                      showEndGameDislay(
+                        currentQuestionNum,
+                        questions,
+                        correctOptionsCount,
+                        optionSelectedCount
+                      )
                     }
                   />
                 );

@@ -93,7 +93,8 @@ footer {
 }
 
 .add-question-display,
-.quiz-taker-view-question-display {
+.quiz-taker-view-question-display,
+.quiz-taker-view-end-game-display {
   display: grid;
   width: 70em;
   height: auto;
