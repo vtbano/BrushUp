@@ -116,6 +116,11 @@ const QuizTakerView = ({}) => {
           </div>
         ) : (
           <div className="quiz-taker-view-question-display">
+            <img
+              alt={activeQuestion !== null && activeQuestion.question_text}
+              src={activeQuestion !== null && activeQuestion.image}
+              className="quiz-taker-question-image"
+            />
             <div className="quiz-taker-view-question-label">Question:</div>
             <div className="quiz-taker-view-question">
               {activeQuestion !== null && activeQuestion.question_text}

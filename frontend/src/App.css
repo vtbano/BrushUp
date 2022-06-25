@@ -369,8 +369,17 @@ footer {
   border: 1px solid #ff2442;
 }
 
+.quiz-taker-question-image {
+  max-height: 10em;
+  width: fit-content;
+  justify-self: center;
+}
+
 .quiz-takeer-view-final-score {
   color: #3db2ff;
   font-size: 4em;
   font-weight: 500;
+  justify-self: center;
+  margin-top: 2em;
+  margin-bottom: 2em;
 }

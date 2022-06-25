@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 
 const SingleAnswerOptionQuizTakerView = ({
-  answerId,
-  questions_id,
+  // answerId,
+  // questions_id,
   correct,
   answer_text,
   optionSelectedCount,
@@ -21,10 +21,7 @@ const SingleAnswerOptionQuizTakerView = ({
       return setCssAnswerOption("quiz-taker-single-answer-option-false");
     }
   };
-  // console.log(
-  //   "see timely update of answerOptionsSelected Array",
-  //   answerOptionsSelected
-  // );
+
   return (
     <>
       <div className="quiz-taker-answer-options-container">
