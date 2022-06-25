@@ -15,6 +15,7 @@ const QuizTakerView = ({}) => {
   const [endGame, setEndGame] = useState(false);
   const [answerOptionsSelected, setAnswerOptionsSelected] = useState([]);
   const [countCorrectAnswers, setCountCorrectAnswers] = useState(0);
+  const [imageActive, setImageActive] = useState(false);
 
   const getCurrentQuizTitle = async () => {
     const response = await fetch(`/quizzes/${id}`);
@@ -30,6 +31,11 @@ const QuizTakerView = ({}) => {
     });
     setQuestions(activeQuizQuestionsSorted);
     setActiveQuestion(activeQuizQuestionsSorted[currentQuestionsIndex]);
+    console.log(
+      "check if image:",
+      activeQuizQuestionsSorted[currentQuestionsIndex].image
+    );
+    checkIfImageforQuestion(activeQuizQuestionsSorted[currentQuestionsIndex]);
   };
 
   const getAnswerOptions = async () => {
@@ -63,6 +69,19 @@ const QuizTakerView = ({}) => {
     if (activeQuestion !== null) getAnswerOptions();
   }, [activeQuestion]);
 
+  const checkIfImageforQuestion = (currentQuestion) => {
+    if (currentQuestion.image !== "") {
+      setImageActive(true);
+      console.log("Current Image True", currentQuestion.image);
+    } else if (currentQuestion.image === null) {
+      setImageActive(false);
+      console.log("Current Image False", currentQuestion.image);
+    } else {
+      setImageActive(false);
+      console.log("Current Image False", currentQuestion.image);
+    }
+  };
+
   const filterAnswerOptions = (answerOptionsSelected) => {
     if (answerOptionsSelected.every((answer) => answer === true) === true) {
       setCountCorrectAnswers(countCorrectAnswers + 1);
@@ -75,6 +94,7 @@ const QuizTakerView = ({}) => {
       setTimeout(() => {
         setOptionSelectedCount(1);
         setActiveQuestion(questions[currentQuestionsIndex + 1]);
+        checkIfImageforQuestion(questions[currentQuestionsIndex + 1]);
         setCurrentQuestionsIndex(currentQuestionsIndex + 1);
         setCurrentQuestionNum(currentQuestionNum + 1);
         filterAnswerOptions(answerOptionsSelected);
@@ -116,11 +136,16 @@ const QuizTakerView = ({}) => {
           </div>
         ) : (
           <div className="quiz-taker-view-question-display">
-            <img
-              alt={activeQuestion !== null && activeQuestion.question_text}
-              src={activeQuestion !== null && activeQuestion.image}
-              className="quiz-taker-question-image"
-            />
+            {imageActive ? (
+              <img
+                alt={activeQuestion !== null && activeQuestion.question_text}
+                src={activeQuestion !== null && activeQuestion.image}
+                className="quiz-taker-question-image"
+              />
+            ) : (
+              <div></div>
+            )}
+
             <div className="quiz-taker-view-question-label">Question:</div>
             <div className="quiz-taker-view-question">
               {activeQuestion !== null && activeQuestion.question_text}
