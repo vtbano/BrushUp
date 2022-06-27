@@ -1,6 +1,7 @@
 const { Router } = require("express");
 const pool = require("../db");
 const router = Router();
+const { generateSecrets } = require("./utils.js");
 
 //QUIZ ROUTES
 router.get("/", (request, response, next) => {
@@ -263,12 +264,11 @@ router.get(
     );
   }
 );
-//*******/
+
 router.post("/:quizzes_id/respondents", (request, response, next) => {
   const { email } = request.body;
-  //create secret function
   const { quizzes_id } = request.params;
-
+  const secret = generateSecrets();
   pool.query(
     "INSERT INTO respondents (quizzes_id,email, secret) VALUES ($1,$2,$3) RETURNING *",
     [quizzes_id, email, secret],
@@ -296,15 +296,34 @@ router.delete(
 
 //RESPONSES
 
-// GET http://www.brushup.com/quizzes/ID/respondents/ID/answer_options/ID
+//OLD VERSION
+// router.get(
+//   "/:quizzes_id/respondents/:respondent_id/responses",
+//   (request, response, next) => {
+//     const { respondent_id, quizzes_id } = request.params;
 
-//change to quizzes & quizzes_id
+//     pool.query(
+//       "SELECT * FROM responses WHERE respondent_id=($1) AND quizzes_id=($2)",
+//       [respondent_id, quizzes_id],
+//       (err, res) => {
+//         if (err) return next(err);
+//         if (res.rows.length === 0)
+//           return response.json({
+//             error: true,
+//             message: "There is no response found",
+//           });
+//         response.json(res.rows[0]);
+//       }
+//     );
+//   }
+// );
+
 router.get("/:quizzes_id/responses", (request, response, next) => {
-  const { quizzes_id, respondent_id, answer_options_id } = request.params;
+  const { quizzes_id } = request.params;
 
   pool.query(
-    "SELECT * FROM responses WHERE respondent_id=($1) AND answer_options_id=($2)",
-    [respondent_id, answer_options_id],
+    "SELECT * FROM responses WHERE quizzes_id=$1",
+    [quizzes_id],
     (err, res) => {
       if (err) return next(err);
       if (res.rows.length === 0)
@@ -312,7 +331,7 @@ router.get("/:quizzes_id/responses", (request, response, next) => {
           error: true,
           message: "There is no response found",
         });
-      response.json(res.rows[0]);
+      response.json(res.rows);
     }
   );
 });
@@ -320,19 +339,56 @@ router.get("/:quizzes_id/responses", (request, response, next) => {
 // POST http://www.brushup.com/quizzes/ID/respondents/ID/responses
 
 router.post("/:quizzes_id/responses", (request, response, next) => {
-  const { email, secret } = request.body;
+  const { id, email, secret } = request.body;
   //validate response based on secret - check to make sure that quiz response has not already been done
   const { quizzes_id } = request.params;
   //who is the respondent when the request is made
 
   pool.query(
-    "INSERT INTO responses (quizzes_id,email, secret) VALUES ($1,$2,$3) RETURNING *",
-    [quizzes_id, email, secret],
+    "SELECT secret FROM respondents WHERE quizzes_id=$1 AND secret=$2 ",
+    [quizzes_id, secret],
     (err, res) => {
       if (err) return next(err);
-      response.json(res.rows[0]);
+      if (res.rows.length === 0)
+        return response.json({
+          error: true,
+          message: "There is no response found",
+        });
+      const verifySecretAuth = response.json(res.rows[0].secret);
+
+      if (verifySecretAuth === secret) {
+        const verifyIfResSubmitted = pool.query(
+          "SELECT * FROM responses JOIN respondents ON respondents.quizzes_id=responses.quizzes_id WHERE responses.quizzes_id=$1 AND respondents.secret=$2 AND responses.respondent_id=$3",
+          [quizzes_id, secret, id],
+          (err, res) => {
+            if (err) return next(err);
+            if (res.rows.length === 0)
+              return response.json({
+                error: true,
+                message: "There is no response found",
+              });
+            response.json(res.rows);
+          }
+        );
+      }
     }
   );
+
+  // if (verifyIfResSubmitted.secret !== secret) {
+  //   pool.query(
+  //     "INSERT INTO responses (quizzes_id,email, secret) VALUES ($1,$2,$3) RETURNING *",
+  //     [quizzes_id, email, secret],
+  //     (err, res) => {
+  //       if (err) return next(err);
+  //       response.json(res.rows[0]);
+  //     }
+  //   );
+  // } else {
+  //   return response.json({
+  //     error: true,
+  //     message: "There is no response found",
+  //   });
+  // }
 });
 
 module.exports = router;
