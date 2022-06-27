@@ -94,7 +94,8 @@ footer {
 
 .add-question-display,
 .quiz-taker-view-question-display,
-.quiz-taker-view-end-game-display {
+.quiz-taker-view-end-game-display,
+.recipient-list-and-email-display {
   display: grid;
   width: 70em;
   height: auto;
@@ -276,6 +277,10 @@ footer {
   background-color: #ff2442;
 }
 
+.btn-add-recipient {
+  background-color: #3db2ff;
+  color: #ffffff;
+}
 .create-quiz-title,
 .edit-quiz-title,
 .question-shelf-quiz-title {
@@ -287,7 +292,8 @@ footer {
   padding-bottom: 0.5em;
 }
 
-.questions-count {
+.questions-count,
+.share-display-quiz-title {
   font-size: 0.5em;
 }
 
@@ -297,7 +303,8 @@ footer {
 }
 
 .add-question-title,
-.quiz-taker-view-question-title {
+.quiz-taker-view-question-title,
+.share-title-banner {
   background-color: #3db2ff;
   color: #ffffff;
   text-align: center;

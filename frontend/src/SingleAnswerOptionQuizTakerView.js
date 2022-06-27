@@ -1,8 +1,6 @@
 import React, { useState } from "react";
 
 const SingleAnswerOptionQuizTakerView = ({
-  // answerId,
-  // questions_id,
   correct,
   answer_text,
   optionSelectedCount,

@@ -11,6 +11,7 @@ import NavigationButtons from "./NavigationButtons";
 import Footer from "./Footer";
 import Error from "./Error";
 import QuizTakerView from "./QuizTakerView";
+import ShareQuiz from "./ShareQuiz";
 
 const App = () => {
   const [creator, setCreator] = useState({
@@ -96,9 +97,8 @@ const App = () => {
                 />
               }
             />
-            <Route path="quizzes/:id" element={<QuizTakerView />}>
-              {" "}
-            </Route>
+            <Route path="quizzes/:id" element={<QuizTakerView />} />
+            <Route path="quizzes/:id/share" element={<ShareQuiz />} />
 
             <Route path="*" element={Error} />
           </Routes>
