@@ -49,6 +49,7 @@ CREATE TABLE responses (
   quizzes_id INT,
   PRIMARY KEY (id),
   FOREIGN KEY (respondent_id) REFERENCES respondents (id),
-  FOREIGN KEY (quizzes_id) REFERENCES quizzes (id)
+  FOREIGN KEY (quizzes_id) REFERENCES quizzes (id),
+  UNIQUE (respondent_id,quizzes_id)
 );
 

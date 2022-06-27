@@ -339,56 +339,33 @@ router.get("/:quizzes_id/responses", (request, response, next) => {
 // POST http://www.brushup.com/quizzes/ID/respondents/ID/responses
 
 router.post("/:quizzes_id/responses", (request, response, next) => {
-  const { id, email, secret } = request.body;
-  //validate response based on secret - check to make sure that quiz response has not already been done
+  const { email, secret } = request.body;
   const { quizzes_id } = request.params;
-  //who is the respondent when the request is made
 
   pool.query(
-    "SELECT secret FROM respondents WHERE quizzes_id=$1 AND secret=$2 ",
+    "SELECT * FROM respondents WHERE quizzes_id=$1 AND secret=$2 ",
     [quizzes_id, secret],
     (err, res) => {
       if (err) return next(err);
       if (res.rows.length === 0)
         return response.json({
           error: true,
-          message: "There is no response found",
+          message: "There is no match for quiz id and secret found",
         });
-      const verifySecretAuth = response.json(res.rows[0].secret);
 
-      if (verifySecretAuth === secret) {
-        const verifyIfResSubmitted = pool.query(
-          "SELECT * FROM responses JOIN respondents ON respondents.quizzes_id=responses.quizzes_id WHERE responses.quizzes_id=$1 AND respondents.secret=$2 AND responses.respondent_id=$3",
-          [quizzes_id, secret, id],
+      if (res.rows.length >= 1) {
+        const respondent = res.rows[0];
+        pool.query(
+          "INSERT INTO responses (respondent_id,quizzes_id) VALUES ($1,$2) RETURNING *",
+          [respondent.id, quizzes_id],
           (err, res) => {
             if (err) return next(err);
-            if (res.rows.length === 0)
-              return response.json({
-                error: true,
-                message: "There is no response found",
-              });
-            response.json(res.rows);
+            response.json(res.rows[0]);
           }
         );
       }
     }
   );
-
-  // if (verifyIfResSubmitted.secret !== secret) {
-  //   pool.query(
-  //     "INSERT INTO responses (quizzes_id,email, secret) VALUES ($1,$2,$3) RETURNING *",
-  //     [quizzes_id, email, secret],
-  //     (err, res) => {
-  //       if (err) return next(err);
-  //       response.json(res.rows[0]);
-  //     }
-  //   );
-  // } else {
-  //   return response.json({
-  //     error: true,
-  //     message: "There is no response found",
-  //   });
-  // }
 });
 
 module.exports = router;
