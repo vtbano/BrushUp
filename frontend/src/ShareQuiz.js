@@ -1,12 +1,25 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import SingleRespondent from "./SingleRespondent";
 
-const ShareQuiz = ({}) => {
+const ShareQuiz = () => {
   const { id } = useParams();
   const [emailEntered, setEmailEntered] = useState("");
+  const [respondentList, setRespondentList] = useState([]);
   const navigate = useNavigate();
 
-  const handleAddRecipient = async (e) => {
+  const getCurrentRespondents = async () => {
+    const response = await fetch(`/quizzes/${id}/respondents`);
+    const responseGetCurrentRespondents = await response.json();
+    setRespondentList(responseGetCurrentRespondents);
+  };
+
+  useEffect(() => {
+    getCurrentRespondents();
+  }, [emailEntered]);
+
+  //HANDLE ADD RESPONDENT
+  const handleAddRespondent = async (e) => {
     e.preventDefault();
 
     const submitRecipient = await fetch(`/quizzes/${id}/respondents`, {
@@ -21,18 +34,31 @@ const ShareQuiz = ({}) => {
     console.log(getRecipientSubmitted);
   };
 
+  //HANDLE DELETE RESPONDENT
+
   return (
     <>
-      <section className="add-recipient-sect">
+      <section className="add-respondent-sect">
         <div className="share-title-banner">
           SHARE
           <div className="share-display-quiz-title">Quiz Title ***</div>
         </div>
-        <div className="recipient-list-and-email-display">
+        <div className="share-display">
+          <div className="recipient-list-and-email-display">
+            {respondentList.map((respondent) => {
+              return (
+                <SingleRespondent
+                  quizzes_id={id}
+                  key={respondent.id}
+                  {...respondent}
+                />
+              );
+            })}
+          </div>
           <form>
             <input
               type="text"
-              className="add-question-input"
+              className="add-recipient-input"
               placeholder="Type Recipient Email"
               value={emailEntered}
               onChange={(e) => {
@@ -45,7 +71,7 @@ const ShareQuiz = ({}) => {
           <button
             type="submit"
             className="btn-add-recipient"
-            onClick={handleAddRecipient}
+            onClick={handleAddRespondent}
           >
             Add Recipient
           </button>

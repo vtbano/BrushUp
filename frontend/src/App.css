@@ -77,7 +77,8 @@ footer {
 
 .quiz-shelf-display,
 .question-shelf-display,
-.answer-options-display {
+.answer-options-display,
+.share-display {
   display: inline-flex;
   flex-wrap: wrap;
   justify-content: center;
@@ -280,6 +281,12 @@ footer {
 .btn-add-recipient {
   background-color: #3db2ff;
   color: #ffffff;
+  font-size: 1em;
+  padding: 0.25rem 1rem;
+  margin-top: 1em;
+  margin-right: 1rem;
+  border-radius: 25px;
+  border: none;
 }
 .create-quiz-title,
 .edit-quiz-title,
@@ -322,7 +329,8 @@ footer {
   font-size: 1em;
 }
 
-.add-question-input {
+.add-question-input,
+.add-recipient-input {
   width: 66em;
   height: 4em;
   font-size: 1em;
@@ -331,6 +339,11 @@ footer {
   color: #3db2ff;
   padding-left: 1em;
   padding-right: 1em;
+}
+
+.add-recipient-input {
+  width: 30em;
+  height: 2em;
 }
 
 .correct-answer-option-input,

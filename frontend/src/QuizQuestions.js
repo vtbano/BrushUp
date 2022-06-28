@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 import SingleQuestion from "./SingleQuestion";
 
 const QuizQuestions = ({
@@ -71,7 +72,6 @@ const QuizQuestions = ({
   const handleQuestionEdit = async (questionId) => {
     const response = await fetch(`/quizzes/${id}/questions/${questionId}`);
     const responseGetQuestion = await response.json();
-    // setActiveQuestion(responseGetQuestion);
     setQuestionPlaceholder(responseGetQuestion.question_text);
     setImagePlaceholder(responseGetQuestion.image);
     setQuestionText(responseGetQuestion.question_text);
@@ -116,11 +116,13 @@ const QuizQuestions = ({
 
           <div className="share-quiz-container">
             {/* when empty it display's a greyed out share img */}
-            <img
-              src="../img/icons8-ToShare-96.png"
-              alt="Share button"
-              className="share-button"
-            />
+            <Link to={`/quizzes/${id}/share`}>
+              <img
+                src="../../img/icons8-clickToShare-96.png"
+                alt="Share button"
+                className="share-button"
+              />
+            </Link>
           </div>
         </div>
       </section>
