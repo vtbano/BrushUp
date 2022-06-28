@@ -414,3 +414,11 @@ footer {
   margin-top: 2em;
   margin-bottom: 2em;
 }
+
+.single-url-link {
+  border: 1px solid #3db2ff;
+  background-color: #cae3f3;
+  font-size: 0.75em;
+  padding: 0.5em;
+  margin-left: 1em;
+}

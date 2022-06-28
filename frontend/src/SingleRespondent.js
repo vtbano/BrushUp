@@ -1,7 +1,4 @@
 import React from "react";
-import DeleteQuiz from "./DeleteQuiz";
-import EditQuiz from "./EditQuiz";
-import { Link } from "react-router-dom";
 
 const SingleRespondent = ({
   id,
@@ -17,7 +14,9 @@ const SingleRespondent = ({
         <span>
           <button onClick={handleRespondentDelete}>x</button>
         </span>
-        <span className="single-quiz-title">{secret}</span>
+        <span className="single-url-link">
+          http://www.brushup.com/quizzes/{quizzes_id}/{secret}
+        </span>
       </div>
     </>
   );
