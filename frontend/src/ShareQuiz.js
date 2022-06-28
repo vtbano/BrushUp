@@ -35,6 +35,16 @@ const ShareQuiz = () => {
   };
 
   //HANDLE DELETE RESPONDENT
+  const handleRespondentDelete = async (respondentId) => {
+    const submitRespondentDelete = await fetch(
+      `/quizzes/${id}/respondents/${respondentId}`,
+      {
+        method: "DELETE",
+      }
+    );
+    console.log(submitRespondentDelete);
+    await getCurrentRespondents();
+  };
 
   return (
     <>
@@ -51,6 +61,9 @@ const ShareQuiz = () => {
                   quizzes_id={id}
                   key={respondent.id}
                   {...respondent}
+                  handleRespondentDelete={() =>
+                    handleRespondentDelete(respondent.id)
+                  }
                 />
               );
             })}
