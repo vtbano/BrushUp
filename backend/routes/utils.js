@@ -14,7 +14,4 @@ const generateSecrets = (email) => {
   return newSecretToOneString;
 };
 
-// console.log("First Line:", generateSecrets(2));
-// console.log("Second Line:", generateSecrets(3));
-
 module.exports = { generateSecrets };

@@ -296,28 +296,6 @@ router.delete(
 
 //RESPONSES
 
-//OLD VERSION
-// router.get(
-//   "/:quizzes_id/respondents/:respondent_id/responses",
-//   (request, response, next) => {
-//     const { respondent_id, quizzes_id } = request.params;
-
-//     pool.query(
-//       "SELECT * FROM responses WHERE respondent_id=($1) AND quizzes_id=($2)",
-//       [respondent_id, quizzes_id],
-//       (err, res) => {
-//         if (err) return next(err);
-//         if (res.rows.length === 0)
-//           return response.json({
-//             error: true,
-//             message: "There is no response found",
-//           });
-//         response.json(res.rows[0]);
-//       }
-//     );
-//   }
-// );
-
 router.get("/:quizzes_id/responses", (request, response, next) => {
   const { quizzes_id } = request.params;
 
