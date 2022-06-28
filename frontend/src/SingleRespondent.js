@@ -3,18 +3,21 @@ import DeleteQuiz from "./DeleteQuiz";
 import EditQuiz from "./EditQuiz";
 import { Link } from "react-router-dom";
 
-const SingleRespondent = ({ id, title, handleDelete }) => {
-  // console.log("TITLE:", title, "QUIZ:", id);
+const SingleRespondent = ({
+  id,
+  quizzes_id,
+  email,
+  secret,
+  handleRespondentDelete,
+}) => {
+  console.log("TITLE:", title, "QUIZ:", id);
 
   return (
     <>
       <div className="single-quiz-row-container">
-        <span className="single-quiz-title">
-          <Link to={`/quizzes/${id}/questions`}> {title}</Link>
-        </span>
+        <span className="single-quiz-title">{email}</span>
         <span>
-          <DeleteQuiz handleDelete={handleDelete} />
-          <EditQuiz id={id} />
+          <button onClick={handleRespondentDelete}>x</button>
         </span>
       </div>
     </>
