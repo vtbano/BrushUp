@@ -6,7 +6,7 @@ const ShareQuiz = () => {
   const { id } = useParams();
   const [emailEntered, setEmailEntered] = useState("");
   const [respondentList, setRespondentList] = useState([]);
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   const getCurrentRespondents = async () => {
     const response = await fetch(`/quizzes/${id}/respondents`);
@@ -16,7 +16,7 @@ const ShareQuiz = () => {
 
   useEffect(() => {
     getCurrentRespondents();
-  }, [emailEntered]);
+  }, []);
 
   //HANDLE ADD RESPONDENT
   const handleAddRespondent = async (e) => {
@@ -31,6 +31,7 @@ const ShareQuiz = () => {
       }),
     });
     const getRecipientSubmitted = await submitRecipient.json();
+    getCurrentRespondents();
     console.log(getRecipientSubmitted);
   };
 
@@ -54,20 +55,20 @@ const ShareQuiz = () => {
           <div className="share-display-quiz-title">Quiz Title ***</div>
         </div>
         <div className="share-display">
-          <div className="recipient-list-and-email-display">
-            {respondentList.map((respondent) => {
-              return (
-                <SingleRespondent
-                  quizzes_id={id}
-                  key={respondent.id}
-                  {...respondent}
-                  handleRespondentDelete={() =>
-                    handleRespondentDelete(respondent.id)
-                  }
-                />
-              );
-            })}
-          </div>
+          {/* <div className="respondent-list-and-email-container "> */}
+          {respondentList.map((respondent) => {
+            return (
+              <SingleRespondent
+                quizzes_id={id}
+                key={respondent.id}
+                {...respondent}
+                handleRespondentDelete={() =>
+                  handleRespondentDelete(respondent.id)
+                }
+              />
+            );
+          })}
+
           <form>
             <input
               type="text"
@@ -79,16 +80,15 @@ const ShareQuiz = () => {
               }}
             />
           </form>
+          {/* </div> */}
         </div>
-        <div>
-          <button
-            type="submit"
-            className="btn-add-recipient"
-            onClick={handleAddRespondent}
-          >
-            Add Recipient
-          </button>
-        </div>
+        <button
+          type="submit"
+          className="btn-add-recipient"
+          onClick={handleAddRespondent}
+        >
+          Add Recipient
+        </button>
       </section>
     </>
   );

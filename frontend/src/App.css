@@ -77,8 +77,7 @@ footer {
 
 .quiz-shelf-display,
 .question-shelf-display,
-.answer-options-display,
-.share-display {
+.answer-options-display {
   display: inline-flex;
   flex-wrap: wrap;
   justify-content: center;
@@ -93,10 +92,16 @@ footer {
   height: 20em;
 }
 
+.share-display {
+  display: grid;
+  /* place-items: center; */
+  width: 70em;
+  height: 20em;
+}
+
 .add-question-display,
 .quiz-taker-view-question-display,
-.quiz-taker-view-end-game-display,
-.recipient-list-and-email-display {
+.quiz-taker-view-end-game-display {
   display: grid;
   width: 70em;
   height: auto;
@@ -134,7 +139,8 @@ footer {
 }
 
 /* must revise  */
-.questions-container {
+.questions-container,
+.respondent-list-and-email-container {
   display: grid;
   border: none;
   width: 35em;
@@ -172,6 +178,10 @@ footer {
 .single-quiz-row-container,
 .single-question-row-container {
   margin-top: 1rem;
+}
+
+.single-respondent-row-container {
+  margin-top: 0.5em;
 }
 
 .create-quiz-label {
@@ -279,6 +289,7 @@ footer {
 }
 
 .btn-add-recipient {
+  display: block;
   background-color: #3db2ff;
   color: #ffffff;
   font-size: 1em;

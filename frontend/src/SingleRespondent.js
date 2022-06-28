@@ -10,15 +10,14 @@ const SingleRespondent = ({
   secret,
   handleRespondentDelete,
 }) => {
-  console.log("TITLE:", title, "QUIZ:", id);
-
   return (
     <>
-      <div className="single-quiz-row-container">
+      <div className="single-respondent-row-container">
         <span className="single-quiz-title">{email}</span>
         <span>
           <button onClick={handleRespondentDelete}>x</button>
         </span>
+        <span className="single-quiz-title">{secret}</span>
       </div>
     </>
   );
