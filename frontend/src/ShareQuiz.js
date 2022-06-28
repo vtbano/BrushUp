@@ -5,6 +5,7 @@ import SingleRespondent from "./SingleRespondent";
 const ShareQuiz = () => {
   const { id } = useParams();
   const [emailEntered, setEmailEntered] = useState("");
+  const [quizTitle, setQuizTitle] = useState("");
   const [respondentList, setRespondentList] = useState([]);
   // const navigate = useNavigate();
 
@@ -14,7 +15,14 @@ const ShareQuiz = () => {
     setRespondentList(responseGetCurrentRespondents);
   };
 
+  const getQuiz = async () => {
+    const submitQuizId = await fetch(`/quizzes/${id}`);
+    const responseGetQuiz = await submitQuizId.json();
+    setQuizTitle(responseGetQuiz.title);
+  };
+
   useEffect(() => {
+    getQuiz();
     getCurrentRespondents();
   }, []);
 
@@ -32,6 +40,7 @@ const ShareQuiz = () => {
     });
     const getRecipientSubmitted = await submitRecipient.json();
     getCurrentRespondents();
+    setEmailEntered("");
     console.log(getRecipientSubmitted);
   };
 
@@ -52,7 +61,7 @@ const ShareQuiz = () => {
       <section className="add-respondent-sect">
         <div className="share-title-banner">
           SHARE
-          <div className="share-display-quiz-title">Quiz Title ***</div>
+          <div className="share-display-quiz-title">{quizTitle}</div>
         </div>
         <div className="share-display">
           {/* <div className="respondent-list-and-email-container "> */}
