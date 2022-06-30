@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useSearchParams, useParams } from "react-router-dom";
 import SingleRespondent from "./SingleRespondent";
 
 const ShareQuiz = () => {
@@ -7,7 +7,7 @@ const ShareQuiz = () => {
   const [emailEntered, setEmailEntered] = useState("");
   const [quizTitle, setQuizTitle] = useState("");
   const [respondentList, setRespondentList] = useState([]);
-  // const navigate = useNavigate();
+  
 
   const getCurrentRespondents = async () => {
     const response = await fetch(`/quizzes/${id}/respondents`);
@@ -64,7 +64,10 @@ const ShareQuiz = () => {
           <div className="share-display-quiz-title">{quizTitle}</div>
         </div>
         <div className="share-display">
-          {/* <div className="respondent-list-and-email-container "> */}
+          <div className="respondent-list-and-email-title-container ">
+            <span>Add Respondent(s)</span>
+            <span>Shareable Link</span>
+          </div>
           {respondentList.map((respondent) => {
             return (
               <SingleRespondent

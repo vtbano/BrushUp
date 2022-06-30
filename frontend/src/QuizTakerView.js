@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useSearchParams, useParams } from "react-router-dom";
 import SingleAnswerOptionQuizTakerView from "./SingleAnswerOptionQuizTakerView";
 
 const QuizTakerView = ({}) => {
@@ -16,6 +16,9 @@ const QuizTakerView = ({}) => {
   const [answerOptionsSelected, setAnswerOptionsSelected] = useState([]);
   const [countCorrectAnswers, setCountCorrectAnswers] = useState(0);
   const [imageActive, setImageActive] = useState(false);
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  const secret = searchParams.get("secret");
 
   const getCurrentQuizTitle = async () => {
     const response = await fetch(`/quizzes/${id}`);
@@ -60,6 +63,20 @@ const QuizTakerView = ({}) => {
     }
   };
 
+  const addRespondent = async (secret) => {
+    const submitRespondent = await fetch(`/${id}/responses`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        quizzes_id: id,
+        secret: secret,
+      }),
+    });
+    const getRespondentSubmitted = await submitRespondent.json();
+  };
+
   useEffect(() => {
     getQuestions();
     getCurrentQuizTitle();
@@ -68,6 +85,19 @@ const QuizTakerView = ({}) => {
   useEffect(() => {
     if (activeQuestion !== null) getAnswerOptions();
   }, [activeQuestion]);
+
+  useEffect(() => {
+    const checkifSecretExists = async () => {
+      const secretCheck = await fetch(`/quizzes/${id}/respondents/${secret}`);
+      const secretResponse = await secretCheck.json();
+      console.log(secretResponse);
+    };
+
+    if (secret) {
+      checkifSecretExists();
+      addRespondent(secret);
+    }
+  }, [secret]);
 
   const checkIfImageforQuestion = (currentQuestion) => {
     if (currentQuestion.image !== "") {

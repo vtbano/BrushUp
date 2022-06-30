@@ -95,8 +95,18 @@ footer {
 .share-display {
   display: grid;
   /* place-items: center; */
+
   width: 70em;
-  height: 20em;
+  min-height: 20em;
+}
+
+.respondent-list-and-email-title-container {
+  display: grid;
+  grid-template-columns: 25em 1fr;
+  color: #3db2ff;
+  font-family: "Roboto", sans-serif;
+  font-weight: 700;
+  margin-left: 0.75em;
 }
 
 .add-question-display,
@@ -181,7 +191,9 @@ footer {
 }
 
 .single-respondent-row-container {
+  display: grid;
   margin-top: 0.5em;
+  grid-template-columns: 25em 1fr;
 }
 
 .create-quiz-label {
@@ -353,6 +365,7 @@ footer {
 }
 
 .add-recipient-input {
+  margin-top: 1em;
   width: 30em;
   height: 2em;
 }
@@ -420,5 +433,11 @@ footer {
   background-color: #cae3f3;
   font-size: 0.75em;
   padding: 0.5em;
+  margin-left: 1em;
+  height: 2em;
+  width: fit-content;
+}
+
+.delete-respondent {
   margin-left: 1em;
 }

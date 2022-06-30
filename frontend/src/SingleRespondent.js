@@ -10,10 +10,16 @@ const SingleRespondent = ({
   return (
     <>
       <div className="single-respondent-row-container">
-        <span className="single-quiz-title">{email}</span>
-        <span>
-          <button onClick={handleRespondentDelete}>x</button>
+        <span className="single-quiz-title">
+          {email}
+          <button
+            className="delete-respondent"
+            onClick={handleRespondentDelete}
+          >
+            x
+          </button>
         </span>
+
         <span className="single-url-link">
           http://www.brushup.com/quizzes/{quizzes_id}/{secret}
         </span>
