@@ -18,6 +18,7 @@ const QuizTakerView = ({}) => {
   const [imageActive, setImageActive] = useState(false);
   const [searchParams, setSearchParams] = useSearchParams();
 
+  //*****/
   const secret = searchParams.get("secret");
 
   const getCurrentQuizTitle = async () => {
@@ -63,6 +64,7 @@ const QuizTakerView = ({}) => {
     }
   };
 
+  //*****/
   const addRespondent = async (secret) => {
     const submitRespondent = await fetch(`/${id}/responses`, {
       method: "POST",
@@ -86,6 +88,7 @@ const QuizTakerView = ({}) => {
     if (activeQuestion !== null) getAnswerOptions();
   }, [activeQuestion]);
 
+  //*****/
   useEffect(() => {
     const checkifSecretExists = async () => {
       const secretCheck = await fetch(`/quizzes/${id}/respondents/${secret}`);
@@ -142,6 +145,7 @@ const QuizTakerView = ({}) => {
       setTimeout(() => {
         filterAnswerOptions(answerOptionsSelected);
         setEndGame(true);
+        //*****/
         addRespondent(secret); //should I add if statement to only trigger this given there is a secret?
       }, 3000);
     } else {

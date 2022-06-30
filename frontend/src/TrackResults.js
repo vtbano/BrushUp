@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { useSearchParams, useParams } from "react-router-dom";
-import SingleRespondent from "./SingleRespondent";
 
 const TrackResults = () => {
   const { id } = useParams();
@@ -32,7 +31,7 @@ const TrackResults = () => {
             <span>Number of Respondents</span>
             <span>Completion</span>
           </div>
-          {respondentList.map((respondent) => {
+          {/* {respondentList.map((respondent) => {
             return (
               <SingleRespondent
                 quizzes_id={id}
@@ -43,7 +42,7 @@ const TrackResults = () => {
                 }
               />
             );
-          })}
+          })} */}
         </div>
       </section>
     </>

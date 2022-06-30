@@ -11,11 +11,13 @@ const NavigationButtons = ({ creator }) => {
           className="nav-button"
         />
       </Link>
-      <img
-        src="../img/icons8-progresspie--96.png"
-        alt="Progress Navigation Button"
-        className="nav-button"
-      />
+      <Link to={`creator/${creator.id}/responses`}>
+        <img
+          src="../img/icons8-progresspie--96.png"
+          alt="Progress Navigation Button"
+          className="nav-button"
+        />
+      </Link>
       <img
         src="../img/icons8-user-96.png"
         alt="move history button"

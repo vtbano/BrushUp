@@ -12,6 +12,7 @@ import Footer from "./Footer";
 import Error from "./Error";
 import QuizTakerView from "./QuizTakerView";
 import ShareQuiz from "./ShareQuiz";
+import TrackResults from "./TrackResults";
 
 const App = () => {
   const [creator, setCreator] = useState({
@@ -99,6 +100,10 @@ const App = () => {
             />
             <Route path="quizzes/:id" element={<QuizTakerView />} />
             <Route path="quizzes/:id/share" element={<ShareQuiz />} />
+            <Route
+              path="creator/:id/responses"
+              element={<TrackResults creator={creator} />}
+            />
 
             <Route path="*" element={Error} />
           </Routes>
