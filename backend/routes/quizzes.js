@@ -317,7 +317,7 @@ router.get("/:quizzes_id/responses", (request, response, next) => {
 // POST http://www.brushup.com/quizzes/ID/respondents/ID/responses
 
 router.post("/:quizzes_id/responses", (request, response, next) => {
-  const { email, secret } = request.body;
+  const { secret } = request.body;
   const { quizzes_id } = request.params;
 
   pool.query(
