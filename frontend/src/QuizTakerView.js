@@ -95,7 +95,6 @@ const QuizTakerView = ({}) => {
 
     if (secret) {
       checkifSecretExists();
-      addRespondent(secret);
     }
   }, [secret]);
 
@@ -143,6 +142,7 @@ const QuizTakerView = ({}) => {
       setTimeout(() => {
         filterAnswerOptions(answerOptionsSelected);
         setEndGame(true);
+        addRespondent(secret); //should I add if statement to only trigger this given there is a secret?
       }, 3000);
     } else {
       goNextQuestion(correctOptionsCount, optionSelectedCount);
