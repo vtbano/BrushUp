@@ -17,6 +17,7 @@ const SingleQuizTrackResult = ({ id, title }) => {
 
   useEffect(() => {
     getNumberOfRespondents();
+    getQuizResponsesComplete();
   }, []);
   return (
     <>

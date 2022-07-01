@@ -118,6 +118,12 @@ footer {
   margin-left: 0.75em;
 }
 
+.track-result-row-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  font-family: "Roboto", sans-serif;
+}
+
 .add-question-display,
 .quiz-taker-view-question-display,
 .quiz-taker-view-end-game-display {
