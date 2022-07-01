@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useSearchParams, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import SingleRespondent from "./SingleRespondent";
 
 const ShareQuiz = () => {
@@ -7,7 +7,6 @@ const ShareQuiz = () => {
   const [emailEntered, setEmailEntered] = useState("");
   const [quizTitle, setQuizTitle] = useState("");
   const [respondentList, setRespondentList] = useState([]);
-  
 
   const getCurrentRespondents = async () => {
     const response = await fetch(`/quizzes/${id}/respondents`);
@@ -92,7 +91,6 @@ const ShareQuiz = () => {
               }}
             />
           </form>
-          {/* </div> */}
         </div>
         <button
           type="submit"

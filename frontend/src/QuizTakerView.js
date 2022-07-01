@@ -77,6 +77,7 @@ const QuizTakerView = ({}) => {
       }),
     });
     const getRespondentSubmitted = await submitRespondent.json();
+    console.log("Respondent Added:", getRespondentSubmitted);
   };
 
   useEffect(() => {
@@ -89,17 +90,17 @@ const QuizTakerView = ({}) => {
   }, [activeQuestion]);
 
   //*****/
-  useEffect(() => {
-    const checkifSecretExists = async () => {
-      const secretCheck = await fetch(`/quizzes/${id}/respondents/${secret}`);
-      const secretResponse = await secretCheck.json();
-      console.log(secretResponse);
-    };
+  // useEffect(() => {
+  //   const checkifSecretExists = async () => {
+  //     const secretCheck = await fetch(`/quizzes/${id}/respondents/${secret}`);
+  //     const secretResponse = await secretCheck.json();
+  //     console.log(secretResponse);
+  //   };
 
-    if (secret) {
-      checkifSecretExists();
-    }
-  }, [secret]);
+  //   if (secret) {
+  //     checkifSecretExists();
+  //   }
+  // }, [secret]);
 
   const checkIfImageforQuestion = (currentQuestion) => {
     if (currentQuestion.image !== "") {
@@ -145,8 +146,9 @@ const QuizTakerView = ({}) => {
       setTimeout(() => {
         filterAnswerOptions(answerOptionsSelected);
         setEndGame(true);
-        //*****/
-        addRespondent(secret); //should I add if statement to only trigger this given there is a secret?
+        if (secret) {
+          addRespondent(secret);
+        }
       }, 3000);
     } else {
       goNextQuestion(correctOptionsCount, optionSelectedCount);

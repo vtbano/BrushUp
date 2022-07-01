@@ -21,7 +21,7 @@ const SingleRespondent = ({
         </span>
 
         <span className="single-url-link">
-          http://www.brushup.com/quizzes/{quizzes_id}/{secret}
+          http://www.brushup.com/quizzes/{quizzes_id}?secret={secret}
         </span>
       </div>
     </>
