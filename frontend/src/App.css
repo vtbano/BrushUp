@@ -100,6 +100,10 @@ footer {
   min-height: 20em;
 }
 
+.track-display {
+  width: 70em;
+}
+
 .respondent-list-and-email-title-container {
   display: grid;
   grid-template-columns: 25em 1fr;
@@ -109,19 +113,35 @@ footer {
   margin-left: 0.75em;
 }
 
-.track-results-subtitle-container {
+.track-results-subtitle-container,
+.track-result-row-container {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   color: #3db2ff;
   font-family: "Roboto", sans-serif;
   font-weight: 700;
   margin-left: 0.75em;
+  margin-bottom: 1em;
 }
 
 .track-result-row-container {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  font-family: "Roboto", sans-serif;
+  font-weight: 300;
+  font-size: 0.8em;
+}
+
+.number-of-respondents-container,
+.quizzes-sent-container {
+  text-decoration: none;
+  color: #3db2ff;
+}
+
+.number-of-respondents-container:hover,
+.quizzes-sent-container:hover {
+  font-weight: 900;
+}
+
+.completion {
+  color: black;
 }
 
 .add-question-display,

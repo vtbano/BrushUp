@@ -4,6 +4,7 @@ import SingleAnswerOptionQuizTakerView from "./SingleAnswerOptionQuizTakerView";
 
 const QuizTakerView = ({}) => {
   const { id } = useParams();
+  const [searchParams, setSearchParams] = useSearchParams();
   const [questions, setQuestions] = useState([]);
   const [quizTitle, setQuizTitle] = useState(null);
   const [answerOptions, setAnswerOptions] = useState([]);
@@ -15,8 +16,8 @@ const QuizTakerView = ({}) => {
   const [endGame, setEndGame] = useState(false);
   const [answerOptionsSelected, setAnswerOptionsSelected] = useState([]);
   const [countCorrectAnswers, setCountCorrectAnswers] = useState(0);
+  const [triggerCorrectAnswerCount, setTriggerCorrectAnswerCount] = useState(0);
   const [imageActive, setImageActive] = useState(false);
-  const [searchParams, setSearchParams] = useSearchParams();
 
   //*****/
   const secret = searchParams.get("secret");
@@ -35,10 +36,10 @@ const QuizTakerView = ({}) => {
     });
     setQuestions(activeQuizQuestionsSorted);
     setActiveQuestion(activeQuizQuestionsSorted[currentQuestionsIndex]);
-    console.log(
-      "check if image:",
-      activeQuizQuestionsSorted[currentQuestionsIndex].image
-    );
+    // console.log(
+    //   "check if image:",
+    //   activeQuizQuestionsSorted[currentQuestionsIndex].image
+    // );
     checkIfImageforQuestion(activeQuizQuestionsSorted[currentQuestionsIndex]);
   };
 
@@ -48,13 +49,13 @@ const QuizTakerView = ({}) => {
     );
     const activeAnswerOptions = await response.json();
     if (activeAnswerOptions.length > 0) {
-      console.log("Active Answer Options:", activeAnswerOptions);
+      // console.log("Active Answer Options:", activeAnswerOptions);
       setAnswerOptions(activeAnswerOptions);
       const correctOptions = activeAnswerOptions.filter((option) => {
         return option.correct === true;
       });
       setCorrectOptionsCount(correctOptions.length);
-      console.log("Correct Options", correctOptions.length);
+      // console.log("Correct Options", correctOptions.length);
     } else if (activeAnswerOptions.length === 0) {
       setActiveQuestion(null);
       setOptionSelectedCount(1);
@@ -88,6 +89,19 @@ const QuizTakerView = ({}) => {
     if (activeQuestion !== null) getAnswerOptions();
   }, [activeQuestion]);
 
+  useEffect(() => {
+    const resultOfAnswerOptionsSelected = answerOptionsSelected.every(
+      (answer) => answer === true
+    );
+    console.log("resultOfAnswerOPtionsSelected", resultOfAnswerOptionsSelected);
+    console.log("answerOPtionsSelected", answerOptionsSelected);
+    if (resultOfAnswerOptionsSelected === true) {
+      setCountCorrectAnswers(countCorrectAnswers + 1);
+    } else if (resultOfAnswerOptionsSelected === false) {
+      return setCountCorrectAnswers(countCorrectAnswers);
+    }
+  }, [triggerCorrectAnswerCount]);
+
   const checkIfImageforQuestion = (currentQuestion) => {
     if (currentQuestion.image !== "") {
       setImageActive(true);
@@ -101,13 +115,6 @@ const QuizTakerView = ({}) => {
     }
   };
 
-  const filterAnswerOptions = (answerOptionsSelected) => {
-    if (answerOptionsSelected.every((answer) => answer === true) === true) {
-      setCountCorrectAnswers(countCorrectAnswers + 1);
-      console.log("Count Correct Answers:", countCorrectAnswers);
-    }
-  };
-
   const goNextQuestion = (correctOptionsCount, optionSelectedCount) => {
     if (correctOptionsCount === optionSelectedCount) {
       setTimeout(() => {
@@ -116,7 +123,7 @@ const QuizTakerView = ({}) => {
         checkIfImageforQuestion(questions[currentQuestionsIndex + 1]);
         setCurrentQuestionsIndex(currentQuestionsIndex + 1);
         setCurrentQuestionNum(currentQuestionNum + 1);
-        filterAnswerOptions(answerOptionsSelected);
+        setTriggerCorrectAnswerCount(triggerCorrectAnswerCount + 1);
         setAnswerOptionsSelected([]);
       }, 3000);
     }
@@ -130,8 +137,8 @@ const QuizTakerView = ({}) => {
   ) => {
     if (currentQuestionNum === questions.length) {
       setTimeout(() => {
-        filterAnswerOptions(answerOptionsSelected);
         setEndGame(true);
+        setTriggerCorrectAnswerCount(triggerCorrectAnswerCount + 1);
         if (secret) {
           addRespondent(secret);
         }

@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate, useParams } from "react-router-dom";
-import { Link } from "react-router-dom";
+import { useNavigate, useParams, Link } from "react-router-dom";
 import SingleQuestion from "./SingleQuestion";
 
 const QuizQuestions = ({

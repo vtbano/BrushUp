@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 
 const SingleQuizTrackResult = ({ id, title }) => {
   const [numberOfRespondents, setNumberOfRespondents] = useState(0);
   const [numberOfResponses, setNumberOfResponses] = useState(0);
+
   const getNumberOfRespondents = async () => {
     const response = await fetch(`/quizzes/${id}/respondents`);
     const responseGetNumberOfRespondents = await response.json();
@@ -23,10 +25,18 @@ const SingleQuizTrackResult = ({ id, title }) => {
     <>
       <div className="track-result-row-container">
         {/* must be 1fr 1fr 1fr */}
-        <div className="quizzes-sent-container">{title}</div>
-        <div className="number-of-respondents-container">
+        <Link
+          className="quizzes-sent-container"
+          to={`/quizzes/${id}/questions`}
+        >
+          {title}
+        </Link>
+        <Link
+          className="number-of-respondents-container"
+          to={`/quizzes/${id}/share`}
+        >
           {numberOfRespondents}
-        </div>
+        </Link>
         <div className="completion">
           {numberOfResponses}/{numberOfRespondents}
         </div>

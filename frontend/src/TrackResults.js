@@ -22,7 +22,7 @@ const TrackResults = () => {
     <>
       <section className="add-respondent-sect">
         <div className="share-title-banner">Track Results</div>
-        <div className="share-display">
+        <div className="track-display">
           <div className="track-results-subtitle-container ">
             <span>Quizzes Sent</span>
             <span>Number of Respondents</span>
