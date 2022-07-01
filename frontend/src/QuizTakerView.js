@@ -65,7 +65,7 @@ const QuizTakerView = ({}) => {
   };
 
   const addRespondent = async (secret) => {
-    const submitRespondent = await fetch(`/${id}/responses`, {
+    const submitRespondent = await fetch(`/quizzes/${id}/responses`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -87,19 +87,6 @@ const QuizTakerView = ({}) => {
   useEffect(() => {
     if (activeQuestion !== null) getAnswerOptions();
   }, [activeQuestion]);
-
-  //*****/
-  // useEffect(() => {
-  //   const checkifSecretExists = async () => {
-  //     const secretCheck = await fetch(`/quizzes/${id}/respondents/${secret}`);
-  //     const secretResponse = await secretCheck.json();
-  //     console.log(secretResponse);
-  //   };
-
-  //   if (secret) {
-  //     checkifSecretExists();
-  //   }
-  // }, [secret]);
 
   const checkIfImageforQuestion = (currentQuestion) => {
     if (currentQuestion.image !== "") {
