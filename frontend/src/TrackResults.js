@@ -1,32 +1,22 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
+import SingleQuizTrackResult from "./SingleQuizTrackResult";
 
-const TrackResults = (creator) => {
+const TrackResults = () => {
   const { id } = useParams();
   const [trackResultQuizzes, setTrackResultQuizzes] = useState([]);
 
   const getQuizzes = async () => {
-    const response = await fetch(url);
+    const response = await fetch(`/creators/${id}/quizzes`);
     const responseQuizzes = await response.json();
-    setQuizzes(responseQuizzes);
+    setTrackResultQuizzes(responseQuizzes);
 
     console.log("All quizzes from specific Creator:", responseQuizzes);
   };
 
-  // const getQuiz = async () => {
-  //   const submitQuizId = await fetch(`/quizzes/${id}`);
-  //   const responseGetQuiz = await submitQuizId.json();
-  //   setQuizTitle(responseGetQuiz.title);
-  // };
-
   useEffect(() => {
     getQuizzes();
   }, []);
-
-  // useEffect(() => {
-  //   getQuiz();
-  //   getCurrentRespondents();
-  // }, []);
 
   return (
     <>
@@ -39,9 +29,9 @@ const TrackResults = (creator) => {
             <span>Completion</span>
           </div>
           <div className="track-results-display">
-            {/* {trackResultQuizzes.map((quiz) => {
-                return <SingleQuizTrackResult key={quiz.id} {...quiz} />;
-              })} */}
+            {trackResultQuizzes.map((quiz) => {
+              return <SingleQuizTrackResult key={quiz.id} {...quiz} />;
+            })}
           </div>
         </div>
       </section>
