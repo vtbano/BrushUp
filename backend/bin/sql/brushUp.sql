@@ -40,7 +40,7 @@ CREATE TABLE respondents (
   email TEXT,
   secret TEXT,
   PRIMARY KEY (id),
-  FOREIGN KEY (quizzes_id) REFERENCES quizzes(id)
+  FOREIGN KEY (quizzes_id) REFERENCES quizzes(id) 
 );
 
 CREATE TABLE responses (
@@ -48,8 +48,8 @@ CREATE TABLE responses (
   respondent_id INT,
   quizzes_id INT,
   PRIMARY KEY (id),
-  FOREIGN KEY (respondent_id) REFERENCES respondents (id),
-  FOREIGN KEY (quizzes_id) REFERENCES quizzes (id),
+  FOREIGN KEY (respondent_id) REFERENCES respondents (id) ON DELETE CASCADE,
+  FOREIGN KEY (quizzes_id) REFERENCES quizzes (id) ON DELETE CASCADE,
   UNIQUE (respondent_id,quizzes_id)
 );
 
