@@ -1,20 +1,27 @@
 import React, { useState, useEffect } from "react";
-import { useSearchParams, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
-const TrackResults = () => {
+const TrackResults = (creator) => {
   const { id } = useParams();
+  const [trackResultQuizzes, setTrackResultQuizzes] = useState([]);
 
-  // const getCurrentRespondents = async () => {
-  //   const response = await fetch(`/quizzes/${id}/respondents`);
-  //   const responseGetCurrentRespondents = await response.json();
-  //   setRespondentList(responseGetCurrentRespondents);
-  // };
+  const getQuizzes = async () => {
+    const response = await fetch(url);
+    const responseQuizzes = await response.json();
+    setQuizzes(responseQuizzes);
+
+    console.log("All quizzes from specific Creator:", responseQuizzes);
+  };
 
   // const getQuiz = async () => {
   //   const submitQuizId = await fetch(`/quizzes/${id}`);
   //   const responseGetQuiz = await submitQuizId.json();
   //   setQuizTitle(responseGetQuiz.title);
   // };
+
+  useEffect(() => {
+    getQuizzes();
+  }, []);
 
   // useEffect(() => {
   //   getQuiz();
@@ -31,18 +38,11 @@ const TrackResults = () => {
             <span>Number of Respondents</span>
             <span>Completion</span>
           </div>
-          {/* {respondentList.map((respondent) => {
-            return (
-              <SingleRespondent
-                quizzes_id={id}
-                key={respondent.id}
-                {...respondent}
-                handleRespondentDelete={() =>
-                  handleRespondentDelete(respondent.id)
-                }
-              />
-            );
-          })} */}
+          <div className="track-results-display">
+            {/* {trackResultQuizzes.map((quiz) => {
+                return <SingleQuizTrackResult key={quiz.id} {...quiz} />;
+              })} */}
+          </div>
         </div>
       </section>
     </>

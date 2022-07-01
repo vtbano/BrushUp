@@ -100,10 +100,7 @@ const App = () => {
             />
             <Route path="quizzes/:id" element={<QuizTakerView />} />
             <Route path="quizzes/:id/share" element={<ShareQuiz />} />
-            <Route
-              path="creator/:id/responses"
-              element={<TrackResults creator={creator} />}
-            />
+            <Route path="creator/:id/responses" element={<TrackResults />} />
 
             <Route path="*" element={Error} />
           </Routes>

@@ -64,7 +64,6 @@ const QuizTakerView = ({}) => {
     }
   };
 
-  //*****/
   const addRespondent = async (secret) => {
     const submitRespondent = await fetch(`/${id}/responses`, {
       method: "POST",
