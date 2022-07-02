@@ -69,7 +69,7 @@ footer {
 
 /* home */
 .book-shelf-girl {
-  background: none;
+  max-width: 100%;
 }
 
 .feature-img {
@@ -78,8 +78,9 @@ footer {
 }
 
 .home-display {
+  padding: 2em;
   display: grid;
-  grid-template-columns: 70% 30%;
+  grid-template-columns: 1fr 25em;
   width: 70em;
   height: 20em;
 }
@@ -286,6 +287,10 @@ footer {
   padding: 0.5em 1.5em;
   border-radius: 20px;
   border: none;
+}
+
+.btn-get-started {
+  margin-top: 2em;
 }
 
 .btn-add-correct-answer,

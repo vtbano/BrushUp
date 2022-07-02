@@ -11,19 +11,20 @@ const Home = ({}) => {
               {
                 "We are constantly learning and sometimes we need a little help recalling all the knowledge we’ve gained. With BrushUp you can create mini quizzes to help you and others recall the knowledge they have tucked away in their memory bookshelf. "
               }
+              <div>
+                <button
+                  type="submit"
+                  className="btn-get-started"
+                  // onClick={handleSubmit}
+                >
+                  GET STARTED
+                </button>
+              </div>
             </div>
-            <button
-              type="submit"
-              className="btn-get-started"
-              // onClick={handleSubmit}
-            >
-              GET STARTED
-            </button>
           </div>
           <div>
-            {" "}
             <img
-              src="../img/undraw_Bookshelves.png"
+              src="../img/Bookshelf.png"
               alt="Girl looking at bookshelf"
               className="book-shelf-girl"
             />
