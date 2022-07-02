@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "./App.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Home from "./Home";
 import CreatorsLogin from "./CreatorsLogin";
 import Quizzes from "./Quizzes";
 import CreateQuiz from "./CreateQuiz";
@@ -56,6 +57,7 @@ const App = () => {
         </header>
         <section className="page-body-main">
           <Routes>
+            <Route path="/" element={<Home />} />
             <Route
               path="creators"
               element={<CreatorsLogin setCreator={setCreator} />}

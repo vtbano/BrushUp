@@ -99,6 +99,17 @@ const ShareQuiz = () => {
         >
           Add Recipient
         </button>
+        <div className="share-link-container">
+          <div className="share-general-link">
+            If you would like to share the link to your quiz without tracking
+            completion
+            <div>
+              <span>Share this link: </span>
+              {`http://localhost:3001/quizzes/${id}`}
+              {/* {`http://www.brushup.com/quizzes/${id}`} */}
+            </div>
+          </div>
+        </div>
       </section>
     </>
   );

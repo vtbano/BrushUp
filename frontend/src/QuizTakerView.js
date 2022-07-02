@@ -162,6 +162,12 @@ const QuizTakerView = ({}) => {
             <div className="quiz-takeer-view-final-score">
               {countCorrectAnswers}/{questions.length} Correct
             </div>
+            <div className="share-general-link">
+              Copy the link to
+              <span> share </span>this quiz:
+              <span> {`http://localhost:3001/quizzes/${id}`} </span>
+              {/* {`http://www.brushup.com/quizzes/${id}`} */}
+            </div>
           </div>
         ) : (
           <div className="quiz-taker-view-question-display">

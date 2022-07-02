@@ -66,6 +66,24 @@ footer {
 .creator-welcome {
   text-align: center;
 }
+
+/* home */
+.book-shelf-girl {
+  background: none;
+}
+
+.feature-img {
+  width: 15em;
+  height: 15em;
+}
+
+.home-display {
+  display: grid;
+  grid-template-columns: 70% 30%;
+  width: 70em;
+  height: 20em;
+}
+
 .quiz-shelf-title {
   background-color: #ffb830;
   color: #ffffff;
@@ -90,6 +108,12 @@ footer {
   place-items: center;
   width: 70em;
   height: 20em;
+}
+
+.features-display {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  width: 70em;
 }
 
 .share-display {
@@ -159,13 +183,32 @@ footer {
   width: 35em;
   height: 20em;
   display: grid;
-  place-items: center;
+  /* place-items: center; */
 }
 
 .share-quiz-container {
   border: none;
 }
 
+/* .share-link-container {
+  display: grid;
+} */
+
+.share-general-link {
+  margin-top: 1em;
+  color: #3db2ff;
+  background-color: #d1e4f0;
+  font-family: "Roboto", sans-serif;
+  font-weight: 300;
+  font-size: 0.75em;
+  padding: 1em;
+  width: 30em;
+  place-self: center;
+}
+
+.share-general-link span {
+  font-weight: 500;
+}
 .quizzes-container {
   display: grid;
   border: 1px solid #3db2ff;
@@ -235,7 +278,8 @@ footer {
   margin-bottom: 0;
 }
 
-.btn-create-quiz {
+.btn-create-quiz,
+.btn-get-started {
   background-color: #ffb830;
   color: #ffffff;
   font-size: 1em;
@@ -401,7 +445,7 @@ footer {
 
 .add-recipient-input {
   margin-top: 1em;
-  width: 30em;
+  width: 22em;
   height: 2em;
 }
 
