@@ -75,14 +75,27 @@ footer {
 .feature-img {
   width: 15em;
   height: 15em;
+  border: 1em solid #ffb830;
 }
 
 .home-display {
   padding: 2em;
   display: grid;
-  grid-template-columns: 1fr 25em;
+  grid-template-columns: 30em 15em 25em;
   width: 70em;
   height: 20em;
+}
+
+.home-summary {
+  text-align: center;
+}
+
+.home-summary-first-paragraph {
+  margin-bottom: 2em;
+}
+
+.home-summary-second-paragraph span {
+  font-weight: 900;
 }
 
 .quiz-shelf-title {
@@ -115,8 +128,14 @@ footer {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   width: 70em;
+  justify-items: center;
 }
 
+.features-display div {
+  font-family: "Roboto", sans-serif;
+  font-size: 1.5em;
+  text-align: center;
+}
 .share-display {
   display: grid;
   /* place-items: center; */

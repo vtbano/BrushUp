@@ -7,21 +7,24 @@ const Home = ({}) => {
       <section className="home-sect">
         <div className="home-display">
           <div className="home-summary">
-            <div>
-              {
-                "We are constantly learning and sometimes we need a little help recalling all the knowledge we’ve gained. With BrushUp you can create mini quizzes to help you and others recall the knowledge they have tucked away in their memory bookshelf. "
-              }
-              <div>
-                <button
-                  type="submit"
-                  className="btn-get-started"
-                  // onClick={handleSubmit}
-                >
-                  GET STARTED
-                </button>
-              </div>
+            <div className="home-summary-first-paragraph">
+              We are constantly learning and sometimes we need a little help
+              recalling all the knowledge we’ve gained.
             </div>
+            <div className="home-summary-second-paragraph">
+              With <span>BrushUp</span> you can create mini quizzes to help you
+              and others recall the knowledge they have tucked away in their
+              memory bookshelf.
+            </div>
+            <button
+              type="submit"
+              className="btn-get-started"
+              // onClick={handleSubmit}
+            >
+              GET STARTED
+            </button>
           </div>
+          <div></div>
           <div>
             <img
               src="../img/Bookshelf.png"
@@ -46,6 +49,11 @@ const Home = ({}) => {
             alt="A horizontal bar graph chart"
             className="feature-img"
           />
+        </div>
+        <div className="features-display">
+          <div> CREATE</div>
+          <div>SHARE</div>
+          <div>TRACK</div>
         </div>
       </section>
     </>
