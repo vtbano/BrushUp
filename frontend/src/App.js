@@ -28,21 +28,9 @@ const App = () => {
   );
   const [questionText, setQuestionText] = useState("");
   const [imageUrl, setImageUrl] = useState("");
+  const [userNavBar, setUserNavBar] = useState(false);
 
   return (
-    // <BrowserRouter>
-    //   <Routes>
-    //     <Route path="/" element={<App />}>
-    //       <Route path="register" element={<CreatorsLogin />} />
-    //       <Route path="quizzes" element={<Quizzes />} />
-    //       <Route path="quizzes/create" element={<CreateQuiz />} />
-    //       <Route path="quizzes/:id/edit" element={<EditQuizTitle />} />
-    //       <Route path="quizzes/:id/questions" element={<QuizQuestions />} />
-    //       <Route path="quizzes/:id/questions/add" element={<AddQuestion />} />
-    //     </Route>
-    //   </Routes>
-    // </BrowserRouter>
-
     <BrowserRouter>
       <div className="page-body">
         <header className="page-body-header">
@@ -52,7 +40,7 @@ const App = () => {
             <span className="title-bold">UP</span>
           </div>
           <div className="navigation-options">
-            <NavigationButtons creator={creator} />
+            <NavigationButtons creator={creator} userNavBar={userNavBar} />
           </div>
         </header>
         <section className="page-body-main">

@@ -1,8 +1,19 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-const NavigationButtons = ({ creator }) => {
+const NavigationButtons = ({ creator, userNavBar }) => {
   return (
+    //   {userNavBar? ():(
+    // <span className="navigation-buttons">
+    //     <Link to={`/quizzes`}>
+    //      <button>LOGIN</button>
+    //     </Link>
+    //     <Link to={`/quizzes`}>
+    //      <button>GET STARTED</button>
+    //     </Link>
+    //     </span>
+    //   )}
+
     <span className="navigation-buttons">
       <Link to={`/quizzes`}>
         <img

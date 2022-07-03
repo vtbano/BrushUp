@@ -73,12 +73,13 @@ footer {
 }
 
 .feature-img {
-  width: 15em;
-  height: 15em;
-  border: 1em solid #ffb830;
+  width: 10em;
+  height: 10em;
+  border: 0.75em solid #ffb830;
 }
 
 .home-display {
+  margin-top: 2em;
   padding: 2em;
   display: grid;
   grid-template-columns: 30em 15em 25em;
@@ -88,6 +89,7 @@ footer {
 
 .home-summary {
   text-align: center;
+  font-size: 1em;
 }
 
 .home-summary-first-paragraph {
@@ -133,12 +135,11 @@ footer {
 
 .features-display div {
   font-family: "Roboto", sans-serif;
-  font-size: 1.5em;
+  font-size: 1.25em;
   text-align: center;
 }
 .share-display {
   display: grid;
-  /* place-items: center; */
 
   width: 70em;
   min-height: 20em;
