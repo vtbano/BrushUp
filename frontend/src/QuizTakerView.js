@@ -16,7 +16,6 @@ const QuizTakerView = ({}) => {
   const [endGame, setEndGame] = useState(false);
   const [answerOptionsSelected, setAnswerOptionsSelected] = useState([]);
   const [countCorrectAnswers, setCountCorrectAnswers] = useState(0);
-  const [triggerCorrectAnswerCount, setTriggerCorrectAnswerCount] = useState(0);
   const [imageActive, setImageActive] = useState(false);
 
   //*****/
@@ -90,17 +89,17 @@ const QuizTakerView = ({}) => {
   }, [activeQuestion]);
 
   useEffect(() => {
-    const resultOfAnswerOptionsSelected = answerOptionsSelected.every(
-      (answer) => answer === true
-    );
-    console.log("resultOfAnswerOPtionsSelected", resultOfAnswerOptionsSelected);
-    console.log("answerOPtionsSelected", answerOptionsSelected);
-    if (resultOfAnswerOptionsSelected === true) {
-      setCountCorrectAnswers(countCorrectAnswers + 1);
-    } else if (resultOfAnswerOptionsSelected === false) {
-      return setCountCorrectAnswers(countCorrectAnswers);
+    if (answerOptionsSelected.length === 0) {
+      setCountCorrectAnswers(countCorrectAnswers);
+    } else if (answerOptionsSelected.length >= 1) {
+      const resultOfAnswerOptionsSelected = answerOptionsSelected.every(
+        (answer) => answer === true
+      );
+      if (resultOfAnswerOptionsSelected === true) {
+        setCountCorrectAnswers(countCorrectAnswers + 1);
+      }
     }
-  }, [triggerCorrectAnswerCount]);
+  }, [currentQuestionNum]);
 
   const checkIfImageforQuestion = (currentQuestion) => {
     if (currentQuestion.image !== "") {
@@ -123,7 +122,6 @@ const QuizTakerView = ({}) => {
         checkIfImageforQuestion(questions[currentQuestionsIndex + 1]);
         setCurrentQuestionsIndex(currentQuestionsIndex + 1);
         setCurrentQuestionNum(currentQuestionNum + 1);
-        setTriggerCorrectAnswerCount(triggerCorrectAnswerCount + 1);
         setAnswerOptionsSelected([]);
       }, 3000);
     }
@@ -138,7 +136,6 @@ const QuizTakerView = ({}) => {
     if (currentQuestionNum === questions.length) {
       setTimeout(() => {
         setEndGame(true);
-        setTriggerCorrectAnswerCount(triggerCorrectAnswerCount + 1);
         if (secret) {
           addRespondent(secret);
         }
