@@ -208,7 +208,7 @@ footer {
   width: 35em;
   height: 20em;
   display: grid;
-  /* place-items: center; */
+  place-items: center;
 }
 
 .share-quiz-container {

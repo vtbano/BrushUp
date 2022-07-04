@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from "react";
 import SingleQuiz from "./SingleQuiz";
+import SingleQuizWithResponse from "./SingleQuizWithResponse";
 import { Link } from "react-router-dom";
 
 const Quizzes = ({ creator }) => {
   const { id, username } = creator;
   const url = `/creators/1/quizzes`; //set for testing- DONT Change until Create Login is setup
   const [quizzes, setQuizzes] = useState([]);
+  const [quizShared, setQuizShared] = useState(true);
 
   const getQuizzes = async () => {
     const response = await fetch(url);
@@ -57,13 +59,25 @@ const Quizzes = ({ creator }) => {
           <div className="quizzes-container-name">
             Shared Quizzes
             <div className="share-container">
-              {/* when empty it display's a greyed out share img */}
-
-              <img
-                src="../img/icons8-noShareFade-96(1).png"
-                alt="Greyed-out share button"
-                className="greyed-share-button"
-              />
+              {quizShared ? (
+                <div className="quizzes-single-quiz-container">
+                  {quizzes.map((quiz) => {
+                    return (
+                      <SingleQuizWithResponse
+                        key={quiz.id}
+                        {...quiz}
+                        setQuizShared={setQuizShared}
+                      />
+                    );
+                  })}
+                </div>
+              ) : (
+                <img
+                  src="../img/icons8-noShareFade-96(1).png"
+                  alt="Greyed-out share button"
+                  className="greyed-share-button"
+                />
+              )}
             </div>
           </div>
         </div>
