@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 
 const Login = () => {
-  const [userEmailEntered, setUserEmailEntered] = useState("");
+  const [userEntered, setUserEntered] = useState("");
   const [userPasswordEntered, setUserPasswordEntered] = useState("");
 
   // const getCurrentRespondents = async () => {
@@ -54,9 +54,9 @@ const Login = () => {
                   type="text"
                   className="login-and-register-form-input"
                   placeholder="Type email"
-                  value={userEmailEntered}
+                  value={userEntered}
                   onChange={(e) => {
-                    setUserEmailEntered(e.target.value);
+                    setUserEntered(e.target.value);
                   }}
                 />
               </div>

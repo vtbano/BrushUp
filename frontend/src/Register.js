@@ -1,8 +1,12 @@
 import React, { useState, useEffect } from "react";
 
 const Register = () => {
+  const [userEntered, setUserEntered] = useState("");
   const [userEmailEntered, setUserEmailEntered] = useState("");
   const [userPasswordEntered, setUserPasswordEntered] = useState("");
+  const [userConfirmPasswordEntered, setUserConfirmPasswordEntered] = useState(
+    ""
+  );
 
   // const getCurrentRespondents = async () => {
   //   const response = await fetch(`/quizzes/${id}/respondents`);
@@ -21,8 +25,8 @@ const Register = () => {
   //   getCurrentRespondents();
   // }, []);
 
-  //HANDLE USER CHECK
-  const handleUserCheck = async (e) => {
+  //HANDLE USER REGISTER
+  const handleUserRegister = async (e) => {
     e.preventDefault();
 
     const submitRecipient = await fetch(`/quizzes/${id}/respondents`, {
@@ -42,12 +46,24 @@ const Register = () => {
   return (
     <>
       <section className="add-respondent-sect">
-        <div className="login-and-register-banner">LOGIN</div>
+        <div className="login-and-register-banner">REGISTER</div>
         <div className="login-and-register-display">
           <div className="google-sign-in-container ">GOOGLE LOGIN</div>
           <div className="or-divider">OR</div>
           <div className="login-form">
             <form>
+              <div>
+                <span className="login-and-register-form-title">Username</span>
+                <input
+                  type="text"
+                  className="login-and-register-form-input"
+                  placeholder="Type email"
+                  value={userEntered}
+                  onChange={(e) => {
+                    setUserEntered(e.target.value);
+                  }}
+                />
+              </div>
               <div>
                 <span className="login-and-register-form-title">Username</span>
                 <input
@@ -72,13 +88,25 @@ const Register = () => {
                   }}
                 />
               </div>
+              <div>
+                <span className="login-and-register-form-title">Password</span>
+                <input
+                  type="text"
+                  className="login-and-register-form-input"
+                  placeholder="Confirm password"
+                  value={userConfirmPasswordEntered}
+                  onChange={(e) => {
+                    setUserConfirmPasswordEntered(e.target.value);
+                  }}
+                />
+              </div>
             </form>
             <button
               type="submit"
-              className="btn-login"
+              className="btn-register"
               onClick={handleUserCheck}
             >
-              Login
+              Register
             </button>
           </div>
         </div>
