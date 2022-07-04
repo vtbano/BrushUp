@@ -14,6 +14,8 @@ import Error from "./Error";
 import QuizTakerView from "./QuizTakerView";
 import ShareQuiz from "./ShareQuiz";
 import TrackResults from "./TrackResults";
+import Login from "./Login";
+import Register from "./Register";
 
 const App = () => {
   const [creator, setCreator] = useState({
@@ -45,7 +47,7 @@ const App = () => {
         </header>
         <section className="page-body-main">
           <Routes>
-            <Route path="/" element={<Home />} />
+            <Route path="/" element={<Login />} />
             <Route
               path="creators"
               element={<CreatorsLogin setCreator={setCreator} />}

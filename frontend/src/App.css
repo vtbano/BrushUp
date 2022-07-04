@@ -275,7 +275,8 @@ footer {
 .correct-answers-container,
 .wrong-answers-container,
 .quiz-taker-view-question,
-.quiz-taker-view-question-label {
+.quiz-taker-view-question-label,
+.login-and-register-form-title {
   color: #3db2ff;
   font-weight: 500;
   margin: 1em;
@@ -297,6 +298,20 @@ footer {
   display: grid;
   margin-top: 0.5em;
   grid-template-columns: 25em 1fr;
+}
+
+.google-sign-in-container {
+  display: grid;
+  place-items: center;
+}
+.or-divider {
+  padding-top: 2em;
+  font-size: 2em;
+  font-weight: 900;
+  color: #3db2ff;
+}
+.login-form {
+  display: grid;
 }
 
 .create-quiz-label {
@@ -349,15 +364,25 @@ footer {
 .btn-save-quiz,
 .btn-save-question,
 .btn-save-question,
-.btn-savePlusAdd-question,
-.btn-login,
-.btn-register {
+.btn-savePlusAdd-question {
   background-color: #4caf50;
   color: #ffffff;
   font-size: 1.5em;
   padding: 0.5rem 2.5rem;
   border-radius: 25px;
   border: none;
+}
+
+.btn-login,
+.btn-register {
+  background-color: #4caf50;
+  color: #ffffff;
+  font-size: 1em;
+  margin: 1em;
+  padding: 0.5rem 2rem;
+  border-radius: 25px;
+  border: none;
+  place-self: center;
 }
 
 .btn-update-quiz {
@@ -476,10 +501,15 @@ footer {
   padding-right: 1em;
 }
 
-.add-recipient-input,
-.login-and-register-form-input {
+.add-recipient-input {
   margin-top: 1em;
   width: 22em;
+  height: 2em;
+}
+
+.login-and-register-form-input {
+  margin-top: 1em;
+  width: 15em;
   height: 2em;
 }
 

@@ -26,29 +26,29 @@ const Register = () => {
   // }, []);
 
   //HANDLE USER REGISTER
-  const handleUserRegister = async (e) => {
-    e.preventDefault();
+  // const handleUserRegister = async (e) => {
+  //   e.preventDefault();
 
-    const submitRecipient = await fetch(`/quizzes/${id}/respondents`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        quizzes_id: id,
-        email: emailEntered,
-      }),
-    });
-    const getRecipientSubmitted = await submitRecipient.json();
-    getCurrentRespondents();
-    setEmailEntered("");
-    console.log(getRecipientSubmitted);
-  };
+  //   const submitRecipient = await fetch(`/quizzes/${id}/respondents`, {
+  //     method: "POST",
+  //     headers: { "Content-Type": "application/json" },
+  //     body: JSON.stringify({
+  //       quizzes_id: id,
+  //       email: emailEntered,
+  //     }),
+  //   });
+  //   const getRecipientSubmitted = await submitRecipient.json();
+  //   getCurrentRespondents();
+  //   setEmailEntered("");
+  //   console.log(getRecipientSubmitted);
+  // };
 
   return (
     <>
       <section className="add-respondent-sect">
         <div className="login-and-register-banner">REGISTER</div>
         <div className="login-and-register-display">
-          <div className="google-sign-in-container ">GOOGLE LOGIN</div>
+          <div className="google-sign-in-container">GOOGLE LOGIN</div>
           <div className="or-divider">OR</div>
           <div className="login-form">
             <form>
@@ -104,7 +104,7 @@ const Register = () => {
             <button
               type="submit"
               className="btn-register"
-              onClick={handleUserCheck}
+              // onClick={handleUserCheck}
             >
               Register
             </button>
