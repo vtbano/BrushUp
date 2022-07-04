@@ -138,11 +138,15 @@ footer {
   font-size: 1.25em;
   text-align: center;
 }
-.share-display {
+.share-display,
+.login-and-register-display {
   display: grid;
-
   width: 70em;
   min-height: 20em;
+}
+
+.login-and-register-display {
+  grid-template-columns: 30em 10em 30em;
 }
 
 .track-display {
@@ -345,7 +349,9 @@ footer {
 .btn-save-quiz,
 .btn-save-question,
 .btn-save-question,
-.btn-savePlusAdd-question {
+.btn-savePlusAdd-question,
+.btn-login,
+.btn-register {
   background-color: #4caf50;
   color: #ffffff;
   font-size: 1.5em;
@@ -438,7 +444,8 @@ footer {
 
 .add-question-title,
 .quiz-taker-view-question-title,
-.share-title-banner {
+.share-title-banner,
+.login-and-register-banner {
   background-color: #3db2ff;
   color: #ffffff;
   text-align: center;
@@ -457,7 +464,8 @@ footer {
 }
 
 .add-question-input,
-.add-recipient-input {
+.add-recipient-input,
+.login-and-register-form-input {
   width: 66em;
   height: 4em;
   font-size: 1em;
@@ -468,7 +476,8 @@ footer {
   padding-right: 1em;
 }
 
-.add-recipient-input {
+.add-recipient-input,
+.login-and-register-form-input {
   margin-top: 1em;
   width: 22em;
   height: 2em;

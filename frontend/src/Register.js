@@ -1,32 +1,28 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
-import SingleRespondent from "./SingleRespondent";
 
-const ShareQuiz = () => {
-  const { id } = useParams();
-  const [emailEntered, setEmailEntered] = useState("");
-  const [quizTitle, setQuizTitle] = useState("");
-  const [respondentList, setRespondentList] = useState([]);
+const Register = () => {
+  const [userEmailEntered, setUserEmailEntered] = useState("");
+  const [userPasswordEntered, setUserPasswordEntered] = useState("");
 
-  const getCurrentRespondents = async () => {
-    const response = await fetch(`/quizzes/${id}/respondents`);
-    const responseGetCurrentRespondents = await response.json();
-    setRespondentList(responseGetCurrentRespondents);
-  };
+  // const getCurrentRespondents = async () => {
+  //   const response = await fetch(`/quizzes/${id}/respondents`);
+  //   const responseGetCurrentRespondents = await response.json();
+  //   setRespondentList(responseGetCurrentRespondents);
+  // };
 
-  const getQuiz = async () => {
-    const submitQuizId = await fetch(`/quizzes/${id}`);
-    const responseGetQuiz = await submitQuizId.json();
-    setQuizTitle(responseGetQuiz.title);
-  };
+  // const getQuiz = async () => {
+  //   const submitQuizId = await fetch(`/quizzes/${id}`);
+  //   const responseGetQuiz = await submitQuizId.json();
+  //   setQuizTitle(responseGetQuiz.title);
+  // };
 
-  useEffect(() => {
-    getQuiz();
-    getCurrentRespondents();
-  }, []);
+  // useEffect(() => {
+  //   getQuiz();
+  //   getCurrentRespondents();
+  // }, []);
 
-  //HANDLE ADD RESPONDENT
-  const handleAddRespondent = async (e) => {
+  //HANDLE USER CHECK
+  const handleUserCheck = async (e) => {
     e.preventDefault();
 
     const submitRecipient = await fetch(`/quizzes/${id}/respondents`, {
@@ -43,71 +39,47 @@ const ShareQuiz = () => {
     console.log(getRecipientSubmitted);
   };
 
-  //HANDLE DELETE RESPONDENT
-  const handleRespondentDelete = async (respondentId) => {
-    const submitRespondentDelete = await fetch(
-      `/quizzes/${id}/respondents/${respondentId}`,
-      {
-        method: "DELETE",
-      }
-    );
-    console.log(submitRespondentDelete);
-    await getCurrentRespondents();
-  };
-
   return (
     <>
       <section className="add-respondent-sect">
-        <div className="share-title-banner">
-          SHARE
-          <div className="share-display-quiz-title">{quizTitle}</div>
-        </div>
-        <div className="share-display">
-          <div className="respondent-list-and-email-title-container ">
-            <span>Add Respondent(s)</span>
-            <span>Shareable Link</span>
-          </div>
-          {respondentList.map((respondent) => {
-            return (
-              <SingleRespondent
-                quizzes_id={id}
-                key={respondent.id}
-                {...respondent}
-                handleRespondentDelete={() =>
-                  handleRespondentDelete(respondent.id)
-                }
-              />
-            );
-          })}
-
-          <form>
-            <input
-              type="text"
-              className="add-recipient-input"
-              placeholder="Type Recipient Email"
-              value={emailEntered}
-              onChange={(e) => {
-                setEmailEntered(e.target.value);
-              }}
-            />
-          </form>
-        </div>
-        <button
-          type="submit"
-          className="btn-add-recipient"
-          onClick={handleAddRespondent}
-        >
-          Add Recipient
-        </button>
-        <div className="share-link-container">
-          <div className="share-general-link">
-            If you would like to share the link to your quiz without tracking
-            completion
-            <div>
-              <span>Share this link: </span>
-              {`http://localhost:3001/quizzes/${id}`}
-              {/* {`http://www.brushup.com/quizzes/${id}`} */}
-            </div>
+        <div className="login-and-register-banner">LOGIN</div>
+        <div className="login-and-register-display">
+          <div className="google-sign-in-container ">GOOGLE LOGIN</div>
+          <div className="or-divider">OR</div>
+          <div className="login-form">
+            <form>
+              <div>
+                <span className="login-and-register-form-title">Username</span>
+                <input
+                  type="text"
+                  className="login-and-register-form-input"
+                  placeholder="Type email"
+                  value={userEmailEntered}
+                  onChange={(e) => {
+                    setUserEmailEntered(e.target.value);
+                  }}
+                />
+              </div>
+              <div>
+                <span className="login-and-register-form-title">Password</span>
+                <input
+                  type="text"
+                  className="login-and-register-form-input"
+                  placeholder="Type password"
+                  value={userPasswordEntered}
+                  onChange={(e) => {
+                    setUserPasswordEntered(e.target.value);
+                  }}
+                />
+              </div>
+            </form>
+            <button
+              type="submit"
+              className="btn-login"
+              onClick={handleUserCheck}
+            >
+              Login
+            </button>
           </div>
         </div>
       </section>
@@ -115,4 +87,4 @@ const ShareQuiz = () => {
   );
 };
 
-export default ShareQuiz;
+export default Register;
