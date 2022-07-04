@@ -1,5 +1,5 @@
 import React from "react";
-// import { Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const Home = ({}) => {
   return (
@@ -16,13 +16,11 @@ const Home = ({}) => {
               and others recall the knowledge they have tucked away in their
               memory bookshelf.
             </div>
-            <button
-              type="submit"
-              className="btn-get-started"
-              // onClick={handleSubmit}
-            >
-              GET STARTED
-            </button>
+            <Link to="register">
+              <button type="submit" className="btn-get-started">
+                GET STARTED
+              </button>
+            </Link>
           </div>
           <div></div>
           <div>

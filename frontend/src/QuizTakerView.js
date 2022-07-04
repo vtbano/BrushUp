@@ -90,16 +90,18 @@ const QuizTakerView = ({}) => {
 
   useEffect(() => {
     if (answerOptionsSelected.length === 0) {
-      setCountCorrectAnswers(countCorrectAnswers);
+      setCountCorrectAnswers(0);
     } else if (answerOptionsSelected.length >= 1) {
       const resultOfAnswerOptionsSelected = answerOptionsSelected.every(
         (answer) => answer === true
       );
       if (resultOfAnswerOptionsSelected === true) {
-        setCountCorrectAnswers(countCorrectAnswers + 1);
+        setCountCorrectAnswers(
+          (oldCountCorrectAnswers) => oldCountCorrectAnswers + 1
+        );
       }
     }
-  }, [currentQuestionNum]);
+  }, [currentQuestionNum, endGame]);
 
   const checkIfImageforQuestion = (currentQuestion) => {
     if (currentQuestion.image !== "") {
@@ -120,8 +122,12 @@ const QuizTakerView = ({}) => {
         setOptionSelectedCount(1);
         setActiveQuestion(questions[currentQuestionsIndex + 1]);
         checkIfImageforQuestion(questions[currentQuestionsIndex + 1]);
-        setCurrentQuestionsIndex(currentQuestionsIndex + 1);
-        setCurrentQuestionNum(currentQuestionNum + 1);
+        setCurrentQuestionsIndex(
+          (oldCurrentQuestionsIndex) => oldCurrentQuestionsIndex + 1
+        );
+        setCurrentQuestionNum(
+          (oldCurrentQuestionNum) => oldCurrentQuestionNum + 1
+        );
         setAnswerOptionsSelected([]);
       }, 3000);
     }

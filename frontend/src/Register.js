@@ -57,7 +57,7 @@ const Register = () => {
                 <input
                   type="text"
                   className="login-and-register-form-input"
-                  placeholder="Type email"
+                  placeholder="Type username"
                   value={userEntered}
                   onChange={(e) => {
                     setUserEntered(e.target.value);
@@ -65,7 +65,9 @@ const Register = () => {
                 />
               </div>
               <div>
-                <span className="login-and-register-form-title">Username</span>
+                <span className="login-and-register-form-title">
+                  User Email
+                </span>
                 <input
                   type="text"
                   className="login-and-register-form-input"
@@ -89,7 +91,9 @@ const Register = () => {
                 />
               </div>
               <div>
-                <span className="login-and-register-form-title">Password</span>
+                <span className="login-and-register-form-title">
+                  Confirm Password
+                </span>
                 <input
                   type="text"
                   className="login-and-register-form-input"

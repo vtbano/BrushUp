@@ -47,14 +47,14 @@ const App = () => {
         </header>
         <section className="page-body-main">
           <Routes>
-            <Route path="/" element={<Login />} />
-            <Route
+            <Route path="/" element={<Home />} />
+            <Route path="login" element={<Login />} />
+            <Route path="register" element={<Register />} />
+            {/* <Route
               path="creators"
               element={<CreatorsLogin setCreator={setCreator} />}
-            />
-            {/* {activeContainer === "Creators" && (
-            <CreatorsLogin setCreator={setCreator} />
-          )} */}
+            /> */}
+
             <Route path="quizzes" element={<Quizzes creator={creator} />} />
 
             <Route
