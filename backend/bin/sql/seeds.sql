@@ -2,6 +2,7 @@ INSERT INTO creators(username,email,first_name,last_name,password)
 VALUES
 ('Ophie_Husky','ophiehusky@gmail.com','Ophelia','husky','12345'),
 ('Matcha','matchatheShiba@gmail.com','Matcha','Shiba','678910');
+('Whiskey','whiskeytheP@gmail.com','Whiskey','colliespy','898910');
 
 INSERT INTO quizzes(creators_id,title) 
 VALUES 
