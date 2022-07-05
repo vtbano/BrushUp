@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 const SingleQuizWithResponse = ({ id, title, setQuizShared }) => {
   const [showTitle, setShowTitle] = useState(false);
 
-  const getQuizResponsesComplete = async (id) => {
+  const getQuizResponsesComplete = async () => {
     const quizResponses = await fetch(`/quizzes/${id}/responses`);
     const resultOfQuizResponses = await quizResponses.json();
     console.log("SingleQuizWithResponse:", resultOfQuizResponses);
