@@ -40,7 +40,7 @@ CREATE TABLE respondents (
   email TEXT,
   secret TEXT,
   PRIMARY KEY (id),
-  FOREIGN KEY (quizzes_id) REFERENCES quizzes(id) 
+  FOREIGN KEY (quizzes_id) REFERENCES quizzes(id) ON DELETE CASCADE
 );
 
 CREATE TABLE responses (

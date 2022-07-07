@@ -5,17 +5,16 @@ import { Link } from "react-router-dom";
 
 const Quizzes = ({ creator }) => {
   const { id, username } = creator;
-  const url = `/creators/3/quizzes`; //set for testing- DONT Change until Create Login is setup
   const [quizzes, setQuizzes] = useState([]);
   const [quizShared, setQuizShared] = useState(false);
 
   const getQuizzes = async () => {
-    const response = await fetch(url);
+    const response = await fetch(`/creators/${id}/quizzes`);
     const responseQuizzes = await response.json();
+    console.log("All quizzes from specific Creator:", responseQuizzes);
     if (responseQuizzes.length >= 1) {
       setQuizzes(responseQuizzes);
       setQuizShared(true);
-      console.log("All quizzes from specific Creator:", responseQuizzes);
     }
   };
 
