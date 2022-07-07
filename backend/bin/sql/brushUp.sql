@@ -5,7 +5,8 @@ CREATE TABLE creators (
   first_name TEXT,
   last_name TEXT,
   password TEXT,
-  PRIMARY KEY (id)
+  PRIMARY KEY (id),
+   UNIQUE (username,email)
 );
 
 CREATE TABLE quizzes (
