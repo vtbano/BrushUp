@@ -201,7 +201,6 @@ footer {
   height: auto;
 }
 
-.share-container,
 .share-quiz-container {
   border: 1px solid #3db2ff;
   flex: 0 1 400px;
@@ -234,7 +233,8 @@ footer {
 .share-general-link span {
   font-weight: 500;
 }
-.quizzes-container {
+.quizzes-container,
+.share-container {
   display: grid;
   border: 1px solid #3db2ff;
   flex: 0 1 400px;

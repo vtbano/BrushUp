@@ -24,7 +24,6 @@ const SingleQuizTrackResult = ({ id, title }) => {
   return (
     <>
       <div className="track-result-row-container">
-        {/* must be 1fr 1fr 1fr */}
         <Link
           className="quizzes-sent-container"
           to={`/quizzes/${id}/questions`}

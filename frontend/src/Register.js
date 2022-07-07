@@ -3,45 +3,33 @@ import React, { useState, useEffect } from "react";
 const Register = () => {
   const [userEntered, setUserEntered] = useState("");
   const [userEmailEntered, setUserEmailEntered] = useState("");
+  const [userFirstNameEntered, setUserFirstNameEntered] = useState("");
+  const [userLastNameEntered, setUserLastNameEntered] = useState("");
   const [userPasswordEntered, setUserPasswordEntered] = useState("");
-  const [userConfirmPasswordEntered, setUserConfirmPasswordEntered] = useState(
-    ""
-  );
-
-  // const getCurrentRespondents = async () => {
-  //   const response = await fetch(`/quizzes/${id}/respondents`);
-  //   const responseGetCurrentRespondents = await response.json();
-  //   setRespondentList(responseGetCurrentRespondents);
-  // };
-
-  // const getQuiz = async () => {
-  //   const submitQuizId = await fetch(`/quizzes/${id}`);
-  //   const responseGetQuiz = await submitQuizId.json();
-  //   setQuizTitle(responseGetQuiz.title);
-  // };
-
-  // useEffect(() => {
-  //   getQuiz();
-  //   getCurrentRespondents();
-  // }, []);
 
   //HANDLE USER REGISTER
-  // const handleUserRegister = async (e) => {
-  //   e.preventDefault();
+  const handleUserRegister = async (e) => {
+    e.preventDefault();
 
-  //   const submitRecipient = await fetch(`/quizzes/${id}/respondents`, {
-  //     method: "POST",
-  //     headers: { "Content-Type": "application/json" },
-  //     body: JSON.stringify({
-  //       quizzes_id: id,
-  //       email: emailEntered,
-  //     }),
-  //   });
-  //   const getRecipientSubmitted = await submitRecipient.json();
-  //   getCurrentRespondents();
-  //   setEmailEntered("");
-  //   console.log(getRecipientSubmitted);
-  // };
+    const submitNewUser = await fetch(`/creators`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        username: userEntered,
+        email: userEmailEntered,
+        first_name: userFirstNameEntered,
+        last_name: userLastNameEntered,
+        password: userPasswordEntered,
+      }),
+    });
+    const getUserSubmitted = await submitNewUser.json();
+    setUserEntered("");
+    setUserEmailEntered("");
+    setUserFirstNameEntered("");
+    setUserLastNameEntered("");
+    setUserPasswordEntered("");
+    console.log(getUserSubmitted);
+  };
 
   return (
     <>
@@ -57,7 +45,7 @@ const Register = () => {
                 <input
                   type="text"
                   className="login-and-register-form-input"
-                  placeholder="Type username"
+                  placeholder="Type Username"
                   value={userEntered}
                   onChange={(e) => {
                     setUserEntered(e.target.value);
@@ -71,10 +59,36 @@ const Register = () => {
                 <input
                   type="text"
                   className="login-and-register-form-input"
-                  placeholder="Type email"
+                  placeholder="Type Email"
                   value={userEmailEntered}
                   onChange={(e) => {
                     setUserEmailEntered(e.target.value);
+                  }}
+                />
+              </div>
+              <div>
+                <span className="login-and-register-form-title">
+                  First Name
+                </span>
+                <input
+                  type="text"
+                  className="login-and-register-form-input"
+                  placeholder="Type First Name"
+                  value={userFirstNameEntered}
+                  onChange={(e) => {
+                    setUserFirstNameEntered(e.target.value);
+                  }}
+                />
+              </div>
+              <div>
+                <span className="login-and-register-form-title">Last Name</span>
+                <input
+                  type="text"
+                  className="login-and-register-form-input"
+                  placeholder="Type Last Name"
+                  value={userLastNameEntered}
+                  onChange={(e) => {
+                    setUserLastNameEntered(e.target.value);
                   }}
                 />
               </div>
@@ -87,20 +101,6 @@ const Register = () => {
                   value={userPasswordEntered}
                   onChange={(e) => {
                     setUserPasswordEntered(e.target.value);
-                  }}
-                />
-              </div>
-              <div>
-                <span className="login-and-register-form-title">
-                  Confirm Password
-                </span>
-                <input
-                  type="text"
-                  className="login-and-register-form-input"
-                  placeholder="Confirm password"
-                  value={userConfirmPasswordEntered}
-                  onChange={(e) => {
-                    setUserConfirmPasswordEntered(e.target.value);
                   }}
                 />
               </div>
