@@ -1,11 +1,14 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
-const Register = () => {
+const Register = ({ setCreator }) => {
+  const navigate = useNavigate();
   const [userEntered, setUserEntered] = useState("");
   const [userEmailEntered, setUserEmailEntered] = useState("");
   const [userFirstNameEntered, setUserFirstNameEntered] = useState("");
   const [userLastNameEntered, setUserLastNameEntered] = useState("");
   const [userPasswordEntered, setUserPasswordEntered] = useState("");
+  // const [idCreated,setIdCreated]=useState("")
 
   //HANDLE USER REGISTER
   const handleUserRegister = async (e) => {
@@ -23,12 +26,14 @@ const Register = () => {
       }),
     });
     const getUserSubmitted = await submitNewUser.json();
+    setCreator(getUserSubmitted);
     setUserEntered("");
     setUserEmailEntered("");
     setUserFirstNameEntered("");
     setUserLastNameEntered("");
     setUserPasswordEntered("");
     console.log(getUserSubmitted);
+    navigate(`/quizzes`);
   };
 
   return (
@@ -108,7 +113,7 @@ const Register = () => {
             <button
               type="submit"
               className="btn-register"
-              // onClick={handleUserCheck}
+              onClick={handleUserRegister}
             >
               Register
             </button>
