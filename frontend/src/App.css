@@ -201,19 +201,6 @@ footer {
   height: auto;
 }
 
-.share-quiz-container {
-  border: 1px solid #3db2ff;
-  flex: 0 1 400px;
-  width: 35em;
-  height: 20em;
-  display: grid;
-  place-items: center;
-}
-
-.share-quiz-container {
-  border: none;
-}
-
 /* .share-link-container {
   display: grid;
 } */
@@ -234,12 +221,22 @@ footer {
   font-weight: 500;
 }
 .quizzes-container,
-.share-container {
+.share-container,
+.share-quiz-container,
+.share-container-center {
   display: grid;
   border: 1px solid #3db2ff;
   flex: 0 1 400px;
   width: 35em;
   min-height: 20em;
+}
+
+.share-container-center {
+  place-items: center;
+}
+
+.share-quiz-container {
+  border: none;
 }
 
 .correct-answer-options,

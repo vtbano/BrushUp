@@ -59,7 +59,11 @@ const Quizzes = ({ creator }) => {
           </div>
           <div className="quizzes-container-name">
             Shared Quizzes
-            <div className="share-container">
+            <div
+              className={
+                quizShared ? "share-container" : "share-quiz-container "
+              }
+            >
               {quizShared ? (
                 <div className="quizzes-single-quiz-container">
                   {quizzes.map((quiz) => {

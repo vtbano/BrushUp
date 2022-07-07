@@ -33,7 +33,7 @@ const Register = ({ setCreator }) => {
     setUserLastNameEntered("");
     setUserPasswordEntered("");
     console.log(getUserSubmitted);
-    navigate(`/quizzes`);
+    // navigate(`/quizzes`);
   };
 
   return (
