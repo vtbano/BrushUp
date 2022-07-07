@@ -48,7 +48,7 @@ router.post("/", (request, response, next) => {
     [username, email, first_name, last_name, password],
     (err, res) => {
       if (err) return next(err);
-      response.redirect("/creators");
+      response.json(res.rows[0]);
     }
   );
 });
