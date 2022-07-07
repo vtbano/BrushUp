@@ -44,7 +44,7 @@ router.post("/", (request, response, next) => {
   const { username, email, first_name, last_name, password } = request.body;
 
   pool.query(
-    "INSERT INTO creators (username, email, first_name, last_name, password) VALUES ($1,$2,$3,$4,$5)",
+    "INSERT INTO creators (username, email, first_name, last_name, password) VALUES ($1,$2,$3,$4,$5) RETURNING *",
     [username, email, first_name, last_name, password],
     (err, res) => {
       if (err) return next(err);
