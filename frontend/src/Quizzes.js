@@ -50,18 +50,20 @@ const Quizzes = ({ creator }) => {
                   );
                 })}
               </div>
-              <Link to={`/quizzes/create`}>
-                <button type="button" className="btn-create-quiz">
-                  +Create Quiz
-                </button>
-              </Link>
+              <div className="btn-create-quiz-container">
+                <Link to={`/quizzes/create`}>
+                  <button type="button" className="btn-create-quiz">
+                    +Create Quiz
+                  </button>
+                </Link>
+              </div>
             </div>
           </div>
           <div className="quizzes-container-name">
             Shared Quizzes
             <div
               className={
-                quizShared ? "share-container" : "share-quiz-container "
+                quizShared ? "share-container" : "share-container-center "
               }
             >
               {quizShared ? (

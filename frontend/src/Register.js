@@ -26,14 +26,15 @@ const Register = ({ setCreator }) => {
       }),
     });
     const getUserSubmitted = await submitNewUser.json();
+    console.log(getUserSubmitted);
     setCreator(getUserSubmitted);
     setUserEntered("");
     setUserEmailEntered("");
     setUserFirstNameEntered("");
     setUserLastNameEntered("");
     setUserPasswordEntered("");
-    console.log(getUserSubmitted);
-    // navigate(`/quizzes`);
+
+    navigate(`/quizzes`);
   };
 
   return (

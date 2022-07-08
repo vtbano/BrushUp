@@ -325,6 +325,11 @@ footer {
   border: none;
 }
 
+.btn-create-quiz-container {
+  place-self: center;
+  margin-top: 2em;
+  margin-bottom: 1em;
+}
 .btn-get-started {
   margin-top: 2em;
 }
@@ -350,12 +355,6 @@ footer {
   padding: 0.5em 1.5em;
   border-radius: 20px;
   border: none;
-}
-
-.btn-create-quiz {
-  place-self: center;
-  margin-top: 2em;
-  margin-bottom: 1em;
 }
 
 .btn-save-quiz,
