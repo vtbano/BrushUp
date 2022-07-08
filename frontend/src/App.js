@@ -48,10 +48,18 @@ const App = () => {
         <section className="page-body-main">
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="login" element={<Login />} />
+            <Route
+              path="login"
+              element={<Login setUserNavBar={setUserNavBar} />}
+            />
             <Route
               path="register"
-              element={<Register setCreator={setCreator} />}
+              element={
+                <Register
+                  setCreator={setCreator}
+                  setUserNavBar={setUserNavBar}
+                />
+              }
             />
 
             <Route path="quizzes" element={<Quizzes creator={creator} />} />

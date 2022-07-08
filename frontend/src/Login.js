@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
-const Login = () => {
+const Login = ({ setUserNavBar }) => {
   const [userEntered, setUserEntered] = useState("");
   const [userPasswordEntered, setUserPasswordEntered] = useState("");
+  const navigate = useNavigate();
 
   // const getCurrentRespondents = async () => {
   //   const response = await fetch(`/quizzes/${id}/respondents`);
@@ -21,23 +23,25 @@ const Login = () => {
   //   getCurrentRespondents();
   // }, []);
 
-  //HANDLE USER CHECK
-  // const handleUserCheck = async (e) => {
-  //   e.preventDefault();
+  // HANDLE USER CHECK
+  const handleUserCheck = async (e) => {
+    e.preventDefault();
 
-  //   const submitRecipient = await fetch(`/quizzes/${id}/respondents`, {
-  //     method: "POST",
-  //     headers: { "Content-Type": "application/json" },
-  //     body: JSON.stringify({
-  //       quizzes_id: id,
-  //       email: emailEntered,
-  //     }),
-  //   });
-  //   const getRecipientSubmitted = await submitRecipient.json();
-  //   getCurrentRespondents();
-  //   setEmailEntered("");
-  //   console.log(getRecipientSubmitted);
-  // };
+    const submitRecipient = await fetch(`/quizzes/${id}/respondents`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        quizzes_id: id,
+        email: emailEntered,
+      }),
+    });
+    const getRecipientSubmitted = await submitRecipient.json();
+    getCurrentRespondents();
+    setEmailEntered("");
+    navigate("/quizzes");
+    setUserNavBar(true);
+    console.log(getRecipientSubmitted);
+  };
 
   return (
     <>
@@ -76,7 +80,7 @@ const Login = () => {
             <button
               type="submit"
               className="btn-login"
-              // onClick={handleUserCheck}
+              onClick={handleUserCheck}
             >
               Login
             </button>
