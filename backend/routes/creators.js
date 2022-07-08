@@ -45,7 +45,7 @@ router.post("/", (request, response, next) => {
 
   pool.query(
     "INSERT INTO creators (username, email, first_name, last_name, password) VALUES ($1,$2,$3,$4,$5) RETURNING *",
-    [username, email, first_name, last_name, password],
+    [username, email, first_name, last_name, bcrypt.hashSync(password, 8)],
     (err, res) => {
       if (err) return next(err);
       response.json(res.rows[0]);
