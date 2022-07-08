@@ -2,6 +2,16 @@ const express = require("express");
 const { Router } = require("express");
 const pool = require("../db");
 const router = Router();
+const jwt = require("jsonwebtoken");
+const bcrypt = require("bcryptjs");
+const cookieSession = require("cookie-session");
+
+app.use(
+  cookieSession({
+    name: "session",
+    maxAge: 24 * 60 * 60 * 1000, // 24 hours
+  })
+);
 
 router.get("/", (request, response, next) => {
   pool.query("SELECT * FROM creators ORDER BY id ASC", (err, res) => {
@@ -82,6 +92,52 @@ router.delete("/:id", (request, response, next) => {
 
     response.redirect("/creators");
   });
+});
+
+//FOR SIGN-UP
+
+router.post("/sign-up", (request, response, next) => {
+  const { username, password } = request.body;
+
+  pool.query(
+    "SELECT * FROM creators WHERE username=$1",
+    [username],
+    (err, res) => {
+      if (err) return next(err);
+      if (res.rows.length === 0)
+        return response.json({
+          error: true,
+          message: "The username does not exist",
+        });
+
+      const user = response.json(res.rows[0]);
+      const passwordIsValid = bcrypt.compareSync(password, user.password);
+      if (!passwordIsValid) {
+        return res.status(401).send({
+          message: "Invalid Password!",
+        });
+      }
+
+      const token = jwt.sign({ id: user.id }, "brushUp-secet-key", {
+        expiresIn: 86400, // 24 hours
+      });
+
+      request.session.token = token;
+
+      return res.status(200).send({
+        id: user.id,
+        username: user.username,
+      });
+    }
+  );
+});
+
+router.post("/signout", (request, response) => {
+  request.session = null;
+  return request.status(200).send({
+    message: "You've been signed out!",
+  });
+  if (err) return next(err);
 });
 
 module.exports = router;
