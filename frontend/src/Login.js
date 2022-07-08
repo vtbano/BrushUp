@@ -27,20 +27,20 @@ const Login = ({ setUserNavBar }) => {
   const handleUserCheck = async (e) => {
     e.preventDefault();
 
-    const submitRecipient = await fetch(`/quizzes/${id}/respondents`, {
+    const submitUser = await fetch(`/creators/signin`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        quizzes_id: id,
-        email: emailEntered,
+        username: userEntered,
+        password: userPasswordEntered,
       }),
     });
-    const getRecipientSubmitted = await submitRecipient.json();
-    getCurrentRespondents();
-    setEmailEntered("");
+    const getUserSubmitted = await submitUser.json();
     navigate("/quizzes");
     setUserNavBar(true);
-    console.log(getRecipientSubmitted);
+    setUserEntered("");
+    setUserPasswordEntered("");
+    console.log(getUserSubmitted);
   };
 
   return (
@@ -57,7 +57,7 @@ const Login = ({ setUserNavBar }) => {
                 <input
                   type="text"
                   className="login-and-register-form-input"
-                  placeholder="Type email"
+                  placeholder="Type username"
                   value={userEntered}
                   onChange={(e) => {
                     setUserEntered(e.target.value);
