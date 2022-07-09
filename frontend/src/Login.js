@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
-const Login = ({ setUserNavBar }) => {
+const Login = ({ setCreator, setUserNavBar }) => {
   const [userEntered, setUserEntered] = useState("");
   const [userPasswordEntered, setUserPasswordEntered] = useState("");
   const navigate = useNavigate();
@@ -36,7 +36,7 @@ const Login = ({ setUserNavBar }) => {
       }),
     });
     const getUserSubmitted = await submitUser.json();
-    navigate("/quizzes");
+    // navigate("/quizzes");
     setUserNavBar(true);
     setUserEntered("");
     setUserPasswordEntered("");
