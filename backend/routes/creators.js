@@ -4,14 +4,6 @@ const pool = require("../db");
 const router = Router();
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
-const cookieSession = require("cookie-session");
-
-// app.use(
-//   cookieSession({
-//     name: "session",
-//     maxAge: 24 * 60 * 60 * 1000, // 24 hours
-//   })
-// );
 
 router.get("/", (request, response, next) => {
   pool.query("SELECT * FROM creators ORDER BY id ASC", (err, res) => {
@@ -110,37 +102,40 @@ router.post("/signin", (request, response, next) => {
           message: "The username does not exist",
         });
 
-      response.json(res.rows[0]);
       const user = res.rows[0];
       console.log("USER ID", user);
 
       const passwordIsValid = bcrypt.compareSync(password, user.password);
       if (!passwordIsValid) {
-        return res.status(401).send({
+        return response.json({
           message: "Invalid Password!",
         });
       }
+      // response.json(res.rows[0]);
+      const token = jwt.sign({ id: user.id }, "brushUp-secet-key", {
+        expiresIn: 86400, // 24 hours
+      });
 
-      //   const token = jwt.sign({ id: user.id }, "brushUp-secet-key", {
-      //     expiresIn: 86400, // 24 hours
-      //   });
+      request.session.token = token;
 
-      //   request.session.token = token;
-
-      //   return res.status(200).send({
-      //     id: user.id,
-      //     username: user.username,
-      //   });
+      return response.json({
+        id: user.id,
+        username: user.username,
+      });
+      // return res.status(200).send({
+      //   id: user.id,
+      //   username: user.username,
+      // });
     }
   );
 });
 
-router.post("/signout", (request, response) => {
-  request.session = null;
-  return request.status(200).send({
-    message: "You've been signed out!",
-  });
-  if (err) return next(err);
-});
+// router.post("/signout", (request, response) => {
+//   request.session = null;
+//   return request.status(200).send({
+//     message: "You've been signed out!",
+//   });
+//   if (err) return next(err);
+// });
 
 module.exports = router;

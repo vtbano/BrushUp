@@ -4,8 +4,15 @@ const creators = require("./routes/creators");
 const quizzes = require("./routes/quizzes");
 const cors = require("cors");
 const app = express();
+const cookieSession = require("cookie-session");
 
 app.use(cors());
+app.use(
+  cookieSession({
+    name: "session",
+    secret: "COOKIE_SECRET",
+  })
+);
 app.use(bodyParser.json());
 app.use("/creators", creators);
 app.use("/quizzes", quizzes);
