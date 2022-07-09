@@ -52,7 +52,7 @@ const Login = ({ setCreator, setUserNavBar }) => {
           <div className="or-divider">OR</div> */}
           <div className="login-form">
             <form>
-              <div>
+              <div className="form-sections">
                 <span className="login-and-register-form-title">Username</span>
                 <input
                   type="text"
@@ -64,7 +64,7 @@ const Login = ({ setCreator, setUserNavBar }) => {
                   }}
                 />
               </div>
-              <div>
+              <div className="form-sections">
                 <span className="login-and-register-form-title">Password</span>
                 <input
                   type="text"
