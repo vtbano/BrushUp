@@ -24,6 +24,25 @@ header {
   display: flex;
   justify-content: right;
 }
+
+.login-register-navigation-buttons button {
+  background-color: #ffedda;
+  margin: 1em;
+  color: #3db2ff;
+  font-family: "Roboto", sans-serif;
+  font-size: 1.5em;
+  border: none;
+}
+
+.login-register-navigation-buttons button:hover {
+  background-color: #3db2ff;
+  margin: 1em;
+  color: white;
+  font-family: "Roboto", sans-serif;
+  font-size: 1.5em;
+  border: none;
+}
+
 footer {
   margin-top: 3em;
   padding-top: 2em;
@@ -323,6 +342,10 @@ footer {
   padding: 0.5em 1.5em;
   border-radius: 20px;
   border: none;
+}
+
+.btn-get-started:hover {
+  color: black;
 }
 
 .btn-create-quiz-container {

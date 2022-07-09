@@ -27,7 +27,7 @@ const NavigationButtons = ({ creator, userNavBar }) => {
           />
         </span>
       ) : (
-        <span className="navigation-buttons">
+        <span className="login-register-navigation-buttons">
           <Link to={`/login`}>
             <button>LOGIN</button>
           </Link>
