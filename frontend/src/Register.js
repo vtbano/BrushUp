@@ -42,8 +42,6 @@ const Register = ({ setCreator, setUserNavBar }) => {
       <section className="add-respondent-sect">
         <div className="login-and-register-banner">REGISTER</div>
         <div className="login-and-register-display">
-          {/* <div className="google-sign-in-container">GOOGLE LOGIN</div>
-          <div className="or-divider">OR</div> */}
           <div className="login-form">
             <form>
               <div className="form-sections">

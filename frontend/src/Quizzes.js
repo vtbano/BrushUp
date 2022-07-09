@@ -33,7 +33,7 @@ const Quizzes = ({ creator }) => {
   return (
     <>
       <section className="quiz-shelf-sect">
-        <div className="creator-welcome">Ready to Brush Up {username}</div>
+        <div className="creator-welcome">Ready to Brush Up {username}?</div>
         <div className="quiz-shelf-title">QUIZ SHELF</div>
         <div className="quiz-shelf-display">
           <div className="quizzes-container-name">
@@ -63,7 +63,7 @@ const Quizzes = ({ creator }) => {
             Shared Quizzes
             <div
               className={
-                quizShared ? "share-container" : "share-container-center "
+                quizShared ? "share-container" : "share-container-center"
               }
             >
               {quizShared ? (

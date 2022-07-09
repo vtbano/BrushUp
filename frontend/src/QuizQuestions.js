@@ -104,16 +104,18 @@ const QuizQuestions = ({
                 })}
               </div>
             </div>
-            <button
-              type="button"
-              className="btn-add-question"
-              onClick={handleQuestionSubmit}
-            >
-              +Add Question
-            </button>
+            <div className="btn-create-question-container">
+              <button
+                type="button"
+                className="btn-add-question"
+                onClick={handleQuestionSubmit}
+              >
+                +Add Question
+              </button>
+            </div>
           </div>
 
-          <div className="share-quiz-container">
+          <div className="share-questions-container-center">
             {/* when empty it display's a greyed out share img */}
             <Link to={`/quizzes/${id}/share`}>
               <img

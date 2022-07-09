@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 const Login = ({ setCreator, setUserNavBar }) => {
   const [userEntered, setUserEntered] = useState("");
   const [userPasswordEntered, setUserPasswordEntered] = useState("");
+  const [checkInput, setCheckInput] = useState(true);
   const navigate = useNavigate();
 
   // const getCurrentRespondents = async () => {
@@ -36,11 +37,17 @@ const Login = ({ setCreator, setUserNavBar }) => {
       }),
     });
     const getUserSubmitted = await submitUser.json();
-    // navigate("/quizzes");
-    setUserNavBar(true);
-    setUserEntered("");
-    setUserPasswordEntered("");
-    console.log(getUserSubmitted);
+    if (getUserSubmitted.message === "Invalid Password!") {
+      console.log("Invalid Password!");
+      setCheckInput(false);
+    } else {
+      setCreator(getUserSubmitted);
+      setUserNavBar(true);
+      navigate("/quizzes");
+      setUserEntered("");
+      setUserPasswordEntered("");
+      console.log(getUserSubmitted);
+    }
   };
 
   return (
@@ -48,15 +55,17 @@ const Login = ({ setCreator, setUserNavBar }) => {
       <section className="add-respondent-sect">
         <div className="login-and-register-banner">LOGIN</div>
         <div className="login-and-register-display">
-          {/* <div className="google-sign-in-container">GOOGLE LOGIN</div>
-          <div className="or-divider">OR</div> */}
           <div className="login-form">
             <form>
               <div className="form-sections">
                 <span className="login-and-register-form-title">Username</span>
                 <input
                   type="text"
-                  className="login-and-register-form-input"
+                  className={
+                    checkInput
+                      ? "login-and-register-form-input"
+                      : "login-and-register-form-input-wrong"
+                  }
                   placeholder="Type username"
                   value={userEntered}
                   onChange={(e) => {
@@ -68,7 +77,11 @@ const Login = ({ setCreator, setUserNavBar }) => {
                 <span className="login-and-register-form-title">Password</span>
                 <input
                   type="text"
-                  className="login-and-register-form-input"
+                  className={
+                    checkInput
+                      ? "login-and-register-form-input"
+                      : "login-and-register-form-input-wrong"
+                  }
                   placeholder="Type password"
                   value={userPasswordEntered}
                   onChange={(e) => {
@@ -77,6 +90,7 @@ const Login = ({ setCreator, setUserNavBar }) => {
                 />
               </div>
             </form>
+            <div>{checkInput ? "" : "Please check username and password"}</div>
             <button
               type="submit"
               className="btn-login"
