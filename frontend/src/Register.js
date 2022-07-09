@@ -8,7 +8,6 @@ const Register = ({ setCreator, setUserNavBar }) => {
   const [userFirstNameEntered, setUserFirstNameEntered] = useState("");
   const [userLastNameEntered, setUserLastNameEntered] = useState("");
   const [userPasswordEntered, setUserPasswordEntered] = useState("");
-  // const [idCreated,setIdCreated]=useState("")
 
   //HANDLE USER REGISTER
   const handleUserRegister = async (e) => {
@@ -43,11 +42,11 @@ const Register = ({ setCreator, setUserNavBar }) => {
       <section className="add-respondent-sect">
         <div className="login-and-register-banner">REGISTER</div>
         <div className="login-and-register-display">
-          <div className="google-sign-in-container">GOOGLE LOGIN</div>
-          <div className="or-divider">OR</div>
+          {/* <div className="google-sign-in-container">GOOGLE LOGIN</div>
+          <div className="or-divider">OR</div> */}
           <div className="login-form">
             <form>
-              <div>
+              <div className="form-sections">
                 <span className="login-and-register-form-title">Username</span>
                 <input
                   type="text"
@@ -59,7 +58,7 @@ const Register = ({ setCreator, setUserNavBar }) => {
                   }}
                 />
               </div>
-              <div>
+              <div className="form-sections">
                 <span className="login-and-register-form-title">
                   User Email
                 </span>
@@ -73,7 +72,7 @@ const Register = ({ setCreator, setUserNavBar }) => {
                   }}
                 />
               </div>
-              <div>
+              <div className="form-sections">
                 <span className="login-and-register-form-title">
                   First Name
                 </span>
@@ -87,7 +86,7 @@ const Register = ({ setCreator, setUserNavBar }) => {
                   }}
                 />
               </div>
-              <div>
+              <div className="form-sections">
                 <span className="login-and-register-form-title">Last Name</span>
                 <input
                   type="text"
@@ -99,7 +98,7 @@ const Register = ({ setCreator, setUserNavBar }) => {
                   }}
                 />
               </div>
-              <div>
+              <div className="form-sections">
                 <span className="login-and-register-form-title">Password</span>
                 <input
                   type="text"

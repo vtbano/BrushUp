@@ -48,8 +48,8 @@ const Login = ({ setCreator, setUserNavBar }) => {
       <section className="add-respondent-sect">
         <div className="login-and-register-banner">LOGIN</div>
         <div className="login-and-register-display">
-          <div className="google-sign-in-container">GOOGLE LOGIN</div>
-          <div className="or-divider">OR</div>
+          {/* <div className="google-sign-in-container">GOOGLE LOGIN</div>
+          <div className="or-divider">OR</div> */}
           <div className="login-form">
             <form>
               <div>
