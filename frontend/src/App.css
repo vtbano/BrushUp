@@ -484,6 +484,26 @@ footer {
   border-radius: 25px;
   border: none;
 }
+
+.btn-save-quiz:hover,
+.btn-save-question:hover,
+.btn-save-question:hover,
+.btn-add-correct-answer:hover,
+.btn-add-wrong-answer:hover,
+.btn-add-question:hover,
+.btn-delete-quiz:hover,
+.btn-edit-quiz:hover,
+.btn-enter-correct-answer:hover,
+.btn-enter-wrong-answer:hover,
+.btn-login:hover,
+.btn-register:hover,
+.btn-savePlusAdd-question:hover,
+.btn-add-recipient:hover {
+  font-weight: 700;
+  opacity: 80%;
+  transition-timing-function: ease-in-out;
+}
+
 .create-quiz-title,
 .edit-quiz-title,
 .question-shelf-quiz-title {
