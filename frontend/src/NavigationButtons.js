@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-const NavigationButtons = ({ creator, userNavBar }) => {
+const NavigationButtons = ({ creator }) => {
   // const handleSignout = async (e) => {
   //   e.preventDefault();
 
@@ -15,7 +15,7 @@ const NavigationButtons = ({ creator, userNavBar }) => {
   // };
   return (
     <>
-      {userNavBar ? (
+      {creator ? (
         <span className="navigation-buttons">
           <Link to={`/quizzes`}>
             <img
