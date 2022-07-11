@@ -11,6 +11,8 @@ app.use(
   cookieSession({
     name: "session",
     secret: "COOKIE_SECRET",
+    httpOnly: true,
+    sameSite: "strict",
   })
 );
 app.use(bodyParser.json());

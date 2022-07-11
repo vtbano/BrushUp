@@ -43,24 +43,27 @@ router.get("/:id/quizzes", (request, response, next) => {
     }
     request.userId = decoded.id;
     const { id } = request.params;
-    if (request.userId !== id) {
+
+    if (request.userId !== Number(id)) {
       return response.json({
+        error: true,
         message: "Token ID provided does not match!",
       });
+    } else {
+      pool.query(
+        "SELECT * FROM quizzes WHERE creators_id=$1",
+        [id],
+        (err, res) => {
+          if (err) return next(err);
+          if (res.rows.length === 0)
+            return response.json({
+              error: true,
+              message: "There are no quizzes under this user",
+            });
+          response.json(res.rows);
+        }
+      );
     }
-    pool.query(
-      "SELECT * FROM quizzes WHERE creators_id=$1",
-      [id],
-      (err, res) => {
-        if (err) return next(err);
-        if (res.rows.length === 0)
-          return response.json({
-            error: true,
-            message: "There are no quizzes under this user",
-          });
-        response.json(res.rows);
-      }
-    );
   });
 });
 
@@ -72,7 +75,17 @@ router.post("/", (request, response, next) => {
     [username, email, first_name, last_name, bcrypt.hashSync(password, 8)],
     (err, res) => {
       if (err) return next(err);
-      response.json(res.rows[0]);
+      const user = res.rows[0];
+      const token = jwt.sign({ id: user.id }, "brushUp-secet-key", {
+        expiresIn: 86400, // 24 hours
+      });
+
+      request.session.token = token;
+
+      return response.json({
+        id: user.id,
+        username: user.username,
+      });
     }
   );
 });
@@ -150,7 +163,6 @@ router.post("/signin", (request, response, next) => {
 
 router.post("/signout", (request, response) => {
   if (err) return next(err);
-
   request.session = null;
   return response.status(200).send({
     message: "You've been signed out!",
