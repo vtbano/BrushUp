@@ -185,7 +185,6 @@ router.post("/:quizzes_id/questions", (request, response, next) => {
       });
     }
     request.userId = decoded.id;
-
     pool.query(
       "INSERT INTO questions (quizzes_id,question_text,image) VALUES ($1,$2,$3) RETURNING *",
       [quizzes_id, question_text, image],
@@ -202,16 +201,29 @@ router.put(
   (request, response, next) => {
     const { quizzes_id, questions_id } = request.params;
     const { question_text, image } = request.body;
-
-    pool.query(
-      `UPDATE questions SET question_text=($1), image=($2) WHERE quizzes_id=($3) AND id=($4) RETURNING *`,
-      [question_text, image, quizzes_id, questions_id],
-      (err, res) => {
-        if (err) return next(err);
-
-        response.json(res.rows[0]);
+    const token = request.session.token;
+    if (!token) {
+      return response.status(403).send({
+        message: "No token provided!",
+      });
+    }
+    jwt.verify(token, "brushUp-secet-key", (err, decoded) => {
+      if (err) {
+        return response.status(401).send({
+          message: "Unauthorized!",
+        });
       }
-    );
+      request.userId = decoded.id;
+      pool.query(
+        `UPDATE questions SET question_text=($1), image=($2) WHERE quizzes_id=($3) AND id=($4) RETURNING *`,
+        [question_text, image, quizzes_id, questions_id],
+        (err, res) => {
+          if (err) return next(err);
+
+          response.json(res.rows[0]);
+        }
+      );
+    });
   }
 );
 
