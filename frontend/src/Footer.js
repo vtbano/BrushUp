@@ -11,6 +11,7 @@ const Footer = () => {
         <a
           href="https://github.com/vtbano/BrushUp"
           target="_blank"
+          rel="noopener noreferrer"
           alt="GitHub link to BrushUp App"
           id="githubLink"
           className="footer-details-bold"
@@ -24,6 +25,7 @@ const Footer = () => {
         <a
           href="https://www.linkedin.com/in/vanessatbano/"
           target="_blank"
+          rel="noopener noreferrer"
           alt="Vanessa Bano's LinkedIn profile"
           id="LinkedIn"
           className="footer-details-bold"

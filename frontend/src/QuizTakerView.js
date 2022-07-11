@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useSearchParams, useParams } from "react-router-dom";
 import SingleAnswerOptionQuizTakerView from "./SingleAnswerOptionQuizTakerView";
 
-const QuizTakerView = ({}) => {
+const QuizTakerView = () => {
   const { id } = useParams();
   const [searchParams, setSearchParams] = useSearchParams();
   const [questions, setQuestions] = useState([]);

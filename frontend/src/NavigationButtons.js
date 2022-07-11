@@ -11,9 +11,9 @@ const NavigationButtons = ({ creator, setCreator }) => {
       headers: { "Content-Type": "application/json" },
     });
     const getSignOutRequestResponse = await submitSignOutRequest.json();
-    console.log("Signout Response:", getSignOutRequestResponse);
+    console.log("Succesfully signed out!", getSignOutRequestResponse);
     localStorage.removeItem("user");
-    setCreator(null);
+    // setCreator(null);
     navigate(`logout`);
   };
   return (
