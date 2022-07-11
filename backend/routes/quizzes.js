@@ -12,20 +12,38 @@ router.get("/", (request, response, next) => {
   });
 });
 
+//UPDATED***
 router.get("/:id", (request, response, next) => {
   const { id } = request.params;
+  const token = request.session.token;
 
-  pool.query("SELECT * FROM quizzes WHERE id=$1", [id], (err, res) => {
-    if (err) return next(err);
-    if (res.rows.length === 0)
-      return response.json({
-        error: true,
-        message: "This quiz does not exist",
+  if (!token) {
+    return response.status(403).send({
+      message: "No token provided!",
+    });
+  }
+
+  jwt.verify(token, "brushUp-secet-key", (err, decoded) => {
+    if (err) {
+      return response.status(401).send({
+        message: "Unauthorized!",
       });
-    response.json(res.rows[0]);
+    }
+    request.userId = decoded.id;
+
+    pool.query("SELECT * FROM quizzes WHERE id=$1", [id], (err, res) => {
+      if (err) return next(err);
+      if (res.rows.length === 0)
+        return response.json({
+          error: true,
+          message: "This quiz does not exist",
+        });
+      response.json(res.rows[0]);
+    });
   });
 });
 
+//UPDATED***
 router.post("/", (request, response, next) => {
   const { creators_id, title } = request.body;
   const token = request.session.token;
