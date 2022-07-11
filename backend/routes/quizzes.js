@@ -316,15 +316,28 @@ router.post(
   (request, response, next) => {
     const { correct, answer_text } = request.body;
     const { questions_id } = request.params;
-
-    pool.query(
-      "INSERT INTO answer_options(questions_id,correct, answer_text) VALUES ($1,$2,$3) RETURNING *",
-      [questions_id, correct, answer_text],
-      (err, res) => {
-        if (err) return next(err);
-        response.json(res.rows[0]);
+    const token = request.session.token;
+    if (!token) {
+      return response.status(403).send({
+        message: "No token provided!",
+      });
+    }
+    jwt.verify(token, "brushUp-secet-key", (err, decoded) => {
+      if (err) {
+        return response.status(401).send({
+          message: "Unauthorized!",
+        });
       }
-    );
+      request.userId = decoded.id;
+      pool.query(
+        "INSERT INTO answer_options(questions_id,correct, answer_text) VALUES ($1,$2,$3) RETURNING *",
+        [questions_id, correct, answer_text],
+        (err, res) => {
+          if (err) return next(err);
+          response.json(res.rows[0]);
+        }
+      );
+    });
   }
 );
 
