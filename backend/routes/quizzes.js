@@ -72,6 +72,7 @@ router.post("/", (request, response, next) => {
   });
 });
 
+//UPDATED***
 router.put("/:id", (request, response, next) => {
   const { id } = request.params;
   const { title } = request.body;
@@ -103,12 +104,29 @@ router.put("/:id", (request, response, next) => {
   });
 });
 
+//UPDATED***
 router.delete("/:id", (request, response, next) => {
   const { id } = request.params;
-  pool.query("DELETE FROM quizzes WHERE id=($1)", [id], (err, res) => {
-    if (err) return next(err);
+  const token = request.session.token;
 
-    response.status(204).end();
+  if (!token) {
+    return response.status(403).send({
+      message: "No token provided!",
+    });
+  }
+
+  jwt.verify(token, "brushUp-secet-key", (err, decoded) => {
+    if (err) {
+      return response.status(401).send({
+        message: "Unauthorized!",
+      });
+    }
+    request.userId = decoded.id;
+    pool.query("DELETE FROM quizzes WHERE id=($1)", [id], (err, res) => {
+      if (err) return next(err);
+
+      response.status(204).end();
+    });
   });
 });
 
