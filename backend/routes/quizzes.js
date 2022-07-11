@@ -2,6 +2,7 @@ const { Router } = require("express");
 const pool = require("../db");
 const router = Router();
 const { generateSecrets } = require("./utils.js");
+const jwt = require("jsonwebtoken");
 
 //QUIZ ROUTES
 router.get("/", (request, response, next) => {

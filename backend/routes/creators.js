@@ -29,16 +29,36 @@ router.get("/:id", (request, response, next) => {
 //CREATE ROUTE FOR CREATORS/QUIZ
 
 router.get("/:id/quizzes", (request, response, next) => {
-  const { id } = request.params;
+  const token = request.session.token;
 
-  pool.query("SELECT * FROM quizzes WHERE creators_id=$1", [id], (err, res) => {
-    if (err) return next(err);
-    if (res.rows.length === 0)
-      return response.json({
-        error: true,
-        message: "There are no quizzes under this user",
+  if (!token) {
+    return res.status(403).send({
+      message: "No token provided!",
+    });
+  }
+
+  jwt.verify(token, "brushUp-secet-key", (err, decoded) => {
+    if (err) {
+      return res.status(401).send({
+        message: "Unauthorized!",
       });
-    response.json(res.rows);
+    }
+    request.userId = decoded.id;
+    const { id } = request.params;
+
+    pool.query(
+      "SELECT * FROM quizzes WHERE creators_id=$1",
+      [id],
+      (err, res) => {
+        if (err) return next(err);
+        if (res.rows.length === 0)
+          return response.json({
+            error: true,
+            message: "There are no quizzes under this user",
+          });
+        response.json(res.rows);
+      }
+    );
   });
 });
 
@@ -122,10 +142,6 @@ router.post("/signin", (request, response, next) => {
         id: user.id,
         username: user.username,
       });
-      // return res.status(200).send({
-      //   id: user.id,
-      //   username: user.username,
-      // });
     }
   );
 });
