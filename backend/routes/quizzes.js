@@ -470,14 +470,28 @@ router.delete(
   "/:quizzes_id/respondents/:respondent_id",
   (request, response, next) => {
     const { quizzes_id, respondent_id } = request.params;
-    pool.query(
-      "DELETE FROM respondents WHERE quizzes_id=$1 AND id=$2",
-      [quizzes_id, respondent_id],
-      (err, res) => {
-        if (err) return next(err);
-        response.status(204).end();
+    const token = request.session.token;
+    if (!token) {
+      return response.status(403).send({
+        message: "No token provided!",
+      });
+    }
+    jwt.verify(token, "brushUp-secet-key", (err, decoded) => {
+      if (err) {
+        return response.status(401).send({
+          message: "Unauthorized!",
+        });
       }
-    );
+      request.userId = decoded.id;
+      pool.query(
+        "DELETE FROM respondents WHERE quizzes_id=$1 AND id=$2",
+        [quizzes_id, respondent_id],
+        (err, res) => {
+          if (err) return next(err);
+          response.status(204).end();
+        }
+      );
+    });
   }
 );
 
