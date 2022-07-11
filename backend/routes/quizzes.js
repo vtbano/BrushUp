@@ -260,19 +260,33 @@ router.delete(
 );
 
 //ANSWER_OPTIONS
-
+//UPDATED***
 router.get(
   "/:quizzes_id/questions/:questions_id/answer_options",
   (request, response, next) => {
     const { questions_id } = request.params;
-    pool.query(
-      "SELECT * FROM answer_options WHERE questions_id=($1) ORDER BY id ASC",
-      [questions_id],
-      (err, res) => {
-        if (err) return next(err);
-        response.json(res.rows);
+    const token = request.session.token;
+    if (!token) {
+      return response.status(403).send({
+        message: "No token provided!",
+      });
+    }
+    jwt.verify(token, "brushUp-secet-key", (err, decoded) => {
+      if (err) {
+        return response.status(401).send({
+          message: "Unauthorized!",
+        });
       }
-    );
+      request.userId = decoded.id;
+      pool.query(
+        "SELECT * FROM answer_options WHERE questions_id=($1) ORDER BY id ASC",
+        [questions_id],
+        (err, res) => {
+          if (err) return next(err);
+          response.json(res.rows);
+        }
+      );
+    });
   }
 );
 
