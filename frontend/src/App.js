@@ -15,6 +15,7 @@ import ShareQuiz from "./ShareQuiz";
 import TrackResults from "./TrackResults";
 import Login from "./Login";
 import Register from "./Register";
+import LogOut from "./LogOut";
 
 const App = () => {
   const getLocalStorage = () => {
@@ -48,7 +49,7 @@ const App = () => {
             <span className="title-bold">UP</span>
           </div>
           <div className="navigation-options">
-            <NavigationButtons creator={creator} />
+            <NavigationButtons creator={creator} setCreator={setCreator} />
           </div>
         </header>
         <section className="page-body-main">
@@ -59,6 +60,7 @@ const App = () => {
               path="register"
               element={<Register setCreator={setCreator} />}
             />
+            <Route path="logout" element={<LogOut />} />
 
             <Route path="quizzes" element={<Quizzes creator={creator} />} />
 

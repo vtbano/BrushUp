@@ -1,18 +1,21 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
-const NavigationButtons = ({ creator }) => {
-  // const handleSignout = async (e) => {
-  //   e.preventDefault();
+const NavigationButtons = ({ creator, setCreator }) => {
+  const navigate = useNavigate();
+  const handleSignOut = async (e) => {
+    e.preventDefault();
 
-  //   const submitSignOutRequest = await fetch("/creators/signout", {
-  //     method: "POST",
-  //     headers: { "Content-Type": "application/json" },
-  //   });
-  //   const getSignOutRequestResponse = await submitSignOutRequest.json();
-  //   console.log("Signout Response:", getSignOutRequestResponse);
-  //   navigate(``);
-  // };
+    const submitSignOutRequest = await fetch("/creators/signout", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+    });
+    const getSignOutRequestResponse = await submitSignOutRequest.json();
+    console.log("Signout Response:", getSignOutRequestResponse);
+    localStorage.removeItem("user");
+    setCreator(null);
+    navigate(`logout`);
+  };
   return (
     <>
       {creator ? (
@@ -41,7 +44,7 @@ const NavigationButtons = ({ creator }) => {
               src="../img/icons8-sign-out-100.png"
               alt="Profilebutton"
               className="nav-button"
-              // onClick={()=> handleSignout}
+              onClick={handleSignOut}
             />
           </Link>
         </span>
