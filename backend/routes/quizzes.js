@@ -437,18 +437,33 @@ router.get(
   }
 );
 
+//UPDATED***
 router.post("/:quizzes_id/respondents", (request, response, next) => {
   const { email } = request.body;
   const { quizzes_id } = request.params;
   const secret = generateSecrets();
-  pool.query(
-    "INSERT INTO respondents (quizzes_id,email, secret) VALUES ($1,$2,$3) RETURNING *",
-    [quizzes_id, email, secret],
-    (err, res) => {
-      if (err) return next(err);
-      response.json(res.rows[0]);
+  const token = request.session.token;
+  if (!token) {
+    return response.status(403).send({
+      message: "No token provided!",
+    });
+  }
+  jwt.verify(token, "brushUp-secet-key", (err, decoded) => {
+    if (err) {
+      return response.status(401).send({
+        message: "Unauthorized!",
+      });
     }
-  );
+    request.userId = decoded.id;
+    pool.query(
+      "INSERT INTO respondents (quizzes_id,email, secret) VALUES ($1,$2,$3) RETURNING *",
+      [quizzes_id, email, secret],
+      (err, res) => {
+        if (err) return next(err);
+        response.json(res.rows[0]);
+      }
+    );
+  });
 });
 
 router.delete(
