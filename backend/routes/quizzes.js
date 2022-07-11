@@ -466,6 +466,7 @@ router.post("/:quizzes_id/respondents", (request, response, next) => {
   });
 });
 
+//UPDATED***
 router.delete(
   "/:quizzes_id/respondents/:respondent_id",
   (request, response, next) => {
@@ -497,22 +498,37 @@ router.delete(
 
 //RESPONSES
 
+//UPDATED***
 router.get("/:quizzes_id/responses", (request, response, next) => {
   const { quizzes_id } = request.params;
-
-  pool.query(
-    "SELECT * FROM responses WHERE quizzes_id=$1",
-    [quizzes_id],
-    (err, res) => {
-      if (err) return next(err);
-      if (res.rows.length === 0)
-        return response.json({
-          error: true,
-          message: "There is no response found",
-        });
-      response.json(res.rows);
+  const token = request.session.token;
+  if (!token) {
+    return response.status(403).send({
+      message: "No token provided!",
+    });
+  }
+  jwt.verify(token, "brushUp-secet-key", (err, decoded) => {
+    if (err) {
+      return response.status(401).send({
+        message: "Unauthorized!",
+      });
     }
-  );
+    request.userId = decoded.id;
+
+    pool.query(
+      "SELECT * FROM responses WHERE quizzes_id=$1",
+      [quizzes_id],
+      (err, res) => {
+        if (err) return next(err);
+        if (res.rows.length === 0)
+          return response.json({
+            error: true,
+            message: "There is no response found",
+          });
+        response.json(res.rows);
+      }
+    );
+  });
 });
 
 // POST http://www.brushup.com/quizzes/ID/respondents/ID/responses
