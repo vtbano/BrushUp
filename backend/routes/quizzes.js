@@ -124,13 +124,11 @@ router.delete("/:id", (request, response, next) => {
 router.get("/:quizzes_id/questions", (request, response, next) => {
   const { quizzes_id } = request.params;
   const token = request.session.token;
-
   if (!token) {
     return response.status(403).send({
       message: "No token provided!",
     });
   }
-
   jwt.verify(token, "brushUp-secet-key", (err, decoded) => {
     if (err) {
       return response.status(401).send({
@@ -138,7 +136,6 @@ router.get("/:quizzes_id/questions", (request, response, next) => {
       });
     }
     request.userId = decoded.id;
-
     pool.query(
       "SELECT * FROM questions WHERE quizzes_id=$1",
       [quizzes_id],
@@ -171,18 +168,33 @@ router.get(
   }
 );
 
+//UPDATED***
 router.post("/:quizzes_id/questions", (request, response, next) => {
   const { question_text, image } = request.body;
   const { quizzes_id } = request.params;
-
-  pool.query(
-    "INSERT INTO questions (quizzes_id,question_text,image) VALUES ($1,$2,$3) RETURNING *",
-    [quizzes_id, question_text, image],
-    (err, res) => {
-      if (err) return next(err);
-      response.json(res.rows[0]);
+  const token = request.session.token;
+  if (!token) {
+    return response.status(403).send({
+      message: "No token provided!",
+    });
+  }
+  jwt.verify(token, "brushUp-secet-key", (err, decoded) => {
+    if (err) {
+      return response.status(401).send({
+        message: "Unauthorized!",
+      });
     }
-  );
+    request.userId = decoded.id;
+
+    pool.query(
+      "INSERT INTO questions (quizzes_id,question_text,image) VALUES ($1,$2,$3) RETURNING *",
+      [quizzes_id, question_text, image],
+      (err, res) => {
+        if (err) return next(err);
+        response.json(res.rows[0]);
+      }
+    );
+  });
 });
 
 router.put(
