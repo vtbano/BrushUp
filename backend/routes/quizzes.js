@@ -311,6 +311,7 @@ router.get(
   }
 );
 
+//UPDATED***
 router.post(
   "/:quizzes_id/questions/:questions_id/answer_options",
   (request, response, next) => {
@@ -357,7 +358,7 @@ router.put(
     );
   }
 );
-
+//UPDATED***
 router.delete(
   "/:quizzes_id/questions/:questions_id/answer_options/:id",
   (request, response, next) => {
@@ -388,17 +389,31 @@ router.delete(
 );
 
 //RESPONDENTS
-
+//UPDATED***
 router.get("/:quizzes_id/respondents", (request, response, next) => {
   const { quizzes_id } = request.params;
-  pool.query(
-    "SELECT * FROM respondents WHERE quizzes_id=$1",
-    [quizzes_id],
-    (err, res) => {
-      if (err) return next(err);
-      response.json(res.rows);
+  const token = request.session.token;
+  if (!token) {
+    return response.status(403).send({
+      message: "No token provided!",
+    });
+  }
+  jwt.verify(token, "brushUp-secet-key", (err, decoded) => {
+    if (err) {
+      return response.status(401).send({
+        message: "Unauthorized!",
+      });
     }
-  );
+    request.userId = decoded.id;
+    pool.query(
+      "SELECT * FROM respondents WHERE quizzes_id=$1",
+      [quizzes_id],
+      (err, res) => {
+        if (err) return next(err);
+        response.json(res.rows);
+      }
+    );
+  });
 });
 
 router.get(
