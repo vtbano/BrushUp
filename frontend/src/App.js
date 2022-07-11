@@ -23,7 +23,7 @@ const App = () => {
       return JSON.parse(localStorage.getItem("user"));
     } else return null;
   };
-  //add function that is triggered with use Effect of empty array , fetch creator from local storage and setCreator, but you will need an if statement if there is no creator in local storate
+
   const [creator, setCreator] = useState(getLocalStorage());
   const [questionPlaceholder, setQuestionPlaceholder] = useState(
     "Example: Can dogs eat chocolate?"
@@ -33,7 +33,6 @@ const App = () => {
   );
   const [questionText, setQuestionText] = useState("");
   const [imageUrl, setImageUrl] = useState("");
-  const [userNavBar, setUserNavBar] = useState(false);
 
   useEffect(() => {
     localStorage.setItem("user", JSON.stringify(creator));
@@ -49,26 +48,16 @@ const App = () => {
             <span className="title-bold">UP</span>
           </div>
           <div className="navigation-options">
-            <NavigationButtons creator={creator} userNavBar={userNavBar} />
+            <NavigationButtons creator={creator} />
           </div>
         </header>
         <section className="page-body-main">
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route
-              path="login"
-              element={
-                <Login setCreator={setCreator} setUserNavBar={setUserNavBar} />
-              }
-            />
+            <Route path="login" element={<Login setCreator={setCreator} />} />
             <Route
               path="register"
-              element={
-                <Register
-                  setCreator={setCreator}
-                  setUserNavBar={setUserNavBar}
-                />
-              }
+              element={<Register setCreator={setCreator} />}
             />
 
             <Route path="quizzes" element={<Quizzes creator={creator} />} />
