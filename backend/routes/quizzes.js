@@ -76,14 +76,31 @@ router.put("/:id", (request, response, next) => {
   const { id } = request.params;
   const { title } = request.body;
 
-  pool.query(
-    `UPDATE quizzes SET title=($1) WHERE id=($2) RETURNING *`,
-    [title, id],
-    (err, res) => {
-      if (err) return next(err);
-      response.json(res.rows[0]);
+  const token = request.session.token;
+
+  if (!token) {
+    return response.status(403).send({
+      message: "No token provided!",
+    });
+  }
+
+  jwt.verify(token, "brushUp-secet-key", (err, decoded) => {
+    if (err) {
+      return response.status(401).send({
+        message: "Unauthorized!",
+      });
     }
-  );
+    request.userId = decoded.id;
+
+    pool.query(
+      `UPDATE quizzes SET title=($1) WHERE id=($2) RETURNING *`,
+      [title, id],
+      (err, res) => {
+        if (err) return next(err);
+        response.json(res.rows[0]);
+      }
+    );
+  });
 });
 
 router.delete("/:id", (request, response, next) => {
