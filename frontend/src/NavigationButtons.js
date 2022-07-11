@@ -22,9 +22,17 @@ const NavigationButtons = ({ creator, userNavBar }) => {
           </Link>
           <img
             src="../img/icons8-user-96.png"
-            alt="move history button"
+            alt="Profilebutton"
             className="nav-button"
           />
+          <Link to={``}>
+            <img
+              src="../img/icons8-sign-out-100.png"
+              alt="Profilebutton"
+              className="nav-button"
+              // onClick={()=> handleSignout}
+            />
+          </Link>
         </span>
       ) : (
         <span className="login-register-navigation-buttons">
