@@ -16,13 +16,11 @@ router.get("/", (request, response, next) => {
 router.get("/:id", (request, response, next) => {
   const { id } = request.params;
   const token = request.session.token;
-
   if (!token) {
     return response.status(403).send({
       message: "No token provided!",
     });
   }
-
   jwt.verify(token, "brushUp-secet-key", (err, decoded) => {
     if (err) {
       return response.status(401).send({
@@ -30,7 +28,6 @@ router.get("/:id", (request, response, next) => {
       });
     }
     request.userId = decoded.id;
-
     pool.query("SELECT * FROM quizzes WHERE id=$1", [id], (err, res) => {
       if (err) return next(err);
       if (res.rows.length === 0)
@@ -47,7 +44,6 @@ router.get("/:id", (request, response, next) => {
 router.post("/", (request, response, next) => {
   const { creators_id, title } = request.body;
   const token = request.session.token;
-
   if (!token) {
     return response.status(403).send({
       message: "No token provided!",
@@ -60,7 +56,6 @@ router.post("/", (request, response, next) => {
       });
     }
     request.userId = decoded.id;
-
     pool.query(
       "INSERT INTO quizzes (creators_id,title) VALUES ($1,$2) RETURNING *",
       [creators_id, title],
@@ -76,15 +71,12 @@ router.post("/", (request, response, next) => {
 router.put("/:id", (request, response, next) => {
   const { id } = request.params;
   const { title } = request.body;
-
   const token = request.session.token;
-
   if (!token) {
     return response.status(403).send({
       message: "No token provided!",
     });
   }
-
   jwt.verify(token, "brushUp-secet-key", (err, decoded) => {
     if (err) {
       return response.status(401).send({
@@ -92,7 +84,6 @@ router.put("/:id", (request, response, next) => {
       });
     }
     request.userId = decoded.id;
-
     pool.query(
       `UPDATE quizzes SET title=($1) WHERE id=($2) RETURNING *`,
       [title, id],
@@ -108,13 +99,11 @@ router.put("/:id", (request, response, next) => {
 router.delete("/:id", (request, response, next) => {
   const { id } = request.params;
   const token = request.session.token;
-
   if (!token) {
     return response.status(403).send({
       message: "No token provided!",
     });
   }
-
   jwt.verify(token, "brushUp-secet-key", (err, decoded) => {
     if (err) {
       return response.status(401).send({
@@ -131,16 +120,34 @@ router.delete("/:id", (request, response, next) => {
 });
 
 //QUESTION ROUTES
+//UPDATED***
 router.get("/:quizzes_id/questions", (request, response, next) => {
   const { quizzes_id } = request.params;
-  pool.query(
-    "SELECT * FROM questions WHERE quizzes_id=$1",
-    [quizzes_id],
-    (err, res) => {
-      if (err) return next(err);
-      response.json(res.rows);
+  const token = request.session.token;
+
+  if (!token) {
+    return response.status(403).send({
+      message: "No token provided!",
+    });
+  }
+
+  jwt.verify(token, "brushUp-secet-key", (err, decoded) => {
+    if (err) {
+      return response.status(401).send({
+        message: "Unauthorized!",
+      });
     }
-  );
+    request.userId = decoded.id;
+
+    pool.query(
+      "SELECT * FROM questions WHERE quizzes_id=$1",
+      [quizzes_id],
+      (err, res) => {
+        if (err) return next(err);
+        response.json(res.rows);
+      }
+    );
+  });
 });
 
 router.get(
