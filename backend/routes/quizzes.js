@@ -196,6 +196,7 @@ router.post("/:quizzes_id/questions", (request, response, next) => {
   });
 });
 
+//UPDATED***
 router.put(
   "/:quizzes_id/questions/:questions_id",
   (request, response, next) => {
@@ -227,19 +228,34 @@ router.put(
   }
 );
 
+//UPDATED***
 router.delete(
   "/:quizzes_id/questions/:questions_id",
   (request, response, next) => {
     const { quizzes_id, questions_id } = request.params;
-    pool.query(
-      "DELETE FROM questions WHERE quizzes_id=$1 AND id=$2",
-      [quizzes_id, questions_id],
-      (err, res) => {
-        if (err) return next(err);
-
-        response.status(204).end(); // Status response
+    const token = request.session.token;
+    if (!token) {
+      return response.status(403).send({
+        message: "No token provided!",
+      });
+    }
+    jwt.verify(token, "brushUp-secet-key", (err, decoded) => {
+      if (err) {
+        return response.status(401).send({
+          message: "Unauthorized!",
+        });
       }
-    );
+      request.userId = decoded.id;
+      pool.query(
+        "DELETE FROM questions WHERE quizzes_id=$1 AND id=$2",
+        [quizzes_id, questions_id],
+        (err, res) => {
+          if (err) return next(err);
+
+          response.status(204).end(); // Status response
+        }
+      );
+    });
   }
 );
 
