@@ -7,23 +7,6 @@ const Login = ({ setCreator, setUserNavBar }) => {
   const [checkInput, setCheckInput] = useState(true);
   const navigate = useNavigate();
 
-  // const getCurrentRespondents = async () => {
-  //   const response = await fetch(`/quizzes/${id}/respondents`);
-  //   const responseGetCurrentRespondents = await response.json();
-  //   setRespondentList(responseGetCurrentRespondents);
-  // };
-
-  // const getQuiz = async () => {
-  //   const submitQuizId = await fetch(`/quizzes/${id}`);
-  //   const responseGetQuiz = await submitQuizId.json();
-  //   setQuizTitle(responseGetQuiz.title);
-  // };
-
-  // useEffect(() => {
-  //   getQuiz();
-  //   getCurrentRespondents();
-  // }, []);
-
   // HANDLE USER CHECK
   const handleUserCheck = async (e) => {
     e.preventDefault();
@@ -76,7 +59,7 @@ const Login = ({ setCreator, setUserNavBar }) => {
               <div className="form-sections">
                 <span className="login-and-register-form-title">Password</span>
                 <input
-                  type="text"
+                  type="password"
                   className={
                     checkInput
                       ? "login-and-register-form-input"

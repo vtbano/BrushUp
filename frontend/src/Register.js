@@ -61,7 +61,7 @@ const Register = ({ setCreator, setUserNavBar }) => {
                   User Email
                 </span>
                 <input
-                  type="text"
+                  type="email"
                   className="login-and-register-form-input"
                   placeholder="Type Email"
                   value={userEmailEntered}
@@ -99,7 +99,7 @@ const Register = ({ setCreator, setUserNavBar }) => {
               <div className="form-sections">
                 <span className="login-and-register-form-title">Password</span>
                 <input
-                  type="text"
+                  type="password"
                   className="login-and-register-form-input"
                   placeholder="Type password"
                   value={userPasswordEntered}
