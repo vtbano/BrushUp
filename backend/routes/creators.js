@@ -32,20 +32,24 @@ router.get("/:id/quizzes", (request, response, next) => {
   const token = request.session.token;
 
   if (!token) {
-    return res.status(403).send({
+    return response.status(403).send({
       message: "No token provided!",
     });
   }
 
   jwt.verify(token, "brushUp-secet-key", (err, decoded) => {
     if (err) {
-      return res.status(401).send({
+      return response.status(401).send({
         message: "Unauthorized!",
       });
     }
     request.userId = decoded.id;
     const { id } = request.params;
-
+    if (request.userId !== id) {
+      return response.json({
+        message: "Token ID provided does not match!",
+      });
+    }
     pool.query(
       "SELECT * FROM quizzes WHERE creators_id=$1",
       [id],
@@ -146,12 +150,13 @@ router.post("/signin", (request, response, next) => {
   );
 });
 
-// router.post("/signout", (request, response) => {
-//   request.session = null;
-//   return request.status(200).send({
-//     message: "You've been signed out!",
-//   });
-//   if (err) return next(err);
-// });
+router.post("/signout", (request, response) => {
+  if (err) return next(err);
+
+  request.session = null;
+  return response.status(200).send({
+    message: "You've been signed out!",
+  });
+});
 
 module.exports = router;
