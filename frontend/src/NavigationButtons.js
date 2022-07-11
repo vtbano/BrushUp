@@ -2,6 +2,17 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 const NavigationButtons = ({ creator, userNavBar }) => {
+  // const handleSignout = async (e) => {
+  //   e.preventDefault();
+
+  //   const submitSignOutRequest = await fetch("/creators/signout", {
+  //     method: "POST",
+  //     headers: { "Content-Type": "application/json" },
+  //   });
+  //   const getSignOutRequestResponse = await submitSignOutRequest.json();
+  //   console.log("Signout Response:", getSignOutRequestResponse);
+  //   navigate(``);
+  // };
   return (
     <>
       {userNavBar ? (
