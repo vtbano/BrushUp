@@ -28,15 +28,30 @@ router.get("/:id", (request, response, next) => {
 
 router.post("/", (request, response, next) => {
   const { creators_id, title } = request.body;
+  const token = request.session.token;
 
-  pool.query(
-    "INSERT INTO quizzes (creators_id,title) VALUES ($1,$2) RETURNING *",
-    [creators_id, title],
-    (err, res) => {
-      if (err) return next(err);
-      response.json(res.rows[0]);
+  if (!token) {
+    return response.status(403).send({
+      message: "No token provided!",
+    });
+  }
+  jwt.verify(token, "brushUp-secet-key", (err, decoded) => {
+    if (err) {
+      return response.status(401).send({
+        message: "Unauthorized!",
+      });
     }
-  );
+    request.userId = decoded.id;
+
+    pool.query(
+      "INSERT INTO quizzes (creators_id,title) VALUES ($1,$2) RETURNING *",
+      [creators_id, title],
+      (err, res) => {
+        if (err) return next(err);
+        response.json(res.rows[0]);
+      }
+    );
+  });
 });
 
 router.put("/:id", (request, response, next) => {

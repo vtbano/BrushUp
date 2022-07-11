@@ -26,8 +26,6 @@ router.get("/:id", (request, response, next) => {
   });
 });
 
-//CREATE ROUTE FOR CREATORS/QUIZ
-
 router.get("/:id/quizzes", (request, response, next) => {
   const token = request.session.token;
 
