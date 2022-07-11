@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./App.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./Home";
@@ -17,11 +17,14 @@ import Login from "./Login";
 import Register from "./Register";
 
 const App = () => {
+  const getLocalStorage = () => {
+    const currentUser = localStorage.getItem("user");
+    if (currentUser) {
+      return JSON.parse(localStorage.getItem("user"));
+    } else return null;
+  };
   //add function that is triggered with use Effect of empty array , fetch creator from local storage and setCreator, but you will need an if statement if there is no creator in local storate
-  const [creator, setCreator] = useState({
-    id: 3,
-    username: "**Fetch Creator from CreatorsLogin Component**",
-  });
+  const [creator, setCreator] = useState(getLocalStorage());
   const [questionPlaceholder, setQuestionPlaceholder] = useState(
     "Example: Can dogs eat chocolate?"
   );
@@ -31,6 +34,10 @@ const App = () => {
   const [questionText, setQuestionText] = useState("");
   const [imageUrl, setImageUrl] = useState("");
   const [userNavBar, setUserNavBar] = useState(false);
+
+  useEffect(() => {
+    localStorage.setItem("user", JSON.stringify(creator));
+  }, [creator]);
 
   return (
     <BrowserRouter>
