@@ -25,11 +25,9 @@ const Login = ({ setCreator, setUserNavBar }) => {
       setCheckInput(false);
     } else {
       setCreator(getUserSubmitted);
-      setUserNavBar(true);
       navigate("/quizzes");
       setUserEntered("");
       setUserPasswordEntered("");
-      console.log(getUserSubmitted);
     }
   };
 

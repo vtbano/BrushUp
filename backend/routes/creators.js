@@ -146,7 +146,7 @@ router.post("/signin", (request, response, next) => {
           message: "Invalid Password!",
         });
       }
-      // response.json(res.rows[0]);
+
       const token = jwt.sign({ id: user.id }, "brushUp-secet-key", {
         expiresIn: 86400, // 24 hours
       });

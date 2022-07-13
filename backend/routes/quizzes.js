@@ -27,7 +27,6 @@ router.get("/:id", (request, response, next) => {
         message: "Unauthorized!",
       });
     }
-    request.userId = decoded.id;
     pool.query("SELECT * FROM quizzes WHERE id=$1", [id], (err, res) => {
       if (err) return next(err);
       if (res.rows.length === 0)
@@ -35,7 +34,16 @@ router.get("/:id", (request, response, next) => {
           error: true,
           message: "This quiz does not exist",
         });
-      response.json(res.rows[0]);
+      const user_id = res.rows[0].creators_id;
+      request.userId = decoded.id;
+      if (request.userId !== Number(user_id)) {
+        return response.json({
+          error: true,
+          message: "Token ID provided does not match!",
+        });
+      } else {
+        response.json(res.rows[0]);
+      }
     });
   });
 });
@@ -56,14 +64,21 @@ router.post("/", (request, response, next) => {
       });
     }
     request.userId = decoded.id;
-    pool.query(
-      "INSERT INTO quizzes (creators_id,title) VALUES ($1,$2) RETURNING *",
-      [creators_id, title],
-      (err, res) => {
-        if (err) return next(err);
-        response.json(res.rows[0]);
-      }
-    );
+    if (request.userId !== Number(creators_id)) {
+      return response.json({
+        error: true,
+        message: "Token ID provided does not match!",
+      });
+    } else {
+      pool.query(
+        "INSERT INTO quizzes (creators_id,title) VALUES ($1,$2) RETURNING *",
+        [creators_id, title],
+        (err, res) => {
+          if (err) return next(err);
+          response.json(res.rows[0]);
+        }
+      );
+    }
   });
 });
 

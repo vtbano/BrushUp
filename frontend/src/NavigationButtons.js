@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 
 const NavigationButtons = ({ creator, setCreator }) => {
   const navigate = useNavigate();
+
   const handleSignOut = async (e) => {
     e.preventDefault();
 
@@ -12,9 +13,9 @@ const NavigationButtons = ({ creator, setCreator }) => {
     });
     const getSignOutRequestResponse = await submitSignOutRequest.json();
     console.log("Succesfully signed out!", getSignOutRequestResponse);
-    localStorage.removeItem("user");
-    // setCreator(null);
     navigate(`logout`);
+    localStorage.removeItem("user");
+    setCreator(null);
   };
   return (
     <>
@@ -39,14 +40,13 @@ const NavigationButtons = ({ creator, setCreator }) => {
             alt="Profilebutton"
             className="nav-button"
           />
-          <Link to={``}>
-            <img
-              src="../img/icons8-sign-out-100.png"
-              alt="Profilebutton"
-              className="nav-button"
-              onClick={handleSignOut}
-            />
-          </Link>
+
+          <img
+            src="../img/icons8-sign-out-100.png"
+            alt="Profilebutton"
+            className="nav-button"
+            onClick={handleSignOut}
+          />
         </span>
       ) : (
         <span className="login-register-navigation-buttons">

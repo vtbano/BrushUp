@@ -6,7 +6,7 @@ const SingleQuizWithResponse = ({ id, title, setQuizShared }) => {
   const getQuizResponsesComplete = async () => {
     const quizResponses = await fetch(`/quizzes/${id}/responses`);
     const resultOfQuizResponses = await quizResponses.json();
-    console.log("SingleQuizWithResponse:", resultOfQuizResponses);
+    // console.log("SingleQuizWithResponse:", resultOfQuizResponses);
     if (resultOfQuizResponses.length >= 1) {
       setShowTitle(true);
     } else if (resultOfQuizResponses.length === 0) {

@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 
 const CreateQuiz = ({ creator, setActiveQuiz }) => {
   const { id } = creator;
-  const [title, setTitle] = useState(""); //this causes to re-render and that's why console.log is coming up multiple times
+  const [title, setTitle] = useState("");
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
@@ -17,7 +17,6 @@ const CreateQuiz = ({ creator, setActiveQuiz }) => {
     const getQuizSubmitted = await submitQuiz.json();
     console.log("Set Active Quiz:", getQuizSubmitted);
     navigate(`/quizzes/${getQuizSubmitted.id}/questions`);
-    console.log("New Quiz Added");
   };
 
   return (
