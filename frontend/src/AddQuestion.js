@@ -35,7 +35,7 @@ const AddQuestion = ({
       }
     );
     const getQuestionSubmitted = await submitQuestion.json();
-    console.log(getQuestionSubmitted);
+    console.log("Question Submitted:", getQuestionSubmitted);
     console.log("New Question Saved");
     console.log(
       "setQuestionPlaceholder in ADDQUESTION",

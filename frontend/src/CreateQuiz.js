@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-const CreateQuiz = ({ creator, setActiveQuiz }) => {
+const CreateQuiz = ({ creator }) => {
   const { id } = creator;
   const [title, setTitle] = useState("");
   const navigate = useNavigate();
@@ -15,7 +15,7 @@ const CreateQuiz = ({ creator, setActiveQuiz }) => {
       body: JSON.stringify({ creators_id: id, title: title }),
     });
     const getQuizSubmitted = await submitQuiz.json();
-    console.log("Set Active Quiz:", getQuizSubmitted);
+    console.log("Set Active Quiz ID:", getQuizSubmitted.id);
     navigate(`/quizzes/${getQuizSubmitted.id}/questions`);
   };
 
