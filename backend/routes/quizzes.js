@@ -234,7 +234,7 @@ router.get(
   }
 );
 
-//UPDATED***
+//UPDATED SECURITY***
 router.post("/:quizzes_id/questions", (request, response, next) => {
   const { question_text, image } = request.body;
   const { quizzes_id } = request.params;
@@ -300,14 +300,34 @@ router.put(
           message: "Unauthorized!",
         });
       }
-      request.userId = decoded.id;
       pool.query(
-        `UPDATE questions SET question_text=($1), image=($2) WHERE quizzes_id=($3) AND id=($4) RETURNING *`,
-        [question_text, image, quizzes_id, questions_id],
+        "SELECT * FROM quizzes WHERE id=$1",
+        [quizzes_id],
         (err, res) => {
           if (err) return next(err);
+          if (res.rows.length === 0)
+            return response.json({
+              error: true,
+              message: "This quiz does not exist",
+            });
+          const user_id = res.rows[0].creators_id;
+          request.userId = decoded.id;
+          if (request.userId !== Number(user_id)) {
+            return response.json({
+              error: true,
+              message: "Token ID provided does not match!",
+            });
+          } else {
+            pool.query(
+              `UPDATE questions SET question_text=($1), image=($2) WHERE quizzes_id=($3) AND id=($4) RETURNING *`,
+              [question_text, image, quizzes_id, questions_id],
+              (err, res) => {
+                if (err) return next(err);
 
-          response.json(res.rows[0]);
+                response.json(res.rows[0]);
+              }
+            );
+          }
         }
       );
     });
