@@ -282,7 +282,7 @@ router.post("/:quizzes_id/questions", (request, response, next) => {
   });
 });
 
-//UPDATED***
+//UPDATED SECURITY***
 router.put(
   "/:quizzes_id/questions/:questions_id",
   (request, response, next) => {
@@ -351,14 +351,34 @@ router.delete(
           message: "Unauthorized!",
         });
       }
-      request.userId = decoded.id;
       pool.query(
-        "DELETE FROM questions WHERE quizzes_id=$1 AND id=$2",
-        [quizzes_id, questions_id],
+        "SELECT * FROM quizzes WHERE id=$1",
+        [quizzes_id],
         (err, res) => {
           if (err) return next(err);
+          if (res.rows.length === 0)
+            return response.json({
+              error: true,
+              message: "This quiz does not exist",
+            });
+          const user_id = res.rows[0].creators_id;
+          request.userId = decoded.id;
+          if (request.userId !== Number(user_id)) {
+            return response.json({
+              error: true,
+              message: "Token ID provided does not match!",
+            });
+          } else {
+            pool.query(
+              "DELETE FROM questions WHERE quizzes_id=$1 AND id=$2",
+              [quizzes_id, questions_id],
+              (err, res) => {
+                if (err) return next(err);
 
-          response.status(204).end(); // Status response
+                response.status(204).end(); // Status response
+              }
+            );
+          }
         }
       );
     });
