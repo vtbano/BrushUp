@@ -86,7 +86,7 @@ const AddQuestion = ({
             </div>
           </div>
         </div>
-        <div>
+        <div className="btn-save-question-container">
           <button
             type="submit"
             className="btn-save-question"

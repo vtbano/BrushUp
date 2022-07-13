@@ -374,6 +374,7 @@ footer {
   background-color: #4caf50;
   color: #ffffff;
   font-size: 1em;
+  margin-left: 0.5em;
   padding: 0.5em 1.5em;
   border-radius: 20px;
   border: none;
@@ -399,8 +400,12 @@ footer {
   border: none;
 }
 
+.btn-save-question-container {
+  display: grid;
+  place-items: center;
+}
+
 .btn-save-quiz,
-.btn-save-question,
 .btn-save-question,
 .btn-savePlusAdd-question {
   background-color: #4caf50;
@@ -486,7 +491,6 @@ footer {
 }
 
 .btn-save-quiz:hover,
-.btn-save-question:hover,
 .btn-save-question:hover,
 .btn-add-correct-answer:hover,
 .btn-add-wrong-answer:hover,
