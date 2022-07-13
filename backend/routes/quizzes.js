@@ -386,7 +386,7 @@ router.delete(
 );
 
 //ANSWER_OPTIONS
-//UPDATED***
+//UPDATED SECURITY***
 router.get(
   "/:quizzes_id/questions/:questions_id/answer_options",
   (request, response, next) => {
@@ -457,12 +457,12 @@ router.get(
   }
 );
 
-//UPDATED***
+//UPDATED SECURITY***
 router.post(
   "/:quizzes_id/questions/:questions_id/answer_options",
   (request, response, next) => {
     const { correct, answer_text } = request.body;
-    const { questions_id } = request.params;
+    const { quizzes_id, questions_id } = request.params;
     const token = request.session.token;
     if (!token) {
       return response.status(403).send({
@@ -475,13 +475,33 @@ router.post(
           message: "Unauthorized!",
         });
       }
-      request.userId = decoded.id;
       pool.query(
-        "INSERT INTO answer_options(questions_id,correct, answer_text) VALUES ($1,$2,$3) RETURNING *",
-        [questions_id, correct, answer_text],
+        "SELECT * FROM quizzes WHERE id=$1",
+        [quizzes_id],
         (err, res) => {
           if (err) return next(err);
-          response.json(res.rows[0]);
+          if (res.rows.length === 0)
+            return response.json({
+              error: true,
+              message: "This quiz does not exist",
+            });
+          const user_id = res.rows[0].creators_id;
+          request.userId = decoded.id;
+          if (request.userId !== Number(user_id)) {
+            return response.json({
+              error: true,
+              message: "Token ID provided does not match!",
+            });
+          } else {
+            pool.query(
+              "INSERT INTO answer_options(questions_id,correct, answer_text) VALUES ($1,$2,$3) RETURNING *",
+              [questions_id, correct, answer_text],
+              (err, res) => {
+                if (err) return next(err);
+                response.json(res.rows[0]);
+              }
+            );
+          }
         }
       );
     });
