@@ -692,7 +692,7 @@ router.post("/:quizzes_id/respondents", (request, response, next) => {
   });
 });
 
-//UPDATED***
+//UPDATED SECURITY***
 router.delete(
   "/:quizzes_id/respondents/:respondent_id",
   (request, response, next) => {
@@ -744,7 +744,7 @@ router.delete(
 
 //RESPONSES
 
-//UPDATED***
+//UPDATED SECURITY***
 router.get("/:quizzes_id/responses", (request, response, next) => {
   const { quizzes_id } = request.params;
   const token = request.session.token;
@@ -759,19 +759,38 @@ router.get("/:quizzes_id/responses", (request, response, next) => {
         message: "Unauthorized!",
       });
     }
-    request.userId = decoded.id;
-
     pool.query(
-      "SELECT * FROM responses WHERE quizzes_id=$1",
+      "SELECT * FROM quizzes WHERE id=$1",
       [quizzes_id],
       (err, res) => {
         if (err) return next(err);
         if (res.rows.length === 0)
           return response.json({
             error: true,
-            message: "There is no response found",
+            message: "This quiz does not exist",
           });
-        response.json(res.rows);
+        const user_id = res.rows[0].creators_id;
+        request.userId = decoded.id;
+        if (request.userId !== Number(user_id)) {
+          return response.json({
+            error: true,
+            message: "Token ID provided does not match!",
+          });
+        } else {
+          pool.query(
+            "SELECT * FROM responses WHERE quizzes_id=$1",
+            [quizzes_id],
+            (err, res) => {
+              if (err) return next(err);
+              if (res.rows.length === 0)
+                return response.json({
+                  error: true,
+                  message: "There is no response found",
+                });
+              response.json(res.rows);
+            }
+          );
+        }
       }
     );
   });
