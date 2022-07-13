@@ -528,7 +528,7 @@ router.put(
 router.delete(
   "/:quizzes_id/questions/:questions_id/answer_options/:id",
   (request, response, next) => {
-    const { questions_id, id } = request.params;
+    const { quizzes_id, questions_id, id } = request.params;
     const token = request.session.token;
     if (!token) {
       return response.status(403).send({
@@ -541,13 +541,33 @@ router.delete(
           message: "Unauthorized!",
         });
       }
-      request.userId = decoded.id;
       pool.query(
-        "DELETE FROM answer_options WHERE questions_id=($1) AND id=($2)",
-        [questions_id, id],
+        "SELECT * FROM quizzes WHERE id=$1",
+        [quizzes_id],
         (err, res) => {
           if (err) return next(err);
-          response.status(204).end();
+          if (res.rows.length === 0)
+            return response.json({
+              error: true,
+              message: "This quiz does not exist",
+            });
+          const user_id = res.rows[0].creators_id;
+          request.userId = decoded.id;
+          if (request.userId !== Number(user_id)) {
+            return response.json({
+              error: true,
+              message: "Token ID provided does not match!",
+            });
+          } else {
+            pool.query(
+              "DELETE FROM answer_options WHERE questions_id=($1) AND id=($2)",
+              [questions_id, id],
+              (err, res) => {
+                if (err) return next(err);
+                response.status(204).end();
+              }
+            );
+          }
         }
       );
     });
@@ -570,13 +590,33 @@ router.get("/:quizzes_id/respondents", (request, response, next) => {
         message: "Unauthorized!",
       });
     }
-    request.userId = decoded.id;
     pool.query(
-      "SELECT * FROM respondents WHERE quizzes_id=$1",
+      "SELECT * FROM quizzes WHERE id=$1",
       [quizzes_id],
       (err, res) => {
         if (err) return next(err);
-        response.json(res.rows);
+        if (res.rows.length === 0)
+          return response.json({
+            error: true,
+            message: "This quiz does not exist",
+          });
+        const user_id = res.rows[0].creators_id;
+        request.userId = decoded.id;
+        if (request.userId !== Number(user_id)) {
+          return response.json({
+            error: true,
+            message: "Token ID provided does not match!",
+          });
+        } else {
+          pool.query(
+            "SELECT * FROM respondents WHERE quizzes_id=$1",
+            [quizzes_id],
+            (err, res) => {
+              if (err) return next(err);
+              response.json(res.rows);
+            }
+          );
+        }
       }
     );
   });
