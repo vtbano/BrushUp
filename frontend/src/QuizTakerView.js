@@ -35,10 +35,7 @@ const QuizTakerView = () => {
     });
     setQuestions(activeQuizQuestionsSorted);
     setActiveQuestion(activeQuizQuestionsSorted[currentQuestionsIndex]);
-    // console.log(
-    //   "check if image:",
-    //   activeQuizQuestionsSorted[currentQuestionsIndex].image
-    // );
+
     checkIfImageforQuestion(activeQuizQuestionsSorted[currentQuestionsIndex]);
   };
 
@@ -48,13 +45,11 @@ const QuizTakerView = () => {
     );
     const activeAnswerOptions = await response.json();
     if (activeAnswerOptions.length > 0) {
-      // console.log("Active Answer Options:", activeAnswerOptions);
       setAnswerOptions(activeAnswerOptions);
       const correctOptions = activeAnswerOptions.filter((option) => {
         return option.correct === true;
       });
       setCorrectOptionsCount(correctOptions.length);
-      // console.log("Correct Options", correctOptions.length);
     } else if (activeAnswerOptions.length === 0) {
       setActiveQuestion(null);
       setOptionSelectedCount(1);
@@ -213,12 +208,12 @@ const QuizTakerView = () => {
             </div>
           </div>
         )}
-
+        {/* //ADDITIONAL FEATURE TO BE ADDED 
         <div>
           <button type="submit" className="btn-save-question">
             Reveal Answers
           </button>
-        </div>
+        </div> */}
       </section>
     </>
   );
