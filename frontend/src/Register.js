@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-const Register = ({ setCreator, setUserNavBar }) => {
+const Register = ({ setCreator }) => {
   const navigate = useNavigate();
   const [userEntered, setUserEntered] = useState("");
   const [userEmailEntered, setUserEmailEntered] = useState("");
@@ -27,7 +27,6 @@ const Register = ({ setCreator, setUserNavBar }) => {
     const getUserSubmitted = await submitNewUser.json();
     console.log(getUserSubmitted);
     setCreator(getUserSubmitted);
-    setUserNavBar(true);
     setUserEntered("");
     setUserEmailEntered("");
     setUserFirstNameEntered("");
