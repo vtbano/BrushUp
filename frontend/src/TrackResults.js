@@ -28,11 +28,16 @@ const TrackResults = () => {
             <span>Number of Respondents</span>
             <span>Completion</span>
           </div>
-          <div className="track-results-display">
-            {trackResultQuizzes.map((quiz) => {
-              return <SingleQuizTrackResult key={quiz.id} {...quiz} />;
-            })}
-          </div>
+          {trackResultQuizzes.length >= 1 && (
+            <div className="track-results-display">
+              {trackResultQuizzes.map((quiz) => {
+                return <SingleQuizTrackResult key={quiz.id} {...quiz} />;
+              })}
+            </div>
+          )}
+          {trackResultQuizzes.error === true && (
+            <div className="no-quizzes-to-track">No quizzes to track</div>
+          )}
         </div>
       </section>
     </>

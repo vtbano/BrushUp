@@ -170,6 +170,7 @@ footer {
 
 .track-display {
   width: 70em;
+  display: grid;
 }
 
 .respondent-list-and-email-title-container {
@@ -224,7 +225,8 @@ footer {
   display: grid;
 } */
 
-.share-general-link {
+.share-general-link,
+.no-quizzes-to-track {
   margin-top: 1em;
   color: #3db2ff;
   background-color: #d1e4f0;
@@ -238,6 +240,12 @@ footer {
 
 .share-general-link span {
   font-weight: 500;
+}
+
+.no-quizzes-to-track {
+  font-weight: 900;
+  font-size: 2em;
+  text-align: center;
 }
 .quizzes-container,
 .share-container,
