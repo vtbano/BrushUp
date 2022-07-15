@@ -119,12 +119,13 @@ router.put("/:id", (request, response, next) => {
     } else {
       fields.forEach((field, index) => {
         pool.query(
-          `UPDATE creators SET ${field}=($1) WHERE id=($2)`,
+          `UPDATE creators SET ${field}=($1) WHERE id=($2) RETURNING *`,
           [request.body[field], id],
           (err, res) => {
             if (err) return next(err);
+            const user = res.rows[0];
             if (index === fields.length - 1)
-              return response.redirect("/creators");
+              return response.json({ id: user.id, username: user.username });
           }
         );
       });
