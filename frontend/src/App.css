@@ -218,10 +218,12 @@ footer {
 
 .track-display {
   width: 70em;
+  min-height: max-content;
   display: grid;
 }
 
 @media screen and (max-width: 500px) {
+  .share-display,
   .login-and-register-display,
   .track-display {
     width: 350px;
@@ -427,6 +429,12 @@ footer {
   display: grid;
   margin-top: 0.5em;
   grid-template-columns: 25em 1fr;
+}
+
+@media screen and (max-width: 500px) {
+  .single-respondent-row-container {
+    grid-template-columns: 0;
+  }
 }
 
 .login-form {
@@ -775,4 +783,11 @@ footer {
 
 .delete-respondent {
   margin-left: 1em;
+}
+
+.log-out-container {
+  min-height: 20em;
+  margin: 2em;
+  font-size: 1.5em;
+  color: #3db2ff;
 }

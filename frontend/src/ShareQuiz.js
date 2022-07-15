@@ -7,6 +7,7 @@ const ShareQuiz = () => {
   const [emailEntered, setEmailEntered] = useState("");
   const [quizTitle, setQuizTitle] = useState("");
   const [respondentList, setRespondentList] = useState([]);
+  const [screenSize, setScreenSize] = useState(window.innerWidth);
 
   const getCurrentRespondents = async () => {
     const response = await fetch(`/quizzes/${id}/respondents`);
@@ -20,9 +21,21 @@ const ShareQuiz = () => {
     setQuizTitle(responseGetQuiz.title);
   };
 
+  const checkSize = () => {
+    setScreenSize(window.innerWidth);
+  };
+
   useEffect(() => {
     getQuiz();
     getCurrentRespondents();
+  }, []);
+
+  useEffect(() => {
+    window.addEventListener("resize", checkSize);
+    //this will clean-up the useEffect
+    return () => {
+      window.removeEventListener("resize", checkSize);
+    };
   }, []);
 
   //HANDLE ADD RESPONDENT
@@ -65,7 +78,7 @@ const ShareQuiz = () => {
         <div className="share-display">
           <div className="respondent-list-and-email-title-container ">
             <span>Add Respondent(s)</span>
-            <span>Shareable Link</span>
+            <span>{screenSize <= 500 ? "" : "Shareable Link"}</span>
           </div>
           {respondentList.map((respondent) => {
             return (
