@@ -367,7 +367,10 @@ footer {
   .share-quiz-container,
   .share-container-center,
   .questions-container,
-  .share-questions-container-center {
+  .share-questions-container-center,
+  .correct-answer-options,
+  .wrong-answer-options,
+  .add-question-display {
     width: 350px;
   }
 }
@@ -660,8 +663,8 @@ footer {
 }
 
 @media screen and (max-width: 500px) {
-  .login-and-register-form-input {
-    width: 10em;
+  .add-question-input {
+    width: 350px;
   }
 }
 
@@ -677,7 +680,7 @@ footer {
 }
 
 @media screen and (max-width: 500px) {
-  .login-and-register-form-input-wrong {
+  .login-and-register-form-input .login-and-register-form-input-wrong {
     width: 10em;
   }
 }
