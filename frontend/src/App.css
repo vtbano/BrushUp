@@ -51,6 +51,12 @@ header {
   border: none;
 }
 
+@media screen and (max-width: 500px) {
+  .navigation-options {
+    align-self: center;
+  }
+}
+
 footer {
   margin-top: 3em;
   padding-top: 2em;
@@ -651,6 +657,12 @@ footer {
   margin-top: 1em;
   width: 15em;
   height: 2em;
+}
+
+@media screen and (max-width: 500px) {
+  .login-and-register-form-input-wrong {
+    width: 10em;
+  }
 }
 
 .correct-answer-option-input,
