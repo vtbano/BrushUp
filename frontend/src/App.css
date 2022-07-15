@@ -322,15 +322,6 @@ footer {
   min-height: 20em;
 }
 
-@media screen and (max-width: 500px) {
-  .quizzes-container,
-  .share-container,
-  .share-quiz-container,
-  .share-container-center {
-    width: 350px;
-  }
-}
-
 .correct-answer-options,
 .wrong-answer-options {
   display: grid;
@@ -368,6 +359,17 @@ footer {
   color: #3db2ff;
   font-weight: 500;
   margin: 1em;
+}
+
+@media screen and (max-width: 500px) {
+  .quizzes-container,
+  .share-container,
+  .share-quiz-container,
+  .share-container-center,
+  .questions-container,
+  .share-questions-container-center {
+    width: 350px;
+  }
 }
 
 .login-and-register-form-title {
