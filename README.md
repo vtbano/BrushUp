@@ -15,12 +15,29 @@ Click the :paperclip: link under the **About** section
 ### Brush Up User flow
 
 **Register or Login**
-If the board fills up with no winner then it will be declared a _Tie Game_.The Pentagon button at the bottom will allow you to flip to the next screen and you have the option of going another round!
+Once you've navigated to BrushUp landing page you have the option of Getting Started and creating an account or going directly to the Login Page.
 
-**Add a quizzes**
-**Add a questions**
+**Add quizzes**
+After you have registered an account it will redirect you to your Quiz dashboard where you can have a high level overview of the Quizzes you've created and the Quizzes that have been shared.
+
+You can easily _Delete_ your quizzes or _Edit_ the Quiz Title name.
+
+Once you've added a Quiz it will redirect to you Add Questions.
+
+**Add questions**
+Once you've added a Quiz it will redirect to you Add Questions. It wil have the quiz title at the top so you know which Quiz you are adding questions to.
+
+Easily _Add_ a question by pressing the Add Question button.
+
+In this view you can also choose to share the quiz with your friends by clicking the share symbol.
 **Invite people to take the quiz**
-**Track quiz completion**
+
+Once you click the **Share symbol** this will redirect you to a view where you can create unique URL links for each person you want to share the quiz with. Each person you add will be added as a respondent. You can then be able to track out of the people you decided to directly share the quiz with, who finished the quiz, regardless if it is a pass or a fail.
+
+**Track quiz completion\***
+How can view the Track Quiz Completion? Click the **pie chart**, a button that is located in the top navigation bar.
+
+It will show you the quizzes you've created, how many people you've shared the quiz with and how many people completed the quiz you've shared.
 
 ## Getting Started
 

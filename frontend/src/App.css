@@ -372,6 +372,10 @@ footer {
   margin: 1em;
 }
 
+.quizzes-container-name {
+  min-height: 20em;
+}
+
 @media screen and (max-width: 500px) {
   .quizzes-container,
   .share-container,
@@ -381,7 +385,10 @@ footer {
   .share-questions-container-center,
   .correct-answer-options,
   .wrong-answer-options,
-  .add-question-display {
+  .add-question-display,
+  .quiz-taker-view-question-display,
+  .quiz-taker-view-end-game-display,
+  .share-general-link {
     width: 350px;
   }
 }
@@ -632,6 +639,9 @@ footer {
   margin-bottom: 1em;
 }
 
+.quiz-taker-view-sect {
+  min-height: max-content;
+}
 .add-question-title,
 .quiz-taker-view-question-title,
 .share-title-banner,
@@ -691,7 +701,8 @@ footer {
 }
 
 @media screen and (max-width: 500px) {
-  .add-question-input {
+  .add-question-input,
+  .add-recipient-input {
     width: 330px;
   }
 }
@@ -769,6 +780,14 @@ footer {
   justify-self: center;
   margin-top: 2em;
   margin-bottom: 2em;
+}
+
+@media screen and (max-width: 500px) {
+  .quiz-takeer-view-final-score {
+    font-size: 2em;
+    margin-top: 1em;
+    margin-bottom: 1em;
+  }
 }
 
 .single-url-link {

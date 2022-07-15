@@ -16,6 +16,7 @@ import TrackResults from "./TrackResults";
 import Login from "./Login";
 import Register from "./Register";
 import LogOut from "./LogOut";
+import UpdateProfile from "./UpdateProfile";
 
 const App = () => {
   const getLocalStorage = () => {
@@ -59,6 +60,10 @@ const App = () => {
             <Route
               path="register"
               element={<Register setCreator={setCreator} />}
+            />
+            <Route
+              path="update"
+              element={<UpdateProfile creator={creator} />}
             />
             <Route path="logout" element={<LogOut />} />
 

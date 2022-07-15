@@ -1,20 +1,33 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
-const UpdateProfile = ({ setCreator, setUserNavBar }) => {
+const UpdateProfile = ({ setCreator, creator }) => {
+  const { id, username } = creator;
   const navigate = useNavigate();
   const [userEntered, setUserEntered] = useState("");
   const [userEmailEntered, setUserEmailEntered] = useState("");
   const [userFirstNameEntered, setUserFirstNameEntered] = useState("");
   const [userLastNameEntered, setUserLastNameEntered] = useState("");
   const [userPasswordEntered, setUserPasswordEntered] = useState("");
+  const [creatorProfile, setCreatorProfile] = useState([]);
+
+  const getCreatorProfile = async () => {
+    const response = await fetch(`/creators/${id}`);
+    const responseCreatorProfile = await response.json();
+    // console.log("Profile Data from specific Creator:", responseCreatorProfile);
+    setCreatorProfile(responseCreatorProfile);
+  };
+
+  useEffect(() => {
+    getCreatorProfile();
+  }, []);
 
   //HANDLE USER REGISTER
-  const handleUserRegister = async (e) => {
+  const handleUserUpdate = async (e) => {
     e.preventDefault();
 
-    const submitNewUser = await fetch(`/creators`, {
-      method: "POST",
+    const submitNewUser = await fetch(`/creators/${id}`, {
+      method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         username: userEntered,
@@ -27,29 +40,28 @@ const UpdateProfile = ({ setCreator, setUserNavBar }) => {
     const getUserSubmitted = await submitNewUser.json();
     console.log(getUserSubmitted);
     setCreator(getUserSubmitted);
-    setUserNavBar(true);
     setUserEntered("");
     setUserEmailEntered("");
     setUserFirstNameEntered("");
     setUserLastNameEntered("");
     setUserPasswordEntered("");
 
-    navigate(`/quizzes`);
+    // navigate(`/quizzes`);
   };
 
   return (
     <>
       <section className="add-respondent-sect">
-        <div className="login-and-register-banner">REGISTER</div>
+        <div className="login-and-register-banner">UPDATE PROFILE</div>
         <div className="login-and-register-display">
           <div className="login-form">
             <form>
               <div className="form-sections">
-                <span className="login-and-register-form-title">Username</span>
+                <span className="login-and-register-form-title">Username:</span>
                 <input
                   type="text"
                   className="login-and-register-form-input"
-                  placeholder="Type Username"
+                  placeholder={username}
                   value={userEntered}
                   onChange={(e) => {
                     setUserEntered(e.target.value);
@@ -58,12 +70,12 @@ const UpdateProfile = ({ setCreator, setUserNavBar }) => {
               </div>
               <div className="form-sections">
                 <span className="login-and-register-form-title">
-                  User Email
+                  User Email:
                 </span>
                 <input
                   type="text"
                   className="login-and-register-form-input"
-                  placeholder="Type Email"
+                  placeholder={creatorProfile.email}
                   value={userEmailEntered}
                   onChange={(e) => {
                     setUserEmailEntered(e.target.value);
@@ -77,7 +89,7 @@ const UpdateProfile = ({ setCreator, setUserNavBar }) => {
                 <input
                   type="text"
                   className="login-and-register-form-input"
-                  placeholder="Type First Name"
+                  placeholder={creatorProfile.first_name}
                   value={userFirstNameEntered}
                   onChange={(e) => {
                     setUserFirstNameEntered(e.target.value);
@@ -89,7 +101,7 @@ const UpdateProfile = ({ setCreator, setUserNavBar }) => {
                 <input
                   type="text"
                   className="login-and-register-form-input"
-                  placeholder="Type Last Name"
+                  placeholder={creatorProfile.last_name}
                   value={userLastNameEntered}
                   onChange={(e) => {
                     setUserLastNameEntered(e.target.value);
@@ -101,7 +113,7 @@ const UpdateProfile = ({ setCreator, setUserNavBar }) => {
                 <input
                   type="text"
                   className="login-and-register-form-input"
-                  placeholder="Type password"
+                  placeholder="Type new password"
                   value={userPasswordEntered}
                   onChange={(e) => {
                     setUserPasswordEntered(e.target.value);
@@ -112,7 +124,7 @@ const UpdateProfile = ({ setCreator, setUserNavBar }) => {
             <button
               type="submit"
               className="btn-register"
-              onClick={handleUserRegister}
+              onClick={handleUserUpdate}
             >
               Update
             </button>

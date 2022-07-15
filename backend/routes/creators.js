@@ -93,22 +93,42 @@ router.post("/", (request, response, next) => {
 router.put("/:id", (request, response, next) => {
   const { id } = request.params;
   const keys = ["username", "email", "first_name", "last_name", "password"];
-
   const fields = [];
-
   keys.forEach((key) => {
     if (request.body[key]) fields.push(key);
   });
 
-  fields.forEach((field, index) => {
-    pool.query(
-      `UPDATE creators SET ${field}=($1) WHERE id=($2)`,
-      [request.body[field], id],
-      (err, res) => {
-        if (err) return next(err);
-        if (index === fields.length - 1) response.redirect("/creators");
-      }
-    );
+  const token = request.session.token;
+  if (!token) {
+    return response.status(403).send({
+      message: "No token provided!",
+    });
+  }
+  jwt.verify(token, "brushUp-secet-key", (err, decoded) => {
+    if (err) {
+      return response.status(401).send({
+        message: "Unauthorized!",
+      });
+    }
+    request.userId = decoded.id;
+    if (request.userId !== Number(id)) {
+      return response.json({
+        error: true,
+        message: "Token ID provided does not match!",
+      });
+    } else {
+      fields.forEach((field, index) => {
+        pool.query(
+          `UPDATE creators SET ${field}=($1) WHERE id=($2)`,
+          [request.body[field], id],
+          (err, res) => {
+            if (err) return next(err);
+            if (index === fields.length - 1)
+              return response.redirect("/creators");
+          }
+        );
+      });
+    }
   });
 });
 

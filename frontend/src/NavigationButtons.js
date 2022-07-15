@@ -35,11 +35,13 @@ const NavigationButtons = ({ creator, setCreator }) => {
               className="nav-button"
             />
           </Link>
-          <img
-            src="../img/icons8-user-96.png"
-            alt="Profilebutton"
-            className="nav-button"
-          />
+          <Link to={`update`}>
+            <img
+              src="../img/icons8-user-96.png"
+              alt="Profilebutton"
+              className="nav-button"
+            />
+          </Link>
 
           <img
             src="../img/icons8-sign-out-100.png"
