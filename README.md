@@ -30,9 +30,16 @@ Once you've added a Quiz it will redirect to you Add Questions.
 
   Once you've added a Quiz it will redirect to you Add Questions. It wil have the quiz title at the top so you know which Quiz you are adding questions to.
 
-Easily _Add_ a question by pressing the Add Question button.
+  In this view you can also choose to share the quiz with your friends by clicking the share symbol.
 
-In this view you can also choose to share the quiz with your friends by clicking the share symbol.
+Easily _Add_ a question by pressing the Add Question button.
+You can easily _Delete_ your questions or _Edit_ the questions and the answer options.
+
+- **Add answer options to specific questions**
+
+After you click Add Question you will be directed to a page where you can type the question, add a image using an image url address, and add correct and wrong answers. You can add as many correct and wrong answers you would like.
+
+**_Tip:_** Make sure you identify how many correct answers there are for that question within the body of your question. When the quiz taker is going through answering the questions, it won't go to the next question until they've selected the amount of possible correct answers there are. So if there are 3 correct answers and there are 5 options, the quiz taker must select at least 3 answer options.
 
 - **Invite people to take the quiz**
 
@@ -40,7 +47,7 @@ Once you click the **Share symbol** this will redirect you to a view where you c
 
 - **Track quiz completion**
 
-How can view the Track Quiz Completion? Click the **pie chart**, a button that is located in the top navigation bar.
+How can you view the track quiz completion? Click the **pie chart**, a button that is located in the top navigation bar.
 
 It will show you the quizzes you've created, how many people you've shared the quiz with and how many people completed the quiz you've shared.
 
