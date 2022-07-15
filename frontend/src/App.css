@@ -216,14 +216,16 @@ footer {
   min-height: 20em;
 }
 
-@media screen and (max-width: 500px) {
-  .login-and-register-display {
-    width: 350px;
-  }
-}
 .track-display {
   width: 70em;
   display: grid;
+}
+
+@media screen and (max-width: 500px) {
+  .login-and-register-display,
+  .track-display {
+    width: 350px;
+  }
 }
 
 .respondent-list-and-email-title-container {
@@ -249,6 +251,13 @@ footer {
 .track-result-row-container {
   font-weight: 300;
   font-size: 0.8em;
+}
+
+@media screen and (max-width: 500px) {
+  .track-result-row-container {
+    border: 1px solid;
+    /* place-items: center; */
+  }
 }
 
 .number-of-respondents-container,
@@ -372,6 +381,17 @@ footer {
   .wrong-answer-options,
   .add-question-display {
     width: 350px;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .add-question-label,
+  .add-url-label,
+  .correct-answers-container,
+  .wrong-answers-container {
+    margin: 0;
+    margin-top: 1em;
+    margin-bottom: 1em;
   }
 }
 
@@ -664,7 +684,7 @@ footer {
 
 @media screen and (max-width: 500px) {
   .add-question-input {
-    width: 350px;
+    width: 330px;
   }
 }
 
