@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-const Login = ({ setCreator, setUserNavBar }) => {
+const Login = ({ setCreator }) => {
   const [userEntered, setUserEntered] = useState("");
   const [userPasswordEntered, setUserPasswordEntered] = useState("");
   const [checkInput, setCheckInput] = useState(true);
@@ -20,8 +20,8 @@ const Login = ({ setCreator, setUserNavBar }) => {
       }),
     });
     const getUserSubmitted = await submitUser.json();
-    if (getUserSubmitted.message === "Invalid Password!") {
-      console.log("Invalid Password!");
+    if (getUserSubmitted.error) {
+      console.log(getUserSubmitted.message);
       setCheckInput(false);
     } else {
       setCreator(getUserSubmitted);

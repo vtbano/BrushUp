@@ -38,6 +38,7 @@ const App = () => {
 
   useEffect(() => {
     localStorage.setItem("user", JSON.stringify(creator));
+    console.log("UseEffect", creator);
   }, [creator]);
 
   return (
@@ -63,7 +64,9 @@ const App = () => {
             />
             <Route
               path="update"
-              element={<UpdateProfile creator={creator} />}
+              element={
+                <UpdateProfile setCreator={setCreator} creator={creator} />
+              }
             />
             <Route path="logout" element={<LogOut />} />
 
