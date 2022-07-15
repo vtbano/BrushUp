@@ -6,35 +6,40 @@ Supporting and sharing is important to me, so I've designed BrushUp to allow sha
 
 You may be interested in tracking who completed the quiz out of the people you've shared it with. We have that tracking covered in BrushUp.Once a quiz taker completes a quiz and gets their final score, the completion will be logged into the data base. Once a quiz taker completes a quiz, it will only log int into the database once.
 
-Get to brushing up in your knowledge and skills with friends!
+Brush up in your knowledge and skills with friends!
 
 ## How to access BrushUp
 
 Click the :paperclip: link under the **About** section
 
-### Brush Up User flow
+## Brush Up User flow
 
-**Register or Login**
-Once you've navigated to BrushUp landing page you have the option of Getting Started and creating an account or going directly to the Login Page.
+- **Register or Login**
 
-**Add quizzes**
-After you have registered an account it will redirect you to your Quiz dashboard where you can have a high level overview of the Quizzes you've created and the Quizzes that have been shared.
+  Once you've navigated to BrushUp landing page you have the option of Getting Started and creating an account or going directly to the Login Page.
+
+- **Add quizzes**
+
+  After you have registered an account it will redirect you to your Quiz dashboard where you can have a high level overview of the Quizzes you've created and the Quizzes that have been shared.
 
 You can easily _Delete_ your quizzes or _Edit_ the Quiz Title name.
 
 Once you've added a Quiz it will redirect to you Add Questions.
 
-**Add questions**
-Once you've added a Quiz it will redirect to you Add Questions. It wil have the quiz title at the top so you know which Quiz you are adding questions to.
+- **Add questions**
+
+  Once you've added a Quiz it will redirect to you Add Questions. It wil have the quiz title at the top so you know which Quiz you are adding questions to.
 
 Easily _Add_ a question by pressing the Add Question button.
 
 In this view you can also choose to share the quiz with your friends by clicking the share symbol.
-**Invite people to take the quiz**
+
+- **Invite people to take the quiz**
 
 Once you click the **Share symbol** this will redirect you to a view where you can create unique URL links for each person you want to share the quiz with. Each person you add will be added as a respondent. You can then be able to track out of the people you decided to directly share the quiz with, who finished the quiz, regardless if it is a pass or a fail.
 
-**Track quiz completion\***
+- **Track quiz completion**
+
 How can view the Track Quiz Completion? Click the **pie chart**, a button that is located in the top navigation bar.
 
 It will show you the quizzes you've created, how many people you've shared the quiz with and how many people completed the quiz you've shared.
