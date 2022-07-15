@@ -14,7 +14,7 @@ const SingleQuestion = ({
     <>
       <div className="single-question-row-container">
         <span className="single-question-title">{question_text}</span>
-        <span>
+        <span className="delete-and-edit-btn-container">
           <DeleteQuestion handleQuestionDelete={handleQuestionDelete} />
           <EditQuestion
             handleQuestionEdit={handleQuestionEdit}

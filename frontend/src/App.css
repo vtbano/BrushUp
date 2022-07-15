@@ -322,6 +322,15 @@ footer {
   min-height: 20em;
 }
 
+@media screen and (max-width: 500px) {
+  .quizzes-container,
+  .share-container,
+  .share-quiz-container,
+  .share-container-center {
+    width: 350px;
+  }
+}
+
 .correct-answer-options,
 .wrong-answer-options {
   display: grid;
@@ -381,6 +390,12 @@ footer {
 .single-quiz-row-container,
 .single-question-row-container {
   margin-top: 1rem;
+}
+
+@media screen and (max-width: 500px) {
+  .delete-and-edit-btn-container {
+    display: block;
+  }
 }
 
 .single-respondent-row-container {

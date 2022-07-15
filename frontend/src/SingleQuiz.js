@@ -10,7 +10,7 @@ const SingleQuiz = ({ id, title, handleDelete }) => {
         <span className="single-quiz-title">
           <Link to={`/quizzes/${id}/questions`}> {title}</Link>
         </span>
-        <span>
+        <span className="delete-and-edit-btn-container">
           <DeleteQuiz handleDelete={handleDelete} />
           <EditQuiz id={id} />
         </span>
