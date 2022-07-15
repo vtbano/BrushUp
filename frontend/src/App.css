@@ -20,6 +20,14 @@ header {
   background-color: #3db2ff;
 }
 
+@media screen and (max-width: 500px) {
+  header {
+    display: flex;
+    flex-direction: column;
+    font-size: 1em;
+  }
+}
+
 .navigation-buttons {
   display: flex;
   justify-content: right;
@@ -75,6 +83,12 @@ footer {
   color: #ffffff;
 }
 
+@media screen and (max-width: 500px) {
+  .title {
+    flex: none;
+  }
+}
+
 .nav-button {
   width: 3em;
   height: 3em;
@@ -91,10 +105,25 @@ footer {
   max-width: 100%;
 }
 
+@media screen and (max-width: 500px) {
+  .book-shelf-girl {
+    max-width: 100%;
+    margin-top: 1em;
+  }
+}
+
 .feature-img {
   width: 10em;
   height: 10em;
   border: 0.75em solid #ffb830;
+}
+
+@media screen and (max-width: 500px) {
+  .feature-img {
+    width: 7em;
+    height: 7em;
+    border: 0.2em solid #ffb830;
+  }
 }
 
 .home-display {
@@ -103,12 +132,21 @@ footer {
   display: grid;
   grid-template-columns: 30em 15em 25em;
   width: 70em;
-  height: 20em;
+  min-height: 20em;
 }
 
 .home-summary {
   text-align: center;
   font-size: 1em;
+}
+
+@media screen and (max-width: 500px) {
+  .home-display {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 350px;
+  }
 }
 
 .home-summary-first-paragraph {
@@ -134,7 +172,6 @@ footer {
   display: inline-flex;
   flex-wrap: wrap;
   justify-content: center;
-  /* border: 1px solid black; */
 }
 
 .create-quiz-display,
@@ -157,16 +194,21 @@ footer {
   font-size: 1.25em;
   text-align: center;
 }
+
+@media screen and (max-width: 500px) {
+  .features-display {
+    font-size: 0.7em;
+    grid-template-columns: 10em 10em 10em;
+    width: 350px;
+  }
+}
+
 .share-display,
 .login-and-register-display {
   display: grid;
   width: 70em;
   min-height: 20em;
 }
-
-/* .login-and-register-display {
-  grid-template-columns: 30em 10em 30em;
-} */
 
 .track-display {
   width: 70em;
