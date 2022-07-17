@@ -64,16 +64,16 @@ It will show you the quizzes you've created, how many people you've shared the q
 ## Sreenshots
 
 **User Register & Login**
-!["Demo"](TBD)
+!["BrushUp Demo"](https://github.com/vtbano/BrushUp/blob/main/frontend/public/gif/BrushUp-Register-and-Login.gif)
 
 **Create Quiz & Question flow**
 
-!["Demo"](TBD)
+!["BrushUp Demo"](https://github.com/vtbano/BrushUp/blob/main/frontend/public/gif/BrushUp-Create-Quiz-and-Question.gif)
 
 **Add Quiz Recipients & Track Completion Results**
 
-!["Demo"](TBD)
+!["BrushUp Demo](https://github.com/vtbano/BrushUp/blob/main/frontend/public/gif/BrushUp-Share-ViewEmptyTrack.gif)
 
-**View: Taking the Quiz as a Recipient**
+**View: Taking the Quiz as a Recipient & User View: Update to Track Completion Results**
 
-!["Demo"](TBD)
+!["BrushUp Demo"](https://github.com/vtbano/BrushUp/blob/main/frontend/public/gif/Brush-up-Quiz-Taker-View.gif)
