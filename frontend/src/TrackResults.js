@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import SingleQuizTrackResult from "./SingleQuizTrackResult";
+import baseUrl from "./api/backendApi";
 
 const TrackResults = () => {
   const { id } = useParams();
   const [trackResultQuizzes, setTrackResultQuizzes] = useState([]);
 
   const getQuizzes = async () => {
-    const response = await fetch(`/creators/${id}/quizzes`);
+    const response = await fetch(`${baseUrl}/creators/${id}/quizzes`);
     const responseQuizzes = await response.json();
     setTrackResultQuizzes(responseQuizzes);
 

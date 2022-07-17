@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import baseUrl from "./api/backendApi";
 
 const UpdateProfile = ({ setCreator, creator }) => {
   const { id, username } = creator;
-  const navigate = useNavigate();
+
   const [userEntered, setUserEntered] = useState("");
   const [userEmailEntered, setUserEmailEntered] = useState("");
   const [userFirstNameEntered, setUserFirstNameEntered] = useState("");
@@ -12,21 +12,20 @@ const UpdateProfile = ({ setCreator, creator }) => {
   const [creatorProfile, setCreatorProfile] = useState([]);
 
   const getCreatorProfile = async () => {
-    const response = await fetch(`/creators/${id}`);
+    const response = await fetch(`${baseUrl}/creators/${id}`);
     const responseCreatorProfile = await response.json();
-    // console.log("Profile Data from specific Creator:", responseCreatorProfile);
     setCreatorProfile(responseCreatorProfile);
   };
 
   useEffect(() => {
     getCreatorProfile();
-  }, []);
+  }, [creator]);
 
   //HANDLE USER REGISTER
   const handleUserUpdate = async (e) => {
     e.preventDefault();
 
-    const submitNewUser = await fetch(`/creators/${id}`, {
+    const submitNewUser = await fetch(`${baseUrl}/creators/${id}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -45,8 +44,6 @@ const UpdateProfile = ({ setCreator, creator }) => {
     setUserFirstNameEntered("");
     setUserLastNameEntered("");
     setUserPasswordEntered("");
-
-    // navigate(`/quizzes`);
   };
 
   return (
