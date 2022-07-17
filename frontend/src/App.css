@@ -606,8 +606,8 @@ footer {
 .btn-edit-quiz:hover,
 .btn-enter-correct-answer:hover,
 .btn-enter-wrong-answer:hover,
-.btn-login:hover,
-.btn-register:hover,
+/* .btn-login:hover,
+.btn-register:hover, */
 .btn-savePlusAdd-question:hover,
 .btn-add-recipient:hover {
   font-weight: 700;
