@@ -5,7 +5,7 @@ import baseUrl from "./api/backendApi";
 
 const QuizTakerView = () => {
   const { id } = useParams();
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [searchParams] = useSearchParams();
   const [questions, setQuestions] = useState([]);
   const [quizTitle, setQuizTitle] = useState(null);
   const [answerOptions, setAnswerOptions] = useState([]);
