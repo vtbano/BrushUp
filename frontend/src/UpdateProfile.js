@@ -9,6 +9,7 @@ const UpdateProfile = ({ setCreator, creator }) => {
   const [userFirstNameEntered, setUserFirstNameEntered] = useState("");
   const [userLastNameEntered, setUserLastNameEntered] = useState("");
   const [userPasswordEntered, setUserPasswordEntered] = useState("");
+  const [updateStatus, setUpdateStatus] = useState(false);
   const [creatorProfile, setCreatorProfile] = useState([]);
 
   const getCreatorProfile = async () => {
@@ -39,6 +40,7 @@ const UpdateProfile = ({ setCreator, creator }) => {
     const getUserSubmitted = await submitNewUser.json();
     console.log(getUserSubmitted);
     setCreator(getUserSubmitted);
+    setUpdateStatus(true);
     setUserEntered("");
     setUserEmailEntered("");
     setUserFirstNameEntered("");
@@ -118,6 +120,7 @@ const UpdateProfile = ({ setCreator, creator }) => {
                 />
               </div>
             </form>
+
             <button
               type="submit"
               className="btn-register"
@@ -125,6 +128,7 @@ const UpdateProfile = ({ setCreator, creator }) => {
             >
               Update
             </button>
+            <div>{updateStatus ? "Update Complete" : ""}</div>
           </div>
         </div>
       </section>
