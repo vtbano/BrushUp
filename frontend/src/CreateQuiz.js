@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import baseUrl from "./api/backendApi";
 
 const CreateQuiz = ({ creator }) => {
   const { id } = creator;
@@ -9,7 +10,7 @@ const CreateQuiz = ({ creator }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const submitQuiz = await fetch("/quizzes", {
+    const submitQuiz = await fetch(`${baseUrl}/quizzes`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ creators_id: id, title: title }),

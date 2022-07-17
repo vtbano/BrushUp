@@ -29,7 +29,6 @@ const CorrectAnswers = ({ questionId, quizzes_id }) => {
     e.preventDefault();
     const submitCorrectAnswer = await fetch(
       `${baseUrl}/quizzes/${quizzes_id}/questions/${questionId}/answer_options`,
-      // `quizzes/1/questions/1/answer_options`, //testing URL
       {
         method: "POST",
         headers: { "Content-Type": "application/json" },

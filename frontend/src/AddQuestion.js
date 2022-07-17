@@ -2,11 +2,9 @@ import React from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import CorrectAnswers from "./CorrectAnswers";
 import WrongAnswers from "./WrongAnswers";
+import baseUrl from "./api/backendApi";
 
 const AddQuestion = ({
-  // setActiveContainer,
-  // id,
-  // quizzes_id,
   questionPlaceholder,
   imagePlaceholder,
   setImagePlaceholder,
@@ -23,7 +21,7 @@ const AddQuestion = ({
     e.preventDefault();
 
     const submitQuestion = await fetch(
-      `/quizzes/${id}/questions/${questionId}`,
+      `${baseUrl}/quizzes/${id}/questions/${questionId}`,
       {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
