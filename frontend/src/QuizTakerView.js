@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useSearchParams, useParams } from "react-router-dom";
 import SingleAnswerOptionQuizTakerView from "./SingleAnswerOptionQuizTakerView";
+import baseUrl from "./api/backendApi";
 
 const QuizTakerView = () => {
   const { id } = useParams();
@@ -18,17 +19,16 @@ const QuizTakerView = () => {
   const [countCorrectAnswers, setCountCorrectAnswers] = useState(0);
   const [imageActive, setImageActive] = useState(false);
 
-  //*****/
   const secret = searchParams.get("secret");
 
   const getCurrentQuizTitle = async () => {
-    const response = await fetch(`/quizzes/${id}`);
+    const response = await fetch(`${baseUrl}/quizzes/${id}`);
     const responseGetCurrentQuizTitle = await response.json();
     setQuizTitle(responseGetCurrentQuizTitle.title);
   };
 
   const getQuestions = async () => {
-    const response = await fetch(`/quizzes/${id}/questions`);
+    const response = await fetch(`${baseUrl}/quizzes/${id}/questions`);
     const activeQuizQuestions = await response.json();
     const activeQuizQuestionsSorted = activeQuizQuestions.sort(function(a, b) {
       return a.id - b.id;
@@ -41,7 +41,7 @@ const QuizTakerView = () => {
 
   const getAnswerOptions = async () => {
     const response = await fetch(
-      `/quizzes/${id}/questions/${activeQuestion.id}/answer_options`
+      `${baseUrl}/quizzes/${id}/questions/${activeQuestion.id}/answer_options`
     );
     const activeAnswerOptions = await response.json();
     if (activeAnswerOptions.length > 0) {
@@ -60,7 +60,7 @@ const QuizTakerView = () => {
   };
 
   const addRespondent = async (secret) => {
-    const submitRespondent = await fetch(`/quizzes/${id}/responses`, {
+    const submitRespondent = await fetch(`${baseUrl}/quizzes/${id}/responses`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

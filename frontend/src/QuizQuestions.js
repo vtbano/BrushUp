@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, useParams, Link } from "react-router-dom";
 import SingleQuestion from "./SingleQuestion";
+import baseUrl from "./api/backendApi";
 
 const QuizQuestions = ({
   setQuestionPlaceholder,
@@ -14,13 +15,13 @@ const QuizQuestions = ({
   const navigate = useNavigate();
 
   const getCurrentQuizTitle = async () => {
-    const response = await fetch(`/quizzes/${id}`);
+    const response = await fetch(`${baseUrl}/quizzes/${id}`);
     const responseGetCurrentQuizTitle = await response.json();
     setQuizTitle(responseGetCurrentQuizTitle.title);
     console.log(responseGetCurrentQuizTitle.title);
   };
   const getQuestions = async () => {
-    const response = await fetch(`/quizzes/${id}/questions`);
+    const response = await fetch(`${baseUrl}/quizzes/${id}/questions`);
     const activeQuizQuestions = await response.json();
     const activeQuizQuestionsSorted = activeQuizQuestions.sort(function(a, b) {
       return a.id - b.id;
@@ -37,7 +38,7 @@ const QuizQuestions = ({
   //HANDLE DELETE
   const handleQuestionDelete = async (questionId) => {
     const submitQuestionDelete = await fetch(
-      `/quizzes/${id}/questions/${questionId}`,
+      `${baseUrl}/quizzes/${id}/questions/${questionId}`,
       {
         method: "DELETE",
       }
@@ -49,7 +50,7 @@ const QuizQuestions = ({
   //HANDLE SUBMIT
   const handleQuestionSubmit = async (e) => {
     e.preventDefault();
-    const submitQuestion = await fetch(`/quizzes/${id}/questions`, {
+    const submitQuestion = await fetch(`${baseUrl}/quizzes/${id}/questions`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

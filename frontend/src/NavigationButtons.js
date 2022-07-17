@@ -1,5 +1,6 @@
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
+import baseUrl from "./api/backendApi";
 
 const NavigationButtons = ({ creator, setCreator }) => {
   const navigate = useNavigate();
@@ -7,7 +8,7 @@ const NavigationButtons = ({ creator, setCreator }) => {
   const handleSignOut = async (e) => {
     e.preventDefault();
 
-    const submitSignOutRequest = await fetch("/creators/signout", {
+    const submitSignOutRequest = await fetch(`${baseUrl}/creators/signout`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
     });
