@@ -6,7 +6,7 @@ const quizzes = require("./routes/quizzes");
 const cors = require("cors");
 const app = express();
 const cookieSession = require("cookie-session");
-const port = 3000;
+const PORT = process.env.PORT || 3000;
 
 app.use(cors());
 app.use(
@@ -25,6 +25,9 @@ app.use((err, req, res, next) => {
   res.json(err);
 });
 
-app.listen(port, () => console.log(`listening on port ${port}`));
+// app.listen(port, () => console.log(`listening on port ${port}`));
+app.listen(PORT, () => {
+  console.log(`Our app is running on port ${PORT}`);
+});
 
 module.exports = app;
