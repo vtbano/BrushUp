@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import SingleQuiz from "./SingleQuiz";
 import SingleQuizWithResponse from "./SingleQuizWithResponse";
 import { Link } from "react-router-dom";
+import baseUrl from "./api/backendApi";
 
 const Quizzes = ({ creator }) => {
   const { id, username } = creator;
@@ -9,7 +10,7 @@ const Quizzes = ({ creator }) => {
   const [quizShared, setQuizShared] = useState(false);
 
   const getQuizzes = async () => {
-    const response = await fetch(`/creators/${id}/quizzes`);
+    const response = await fetch(`${baseUrl}/creators/${id}/quizzes`);
     const responseQuizzes = await response.json();
     console.log("All quizzes from specific Creator:", responseQuizzes);
     if (responseQuizzes.length >= 1) {
@@ -23,7 +24,7 @@ const Quizzes = ({ creator }) => {
   }, []);
 
   const handleDelete = async (id) => {
-    const submitQuizDelete = await fetch(`/quizzes/${id}`, {
+    const submitQuizDelete = await fetch(`${baseUrl}/quizzes/${id}`, {
       method: "DELETE",
     });
     console.log(submitQuizDelete);

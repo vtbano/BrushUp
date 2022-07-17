@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import SingleRespondent from "./SingleRespondent";
+import baseUrl from "./api/backendApi";
 
 const ShareQuiz = () => {
   const { id } = useParams();
@@ -10,13 +11,13 @@ const ShareQuiz = () => {
   const [screenSize, setScreenSize] = useState(window.innerWidth);
 
   const getCurrentRespondents = async () => {
-    const response = await fetch(`/quizzes/${id}/respondents`);
+    const response = await fetch(`${baseUrl}/quizzes/${id}/respondents`);
     const responseGetCurrentRespondents = await response.json();
     setRespondentList(responseGetCurrentRespondents);
   };
 
   const getQuiz = async () => {
-    const submitQuizId = await fetch(`/quizzes/${id}`);
+    const submitQuizId = await fetch(`${baseUrl}/quizzes/${id}`);
     const responseGetQuiz = await submitQuizId.json();
     setQuizTitle(responseGetQuiz.title);
   };
@@ -42,14 +43,17 @@ const ShareQuiz = () => {
   const handleAddRespondent = async (e) => {
     e.preventDefault();
 
-    const submitRecipient = await fetch(`/quizzes/${id}/respondents`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        quizzes_id: id,
-        email: emailEntered,
-      }),
-    });
+    const submitRecipient = await fetch(
+      `${baseUrl}/quizzes/${id}/respondents`,
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          quizzes_id: id,
+          email: emailEntered,
+        }),
+      }
+    );
     const getRecipientSubmitted = await submitRecipient.json();
     getCurrentRespondents();
     setEmailEntered("");
@@ -59,7 +63,7 @@ const ShareQuiz = () => {
   //HANDLE DELETE RESPONDENT
   const handleRespondentDelete = async (respondentId) => {
     const submitRespondentDelete = await fetch(
-      `/quizzes/${id}/respondents/${respondentId}`,
+      `${baseUrl}/quizzes/${id}/respondents/${respondentId}`,
       {
         method: "DELETE",
       }
