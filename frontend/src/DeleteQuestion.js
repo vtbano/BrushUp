@@ -1,6 +1,5 @@
 import React from "react";
 
-//  "/:quizzes_id/questions/:questions_id"
 const DeleteQuestion = ({ handleQuestionDelete }) => {
   return (
     <>

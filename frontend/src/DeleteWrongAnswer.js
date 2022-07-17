@@ -1,7 +1,5 @@
 import React from "react";
 
-// "/:quizzes_id/questions/:questions_id/answer_options/:id"
-
 const DeleteWrongAnswer = ({ handleWrongAnswerDelete }) => {
   return (
     <>
