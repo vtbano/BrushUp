@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import baseUrl from "./api/backendApi";
 
 const EditQuizTitle = ({ setActiveQuiz }) => {
   const navigate = useNavigate();
@@ -8,7 +9,7 @@ const EditQuizTitle = ({ setActiveQuiz }) => {
   const [quizTitle, setQuizTitle] = useState(null);
 
   const getCurrentQuizTitle = async () => {
-    const response = await fetch(`/quizzes/${id}`);
+    const response = await fetch(`${baseUrl}/quizzes/${id}`);
     const responseGetCurrentQuizTitle = await response.json();
     setQuizTitle(responseGetCurrentQuizTitle.title);
     console.log(responseGetCurrentQuizTitle.title);
@@ -21,7 +22,7 @@ const EditQuizTitle = ({ setActiveQuiz }) => {
   const handleEdit = async (e) => {
     e.preventDefault();
 
-    const submitQuizTitleEdit = await fetch(`/quizzes/${id}`, {
+    const submitQuizTitleEdit = await fetch(`${baseUrl}/quizzes/${id}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ title: updateTitle }),
