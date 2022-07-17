@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import baseUrl from "./api/backendApi";
 
 const Login = ({ setCreator }) => {
   const [userEntered, setUserEntered] = useState("");
@@ -11,7 +12,7 @@ const Login = ({ setCreator }) => {
   const handleUserCheck = async (e) => {
     e.preventDefault();
 
-    const submitUser = await fetch(`/creators/signin`, {
+    const submitUser = await fetch(`${baseUrl}/creators/signin`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
