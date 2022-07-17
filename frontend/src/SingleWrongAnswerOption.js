@@ -1,24 +1,7 @@
 import React from "react";
 import DeleteWrongAnswer from "./DeleteWrongAnswer";
 
-const SingleWrongAnswerOption = ({
-  id,
-  questions_id,
-  quizzes_id,
-  answer_text,
-  handleWrongAnswerDelete,
-}) => {
-  // console.log(
-  //   "Answer ID:",
-  //   id,
-  //   "Question ID:",
-  //   questions_id,
-  //   "correct:",
-  //   correct,
-  //   "AnswerText:",
-  //   answer_text
-  // );
-
+const SingleWrongAnswerOption = ({ answer_text, handleWrongAnswerDelete }) => {
   return (
     <>
       <div className="single-question-row-container">
