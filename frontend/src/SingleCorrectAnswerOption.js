@@ -2,9 +2,6 @@ import React from "react";
 import DeleteCorrectAnswer from "./DeleteCorrectAnswer";
 
 const SingleCorrectAnswerOption = ({
-  id,
-  questions_id,
-  correct,
   answer_text,
   handleCorrectAnswerDelete,
 }) => {
