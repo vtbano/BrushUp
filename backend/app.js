@@ -6,6 +6,7 @@ const quizzes = require("./routes/quizzes");
 const cors = require("cors");
 const app = express();
 const cookieSession = require("cookie-session");
+const port = 3000;
 
 app.use(cors());
 app.use(
@@ -23,5 +24,7 @@ app.use("/quizzes", quizzes);
 app.use((err, req, res, next) => {
   res.json(err);
 });
+
+app.listen(port, () => console.log(`listening on port ${port}`));
 
 module.exports = app;
