@@ -21,6 +21,7 @@ const Login = ({ setCreator }) => {
       }),
     });
     const getUserSubmitted = await submitUser.json();
+    console.log("getUserSubmitted", getUserSubmitted);
     if (getUserSubmitted.error) {
       console.log(getUserSubmitted.message);
       setCheckInput(false);
