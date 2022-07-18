@@ -164,6 +164,7 @@ router.post("/signin", (request, response, next) => {
       const passwordIsValid = bcrypt.compareSync(password, user.password);
       if (!passwordIsValid) {
         return response.json({
+          error: true,
           message: "Invalid Password!",
         });
       }
