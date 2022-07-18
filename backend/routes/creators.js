@@ -31,6 +31,7 @@ router.get("/:id/quizzes", (request, response, next) => {
 
   if (!token) {
     return response.status(403).send({
+      error: true,
       message: "No token provided!",
     });
   }
@@ -38,6 +39,7 @@ router.get("/:id/quizzes", (request, response, next) => {
   jwt.verify(token, "brushUp-secet-key", (err, decoded) => {
     if (err) {
       return response.status(401).send({
+        error: true,
         message: "Unauthorized!",
       });
     }
@@ -101,12 +103,14 @@ router.put("/:id", (request, response, next) => {
   const token = request.session.token;
   if (!token) {
     return response.status(403).send({
+      error: true,
       message: "No token provided!",
     });
   }
   jwt.verify(token, "brushUp-secet-key", (err, decoded) => {
     if (err) {
       return response.status(401).send({
+        error: true,
         message: "Unauthorized!",
       });
     }
