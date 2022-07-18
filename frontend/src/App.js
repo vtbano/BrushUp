@@ -23,7 +23,9 @@ const App = () => {
     const currentUser = localStorage.getItem("user");
     if (currentUser) {
       return JSON.parse(localStorage.getItem("user"));
-    } else return null;
+    } else {
+      return null;
+    }
   };
 
   const [creator, setCreator] = useState(getLocalStorage());
