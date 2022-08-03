@@ -5,12 +5,18 @@ import { Link } from "react-router-dom";
 import baseUrl from "./api/backendApi";
 
 const Quizzes = ({ creator }) => {
-  const { id, username } = creator;
+  const { id, username, token } = creator;
   const [quizzes, setQuizzes] = useState([]);
   const [quizShared, setQuizShared] = useState(false);
 
   const getQuizzes = async () => {
-    const response = await fetch(`${baseUrl}/creators/${id}/quizzes`);
+    const response = await fetch(`${baseUrl}/creators/${id}/quizzes`, {
+      method: "GET",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        token,
+      }),
+    });
     const responseQuizzes = await response.json();
     console.log("All quizzes from specific Creator:", responseQuizzes);
     if (responseQuizzes.length >= 1) {
