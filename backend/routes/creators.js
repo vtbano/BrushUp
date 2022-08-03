@@ -27,7 +27,7 @@ router.get("/:id", (request, response, next) => {
 });
 
 router.get("/:id/quizzes", (request, response, next) => {
-  const token = req.get("Authorization");
+  const token = request.get("Authorization");
   console.log("TOKEN", token);
   if (!token) {
     return response.status(403).send({
@@ -82,11 +82,10 @@ router.post("/", (request, response, next) => {
         expiresIn: 86400, // 24 hours
       });
 
-      request.session.token = token;
-
       return response.json({
         id: user.id,
         username: user.username,
+        token,
       });
     }
   );
@@ -100,7 +99,7 @@ router.put("/:id", (request, response, next) => {
     if (request.body[key]) fields.push(key);
   });
 
-  const token = request.session.token;
+  const token = request.get("Authorization");
   if (!token) {
     return response.status(403).send({
       error: true,
@@ -181,8 +180,6 @@ router.post("/signin", (request, response, next) => {
         expiresIn: 86400, // 24 hours
       });
 
-      request.session.token = token;
-
       return response.json({
         id: user.id,
         username: user.username,
@@ -194,7 +191,6 @@ router.post("/signin", (request, response, next) => {
 
 router.post("/signout", (request, response) => {
   if (err) return next(err);
-  request.session = null;
   return response.status(200).send({
     message: "You've been signed out!",
   });
