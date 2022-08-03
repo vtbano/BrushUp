@@ -129,7 +129,11 @@ router.put("/:id", (request, response, next) => {
             if (err) return next(err);
             const user = res.rows[0];
             if (index === fields.length - 1)
-              return response.json({ id: user.id, username: user.username });
+              return response.json({
+                id: user.id,
+                username: user.username,
+                token,
+              });
           }
         );
       });
@@ -182,6 +186,7 @@ router.post("/signin", (request, response, next) => {
       return response.json({
         id: user.id,
         username: user.username,
+        token,
       });
     }
   );
