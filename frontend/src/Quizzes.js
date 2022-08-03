@@ -12,10 +12,10 @@ const Quizzes = ({ creator }) => {
   const getQuizzes = async () => {
     const response = await fetch(`${baseUrl}/creators/${id}/quizzes`, {
       method: "GET",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        token,
-      }),
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + token,
+      },
     });
     const responseQuizzes = await response.json();
     console.log("All quizzes from specific Creator:", responseQuizzes);
