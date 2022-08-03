@@ -8,13 +8,20 @@ const app = express();
 const cookieSession = require("cookie-session");
 const PORT = process.env.PORT || 3000;
 
-app.use(cors());
+app.set("trust proxy", 1);
+app.use(
+  cors({
+    credentials: true,
+    origin: [process.env.FRONTEND_APP_URL],
+  })
+);
 app.use(
   cookieSession({
     name: "session",
     secret: "COOKIE_SECRET",
     httpOnly: true,
-    sameSite: "strict",
+    sameSite: "none",
+    secure: process.env.NODE_ENV === "production",
   })
 );
 app.use(bodyParser.json());
