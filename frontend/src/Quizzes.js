@@ -6,6 +6,7 @@ import baseUrl from "./api/backendApi";
 
 const Quizzes = ({ creator }) => {
   const { id, username, token } = creator;
+  console.log("Token front end", token);
   const [quizzes, setQuizzes] = useState([]);
   const [quizShared, setQuizShared] = useState(false);
 
@@ -14,7 +15,7 @@ const Quizzes = ({ creator }) => {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        Authorization: "Bearer " + token,
+        Authorization: token,
       },
     });
     const responseQuizzes = await response.json();
