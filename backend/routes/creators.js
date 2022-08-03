@@ -27,7 +27,7 @@ router.get("/:id", (request, response, next) => {
 });
 
 router.get("/:id/quizzes", (request, response, next) => {
-  const token = request.session.token;
+  const token = request.body.token;
 
   if (!token) {
     return response.status(403).send({
