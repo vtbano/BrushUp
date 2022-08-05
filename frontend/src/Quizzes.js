@@ -92,7 +92,7 @@ const Quizzes = ({ creator }) => {
                 </div>
               ) : (
                 <img
-                  src="../img/icons8-noShareFade-96(1).png"
+                  src="/img/icons8-noShareFade-96(1).png"
                   alt="Greyed-out share button"
                   className="greyed-share-button"
                 />

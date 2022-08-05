@@ -24,28 +24,28 @@ const NavigationButtons = ({ creator, setCreator }) => {
         <span className="navigation-buttons">
           <Link to={`/quizzes`}>
             <img
-              src="../img/icons8-book-shelf-96.png"
+              src="/img/icons8-book-shelf-96.png"
               alt="Quiz Shelf Button"
               className="nav-button"
             />
           </Link>
           <Link to={`creator/${creator.id}/responses`}>
             <img
-              src="../img/icons8-progresspie--96.png"
+              src="/img/icons8-progresspie--96.png"
               alt="Progress Navigation Button"
               className="nav-button"
             />
           </Link>
           <Link to={`update`}>
             <img
-              src="../img/icons8-user-96.png"
+              src="/img/icons8-user-96.png"
               alt="Profilebutton"
               className="nav-button"
             />
           </Link>
 
           <img
-            src="../img/icons8-sign-out-100.png"
+            src="/img/icons8-sign-out-100.png"
             alt="Profilebutton"
             className="nav-button"
             onClick={handleSignOut}

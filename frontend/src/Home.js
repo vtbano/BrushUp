@@ -25,7 +25,7 @@ const Home = () => {
           <div></div>
           <div>
             <img
-              src="../img/Bookshelf.png"
+              src="/img/Bookshelf.png"
               alt="Girl looking at bookshelf"
               className="book-shelf-girl"
             />
@@ -33,17 +33,17 @@ const Home = () => {
         </div>
         <div className="features-display">
           <img
-            src="../../img/CreativeLightPenNotepad.png"
+            src="/img/CreativeLightPenNotepad.png"
             alt="Lightbulb and paper to imply create"
             className="feature-img"
           />
           <img
-            src="../../img/Share_Outline.png"
+            src="/img/Share_Outline.png"
             alt="People are sharing notes and has the share symbol"
             className="feature-img"
           />
           <img
-            src="../../img/Graphics_and_charts_Tracking.png"
+            src="/img/Graphics_and_charts_Tracking.png"
             alt="A horizontal bar graph chart"
             className="feature-img"
           />

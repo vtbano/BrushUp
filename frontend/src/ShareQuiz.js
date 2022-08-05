@@ -137,7 +137,7 @@ const ShareQuiz = ({ creator }) => {
             <div>
               <span>Share this link: </span>
               {/* {`http://localhost:3001/quizzes/${id}`} */}
-              {`http://www.brushup.com/quizzes/${id}`}
+              {`https://brushup.netlify.app/quizzes/${id}`}
             </div>
           </div>
         </div>

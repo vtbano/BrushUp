@@ -21,7 +21,7 @@ const SingleRespondent = ({
         </span>
 
         <span className="single-url-link">
-          http://www.brushup.com/quizzes/{quizzes_id}?secret={secret}
+          https://brushup.netlify.app/quizzes/{quizzes_id}?secret={secret}
         </span>
       </div>
     </>
