@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import baseUrl from "./api/backendApi";
 
 const CreateQuiz = ({ creator }) => {
-  const { id } = creator;
+  const { id, token } = creator;
   const [title, setTitle] = useState("");
   const navigate = useNavigate();
 
@@ -12,7 +12,7 @@ const CreateQuiz = ({ creator }) => {
 
     const submitQuiz = await fetch(`${baseUrl}/quizzes`, {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: { "Content-Type": "application/json", Authorization: token },
       body: JSON.stringify({ creators_id: id, title: title }),
     });
     const getQuizSubmitted = await submitQuiz.json();

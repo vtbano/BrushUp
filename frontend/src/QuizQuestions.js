@@ -23,7 +23,13 @@ const QuizQuestions = ({
     console.log(responseGetCurrentQuizTitle.title);
   };
   const getQuestions = async () => {
-    const response = await fetch(`${baseUrl}/quizzes/${id}/questions`);
+    const response = await fetch(`${baseUrl}/quizzes/${id}/questions`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: token,
+      },
+    });
     const activeQuizQuestions = await response.json();
     const activeQuizQuestionsSorted = activeQuizQuestions.sort(function(a, b) {
       return a.id - b.id;
@@ -43,6 +49,10 @@ const QuizQuestions = ({
       `${baseUrl}/quizzes/${id}/questions/${questionId}`,
       {
         method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: token,
+        },
       }
     );
     console.log(submitQuestionDelete);
@@ -56,6 +66,7 @@ const QuizQuestions = ({
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        Authorization: token,
       },
       body: JSON.stringify({
         quizzes_id: id,
@@ -72,7 +83,13 @@ const QuizQuestions = ({
   //HANDLE EDIT TO EACH QUESTION
 
   const handleQuestionEdit = async (questionId) => {
-    const response = await fetch(`/quizzes/${id}/questions/${questionId}`);
+    const response = await fetch(`/quizzes/${id}/questions/${questionId}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: token,
+      },
+    });
     const responseGetQuestion = await response.json();
     setQuestionPlaceholder(responseGetQuestion.question_text);
     setImagePlaceholder(responseGetQuestion.image);

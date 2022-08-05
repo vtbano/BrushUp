@@ -2,14 +2,21 @@ import React, { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import baseUrl from "./api/backendApi";
 
-const EditQuizTitle = ({ setActiveQuiz }) => {
+const EditQuizTitle = ({ creator }) => {
   const navigate = useNavigate();
+  const { token } = creator;
   const { id } = useParams();
-  const [updateTitle, setUpdateTitle] = useState(""); //this causes to re-render and that's why console.log is coming up multiple times
+  const [updateTitle, setUpdateTitle] = useState("");
   const [quizTitle, setQuizTitle] = useState(null);
 
   const getCurrentQuizTitle = async () => {
-    const response = await fetch(`${baseUrl}/quizzes/${id}`);
+    const response = await fetch(`${baseUrl}/quizzes/${id}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: token,
+      },
+    });
     const responseGetCurrentQuizTitle = await response.json();
     setQuizTitle(responseGetCurrentQuizTitle.title);
     console.log(responseGetCurrentQuizTitle.title);
@@ -24,7 +31,7 @@ const EditQuizTitle = ({ setActiveQuiz }) => {
 
     const submitQuizTitleEdit = await fetch(`${baseUrl}/quizzes/${id}`, {
       method: "PUT",
-      headers: { "Content-Type": "application/json" },
+      headers: { "Content-Type": "application/json", Authorization: token },
       body: JSON.stringify({ title: updateTitle }),
     });
     const getQuizTitleSubmitted = await submitQuizTitleEdit.json();
