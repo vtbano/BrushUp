@@ -2,18 +2,30 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import baseUrl from "./api/backendApi";
 
-const SingleQuizTrackResult = ({ id, title }) => {
+const SingleQuizTrackResult = ({ id, title, token }) => {
   const [numberOfRespondents, setNumberOfRespondents] = useState(0);
   const [numberOfResponses, setNumberOfResponses] = useState(0);
 
   const getNumberOfRespondents = async () => {
-    const response = await fetch(`${baseUrl}/quizzes/${id}/respondents`);
+    const response = await fetch(`${baseUrl}/quizzes/${id}/respondents`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: token,
+      },
+    });
     const responseGetNumberOfRespondents = await response.json();
     setNumberOfRespondents(responseGetNumberOfRespondents.length);
   };
 
   const getQuizResponsesComplete = async () => {
-    const quizResponses = await fetch(`${baseUrl}/quizzes/${id}/responses`);
+    const quizResponses = await fetch(`${baseUrl}/quizzes/${id}/responses`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: token,
+      },
+    });
     const resultOfQuizResponses = await quizResponses.json();
     setNumberOfResponses(resultOfQuizResponses.length);
   };

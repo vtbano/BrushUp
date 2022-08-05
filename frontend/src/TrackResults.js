@@ -9,7 +9,13 @@ const TrackResults = ({ creator }) => {
   const [trackResultQuizzes, setTrackResultQuizzes] = useState([]);
 
   const getQuizzes = async () => {
-    const response = await fetch(`${baseUrl}/creators/${id}/quizzes`);
+    const response = await fetch(`${baseUrl}/creators/${id}/quizzes`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: token,
+      },
+    });
     const responseQuizzes = await response.json();
     setTrackResultQuizzes(responseQuizzes);
 
@@ -33,7 +39,13 @@ const TrackResults = ({ creator }) => {
           {trackResultQuizzes.length >= 1 && (
             <div className="track-results-display">
               {trackResultQuizzes.map((quiz) => {
-                return <SingleQuizTrackResult key={quiz.id} {...quiz} />;
+                return (
+                  <SingleQuizTrackResult
+                    key={quiz.id}
+                    {...quiz}
+                    token={token}
+                  />
+                );
               })}
             </div>
           )}
