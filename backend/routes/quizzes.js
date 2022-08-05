@@ -12,43 +12,41 @@ router.get("/", (request, response, next) => {
   });
 });
 
-//UPDATED SECURITY***
 router.get("/:id", (request, response, next) => {
   const { id } = request.params;
-  // const token = request.get("Authorization");
-  // if (!token) {
-  //   return response.status(403).send({
-  //     message: "No token provided!",
-  //   });
-  // }
-  // jwt.verify(token, "brushUp-secet-key", (err, decoded) => {
-  //   if (err) {
-  //     return response.status(401).send({
-  //       message: "Unauthorized!",
-  //     });
-  // }
-  pool.query("SELECT * FROM quizzes WHERE id=$1", [id], (err, res) => {
-    if (err) return next(err);
-    if (res.rows.length === 0)
-      return response.json({
-        error: true,
-        message: "This quiz does not exist",
+  const token = request.get("Authorization");
+  if (!token) {
+    return response.status(403).send({
+      message: "No token provided!",
+    });
+  }
+  jwt.verify(token, "brushUp-secet-key", (err, decoded) => {
+    if (err) {
+      return response.status(401).send({
+        message: "Unauthorized!",
       });
-    // const user_id = res.rows[0].creators_id;
-    // request.userId = decoded.id;
-    // if (request.userId !== Number(user_id)) {
-    //   return response.json({
-    //     error: true,
-    //     message: "Token ID provided does not match!",
-    //   });
-    // } else {
-    response.json(res.rows[0]);
-    // }
-    // });
+    }
+    pool.query("SELECT * FROM quizzes WHERE id=$1", [id], (err, res) => {
+      if (err) return next(err);
+      if (res.rows.length === 0)
+        return response.json({
+          error: true,
+          message: "This quiz does not exist",
+        });
+      const user_id = res.rows[0].creators_id;
+      request.userId = decoded.id;
+      if (request.userId !== Number(user_id)) {
+        return response.json({
+          error: true,
+          message: "Token ID provided does not match!",
+        });
+      } else {
+        response.json(res.rows[0]);
+      }
+    });
   });
 });
 
-//UPDATED SECURITY***
 router.post("/", (request, response, next) => {
   const { creators_id, title } = request.body;
   const token = request.get("Authorization");
@@ -82,7 +80,6 @@ router.post("/", (request, response, next) => {
   });
 });
 
-//UPDATED SECURITY***
 router.put("/:id", (request, response, next) => {
   const { id } = request.params;
   const { title } = request.body;
@@ -126,7 +123,6 @@ router.put("/:id", (request, response, next) => {
   });
 });
 
-//UPDATED SECURITY***
 router.delete("/:id", (request, response, next) => {
   const { id } = request.params;
   const token = request.get("Authorization");
@@ -166,47 +162,51 @@ router.delete("/:id", (request, response, next) => {
 });
 
 //QUESTION ROUTES
-//UPDATED SECURITY***
+
 router.get("/:quizzes_id/questions", (request, response, next) => {
   const { quizzes_id } = request.params;
-  // const token = request.get("Authorization");
-  // if (!token) {
-  //   return response.status(403).send({
-  //     message: "No token provided!",
-  //   });
-  // }
-  // jwt.verify(token, "brushUp-secet-key", (err, decoded) => {
-  //   if (err) {
-  //     return response.status(401).send({
-  //       message: "Unauthorized!",
-  //     });
-  //   }
-  pool.query("SELECT * FROM quizzes WHERE id=$1", [quizzes_id], (err, res) => {
-    if (err) return next(err);
-    if (res.rows.length === 0)
-      return response.json({
-        error: true,
-        message: "This quiz does not exist",
+  const token = request.get("Authorization");
+  if (!token) {
+    return response.status(403).send({
+      message: "No token provided!",
+    });
+  }
+  jwt.verify(token, "brushUp-secet-key", (err, decoded) => {
+    if (err) {
+      return response.status(401).send({
+        message: "Unauthorized!",
       });
-    // const user_id = res.rows[0].creators_id;
-    // request.userId = decoded.id;
-    // if (request.userId !== Number(user_id)) {
-    //   return response.json({
-    //     error: true,
-    //     message: "Token ID provided does not match!",
-    //   });
-    // } else {
+    }
     pool.query(
-      "SELECT * FROM questions WHERE quizzes_id=$1",
+      "SELECT * FROM quizzes WHERE id=$1",
       [quizzes_id],
       (err, res) => {
         if (err) return next(err);
-        response.json(res.rows);
+        if (res.rows.length === 0)
+          return response.json({
+            error: true,
+            message: "This quiz does not exist",
+          });
+        const user_id = res.rows[0].creators_id;
+        request.userId = decoded.id;
+        if (request.userId !== Number(user_id)) {
+          return response.json({
+            error: true,
+            message: "Token ID provided does not match!",
+          });
+        } else {
+          pool.query(
+            "SELECT * FROM questions WHERE quizzes_id=$1",
+            [quizzes_id],
+            (err, res) => {
+              if (err) return next(err);
+              response.json(res.rows);
+            }
+          );
+        }
       }
     );
-    // }
   });
-  // });
 });
 
 router.get(
@@ -230,7 +230,6 @@ router.get(
   }
 );
 
-//UPDATED SECURITY***
 router.post("/:quizzes_id/questions", (request, response, next) => {
   const { question_text, image } = request.body;
   const { quizzes_id } = request.params;
@@ -278,7 +277,6 @@ router.post("/:quizzes_id/questions", (request, response, next) => {
   });
 });
 
-//UPDATED SECURITY***
 router.put(
   "/:quizzes_id/questions/:questions_id",
   (request, response, next) => {
@@ -330,7 +328,6 @@ router.put(
   }
 );
 
-//UPDATED SECURITY***
 router.delete(
   "/:quizzes_id/questions/:questions_id",
   (request, response, next) => {
@@ -382,53 +379,53 @@ router.delete(
 );
 
 //ANSWER_OPTIONS
-//UPDATED SECURITY***
+
 router.get(
   "/:quizzes_id/questions/:questions_id/answer_options",
   (request, response, next) => {
     const { quizzes_id, questions_id } = request.params;
-    // const token = request.get("Authorization");
-    // if (!token) {
-    //   return response.status(403).send({
-    //     message: "No token provided!",
-    //   });
-    // }
-    // jwt.verify(token, "brushUp-secet-key", (err, decoded) => {
-    //   if (err) {
-    //     return response.status(401).send({
-    //       message: "Unauthorized!",
-    //     });
-    //   }
-    pool.query(
-      "SELECT * FROM quizzes WHERE id=$1",
-      [quizzes_id],
-      (err, res) => {
-        if (err) return next(err);
-        if (res.rows.length === 0)
-          return response.json({
-            error: true,
-            message: "This quiz does not exist",
-          });
-        // const user_id = res.rows[0].creators_id;
-        // request.userId = decoded.id;
-        // if (request.userId !== Number(user_id)) {
-        //   return response.json({
-        //     error: true,
-        //     message: "Token ID provided does not match!",
-        //   });
-        // } else {
-        pool.query(
-          "SELECT * FROM answer_options WHERE questions_id=($1) ORDER BY id ASC",
-          [questions_id],
-          (err, res) => {
-            if (err) return next(err);
-            response.json(res.rows);
-          }
-        );
-        // }
+    const token = request.get("Authorization");
+    if (!token) {
+      return response.status(403).send({
+        message: "No token provided!",
+      });
+    }
+    jwt.verify(token, "brushUp-secet-key", (err, decoded) => {
+      if (err) {
+        return response.status(401).send({
+          message: "Unauthorized!",
+        });
       }
-    );
-    // });
+      pool.query(
+        "SELECT * FROM quizzes WHERE id=$1",
+        [quizzes_id],
+        (err, res) => {
+          if (err) return next(err);
+          if (res.rows.length === 0)
+            return response.json({
+              error: true,
+              message: "This quiz does not exist",
+            });
+          const user_id = res.rows[0].creators_id;
+          request.userId = decoded.id;
+          if (request.userId !== Number(user_id)) {
+            return response.json({
+              error: true,
+              message: "Token ID provided does not match!",
+            });
+          } else {
+            pool.query(
+              "SELECT * FROM answer_options WHERE questions_id=($1) ORDER BY id ASC",
+              [questions_id],
+              (err, res) => {
+                if (err) return next(err);
+                response.json(res.rows);
+              }
+            );
+          }
+        }
+      );
+    });
   }
 );
 
@@ -453,7 +450,6 @@ router.get(
   }
 );
 
-//UPDATED SECURITY***
 router.post(
   "/:quizzes_id/questions/:questions_id/answer_options",
   (request, response, next) => {
@@ -520,7 +516,7 @@ router.put(
     );
   }
 );
-//UPDATED***
+
 router.delete(
   "/:quizzes_id/questions/:questions_id/answer_options/:id",
   (request, response, next) => {
@@ -571,7 +567,7 @@ router.delete(
 );
 
 //RESPONDENTS
-//UPDATED SECURITY***
+
 router.get("/:quizzes_id/respondents", (request, response, next) => {
   const { quizzes_id } = request.params;
   const token = request.get("Authorization");
@@ -639,7 +635,6 @@ router.get(
   }
 );
 
-//UPDATED***
 router.post("/:quizzes_id/respondents", (request, response, next) => {
   const { email } = request.body;
   const { quizzes_id } = request.params;
@@ -688,7 +683,6 @@ router.post("/:quizzes_id/respondents", (request, response, next) => {
   });
 });
 
-//UPDATED SECURITY***
 router.delete(
   "/:quizzes_id/respondents/:respondent_id",
   (request, response, next) => {
@@ -740,7 +734,6 @@ router.delete(
 
 //RESPONSES
 
-//UPDATED SECURITY***
 router.get("/:quizzes_id/responses", (request, response, next) => {
   const { quizzes_id } = request.params;
   const token = request.get("Authorization");
@@ -791,8 +784,6 @@ router.get("/:quizzes_id/responses", (request, response, next) => {
     );
   });
 });
-
-// POST http://www.brushup.com/quizzes/ID/respondents/ID/responses
 
 router.post("/:quizzes_id/responses", (request, response, next) => {
   const { secret } = request.body;
