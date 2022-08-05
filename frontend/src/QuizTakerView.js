@@ -4,7 +4,6 @@ import SingleAnswerOptionQuizTakerView from "./SingleAnswerOptionQuizTakerView";
 import baseUrl from "./api/backendApi";
 
 const QuizTakerView = ({ creator }) => {
-  const { token } = creator;
   const { id } = useParams();
   const [searchParams] = useSearchParams();
   const [questions, setQuestions] = useState([]);
@@ -27,7 +26,6 @@ const QuizTakerView = ({ creator }) => {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        Authorization: token,
       },
     });
     const responseGetCurrentQuizTitle = await response.json();
@@ -39,7 +37,6 @@ const QuizTakerView = ({ creator }) => {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        Authorization: token,
       },
     });
     const activeQuizQuestions = await response.json();
@@ -59,7 +56,6 @@ const QuizTakerView = ({ creator }) => {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
-          Authorization: token,
         },
       }
     );
@@ -84,7 +80,6 @@ const QuizTakerView = ({ creator }) => {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        Authorization: token,
       },
       body: JSON.stringify({
         quizzes_id: id,
