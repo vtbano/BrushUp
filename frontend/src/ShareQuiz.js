@@ -12,13 +12,25 @@ const ShareQuiz = ({ creator }) => {
   const [screenSize, setScreenSize] = useState(window.innerWidth);
 
   const getCurrentRespondents = async () => {
-    const response = await fetch(`${baseUrl}/quizzes/${id}/respondents`);
+    const response = await fetch(`${baseUrl}/quizzes/${id}/respondents`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: token,
+      },
+    });
     const responseGetCurrentRespondents = await response.json();
     setRespondentList(responseGetCurrentRespondents);
   };
 
   const getQuiz = async () => {
-    const submitQuizId = await fetch(`${baseUrl}/quizzes/${id}`);
+    const submitQuizId = await fetch(`${baseUrl}/quizzes/${id}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: token,
+      },
+    });
     const responseGetQuiz = await submitQuizId.json();
     setQuizTitle(responseGetQuiz.title);
   };
@@ -48,7 +60,7 @@ const ShareQuiz = ({ creator }) => {
       `${baseUrl}/quizzes/${id}/respondents`,
       {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: { "Content-Type": "application/json", Authorization: token },
         body: JSON.stringify({
           quizzes_id: id,
           email: emailEntered,
@@ -67,6 +79,7 @@ const ShareQuiz = ({ creator }) => {
       `${baseUrl}/quizzes/${id}/respondents/${respondentId}`,
       {
         method: "DELETE",
+        headers: { "Content-Type": "application/json", Authorization: token },
       }
     );
     console.log(submitRespondentDelete);
