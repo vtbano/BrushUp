@@ -17,7 +17,13 @@ const QuizQuestions = ({
   const navigate = useNavigate();
 
   const getCurrentQuizTitle = async () => {
-    const response = await fetch(`${baseUrl}/quizzes/${id}`);
+    const response = await fetch(`${baseUrl}/quizzes/${id}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: token,
+      },
+    });
     const responseGetCurrentQuizTitle = await response.json();
     setQuizTitle(responseGetCurrentQuizTitle.title);
     console.log(responseGetCurrentQuizTitle.title);

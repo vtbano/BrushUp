@@ -23,13 +23,25 @@ const QuizTakerView = ({ creator }) => {
   const secret = searchParams.get("secret");
 
   const getCurrentQuizTitle = async () => {
-    const response = await fetch(`${baseUrl}/quizzes/${id}`);
+    const response = await fetch(`${baseUrl}/quizzes/${id}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: token,
+      },
+    });
     const responseGetCurrentQuizTitle = await response.json();
     setQuizTitle(responseGetCurrentQuizTitle.title);
   };
 
   const getQuestions = async () => {
-    const response = await fetch(`${baseUrl}/quizzes/${id}/questions`);
+    const response = await fetch(`${baseUrl}/quizzes/${id}/questions`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: token,
+      },
+    });
     const activeQuizQuestions = await response.json();
     const activeQuizQuestionsSorted = activeQuizQuestions.sort(function(a, b) {
       return a.id - b.id;
@@ -42,7 +54,14 @@ const QuizTakerView = ({ creator }) => {
 
   const getAnswerOptions = async () => {
     const response = await fetch(
-      `${baseUrl}/quizzes/${id}/questions/${activeQuestion.id}/answer_options`
+      `${baseUrl}/quizzes/${id}/questions/${activeQuestion.id}/answer_options`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: token,
+        },
+      }
     );
     const activeAnswerOptions = await response.json();
     if (activeAnswerOptions.length > 0) {
@@ -65,6 +84,7 @@ const QuizTakerView = ({ creator }) => {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        Authorization: token,
       },
       body: JSON.stringify({
         quizzes_id: id,
@@ -164,8 +184,8 @@ const QuizTakerView = ({ creator }) => {
             <div className="share-general-link">
               Copy the link to
               <span> share </span>this quiz:
-              <span> {`http://localhost:3001/quizzes/${id}`} </span>
-              {/* {`http://www.brushup.com/quizzes/${id}`} */}
+              <span> {`http://www.brushup.com/quizzes/${id}`}</span>
+              {/* {`http://localhost:3001/quizzes/${id}`} */}
             </div>
           </div>
         ) : (
