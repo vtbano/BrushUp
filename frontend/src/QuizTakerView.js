@@ -179,7 +179,7 @@ const QuizTakerView = ({ creator }) => {
             <div className="share-general-link">
               Copy the link to
               <span> share </span>this quiz:
-              <span> {`http://www.brushup.com/quizzes/${id}`}</span>
+              <span> {`https://brushup.netlify.app/quizzes/${id}`}</span>
               {/* {`http://localhost:3001/quizzes/${id}`} */}
             </div>
           </div>
