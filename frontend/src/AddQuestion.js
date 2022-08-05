@@ -26,7 +26,7 @@ const AddQuestion = ({
       `${baseUrl}/quizzes/${id}/questions/${questionId}`,
       {
         method: "PUT",
-        headers: { "Content-Type": "application/json" },
+        headers: { "Content-Type": "application/json", Authorization: token },
         body: JSON.stringify({
           quizzes_id: id,
           question_text: questionText,
@@ -78,11 +78,19 @@ const AddQuestion = ({
           <div className="answer-options-display">
             <div className="correct-answers-container">
               Correct Answers
-              <CorrectAnswers questionId={questionId} quizzes_id={id} />
+              <CorrectAnswers
+                questionId={questionId}
+                quizzes_id={id}
+                token={token}
+              />
             </div>
             <div className="wrong-answers-container">
               Wrong Answers
-              <WrongAnswers questionId={questionId} quizzes_id={id} />
+              <WrongAnswers
+                questionId={questionId}
+                quizzes_id={id}
+                token={token}
+              />
             </div>
           </div>
         </div>

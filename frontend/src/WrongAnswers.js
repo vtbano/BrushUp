@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import SingleWrongAnswerOption from "./SingleWrongAnswerOption";
 import baseUrl from "./api/backendApi";
 
-const WrongAnswers = ({ questionId, quizzes_id }) => {
+const WrongAnswers = ({ questionId, quizzes_id, token }) => {
   const [wrongOptionsList, setWrongOptionsList] = useState([]);
   const [showInput, setShowInput] = useState(false);
   const [wrongAnswers, setWrongAnswer] = useState("");
@@ -10,8 +10,14 @@ const WrongAnswers = ({ questionId, quizzes_id }) => {
   //GET CALL
   const getWrongOptions = async () => {
     const response = await fetch(
-      `${baseUrl}/quizzes/${quizzes_id}/questions/${questionId}/answer_options`
-      // `quizzes/1/questions/1/answer_options` //testing URL
+      `${baseUrl}/quizzes/${quizzes_id}/questions/${questionId}/answer_options`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: token,
+        },
+      }
     );
     const responseAnswerOptions = await response.json();
     const onlyWrongAnswers = responseAnswerOptions.filter(
@@ -31,10 +37,10 @@ const WrongAnswers = ({ questionId, quizzes_id }) => {
     e.preventDefault();
     const submitWrongAnswer = await fetch(
       `${baseUrl}/quizzes/${quizzes_id}/questions/${questionId}/answer_options`,
-      // `quizzes/1/questions/1/answer_options`, //testing URL
+
       {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: { "Content-Type": "application/json", Authorization: token },
         body: JSON.stringify({
           questions_id: 1,
           correct: false,
@@ -57,6 +63,7 @@ const WrongAnswers = ({ questionId, quizzes_id }) => {
       `${baseUrl}/quizzes/${quizzes_id}/questions/${questionId}/answer_options/${id}`,
       {
         method: "DELETE",
+        headers: { "Content-Type": "application/json", Authorization: token },
       }
     );
     console.log(submitWrongAnswerDelete);

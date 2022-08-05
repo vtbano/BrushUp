@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import SingleCorrectAnswerOption from "./SingleCorrectAnswerOption";
 import baseUrl from "./api/backendApi";
 
-const CorrectAnswers = ({ questionId, quizzes_id }) => {
+const CorrectAnswers = ({ questionId, quizzes_id, token }) => {
   const [answerOptionsList, setAnswerOptionsList] = useState([]);
   const [showInput, setShowInput] = useState(false);
   const [correctAnswer, setCorrectAnswer] = useState("");
@@ -10,7 +10,11 @@ const CorrectAnswers = ({ questionId, quizzes_id }) => {
   //GET CALL
   const getAnswerOptions = async () => {
     const response = await fetch(
-      `${baseUrl}/quizzes/${quizzes_id}/questions/${questionId}/answer_options`
+      `${baseUrl}/quizzes/${quizzes_id}/questions/${questionId}/answer_options`,
+      {
+        method: "GET",
+        headers: { "Content-Type": "application/json", Authorization: token },
+      }
     );
     const responseAnswerOptions = await response.json();
     const onlyCorrectAnswers = responseAnswerOptions.filter(
@@ -31,7 +35,7 @@ const CorrectAnswers = ({ questionId, quizzes_id }) => {
       `${baseUrl}/quizzes/${quizzes_id}/questions/${questionId}/answer_options`,
       {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: { "Content-Type": "application/json", Authorization: token },
         body: JSON.stringify({
           questions_id: 1,
           correct: true,
@@ -54,6 +58,7 @@ const CorrectAnswers = ({ questionId, quizzes_id }) => {
       `${baseUrl}/quizzes/${quizzes_id}/questions/${questionId}/answer_options/${id}`,
       {
         method: "DELETE",
+        headers: { "Content-Type": "application/json", Authorization: token },
       }
     );
     console.log(submitCorrectAnswerDelete);
