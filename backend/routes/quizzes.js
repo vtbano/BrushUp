@@ -15,7 +15,7 @@ router.get("/", (request, response, next) => {
 //UPDATED SECURITY***
 router.get("/:id", (request, response, next) => {
   const { id } = request.params;
-  const token = request.session.token;
+  const token = request.get("Authorization");
   if (!token) {
     return response.status(403).send({
       message: "No token provided!",
@@ -51,7 +51,7 @@ router.get("/:id", (request, response, next) => {
 //UPDATED SECURITY***
 router.post("/", (request, response, next) => {
   const { creators_id, title } = request.body;
-  const token = request.session.token;
+  const token = request.get("Authorization");
   if (!token) {
     return response.status(403).send({
       message: "No token provided!",
@@ -86,7 +86,7 @@ router.post("/", (request, response, next) => {
 router.put("/:id", (request, response, next) => {
   const { id } = request.params;
   const { title } = request.body;
-  const token = request.session.token;
+  const token = request.get("Authorization");
   if (!token) {
     return response.status(403).send({
       message: "No token provided!",
@@ -129,7 +129,7 @@ router.put("/:id", (request, response, next) => {
 //UPDATED SECURITY***
 router.delete("/:id", (request, response, next) => {
   const { id } = request.params;
-  const token = request.session.token;
+  const token = request.get("Authorization");
   if (!token) {
     return response.status(403).send({
       message: "No token provided!",
@@ -169,7 +169,7 @@ router.delete("/:id", (request, response, next) => {
 //UPDATED SECURITY***
 router.get("/:quizzes_id/questions", (request, response, next) => {
   const { quizzes_id } = request.params;
-  const token = request.session.token;
+  const token = request.get("Authorization");
   if (!token) {
     return response.status(403).send({
       message: "No token provided!",
@@ -238,7 +238,7 @@ router.get(
 router.post("/:quizzes_id/questions", (request, response, next) => {
   const { question_text, image } = request.body;
   const { quizzes_id } = request.params;
-  const token = request.session.token;
+  const token = request.get("Authorization");
   if (!token) {
     return response.status(403).send({
       message: "No token provided!",
@@ -288,7 +288,7 @@ router.put(
   (request, response, next) => {
     const { quizzes_id, questions_id } = request.params;
     const { question_text, image } = request.body;
-    const token = request.session.token;
+    const token = request.get("Authorization");
     if (!token) {
       return response.status(403).send({
         message: "No token provided!",
@@ -339,7 +339,7 @@ router.delete(
   "/:quizzes_id/questions/:questions_id",
   (request, response, next) => {
     const { quizzes_id, questions_id } = request.params;
-    const token = request.session.token;
+    const token = request.get("Authorization");
     if (!token) {
       return response.status(403).send({
         message: "No token provided!",
@@ -391,7 +391,7 @@ router.get(
   "/:quizzes_id/questions/:questions_id/answer_options",
   (request, response, next) => {
     const { quizzes_id, questions_id } = request.params;
-    const token = request.session.token;
+    const token = request.get("Authorization");
     if (!token) {
       return response.status(403).send({
         message: "No token provided!",
@@ -463,7 +463,7 @@ router.post(
   (request, response, next) => {
     const { correct, answer_text } = request.body;
     const { quizzes_id, questions_id } = request.params;
-    const token = request.session.token;
+    const token = request.get("Authorization");
     if (!token) {
       return response.status(403).send({
         message: "No token provided!",
@@ -529,7 +529,7 @@ router.delete(
   "/:quizzes_id/questions/:questions_id/answer_options/:id",
   (request, response, next) => {
     const { quizzes_id, questions_id, id } = request.params;
-    const token = request.session.token;
+    const token = request.get("Authorization");
     if (!token) {
       return response.status(403).send({
         message: "No token provided!",
@@ -578,7 +578,7 @@ router.delete(
 //UPDATED SECURITY***
 router.get("/:quizzes_id/respondents", (request, response, next) => {
   const { quizzes_id } = request.params;
-  const token = request.session.token;
+  const token = request.get("Authorization");
   if (!token) {
     return response.status(403).send({
       message: "No token provided!",
@@ -648,7 +648,7 @@ router.post("/:quizzes_id/respondents", (request, response, next) => {
   const { email } = request.body;
   const { quizzes_id } = request.params;
   const secret = generateSecrets();
-  const token = request.session.token;
+  const token = request.get("Authorization");
   if (!token) {
     return response.status(403).send({
       message: "No token provided!",
@@ -697,7 +697,7 @@ router.delete(
   "/:quizzes_id/respondents/:respondent_id",
   (request, response, next) => {
     const { quizzes_id, respondent_id } = request.params;
-    const token = request.session.token;
+    const token = request.get("Authorization");
     if (!token) {
       return response.status(403).send({
         message: "No token provided!",
@@ -747,7 +747,7 @@ router.delete(
 //UPDATED SECURITY***
 router.get("/:quizzes_id/responses", (request, response, next) => {
   const { quizzes_id } = request.params;
-  const token = request.session.token;
+  const token = request.get("Authorization");
   if (!token) {
     return response.status(403).send({
       message: "No token provided!",
