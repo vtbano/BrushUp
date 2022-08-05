@@ -34,16 +34,16 @@ router.get("/:id", (request, response, next) => {
         error: true,
         message: "This quiz does not exist",
       });
-    const user_id = res.rows[0].creators_id;
-    request.userId = decoded.id;
-    if (request.userId !== Number(user_id)) {
-      return response.json({
-        error: true,
-        message: "Token ID provided does not match!",
-      });
-    } else {
-      response.json(res.rows[0]);
-    }
+    // const user_id = res.rows[0].creators_id;
+    // request.userId = decoded.id;
+    // if (request.userId !== Number(user_id)) {
+    //   return response.json({
+    //     error: true,
+    //     message: "Token ID provided does not match!",
+    //   });
+    // } else {
+    response.json(res.rows[0]);
+    // }
     // });
   });
 });
@@ -188,23 +188,23 @@ router.get("/:quizzes_id/questions", (request, response, next) => {
         error: true,
         message: "This quiz does not exist",
       });
-    const user_id = res.rows[0].creators_id;
-    request.userId = decoded.id;
-    if (request.userId !== Number(user_id)) {
-      return response.json({
-        error: true,
-        message: "Token ID provided does not match!",
-      });
-    } else {
-      pool.query(
-        "SELECT * FROM questions WHERE quizzes_id=$1",
-        [quizzes_id],
-        (err, res) => {
-          if (err) return next(err);
-          response.json(res.rows);
-        }
-      );
-    }
+    // const user_id = res.rows[0].creators_id;
+    // request.userId = decoded.id;
+    // if (request.userId !== Number(user_id)) {
+    //   return response.json({
+    //     error: true,
+    //     message: "Token ID provided does not match!",
+    //   });
+    // } else {
+    pool.query(
+      "SELECT * FROM questions WHERE quizzes_id=$1",
+      [quizzes_id],
+      (err, res) => {
+        if (err) return next(err);
+        response.json(res.rows);
+      }
+    );
+    // }
   });
   // });
 });
@@ -409,23 +409,23 @@ router.get(
             error: true,
             message: "This quiz does not exist",
           });
-        const user_id = res.rows[0].creators_id;
-        request.userId = decoded.id;
-        if (request.userId !== Number(user_id)) {
-          return response.json({
-            error: true,
-            message: "Token ID provided does not match!",
-          });
-        } else {
-          pool.query(
-            "SELECT * FROM answer_options WHERE questions_id=($1) ORDER BY id ASC",
-            [questions_id],
-            (err, res) => {
-              if (err) return next(err);
-              response.json(res.rows);
-            }
-          );
-        }
+        // const user_id = res.rows[0].creators_id;
+        // request.userId = decoded.id;
+        // if (request.userId !== Number(user_id)) {
+        //   return response.json({
+        //     error: true,
+        //     message: "Token ID provided does not match!",
+        //   });
+        // } else {
+        pool.query(
+          "SELECT * FROM answer_options WHERE questions_id=($1) ORDER BY id ASC",
+          [questions_id],
+          (err, res) => {
+            if (err) return next(err);
+            response.json(res.rows);
+          }
+        );
+        // }
       }
     );
     // });
