@@ -4,6 +4,7 @@ import SingleQuestion from "./SingleQuestion";
 import baseUrl from "./api/backendApi";
 
 const QuizQuestions = ({
+  creator,
   setQuestionPlaceholder,
   setImagePlaceholder,
   setQuestionText,
@@ -11,6 +12,7 @@ const QuizQuestions = ({
 }) => {
   const [questions, setQuestions] = useState([]);
   const [quizTitle, setQuizTitle] = useState(null);
+  const { token } = creator;
   const { id } = useParams();
   const navigate = useNavigate();
 

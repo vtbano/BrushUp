@@ -79,12 +79,16 @@ const App = () => {
               element={<CreateQuiz creator={creator} />}
             />
 
-            <Route path="quizzes/:id/edit" element={<EditQuizTitle />} />
+            <Route
+              path="quizzes/:id/edit"
+              element={<EditQuizTitle creator={creator} />}
+            />
 
             <Route
               path={`quizzes/:id/questions`}
               element={
                 <QuizQuestions
+                  creator={creator}
                   setQuestionPlaceholder={setQuestionPlaceholder}
                   setImagePlaceholder={setImagePlaceholder}
                   setQuestionText={setQuestionText}
@@ -96,6 +100,7 @@ const App = () => {
               path="quizzes/:id/questions/add/:questionId"
               element={
                 <AddQuestion
+                  creator={creator}
                   questionPlaceholder={questionPlaceholder}
                   imagePlaceholder={imagePlaceholder}
                   setImagePlaceholder={setImagePlaceholder}
@@ -107,9 +112,18 @@ const App = () => {
                 />
               }
             />
-            <Route path="quizzes/:id" element={<QuizTakerView />} />
-            <Route path="quizzes/:id/share" element={<ShareQuiz />} />
-            <Route path="creator/:id/responses" element={<TrackResults />} />
+            <Route
+              path="quizzes/:id"
+              element={<QuizTakerView creator={creator} />}
+            />
+            <Route
+              path="quizzes/:id/share"
+              element={<ShareQuiz creator={creator} />}
+            />
+            <Route
+              path="creator/:id/responses"
+              element={<TrackResults creator={creator} />}
+            />
 
             <Route path="*" element={Error} />
           </Routes>

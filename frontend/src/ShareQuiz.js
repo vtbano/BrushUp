@@ -3,7 +3,8 @@ import { useParams } from "react-router-dom";
 import SingleRespondent from "./SingleRespondent";
 import baseUrl from "./api/backendApi";
 
-const ShareQuiz = () => {
+const ShareQuiz = ({ creator }) => {
+  const { token } = creator;
   const { id } = useParams();
   const [emailEntered, setEmailEntered] = useState("");
   const [quizTitle, setQuizTitle] = useState("");

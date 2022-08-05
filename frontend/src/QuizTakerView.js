@@ -3,7 +3,8 @@ import { useSearchParams, useParams } from "react-router-dom";
 import SingleAnswerOptionQuizTakerView from "./SingleAnswerOptionQuizTakerView";
 import baseUrl from "./api/backendApi";
 
-const QuizTakerView = () => {
+const QuizTakerView = ({ creator }) => {
+  const { token } = creator;
   const { id } = useParams();
   const [searchParams] = useSearchParams();
   const [questions, setQuestions] = useState([]);

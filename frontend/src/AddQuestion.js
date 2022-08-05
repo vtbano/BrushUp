@@ -5,6 +5,7 @@ import WrongAnswers from "./WrongAnswers";
 import baseUrl from "./api/backendApi";
 
 const AddQuestion = ({
+  creator,
   questionPlaceholder,
   imagePlaceholder,
   setImagePlaceholder,
@@ -15,6 +16,7 @@ const AddQuestion = ({
   setImageUrl,
 }) => {
   const { id, questionId } = useParams();
+  const { token } = creator;
   const navigate = useNavigate();
 
   const handleQuestionSave = async (e) => {

@@ -3,7 +3,8 @@ import { useParams } from "react-router-dom";
 import SingleQuizTrackResult from "./SingleQuizTrackResult";
 import baseUrl from "./api/backendApi";
 
-const TrackResults = () => {
+const TrackResults = ({ creator }) => {
+  const { token } = creator;
   const { id } = useParams();
   const [trackResultQuizzes, setTrackResultQuizzes] = useState([]);
 
