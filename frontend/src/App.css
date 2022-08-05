@@ -611,7 +611,7 @@ footer {
 .btn-savePlusAdd-question:hover,
 .btn-add-recipient:hover {
   font-weight: 700;
-  opacity: 0.9;
+  opacity: 0.85;
   transition-timing-function: ease-in-out;
 }
 
