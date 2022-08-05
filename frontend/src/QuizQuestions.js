@@ -89,13 +89,16 @@ const QuizQuestions = ({
   //HANDLE EDIT TO EACH QUESTION
 
   const handleQuestionEdit = async (questionId) => {
-    const response = await fetch(`/quizzes/${id}/questions/${questionId}`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: token,
-      },
-    });
+    const response = await fetch(
+      `${baseUrl}/quizzes/${id}/questions/${questionId}`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: token,
+        },
+      }
+    );
     const responseGetQuestion = await response.json();
     setQuestionPlaceholder(responseGetQuestion.question_text);
     setImagePlaceholder(responseGetQuestion.image);
