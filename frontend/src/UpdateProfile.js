@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import baseUrl from "./api/backendApi";
 
 const UpdateProfile = ({ setCreator, creator }) => {
-  const { id, username } = creator;
+  const { id, username, token } = creator;
 
   const [userEntered, setUserEntered] = useState("");
   const [userEmailEntered, setUserEmailEntered] = useState("");
@@ -13,7 +13,7 @@ const UpdateProfile = ({ setCreator, creator }) => {
   const [creatorProfile, setCreatorProfile] = useState([]);
 
   const getCreatorProfile = async () => {
-    const response = await fetch(`${baseUrl}/creators/${id}`);
+    const response = await fetch(`${baseUrl}/creators/${id}`); //this does not require token in the backend
     const responseCreatorProfile = await response.json();
     setCreatorProfile(responseCreatorProfile);
   };
@@ -28,7 +28,7 @@ const UpdateProfile = ({ setCreator, creator }) => {
 
     const submitNewUser = await fetch(`${baseUrl}/creators/${id}`, {
       method: "PUT",
-      headers: { "Content-Type": "application/json" },
+      headers: { "Content-Type": "application/json", Authorization: token },
       body: JSON.stringify({
         username: userEntered,
         email: userEmailEntered,

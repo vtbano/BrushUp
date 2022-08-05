@@ -81,7 +81,13 @@ const Quizzes = ({ creator }) => {
               {quizShared ? (
                 <div className="quizzes-single-quiz-container">
                   {quizzes.map((quiz) => {
-                    return <SingleQuizWithResponse key={quiz.id} {...quiz} />;
+                    return (
+                      <SingleQuizWithResponse
+                        key={quiz.id}
+                        {...quiz}
+                        token={token}
+                      />
+                    );
                   })}
                 </div>
               ) : (

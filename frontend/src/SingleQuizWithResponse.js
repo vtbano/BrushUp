@@ -1,11 +1,17 @@
 import React, { useState, useEffect } from "react";
 import baseUrl from "./api/backendApi";
 
-const SingleQuizWithResponse = ({ id, title, setQuizShared }) => {
+const SingleQuizWithResponse = ({ id, title, setQuizShared, token }) => {
   const [showTitle, setShowTitle] = useState(false);
 
   const getQuizResponsesComplete = async () => {
-    const quizResponses = await fetch(`${baseUrl}/quizzes/${id}/responses`);
+    const quizResponses = await fetch(`${baseUrl}/quizzes/${id}/responses`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: token,
+      },
+    });
     const resultOfQuizResponses = await quizResponses.json();
     if (resultOfQuizResponses.length >= 1) {
       setShowTitle(true);
