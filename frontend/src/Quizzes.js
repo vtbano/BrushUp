@@ -6,7 +6,7 @@ import baseUrl from "./api/backendApi";
 
 const Quizzes = ({ creator }) => {
   const { id, username, token } = creator;
-  console.log("Token front end", token);
+  // console.log("Token front end", token);
   const [quizzes, setQuizzes] = useState([]);
   const [quizShared, setQuizShared] = useState(false);
 
