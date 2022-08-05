@@ -32,7 +32,6 @@ app.use((err, req, res, next) => {
   res.json(err);
 });
 
-// app.listen(port, () => console.log(`listening on port ${port}`));
 app.listen(PORT, () => {
   console.log(`Our app is running on port ${PORT}`);
 });

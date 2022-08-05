@@ -33,6 +33,10 @@ const Quizzes = ({ creator }) => {
   const handleDelete = async (id) => {
     const submitQuizDelete = await fetch(`${baseUrl}/quizzes/${id}`, {
       method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: token,
+      },
     });
     console.log(submitQuizDelete);
     await getQuizzes();
