@@ -1,10 +1,10 @@
 # BrushUp
 
-Create quizzes with the BrushUp app! This app was designed to help you create quick quizzes to help you study or review some material you think you need to BrushUp on. The multiple choice design was created with flexibility in mind, meaning you can add as many correct or wrong answers as you like. You just need to ensure that the question you ask is descriptive and gives you and your quiz taker a good understanding of how many possible correct answers there are to choose from. You also have the capbility to add images along with your questions.
+Create quizzes with the BrushUp app! This app was designed to help you create quick quizzes to help you study or review some material you think you need to BrushUp on. The multiple choice design was created with flexibility in mind, meaning you can add as many correct or wrong answers as you like. You just need to ensure that the question you ask is descriptive and gives you and your quiz taker a good understanding of how many possible correct answers there are to choose from. You also have the capability to add images along with your questions.
 
-Supporting and sharing is important to me, so I've designed BrushUp to allow sharing capabilities. The user is able to share the quiz with their friends,and even they can continue passing on a link to share with their contacts as-well. The effort you put to creating a quiz won't go wasted, and the knowledge you gain with creating the quiz will be shared to those taking it too!
+Supporting and sharing is important to me, so I've designed BrushUp to allow sharing capabilities. The user is able to share the quiz with their friends, and even they can continue passing on a link to share with their contacts as-well. The effort you put to creating a quiz won't go wasted, and the knowledge you gain with creating the quiz will be shared to those taking it too!
 
-You may be interested in tracking who completed the quiz out of the people you've shared it with. We have that tracking covered in BrushUp.Once a quiz taker completes a quiz and gets their final score, the completion will be logged into the data base. Once a quiz taker completes a quiz, it will only log int into the database once.
+You may be interested in tracking who completed the quiz out of the people you've shared it with. We have that tracking covered in BrushUp.Once a quiz taker completes a quiz and gets their final score, the completion will be logged into the data base. Once a quiz taker completes a quiz, it will only log into the database once.
 
 Brush up in your knowledge and skills with friends!
 
