@@ -8,6 +8,7 @@ const SingleAnswerOptionQuizTakerView = ({
   showEndGameDislay,
   answerOptionsSelected,
   setAnswerOptionsSelected,
+  disableAnswerOption,
 }) => {
   const [cssAnswerOption, setCssAnswerOption] = useState(
     "quiz-taker-single-answer-option"
@@ -26,6 +27,10 @@ const SingleAnswerOptionQuizTakerView = ({
         <div
           className={cssAnswerOption}
           onClick={() => {
+            if (disableAnswerOption) {
+              return;
+            }
+
             showAnswerSelectionResult(correct);
             setOptionSelectedCount(optionSelectedCount + 1);
             setAnswerOptionsSelected([...answerOptionsSelected, correct]);

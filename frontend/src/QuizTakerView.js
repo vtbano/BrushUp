@@ -18,6 +18,7 @@ const QuizTakerView = ({ creator }) => {
   const [answerOptionsSelected, setAnswerOptionsSelected] = useState([]);
   const [countCorrectAnswers, setCountCorrectAnswers] = useState(0);
   const [imageActive, setImageActive] = useState(false);
+  const [disableAnswerOption, setDisableAnswerOption] = useState(false);
 
   const secret = searchParams.get("secret");
 
@@ -129,6 +130,8 @@ const QuizTakerView = ({ creator }) => {
 
   const goNextQuestion = (correctOptionsCount, optionSelectedCount) => {
     if (correctOptionsCount === optionSelectedCount) {
+      setDisableAnswerOption(true);
+      console.log("setDisableAnswerOption", disableAnswerOption);
       setTimeout(() => {
         setOptionSelectedCount(1);
         setActiveQuestion(questions[currentQuestionsIndex + 1]);
@@ -140,6 +143,8 @@ const QuizTakerView = ({ creator }) => {
           (oldCurrentQuestionNum) => oldCurrentQuestionNum + 1
         );
         setAnswerOptionsSelected([]);
+        setDisableAnswerOption(false);
+        console.log("setDisableAnswerOption to false", disableAnswerOption);
       }, 3000);
     }
   };
@@ -151,6 +156,7 @@ const QuizTakerView = ({ creator }) => {
     optionSelectedCount
   ) => {
     if (currentQuestionNum === questions.length) {
+      setDisableAnswerOption(true);
       setTimeout(() => {
         setEndGame(true);
         if (secret) {
@@ -218,9 +224,15 @@ const QuizTakerView = ({ creator }) => {
                     }
                     answerOptionsSelected={answerOptionsSelected}
                     setAnswerOptionsSelected={setAnswerOptionsSelected}
+                    disableAnswerOption={disableAnswerOption}
                   />
                 );
               })}
+              {disableAnswerOption ? (
+                <div>
+                  You've made the maximum selections allowed for this question
+                </div>
+              ) : null}
             </div>
           </div>
         )}

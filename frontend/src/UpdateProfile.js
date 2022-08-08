@@ -128,7 +128,7 @@ const UpdateProfile = ({ setCreator, creator }) => {
             >
               Update
             </button>
-            <div>{updateStatus ? "Update Complete" : ""}</div>
+            <div>{updateStatus ? "Update Complete!" : ""}</div>
           </div>
         </div>
       </section>
