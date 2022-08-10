@@ -164,28 +164,14 @@ const QuizTakerView = ({}) => {
     }
   };
 
-  const showEndGameDislay = () =>
-    // currentQuestionNum,
-    // questions,
-    // correctOptionsCount,
-    // optionSelectedCount
-    {
-      // if (currentQuestionNum === questions.length) {
-      setTimeout(() => {
-        setEndGame(true);
-        if (secret) {
-          addRespondent(secret);
-        }
-      }, 3000);
-      // } else {
-      //   goNextQuestion(
-      //     correctOptionsCount,
-      //     optionSelectedCount,
-      //     currentQuestionNum,
-      //     questions
-      //   );
-      // }
-    };
+  const showEndGameDislay = () => {
+    setTimeout(() => {
+      setEndGame(true);
+      if (secret) {
+        addRespondent(secret);
+      }
+    }, 3000);
+  };
 
   return (
     <>
@@ -233,14 +219,6 @@ const QuizTakerView = ({}) => {
                     {...answer}
                     optionSelectedCount={optionSelectedCount}
                     setOptionSelectedCount={setOptionSelectedCount}
-                    // showEndGameDislay={() =>
-                    //   showEndGameDislay(
-                    //     currentQuestionNum,
-                    //     questions,
-                    //     correctOptionsCount,
-                    //     optionSelectedCount
-                    //   )
-                    // }
                     goNextQuestion={() =>
                       goNextQuestion(
                         correctOptionsCount,
