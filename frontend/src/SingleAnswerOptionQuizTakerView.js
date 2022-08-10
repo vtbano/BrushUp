@@ -5,7 +5,7 @@ const SingleAnswerOptionQuizTakerView = ({
   answer_text,
   optionSelectedCount,
   setOptionSelectedCount,
-  showEndGameDislay,
+  goNextQuestion,
   answerOptionsSelected,
   setAnswerOptionsSelected,
   disableAnswerOption,
@@ -34,7 +34,7 @@ const SingleAnswerOptionQuizTakerView = ({
             showAnswerSelectionResult(correct);
             setOptionSelectedCount(optionSelectedCount + 1);
             setAnswerOptionsSelected([...answerOptionsSelected, correct]);
-            showEndGameDislay();
+            goNextQuestion();
           }}
         >
           {answer_text}

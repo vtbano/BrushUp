@@ -128,8 +128,16 @@ const QuizTakerView = ({}) => {
     }
   };
 
-  const goNextQuestion = (correctOptionsCount, optionSelectedCount) => {
-    if (correctOptionsCount === optionSelectedCount) {
+  const goNextQuestion = (
+    correctOptionsCount,
+    optionSelectedCount,
+    currentQuestionNum,
+    questions
+  ) => {
+    if (
+      correctOptionsCount === optionSelectedCount &&
+      currentQuestionNum !== questions.length
+    ) {
       setDisableAnswerOption(true);
       console.log("setDisableAnswerOption", disableAnswerOption);
       setTimeout(() => {
@@ -146,27 +154,38 @@ const QuizTakerView = ({}) => {
         setDisableAnswerOption(false);
         console.log("setDisableAnswerOption to false", disableAnswerOption);
       }, 3000);
+    } else if (
+      correctOptionsCount === optionSelectedCount &&
+      currentQuestionNum === questions.length
+    ) {
+      setDisableAnswerOption(true);
+      console.log("setDisableAnswerOption", disableAnswerOption);
+      showEndGameDislay();
     }
   };
 
-  const showEndGameDislay = (
-    currentQuestionNum,
-    questions,
-    correctOptionsCount,
-    optionSelectedCount
-  ) => {
-    if (currentQuestionNum === questions.length) {
-      setDisableAnswerOption(true);
+  const showEndGameDislay = () =>
+    // currentQuestionNum,
+    // questions,
+    // correctOptionsCount,
+    // optionSelectedCount
+    {
+      // if (currentQuestionNum === questions.length) {
       setTimeout(() => {
         setEndGame(true);
         if (secret) {
           addRespondent(secret);
         }
       }, 3000);
-    } else {
-      goNextQuestion(correctOptionsCount, optionSelectedCount);
-    }
-  };
+      // } else {
+      //   goNextQuestion(
+      //     correctOptionsCount,
+      //     optionSelectedCount,
+      //     currentQuestionNum,
+      //     questions
+      //   );
+      // }
+    };
 
   return (
     <>
@@ -214,12 +233,20 @@ const QuizTakerView = ({}) => {
                     {...answer}
                     optionSelectedCount={optionSelectedCount}
                     setOptionSelectedCount={setOptionSelectedCount}
-                    showEndGameDislay={() =>
-                      showEndGameDislay(
-                        currentQuestionNum,
-                        questions,
+                    // showEndGameDislay={() =>
+                    //   showEndGameDislay(
+                    //     currentQuestionNum,
+                    //     questions,
+                    //     correctOptionsCount,
+                    //     optionSelectedCount
+                    //   )
+                    // }
+                    goNextQuestion={() =>
+                      goNextQuestion(
                         correctOptionsCount,
-                        optionSelectedCount
+                        optionSelectedCount,
+                        currentQuestionNum,
+                        questions
                       )
                     }
                     answerOptionsSelected={answerOptionsSelected}
