@@ -724,7 +724,8 @@ footer {
 @media screen and (max-width: 500px) {
   .add-question-input,
   .add-recipient-input,
-  .create-quiz-title-input {
+  .create-quiz-title-input,
+  .edit-quiz-title-input {
     width: 330px;
   }
 }
