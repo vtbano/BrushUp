@@ -655,7 +655,8 @@ footer {
   font-size: 0.5em;
 }
 
-.create-quiz-title {
+.create-quiz-title,
+.edit-quiz-title {
   margin-top: 2em;
   margin-bottom: 1em;
 }
