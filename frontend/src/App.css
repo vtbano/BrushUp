@@ -389,6 +389,8 @@ footer {
 
 @media screen and (max-width: 500px) {
   .quizzes-container,
+  .create-quiz-display,
+  .edit-quiz-display,
   .share-container,
   .share-quiz-container,
   .share-container-center,
@@ -440,6 +442,7 @@ footer {
 @media screen and (max-width: 500px) {
   .delete-and-edit-btn-container {
     display: block;
+    margin-top: 1em;
   }
 }
 
@@ -596,6 +599,13 @@ footer {
   background-color: #ff2442;
 }
 
+@media screen and (max-width: 500px) {
+  .btn-enter-wrong-answer,
+  .btn-enter-correct-answer {
+    margin-top: 1em;
+  }
+}
+
 .btn-add-recipient {
   display: block;
   background-color: #3db2ff;
@@ -713,7 +723,8 @@ footer {
 
 @media screen and (max-width: 500px) {
   .add-question-input,
-  .add-recipient-input {
+  .add-recipient-input,
+  .create-quiz-title-input {
     width: 330px;
   }
 }
@@ -746,6 +757,13 @@ footer {
   padding-left: 1em;
   padding-right: 1em;
   margin-left: 1em;
+}
+
+@media screen and (max-width: 500px) {
+  .correct-answer-option-input,
+  .wrong-answer-option-input {
+    width: 14em;
+  }
 }
 
 .quiz-taker-single-answer-option,
