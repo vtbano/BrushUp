@@ -10,6 +10,8 @@ body {
 .page-body {
   display: grid;
   grid-template-rows: auto 1fr auto;
+  height: 100vh;
+  min-height: 100%;
 }
 
 .page-body-main {
@@ -71,7 +73,7 @@ footer {
   height: 1.5em;
   margin-top: 3em;
   padding-top: 2em;
-  padding-bottom: 1em;
+  padding-bottom: 2em;
   background-color: #3db2ff;
   color: #ffffff;
   display: grid;
